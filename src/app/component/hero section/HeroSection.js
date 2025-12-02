@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const DestinationsMarquee = () => {
   const destinations = [
-    "Istanbul, Turkey ",
+    "Istanbul, Turkey",
     "Dubai, UAE",
     "Kuala Lumpur, Malaysia",
     "London, UK",
@@ -19,12 +19,12 @@ const DestinationsMarquee = () => {
         className="flex gap-12 whitespace-nowrap animate-marquee"
       >
         {destinations.map((dest, i) => (
-          <span key={i} className="text-[#0f0f0f] text-base sm:text-lg md:text-xl lg:text-2xl font-semibold px-4">
+          <span key={i} className="text-black text-base sm:text-lg md:text-xl lg:text-2xl font-semibold px-4">
             {dest}
           </span>
         ))}
         {destinations.map((dest, i) => (
-          <span key={i + destinations.length} className="text-[#0f0f0f] text-base sm:text-lg md:text-xl lg:text-2xl font-semibold px-4">
+          <span key={i + destinations.length} className="text-black text-base sm:text-lg md:text-xl lg:text-2xl font-semibold px-4">
             {dest}
           </span>
         ))}
