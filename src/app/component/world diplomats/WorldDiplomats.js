@@ -1,0 +1,80 @@
+"use client";
+import React from "react";
+import bg from "../../../../public/img/worlddiplomats.jpg";
+
+const WorldDiplomats = () => {
+  return (
+    <section id="world-diplomats" className="w-full mt-12">
+
+      {/* --- OUTSIDE HEADING LIKE "Series of Events" --- */}
+      <div className="text-center mb-10">
+        <h2 className="text-[#2C3E50] text-4xl sm:text-5xl font-extrabold">
+          World Diplomats
+        </h2>
+        <p className="text-gray-500 text-lg mt-2">Our Key Diplomats</p>
+
+        {/* PREMIUM DIVIDER */}
+         <div className="flex items-center justify-center gap-2 mt-3">
+  <span className="w-12 h-[2px] bg-blue-400 side-line-animate"></span>
+  <span className="w-3 h-3 bg-blue-500 rounded-full dot-animate"></span>
+  <span className="w-12 h-[2px] bg-blue-400 side-line-animate"></span>
+</div>
+      </div>
+
+      {/* --- IMAGE BACKGROUND SECTION WITH PARALLAX --- */}
+      <div
+        className="relative w-full h-screen overflow-hidden"
+        style={{
+          backgroundImage: `url(${bg.src})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed", // PARALLAX EFFECT
+        }}
+      >
+
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent"></div>
+
+        {/* Content Box */}
+        <div
+          className="
+            absolute
+            bottom-0
+            w-[90%] sm:w-[85%] md:w-[70%] lg:w-[600px]
+            h-[65%] sm:h-[70%] md:h-[75%] lg:h-[70%]
+            bg-white/15
+            backdrop-blur-3xl
+            p-6 sm:p-8 md:p-10 lg:p-12
+            rounded-t-[30px]
+            shadow-2xl
+            flex flex-col justify-center
+            z-10
+
+            left-1/2 transform -translate-x-1/2
+            lg:left-[10%] lg:translate-x-0
+          "
+        >
+          <h2
+            className="
+              text-white font-bold tracking-wide mb-6
+              text-2xl sm:text-3xl md:text-4xl lg:text-5xl
+              text-center lg:text-left
+          ">
+            WORLD DIPLOMATS?
+          </h2>
+
+          <p className="text-white/95 text-base sm:text-lg md:text-xl leading-relaxed">
+            World Diplomats is a global United Nations simulation movement bringing
+            together students from South-East Asia, the Gulf, Europe, Latin America,
+            and beyond. We believe every young leader deserves a voice on the world stage.
+            <br /><br />
+            Whether held in Istanbul, London, Riyadh, or Dubai, our conferences are
+            designed to be creative, inclusive, and globally immersive.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default WorldDiplomats;
