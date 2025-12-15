@@ -32,11 +32,13 @@ const destinations = [
   },
 ];
 
-const DestinationCard = ({ title, image, description, size }) => (
+const DestinationCard = ({ title, image, description, size, delay }) => (
   <div
-    className={`relative rounded-2xl overflow-hidden  bg-white/10 border border-white/20 shadow-xl transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
+    className={`relative rounded-2xl overflow-hidden bg-white/10 border border-white/20 shadow-xl transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
       size === "large" ? "h-[400px]" : "h-[300px]"
     }`}
+    data-aos="fade-up"
+    data-aos-delay={delay}
   >
     <div className="group h-full w-full [perspective:1000px]">
       <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
@@ -65,21 +67,23 @@ export default function Ourstages() {
     <>
       {/* Heading Section */}
       <section className="py-20 text-center">
-        <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#2C3E50]" data-aos="fade-up">
           Iconic Global Destinations
         </h2>
-        <p className="text-blue-500 text-lg mt-2">Our Stages</p>
-         <div className="flex items-center justify-center gap-2 mt-3">
-  <span className="w-12 h-[2px] bg-blue-400 side-line-animate"></span>
-  <span className="w-3 h-3 bg-blue-500 rounded-full dot-animate"></span>
-  <span className="w-12 h-[2px] bg-blue-400 side-line-animate"></span>
-</div>
+        <p className="text-blue-500 text-lg mt-2" data-aos="fade-up" data-aos-delay="100">
+          Our Stages
+        </p>
+        <div className="flex items-center justify-center gap-2 mt-3" data-aos="fade-up" data-aos-delay="200">
+          <span className="w-12 h-[2px] bg-blue-400 side-line-animate"></span>
+          <span className="w-3 h-3 bg-blue-500 rounded-full dot-animate"></span>
+          <span className="w-12 h-[2px] bg-blue-400 side-line-animate"></span>
+        </div>
       </section>
 
       {/* Background Image Section */}
       <section className="relative">
         <div className="absolute inset-0 -z-10">
-          <img src={bg.src} alt="background" className="w-full h-full object-cover  brightness-30" />
+          <img src={bg.src} alt="background" className="w-full h-full object-cover brightness-30" />
           <div className="absolute inset-0 bg-black/20"></div>
         </div>
 
@@ -93,6 +97,7 @@ export default function Ourstages() {
                 image={dest.image}
                 description={dest.description}
                 size="large"
+                delay={i * 100} // staggered animation
               />
             ))}
           </div>
@@ -105,6 +110,7 @@ export default function Ourstages() {
                 image={dest.image}
                 description={dest.description}
                 size="small"
+                delay={i * 100 + 200} // staggered animation
               />
             ))}
           </div>

@@ -26,7 +26,6 @@ export default function Home() {
 <OurImpact />
 <Gallery />
 <ContactUS />
-<Footer />
 <ScrollToTop />
 <Whatsapp />
 

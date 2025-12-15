@@ -12,16 +12,16 @@ const images = [
 
 const Gallery = () => {
   return (
-    <section className="py-16 px-4 sm:px-8 max-w-7xl mx-auto">
+    <section className="py-12 px-4 sm:px-8 max-w-7xl mx-auto">
 
       {/* Heading */}
      
 
        <div className="text-center mb-10">
         <p className="text-gray-500 text-lg mt-2">EVENT GALLERY</p>
-        <h3 className="text-[#2C3E50] text-3xl sm:text-4xl font-extrabold">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#2C3E50]" data-aos="fade-up">
           OUR PREVIOUS ENGAGEMENTS
-        </h3>
+        </h2>
 
           <div className="flex items-center justify-center gap-2 mt-3">
   <span className="w-12 h-[2px] bg-blue-400 side-line-animate"></span>

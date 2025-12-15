@@ -1,9 +1,10 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Link from 'next/link';
 
+// ---------------- Destinations Marquee ----------------
 const DestinationsMarquee = () => {
   const destinations = [
     "Istanbul, Turkey",
@@ -15,9 +16,7 @@ const DestinationsMarquee = () => {
 
   return (
     <div className="overflow-hidden w-full py-2 bg-transparent">
-      <div
-        className="flex gap-12 whitespace-nowrap animate-marquee"
-      >
+      <div className="flex gap-12 whitespace-nowrap animate-marquee">
         {destinations.map((dest, i) => (
           <span key={i} className="text-black text-base sm:text-lg md:text-xl lg:text-2xl font-semibold px-4">
             {dest}
@@ -44,6 +43,67 @@ const DestinationsMarquee = () => {
   );
 };
 
+// ---------------- Letter Component ----------------
+const Letter = ({ char, mousePos }) => {
+  const letterRef = useRef(null);
+  const [style, setStyle] = useState({});
+
+  useEffect(() => {
+    const update = () => {
+      if (!letterRef.current) return;
+
+      const rect = letterRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      const dx = mousePos.x - centerX;
+      const dy = mousePos.y - centerY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      const weight = Math.min(900, Math.max(400, 900 - dist * 5));
+      const scale = 1 + Math.max(0, (120 - dist) / 600);
+
+      setStyle({
+        fontVariationSettings: `'wght' ${weight}`,
+        transform: `scale(${scale})`,
+        transformOrigin: 'center center',
+        display: 'inline-flex',
+        backfaceVisibility: 'hidden',
+        transition: 'font-variation-settings 0.1s linear, transform 0.1s linear',
+      });
+    };
+
+    const frame = requestAnimationFrame(update);
+    return () => cancelAnimationFrame(frame);
+  }, [mousePos]);
+
+  return <span ref={letterRef} style={style}>{char}</span>;
+};
+
+// ---------------- LetterHeading Component ----------------
+const LetterHeading = ({ text, className, delay = 0 }) => {
+  const containerRef = useRef(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e) => setMousePos({ x: e.clientX, y: e.clientY });
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  return (
+    <h1 ref={containerRef} data-aos="fade-up" data-aos-delay={delay} className={className}>
+      {text.split('').map((char, i) => {
+        if (char === ' ') {
+          return <span key={i} style={{ display: 'inline-block', width: '0.35em' }}>&nbsp;</span>;
+        }
+        return <Letter key={i} char={char} mousePos={mousePos} />;
+      })}
+    </h1>
+  );
+};
+
+// ---------------- HeroSection Component ----------------
 const HeroSection = () => {
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
@@ -70,30 +130,43 @@ const HeroSection = () => {
 
         {/* Main Content */}
         <div className="relative z-20 text-center max-w-4xl px-4 sm:px-6 md:px-8 lg:px-10 mt-16 sm:mt-20 flex flex-col items-center">
-          
+
           {/* Top Badge */}
           <div
             data-aos="fade-up"
-            className="inline-block mb-4 px-4 sm:px-5 py-1 sm:py-2 rounded-full bg-white/20 backdrop-blur-md text-xs sm:text-sm font-semibold tracking-wide"
+            className="inline-block -mt-8 mb-8 px-4 sm:px-5 py-1 sm:py-2 rounded-full bg-white/20 backdrop-blur-md text-xs sm:text-sm font-semibold tracking-wide"
           >
-            WORLD DIPLOMATS
+            WORLD <span className=' text-[#EB9336]'> DIPLOMATS </span>
           </div>
 
-          {/* Main Heading */}
-          <h1
-            data-aos="fade-up"
+          {/* Headings */}
+
+
+
+          {/* <LetterHeading
+            text="Crowning the Future of"
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-extrabold leading-tight"
+          />
+
+          <LetterHeading
+            text="Global Diplomats"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-extrabold leading-tight text-blue-300 mt-2 sm:mt-3"
+            delay={150}
+          /> */}
+
+
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-extrabold leading-tight"
           >
             Crowning the Future of
+
           </h1>
 
-          <h1
-            data-aos="fade-up"
-            data-aos-delay="150"
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-extrabold leading-tight text-blue-300 mt-2 sm:mt-3"
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-extrabold leading-tight bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent 
+              drop-shadow-[0_0_18px_rgba(59,130,246,0.35)] mt-2 sm:mt-3"
           >
             Global Diplomats
           </h1>
+
 
           {/* Sub Text */}
           <p
@@ -124,13 +197,11 @@ const HeroSection = () => {
           </div>
 
         </div>
-
       </header>
 
-
-<div className='mt-6'>
-        <DestinationsMarquee  />
-  </div>
+      <div className='mt-6'>
+        <DestinationsMarquee />
+      </div>
     </>
   );
 };

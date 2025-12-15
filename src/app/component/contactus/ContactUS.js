@@ -44,7 +44,7 @@ const ContactUS = () => {
 
     <div className="mb-14">
         <div className="text-center">
-        <h2 className="text-[#2C3E50] text-4xl sm:text-5xl font-extrabold">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#2C3E50]" data-aos="fade-up">
           Contact US 
         </h2>
         <p className="text-gray-500 text-lg mt-2">WE ARE HERE TO HELP</p>
