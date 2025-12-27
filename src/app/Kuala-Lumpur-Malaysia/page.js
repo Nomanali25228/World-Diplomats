@@ -6,7 +6,6 @@ import DestinationParticipantsExpected from '../component/destination-participan
 import DubaibgImage from "../../../public/img/Dubai-Hero-Section.jpg";
 import DubaicityImg from "../../../public/img/Dubai-Participants-Expected.jpg";
 import DestinationPrice from '../component/destination-price/DestinationPrice'
-import DubaiImportantDates from '../component/dubai-important-dates/DubaiImportantDates'
 import DestinationQuestions from '../component/destinationquestions/DestinationQuestions'
 import DestinationMap from '../component/destination-map/DestinationMap'
 import hotelx1 from "../../../public/img/bghotelistanbul1.jpg";
@@ -15,35 +14,36 @@ import hotelx3 from "../../../public/img/hotelistanbul3.jpg";
 import hotelx4 from "../../../public/img/hotelistanbul4.jpg";
 import hotelx5 from "../../../public/img/hotelistanbul5.jpg";
 import DestinationCityTour from '../component/destination-city-tour/DestinationCityTour'
+import MalaysiaImportantDates from '../component/malaysiaimportantdates/MalaysiaImportantDates'
 
 const page = () => {
 
   // Example props data
   const heroData = {
-    title: "Dubai",
-    subtitle: "UAE",
-    dates: "14 - 15 - 16 - 17 May, 2026",
-    agenda: "Conference Agenda: Reimagining Global Governance — Protecting Human Rights, Peace, and Public Health in an Era of Uncertainty.",
+    title: "Kuala Lumpur",
+    subtitle: "Malaysia",
+    dates: "09 - 10 - 11 - 12 July, 2026",
+    agenda: "Conference Agenda: Diplomacy in an Era of Armed Conflict, Human Rights Accountability, and Global Systemic Resilience.",
     bgImage: DubaibgImage,
     registerlinke: "/Register-Now",
     pricinglink: "#pricing",
   }
 
   const delegatesData = {
-    title: "Dubai Conference",
+    title: "Kuala Lumpur Conference",
     DelegatesAttending: 500,
-    Location: "Dubai, UAE",
+    Location: "Kuala Lumpur, Malaysia",
   }
 
   const participantsData = {
     title: "The most competitive United Nations Simulation in the World",
     subtitle1: "World Diplomats centers on the urgent need to strengthen global cooperation as the world faces rising conflicts, rapid technological change, and unprecedented public health challenges. This year's agenda invites delegates to explore innovative frameworks for safeguarding human rights, promoting sustainable peace, and building resilient health systems.",
-    subtitle2: "Through thoughtful diplomacy and informed debate, participants will work toward reimagining international governance for a more secure and equitable future.",
+    subtitle2: " Through thoughtful diplomacy and informed debate, participants will work toward reimagining international governance for a more secure and equitable future.",
     cardimage: DubaicityImg,
   }
 
   const DestinationPriceData = {
-    tital: "Dubai UAE ",
+    tital: "Kuala Lumpur ",
     Basic: "$389",
     DelegateAccommodationExperience: "$551",
     DelegatefullExperience: "$670",
@@ -90,7 +90,7 @@ const page = () => {
             <DestinationCityTour  />
       
 
-      <DubaiImportantDates />
+      <MalaysiaImportantDates />
 
       
              <DestinationMap

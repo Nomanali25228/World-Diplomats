@@ -44,15 +44,28 @@ const DestinationCityTour = () => {
       */}
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#2C3E50]" data-aos="fade-up">
-        City Tour Highlights
+       
+
+       <div className="text-center mb-16">
+        <h2
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl 
+                     font-bold text-[#0d1b4c]"
+          data-aos="fade-up"
+        >
+          City Tour 
+                    <span className="text-[#b00000]"> Highlights</span>
+
         </h2>
 
-        <div className="flex items-center justify-center gap-3 mt-4">
-          <span className="w-16 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full animate-pulse"></span>
-          <span className="w-4 h-4 bg-blue-500 rounded-full animate-bounce"></span>
-          <span className="w-16 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full animate-pulse"></span>
+        {/* Divider */}
+         <div
+          className="flex items-center justify-center gap-2 mt-4"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <span className="w-10 h-[2px] bg-[#1a2a9c] side-line-animate"></span>
+          <span className="w-3 h-3 bg-[#b00000] rounded-full dot-animate"></span>
+          <span className="w-10 h-[2px] bg-[#1a2a9c] side-line-animate"></span>
         </div>
       </div>
 

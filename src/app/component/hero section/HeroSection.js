@@ -15,31 +15,38 @@ const DestinationsMarquee = () => {
   ];
 
   return (
-    <div className="overflow-hidden w-full py-2 bg-transparent">
-      <div className="flex gap-12 whitespace-nowrap animate-marquee">
-        {destinations.map((dest, i) => (
-          <span key={i} className="text-black text-base sm:text-lg md:text-xl lg:text-2xl font-semibold px-4">
-            {dest}
-          </span>
-        ))}
-        {destinations.map((dest, i) => (
-          <span key={i + destinations.length} className="text-black text-base sm:text-lg md:text-xl lg:text-2xl font-semibold px-4">
-            {dest}
-          </span>
-        ))}
-      </div>
+   <div className="overflow-hidden w-full py-2 bg-transparent">
+  <div className="flex gap-12 whitespace-nowrap animate-marquee">
+    {destinations.map((dest, i) => (
+      <span
+        key={i}
+        className="text-[#0d1b4c] text-base sm:text-lg md:text-xl lg:text-2xl font-semibold px-4"
+      >
+        {dest}
+      </span>
+    ))}
+    {destinations.map((dest, i) => (
+      <span
+        key={i + destinations.length}
+        className="text-[#0d1b4c] text-base sm:text-lg md:text-xl lg:text-2xl font-semibold px-4"
+      >
+        {dest}
+      </span>
+    ))}
+  </div>
 
-      <style jsx>{`
-        @keyframes marquee {
-          0% { transform: translateX(0%); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-          display: inline-flex;
-          animation: marquee 20s linear infinite;
-        }
-      `}</style>
-    </div>
+  <style jsx>{`
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: inline-flex;
+      animation: marquee 20s linear infinite;
+    }
+  `}</style>
+</div>
+
   );
 };
 
@@ -164,7 +171,7 @@ const HeroSection = () => {
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-extrabold leading-tight bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent 
               drop-shadow-[0_0_18px_rgba(59,130,246,0.35)] mt-2 sm:mt-3"
           >
-            Global Diplomats
+            Global  Diplomats
           </h1>
 
 
@@ -183,14 +190,14 @@ const HeroSection = () => {
             data-aos-delay="500"
             className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-6 mt-6 sm:mt-8 px-4 w-full"
           >
-            <Link href="/conferences" className="w-full sm:w-auto">
+            <Link href="/Destinations" className="w-full sm:w-auto">
               <button className="w-full sm:w-auto px-5 sm:px-6 py-3 rounded-full cursor-pointer bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-lg transition text-sm sm:text-base md:text-base lg:text-lg">
                 Explore Conferences
               </button>
             </Link>
 
-            <Link href="/RegisterNow" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto px-5 sm:px-6 py-3 rounded-full border border-white/50 hover:bg-white/20 backdrop-blur-md font-semibold transition text-sm sm:text-base md:text-base lg:text-lg">
+            <Link href="/Register-Now" className="w-full sm:w-auto">
+              <button className="w-full cursor-pointer sm:w-auto px-5 sm:px-6 py-3 rounded-full border border-white/50 hover:bg-white/20 backdrop-blur-md font-semibold transition text-sm sm:text-base md:text-base lg:text-lg">
                 Register Now
               </button>
             </Link>

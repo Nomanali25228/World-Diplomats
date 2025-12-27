@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import bgimportdates from "../../../../public/img/bgimportandates.jpg";
 
-const DubaiImportantDates = () => {
+const MalaysiaImportantDates = () => {
   const [openIndex, setOpenIndex] = useState(4);
 
   const toggle = (index) => {
@@ -139,21 +139,21 @@ Early Bird Registration Deadline: January 15th, 2026
 
     <p>
       <strong>Visa Information for World Diplomats Participants</strong><br />
-      Participation in World Diplomats does not require a study visa. Delegates will need to apply for a tourist or conference visa to enter UAE, unless they are from a visa-exempt country.
+      Participation in World Diplomats does not require a study visa. Delegates will need to apply for a tourist or conference visa to enter Malaysia, unless they are from a visa-exempt country.
     </p>
 
     <p>
-      <strong>Traveling to the UAE</strong><br />
+      <strong>Traveling to the Malaysia</strong><br />
       We advise all participants to review the official entry requirements and travel regulations before planning their trip. Complete and updated information can be found on the official government website.<br />
       You can apply for your visa in your country of residence. When submitting your application, ensure that all required documents are included:<br />
       - A recent color photograph of the applicant<br />
       - A color copy of your passport (valid for at least six months from the date of travel)<br />
-      - If you are traveling to the UAE, please check with the Embassy or Consulate in your country for specific requirements and procedures.
+      - If you are traveling to the Malaysia, please check with the Embassy or Consulate in your country for specific requirements and procedures.
     </p>
 
     <p>
       <strong>Visa Support Letter from World Diplomats</strong><br />
-      Once you register, World Diplomats can issue an official confirmation-of-participation letter to support your visa application. This letter does not guarantee visa approval and cannot replace an official visa. Visas are granted only by the UAE government authorities.<br />
+      Once you register, World Diplomats can issue an official confirmation-of-participation letter to support your visa application. This letter does not guarantee visa approval and cannot replace an official visa. Visas are granted only by the Malaysia government authorities.<br />
       <strong>How to Request Your Visa Support Letter:</strong><br />
       1. Register yourself or your delegation for World Diplomats and confirm your participation by completing the payment.<br />
       2. After we receive your payment, send an email to <a href="mailto:info@worlddiplomats.org" className="text-blue-600 underline">info@worlddiplomats.org</a> or contact us on WhatsApp at (number) to request your letter.<br />
@@ -373,4 +373,5 @@ Early Bird Registration Deadline: January 15th, 2026
   );
 };
 
-export default DubaiImportantDates;
+
+export default MalaysiaImportantDates

@@ -92,9 +92,33 @@ const OurImpact = () => {
 
   return (
     <section ref={ref} className="py-16 bg-[#F1F2F4] px-4 sm:px-8 lg:px-12  mx-auto relative" data-aos="fade-up">
-      <h2 className="text-center mb-12 font-bold" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', color: '#0d1b4c' }}>
-        Our <span style={{ color: '#b00000' }}>Impact</span>
-      </h2>
+    
+
+
+  <div className="text-center mb-12">
+        <h2
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl 
+                     font-bold text-[#0d1b4c]"
+          data-aos="fade-up"
+        >
+          Our <span className="text-[#b00000]">Impact</span>
+        </h2>
+        
+
+      
+
+        {/* Decorative line */}
+        <div
+          className="flex items-center justify-center gap-2 mt-4"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <span className="w-10 h-[2px] bg-[#1a2a9c] side-line-animate"></span>
+          <span className="w-3 h-3 bg-[#b00000] rounded-full dot-animate"></span>
+          <span className="w-10 h-[2px] bg-[#1a2a9c] side-line-animate"></span>
+        </div>
+      </div>
+      
 
       <div className="grid lg:grid-cols-3 gap-8">
 
@@ -104,6 +128,8 @@ const OurImpact = () => {
           <h3 className="mb-4 font-bold" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.25rem)' }}>
             Why We Matter
           </h3>
+
+
           <p className="text-gray-700 leading-relaxed" style={{ fontSize: 'clamp(0.85rem, 2.5vw, 1rem)' }}>
             Over the years, we have shaped global dialogues by engaging high-level speakers,
             creating international opportunities, and opening doors for participants from 100+ nations.

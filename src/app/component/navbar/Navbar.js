@@ -9,7 +9,7 @@ import {
 } from "react-icons/ai";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import logo from "../../../../public/img/logo.png";
+import logo from "../../../../public/img/logo3.png";
 
 function Navbar() {
   const pathname = usePathname();
@@ -51,6 +51,8 @@ function Navbar() {
   // ---------------- Scroll Effect ----------------
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
+    // run once on mount to set initial state (handles refresh when page already scrolled)
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -64,24 +66,30 @@ function Navbar() {
   }, [mobileMenuOpen]);
 
   // ---------------- Active link styles ----------------
+
   const linkClass = (href) =>
-    `relative text-black hover:text-blue-600 transition
-     after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-blue-600 after:transition-all
+    `relative text-white hover:text-[#60A5FA] transition
+     after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-[#60A5FA] after:transition-all
      ${
        pathname === href
-         ? "text-blue-600 after:w-full"
+         ? "text-[#60A5FA] after:w-full"
          : "after:w-0 hover:after:w-full"
      }`;
 
   const dropdownLinkClass = (href) =>
-    `block px-4 py-2 hover:text-blue-500 transition ${
-      pathname === href ? "text-blue-600" : ""
+    `block px-4 py-2 hover:text-[#60A5FA] transition ${
+      pathname === href ? "text-[#60A5FA]" : ""
     }`;
 
   const mobileDropdownLinkClass = (href) =>
-    `block py-2 px-4 hover:bg-blue-100 rounded ${
-      pathname === href ? "text-blue-600" : ""
-    }`;
+  `block py-2 px-4 rounded transition-colors
+   ${
+     pathname === href
+       ? "bg-[#1a2a9c] text-white"
+       : "text-gray-200 hover:bg-[#e3f2fd] hover:text-[#0d1b4c]"
+   }`;
+
+    
 
   const destinations = [
     "/Destinations",
@@ -102,23 +110,27 @@ function Navbar() {
 
   const parentClass = (active) =>
     `relative flex items-center space-x-1 cursor-pointer transition
-     after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-blue-600 after:transition-all
+     after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-[#60A5FA] after:transition-all
      ${
        active
-         ? "text-blue-600 after:w-full"
-         : "text-black after:w-0 hover:after:w-full hover:text-blue-600"
+         ? "text-[#60A5FA] after:w-full"
+         : "text-white after:w-0 hover:after:w-full hover:text-[#60A5FA]"
      }`;
 
   return (
     <nav
   className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-    isScrolled ? "bg-[#ffffffe7] shadow-md" : "bg-[#ffffffd3]"
+    isScrolled ? "bg-[#071429f8]  text-white shadow-md" : "bg-transparent text-white"
   }`}
 >
-  <div className="container mx-auto flex items-center justify-between px-4 py-4 lg:py-2">
+  <div className="container mx-auto flex items-center justify-between px-2 py-4 lg:py-2">
     {/* Logo */}
     <Link href="/">
-      <Image src={logo} alt="Logo" className="h-14 md:h-18 w-auto" />
+<Image 
+  src={logo} 
+  alt="Logo" 
+  className="h-16 sm:h-20 md:h-24 w-auto max-w-[150px] object-contain"
+/>
     </Link>
 
     {/* Desktop Links */}
@@ -146,7 +158,7 @@ function Navbar() {
         </Link>
 
         {dropdownOpen2 && (
-          <div className="absolute top-full mt-2 w-48 bg-white text-black rounded shadow-lg">
+          <div className="absolute top-full mt-2 w-52 bg-white text-black rounded shadow-lg">
             <Link
               href="/Istanbul-Turkey"
               className={dropdownLinkClass("/Istanbul-Turkey")}
@@ -160,16 +172,16 @@ function Navbar() {
               Dubai, UAE
             </Link>
             <Link
-              href="/Kuala-Lumpur"
-              className={dropdownLinkClass("/Kuala-Lumpur")}
+              href="/Kuala-Lumpur-Malaysia"
+              className={dropdownLinkClass("/Kuala-Lumpur-Malaysia")}
             >
-              Kuala Lumpur
+              Kuala Lumpur, Malaysia
             </Link>
-            <Link href="/London" className={dropdownLinkClass("/London")}>
-              London
+            <Link href="" className={dropdownLinkClass("/London")}>
+              London, UK
             </Link>
-            <Link href="/Riyadh" className={dropdownLinkClass("/Riyadh")}>
-              Riyadh
+            <Link href="" className={dropdownLinkClass("/Riyadh")}>
+              Riyadh, Saudi Arabia
             </Link>
           </div>
         )}
@@ -197,20 +209,28 @@ function Navbar() {
         {dropdownOpen && (
           <div className="absolute top-full mt-2 w-44 bg-white text-black rounded shadow-lg">
             <Link
-              href="/payment"
-              className={dropdownLinkClass("/payment")}
+              href="/Pricing"
+              className={dropdownLinkClass("/Pricing")}
             >
               Pricing
             </Link>
+
+             <Link
+              href="/FAQs"
+              className={dropdownLinkClass("/FAQs")}
+            >
+              FAQs
+            </Link>
+
             <Link
-              href="/Terms&conditions"
-              className={dropdownLinkClass("/Terms&conditions")}
+              href="/Terms&Conditions"
+              className={dropdownLinkClass("/Terms&Conditions")}
             >
               Terms & Conditions
             </Link>
             <Link
-              href="/Privac"
-              className={dropdownLinkClass("/Privac")}
+              href="/Privacy-Policy"
+              className={dropdownLinkClass("/Privacy-Policy")}
             >
               Privacy Policy
             </Link>
@@ -218,7 +238,7 @@ function Navbar() {
         )}
       </div>
 
-      <Link href="/AboutUs" className={linkClass("/AboutUs")}>
+      <Link href="/About-US" className={linkClass("/AboutUs")}>
         About Us
       </Link>
 
@@ -233,8 +253,8 @@ function Navbar() {
         <button
           className={`cursor-pointer font-semibold py-1 px-4 rounded-full border-2 border-blue-600 transition ${
             isRegisterActive
-              ? "bg-transparent text-blue-600"
-              : "bg-blue-600 text-white hover:bg-transparent hover:text-blue-600"
+              ? "bg-transparent text-white"
+              : "bg-blue-600 text-white hover:bg-transparent hover:text-white"
           }`}
         >
           Register Now
@@ -244,13 +264,13 @@ function Navbar() {
 
     {/* Mobile Top Bar */}
     <div className="relative flex items-center justify-between lg:hidden w-full">
-      <div className="absolute left-1/2 transform -translate-x-1/2">
+      <div className="absolute left-1/3 transform -translate-x-1/3">
         <Link href="/Register-Now">
           <button
-            className={`font-semibold py-1 px-3 rounded-full border-2 border-blue-600 transition text-[10px] sm:text-sm ${
+            className={`font-semibold py-2 px-3 rounded-full border-2 border-blue-600 transition text-[12px] sm:text-sm ${
               isRegisterActive
-                ? "bg-transparent text-blue-600"
-                : "bg-blue-600 text-white hover:bg-transparent hover:text-blue-600"
+                ? "bg-transparent text-white"
+                : "bg-blue-600 text-white hover:bg-transparent hover:text-white"
             }`}
           >
             Register Now
@@ -259,7 +279,7 @@ function Navbar() {
       </div>
 
       <button
-        className="text-black ml-auto"
+        className="text-white ml-auto"
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
       >
         {!mobileMenuOpen && <AiOutlineMenu className="w-6 h-6" />}
@@ -269,111 +289,111 @@ function Navbar() {
 
   {/* Mobile Menu */}
   {mobileMenuOpen && (
-    <div className="lg:hidden fixed top-4 bottom-4 left-4 right-4 z-50 bg-white text-black p-6 rounded-xl shadow-lg overflow-y-auto">
-      <div className="flex justify-end">
-        <button onClick={() => setMobileMenuOpen(false)}>
-          <AiOutlineClose className="w-6 h-6" />
-        </button>
-      </div>
-
-      <nav className="mt-6 space-y-4">
-        <Link href="/" className="block py-2 px-4 hover:bg-blue-100 rounded">
-          Home
-        </Link>
-
-        {/* Destinations Mobile */}
-        <button
-          className={`flex justify-between w-full items-center py-2 px-4 hover:bg-blue-100 rounded relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-blue-600 after:transition-all ${
-            isDestinationActive
-              ? "text-blue-600 after:w-full"
-              : "after:w-0 hover:after:w-full"
-          }`}
-          onClick={() => setMobileDropdownOpen2(!mobileDropdownOpen2)}
-        >
-          <span>Destinations</span>
-          {mobileDropdownOpen2 ? <AiOutlineUp /> : <AiOutlineDown />}
-        </button>
-
-        {mobileDropdownOpen2 && (
-          <div className="ml-4 space-y-2">
-             <Link
-              href="/Destinations"
-              className={mobileDropdownLinkClass("/Destinations")}
-            >
-              Destinations
-            </Link>
-            <Link
-              href="/Istanbul-Turkey"
-              className={mobileDropdownLinkClass("/Istanbul-Turkey")}
-            >
-              Istanbul, Turkey
-            </Link>
-            <Link
-              href="/Dubai-UAE"
-              className={mobileDropdownLinkClass("/Dubai-UAE")}
-            >
-              Dubai, UAE
-            </Link>
-            <Link
-              href="/Kuala-Lumpur"
-              className={mobileDropdownLinkClass("/Kuala-Lumpur")}
-            >
-              Kuala Lumpur
-            </Link>
-            <Link
-              href="/London"
-              className={mobileDropdownLinkClass("/London")}
-            >
-              London
-            </Link>
-            <Link
-              href="/Riyadh"
-              className={mobileDropdownLinkClass("/Riyadh")}
-            >
-              Riyadh
-            </Link>
-          </div>
-        )}
-
-        <Link href="/Blog" className="block py-2 px-4 hover:bg-blue-100 rounded">
-          Blog
-        </Link>
-
-        {/* Information Mobile (expandable) */}
-        <button
-          className={`flex justify-between w-full items-center py-2 px-4 hover:bg-blue-100 rounded relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-blue-600 after:transition-all ${
-            isInfoActive ? "text-blue-600 after:w-full" : "after:w-0 hover:after:w-full"
-          }`}
-          onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
-        >
-          <span>Information</span>
-          {mobileDropdownOpen ? <AiOutlineUp /> : <AiOutlineDown />}
-        </button>
-
-        {mobileDropdownOpen && (
-          <div className="ml-4 space-y-2">
-            <Link href="/payment" className={mobileDropdownLinkClass("/payment")}>
-              Pricing
-            </Link>
-            <Link href="/Terms&conditions" className={mobileDropdownLinkClass("/Terms&conditions")}>
-              Terms & Conditions
-            </Link>
-            <Link href="/Privac" className={mobileDropdownLinkClass("/Privac")}>
-              Privacy Policy
-            </Link>
-          </div>
-        )}
-
-        <Link href="/AboutUs" className="block py-2 px-4 hover:bg-blue-100 rounded">
-          About Us
-        </Link>
-
-        <Link href="/Scholarships" className="block py-2 px-4 hover:bg-blue-100 rounded">
-          Scholarships
-        </Link>
-      </nav>
+  <div className="lg:hidden fixed top-4 bottom-4 left-4 right-4 z-50 bg-[#0c1629] text-white p-6 rounded-xl shadow-lg overflow-y-auto">
+    <div className="flex justify-end">
+      <button onClick={() => setMobileMenuOpen(false)}>
+        <AiOutlineClose className="w-6 h-6 text-white" />
+      </button>
     </div>
-  )}
+
+    <nav className="mt-6 space-y-4">
+      <Link
+        href="/"
+        className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors"
+      >
+        Home
+      </Link>
+
+      {/* Destinations Mobile */}
+      <button
+        className={`flex justify-between w-full items-center py-2 px-4 rounded relative transition-colors ${
+          isDestinationActive
+            ? "text-blue-500 after:w-full"
+            : "text-white after:w-0 hover:after:w-full"
+        } hover:bg-[#1e2a4d] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-blue-500 after:transition-all`}
+        onClick={() => setMobileDropdownOpen2(!mobileDropdownOpen2)}
+      >
+        <span>Destinations</span>
+        {mobileDropdownOpen2 ? <AiOutlineUp /> : <AiOutlineDown />}
+      </button>
+
+      {mobileDropdownOpen2 && (
+        <div className="ml-4 space-y-2">
+          <Link href="/Destinations" className={mobileDropdownLinkClass("/Destinations")}>
+            Destinations
+          </Link>
+          <Link href="/Istanbul-Turkey" className={mobileDropdownLinkClass("/Istanbul-Turkey")}>
+            Istanbul, Turkey
+          </Link>
+          <Link href="/Dubai-UAE" className={mobileDropdownLinkClass("/Dubai-UAE")}>
+            Dubai, UAE
+          </Link>
+          <Link href="/Kuala-Lumpur-Malaysia" className={mobileDropdownLinkClass("/Kuala-Lumpur-Malaysia")}>
+            Kuala Lumpur, Malaysia
+          </Link>
+          <Link href="" className={mobileDropdownLinkClass("/London")}>
+            London, UK
+          </Link>
+          <Link href="" className={mobileDropdownLinkClass("/Riyadh")}>
+            Riyadh, Saudi Arabia
+          </Link>
+        </div>
+      )}
+
+      <Link
+        href="/Blog"
+        className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors"
+      >
+        Blog
+      </Link>
+
+      {/* Information Mobile (expandable) */}
+      <button
+        className={`flex justify-between w-full items-center py-2 px-4 rounded relative transition-colors ${
+          isInfoActive
+            ? "text-blue-500 after:w-full"
+            : "text-white after:w-0 hover:after:w-full"
+        } hover:bg-[#1e2a4d] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-blue-500 after:transition-all`}
+        onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
+      >
+        <span>Information</span>
+        {mobileDropdownOpen ? <AiOutlineUp /> : <AiOutlineDown />}
+      </button>
+
+      {mobileDropdownOpen && (
+        <div className="ml-4 space-y-2">
+          <Link href="/Pricing" className={mobileDropdownLinkClass("/Pricing")}>
+            Pricing
+          </Link>
+          <Link href="/FAQs" className={mobileDropdownLinkClass("/FAQs")}>
+            FAQs
+          </Link>
+          <Link href="/Terms&Conditions" className={mobileDropdownLinkClass("/Terms&Conditions")}>
+            Terms & Conditions
+          </Link>
+          <Link href="/Privacy-Policy" className={mobileDropdownLinkClass("/Privacy-Policy")}>
+            Privacy Policy
+          </Link>
+        </div>
+      )}
+
+      <Link
+        href="/About-US"
+        className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors"
+      >
+        About Us
+      </Link>
+
+      <Link
+        href="/Scholarships"
+        className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors"
+      >
+        Scholarships
+      </Link>
+    </nav>
+  </div>
+)}
+
 </nav>
 
   );

@@ -23,7 +23,7 @@ const DestinationQuestions = () => {
           <motion.div
             animate={{ y: [0, -12, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-20 -right-20 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"
+            className="absolute -top-20 -right-20 w-64 h-64 bg-red-700/10 rounded-full blur-3xl"
           />
 
           {/* Icon */}
@@ -52,7 +52,7 @@ const DestinationQuestions = () => {
             whileTap={{ scale: 0.97 }}
             className="relative z-10"
           >
-            <Link href="/contact">
+            <Link href="/DelegationForm">
               <button className="inline-flex cursor-pointer items-center gap-2 px-7 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 transition rounded-lg text-white text-sm sm:text-base font-medium shadow-lg">
                 Talk with us
               </button>

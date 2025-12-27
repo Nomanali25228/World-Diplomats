@@ -34,7 +34,7 @@ const destinations = [
 
 const DestinationCard = ({ title, image, description, size, delay }) => (
   <div
-    className={`relative rounded-2xl overflow-hidden bg-white/10 border border-white/20 shadow-xl transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
+    className={`relative rounded-3xl overflow-hidden bg-white/10 border border-white/20 shadow-xl transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
       size === "large" ? "h-[400px]" : "h-[300px]"
     }`}
     data-aos="fade-up"
@@ -44,16 +44,25 @@ const DestinationCard = ({ title, image, description, size, delay }) => (
       <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
         {/* FRONT */}
         <div className="absolute inset-0 [backface-visibility:hidden]">
-          <img src={image.src ? image.src : image} alt={title} className="w-full h-full object-cover" />
-          <div className="absolute bottom-0 w-full bg-black/40 p-4 text-white">
+          <img
+            src={image.src ? image.src : image}
+            alt={title}
+            className="w-full h-full object-cover brightness-90"
+          />
+          <div className="absolute bottom-0 w-full bg-[#0d1b4c]/80 p-4 text-white rounded-tl-2xl rounded-tr-2xl">
             <h3 className="font-semibold text-lg">{title}</h3>
           </div>
         </div>
+
         {/* BACK */}
         <div className="absolute inset-0 [transform:rotateY(180deg)] [backface-visibility:hidden]">
-          <img src={image.src ? image.src : image} alt={title} className="w-full h-full object-cover brightness-[0.35]" />
+          <img
+            src={image.src ? image.src : image}
+            alt={title}
+            className="w-full h-full object-cover brightness-30"
+          />
           <div className="absolute inset-0 p-5 flex flex-col justify-center text-white">
-            <h3 className="text-xl font-bold mb-3">{title}</h3>
+            <h3 className="text-xl font-bold mb-3 ">{title}</h3>
             <p className="opacity-95">{description}</p>
           </div>
         </div>
@@ -65,26 +74,43 @@ const DestinationCard = ({ title, image, description, size, delay }) => (
 export default function Ourstages() {
   return (
     <>
-      {/* Heading Section */}
+      {/* ================= Heading Section ================= */}
       <section className="py-20 text-center">
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#2C3E50]" data-aos="fade-up">
-          Iconic Global Destinations
+        <h2
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0d1b4c]"
+          data-aos="fade-up"
+        >
+          
+                              Iconic Global <span className="text-[#b00000]">Destinations</span>
+
         </h2>
-        <p className="text-blue-500 text-lg mt-2" data-aos="fade-up" data-aos-delay="100">
+        <p
+          className="text-gray-500 text-lg mt-2"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
           Our Stages
         </p>
-        <div className="flex items-center justify-center gap-2 mt-3" data-aos="fade-up" data-aos-delay="200">
-          <span className="w-12 h-[2px] bg-blue-400 side-line-animate"></span>
-          <span className="w-3 h-3 bg-blue-500 rounded-full dot-animate"></span>
-          <span className="w-12 h-[2px] bg-blue-400 side-line-animate"></span>
+          <div
+          className="flex items-center justify-center gap-2 mt-4"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <span className="w-10 h-[2px] bg-[#1a2a9c] side-line-animate"></span>
+          <span className="w-3 h-3 bg-[#b00000] rounded-full dot-animate"></span>
+          <span className="w-10 h-[2px] bg-[#1a2a9c] side-line-animate"></span>
         </div>
       </section>
 
-      {/* Background Image Section */}
+      {/* ================= Background Image Section ================= */}
       <section className="relative">
         <div className="absolute inset-0 -z-10">
-          <img src={bg.src} alt="background" className="w-full h-full object-cover brightness-30" />
-          <div className="absolute inset-0 bg-black/20"></div>
+          <img
+            src={bg.src}
+            alt="background"
+            className="w-full h-full object-cover brightness-30"
+          />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0d1b4c]/95 via-[#1a2a9c]/85 to-[#b00000]/80"></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 py-20 relative z-10">
@@ -97,7 +123,7 @@ export default function Ourstages() {
                 image={dest.image}
                 description={dest.description}
                 size="large"
-                delay={i * 100} // staggered animation
+                delay={i * 100}
               />
             ))}
           </div>
@@ -110,7 +136,7 @@ export default function Ourstages() {
                 image={dest.image}
                 description={dest.description}
                 size="small"
-                delay={i * 100 + 200} // staggered animation
+                delay={i * 100 + 200}
               />
             ))}
           </div>

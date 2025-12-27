@@ -6,33 +6,37 @@ const WorldDiplomats = () => {
   return (
     <section id="world-diplomats" className="w-full mt-12">
 
-      {/* --- OUTSIDE HEADING LIKE "Series of Events" --- */}
+      {/* ================= Heading Section ================= */}
       <div className="text-center mb-10">
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#2C3E50]" data-aos="fade-up">
+        <h2
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0d1b4c]"
+          data-aos="fade-up"
+        >
+                                        World <span className="text-[#b00000]">Diplomats</span>
 
-          World Diplomats
         </h2>
-        <p 
+        <p
           className="text-gray-500 text-lg mt-2"
           data-aos="fade-up"
           data-aos-delay="100"
         >
           Our Key Diplomats
+          
         </p>
 
         {/* PREMIUM DIVIDER */}
-        <div 
-          className="flex items-center justify-center gap-2 mt-3"
+       <div
+          className="flex items-center justify-center gap-2 mt-4"
           data-aos="fade-up"
           data-aos-delay="200"
         >
-          <span className="w-12 h-[2px] bg-blue-400 side-line-animate"></span>
-          <span className="w-3 h-3 bg-blue-500 rounded-full dot-animate"></span>
-          <span className="w-12 h-[2px] bg-blue-400 side-line-animate"></span>
+          <span className="w-10 h-[2px] bg-[#1a2a9c] side-line-animate"></span>
+          <span className="w-3 h-3 bg-[#b00000] rounded-full dot-animate"></span>
+          <span className="w-10 h-[2px] bg-[#1a2a9c] side-line-animate"></span>
         </div>
       </div>
 
-      {/* --- IMAGE BACKGROUND SECTION WITH PARALLAX --- */}
+      {/* ================= IMAGE BACKGROUND SECTION WITH PARALLAX ================= */}
       <div
         className="relative w-full h-screen overflow-hidden"
         style={{
@@ -52,7 +56,7 @@ const WorldDiplomats = () => {
             bottom-0
             w-[90%] sm:w-[85%] md:w-[70%] lg:w-[600px]
             h-[65%] sm:h-[70%] md:h-[75%] lg:h-[70%]
-            bg-white/15
+            bg-[#0d1b4c]/15
             backdrop-blur-3xl
             p-6 sm:p-8 md:p-10 lg:p-12
             rounded-t-[30px]
@@ -67,7 +71,7 @@ const WorldDiplomats = () => {
         >
           <h2
             className="
-              text-white font-bold tracking-wide mb-6
+             text-white  font-bold tracking-wide mb-6
               text-2xl sm:text-3xl md:text-4xl lg:text-5xl
               text-center lg:text-left
             "

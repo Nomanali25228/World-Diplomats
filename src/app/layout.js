@@ -2,6 +2,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 import Footer from "./component/footer/Footer";
+import ScrollToTop from "./component/Scrolltotop/ScrollToTop";
+import Whatsapp from "./component/whatsapp/Whatsapp";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,13 +26,15 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-         <NextTopLoader
+        <NextTopLoader
           color="#2563eb"
           height={3}
           showSpinner={false}
         />
         {children}
-        <Footer/>
+        <Footer />
+        <ScrollToTop />
+        <Whatsapp />
       </body>
     </html>
   );
