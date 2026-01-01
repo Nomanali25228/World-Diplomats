@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from "framer-motion";
 import bgimg from '../../../public/img/registerbg.jpg';
 import Confetti from 'react-confetti';
@@ -12,6 +13,7 @@ import Select from "react-select";
 import * as Flags from "country-flag-icons/react/1x1";
 import { countryOptions } from "@/app/utils/countryList";
 import Navbar from "../component/navbar/Navbar";
+import { useDestination } from '@/app/context/DestinationContext';
 export default function FunRegistration() {
 const [step, setStep] = useState(1);
 const [submitted, setSubmitted] = useState(false);
@@ -31,6 +33,53 @@ shirtSize: "",
 foodPreference: "",
 destination: ""
 });
+// Map destination labels to backend API resource names
+const DEST_API_MAP = {
+  "Istanbul, Turkey": "firstnames",
+  "Dubai, UAE": "secondenames",
+  "Baku, Azerbaijan": "thirdnames",
+  "Riyadh, Saudi Arabia": "fivenames",
+  "London, UK": "fivthnames",
+  "Kuala Lumpur, Malaysia": "fournames",
+};
+
+const [changeApi, setChangeApi] = useState("firstnames");
+
+const [isDestinationLocked, setIsDestinationLocked] = useState(false);
+const [submitting, setSubmitting] = useState(false);
+
+// Map destination labels to a display date (used in the left "World Diplomats" card)
+const DEST_DATE_MAP = {
+  "Istanbul, Turkey": "26th – 29th March 2026",
+  "Dubai, UAE": "14th – 17th May 2026",
+  "Kuala Lumpur, Malaysia": "9th – 12th July 2026",
+  "London, UK": "3th – 6th September 2026",
+  "Riyadh, Saudi Arabia": "15th – 18th October 2026",
+};
+
+useEffect(() => {
+  const dest = (form.destination || "").trim();
+  const api = DEST_API_MAP[dest] || "firstnames";
+  setChangeApi(api);
+}, [form.destination]);
+
+// Use destination from global context (or fallback to URL param)
+const searchParams = useSearchParams();
+const { destination: ctxDestination, locked: ctxLocked, selectDestination } = useDestination();
+useEffect(() => {
+  if (ctxDestination) {
+    setForm(prev => ({ ...prev, destination: ctxDestination }));
+    setIsDestinationLocked(!!ctxLocked);
+    return;
+  }
+  const destParam = searchParams?.get?.('destination') || '';
+  if (destParam) {
+    // populate context from URL param so app state is consistent
+    selectDestination(destParam, true);
+    setForm(prev => ({ ...prev, destination: destParam }));
+    setIsDestinationLocked(true);
+  }
+}, [ctxDestination, ctxLocked, searchParams, selectDestination]);
 // Registration type: 'single' or 'group'
 const [registrationType, setRegistrationType] = useState("single");
 // Group delegates state
@@ -124,8 +173,8 @@ const next = () => {
   if (step === 1) {
     // Basic validation: for single require name/email, for group require groupEmail and at least two delegate names
     if (registrationType === "single") {
-      if (!form.name.trim() || !form.email.trim()) {
-        toast.error("Please fill Name and Email for single delegate");
+      if (!form.name.trim() || !form.email.trim() || !form.destination.trim()) {
+        toast.error("Please fill Name, Email and destination for single delegate");
         return;
       }
     } else {
@@ -133,9 +182,13 @@ const next = () => {
         toast.error("Please provide a contact email for the delegation");
         return;
       }
+      if (!form.destination.trim()) {
+        toast.error("Please select a Destination for the delegation");
+        return;
+      }
       const filledNames = delegates.filter((d) => d.trim() !== "");
       if (filledNames.length < MIN_DELEGATES) {
-        toast.error(`Please provide  delegate names`);
+        toast.error("Please provide delegate names");
         return;
       }
     }
@@ -143,7 +196,7 @@ const next = () => {
   setStep(2);
 };const handleSubmit = async (e) => {
   e.preventDefault();
-
+  setSubmitting(true);
   try {
     // ---------- BASE PAYLOAD ----------
     let payload = {
@@ -200,29 +253,55 @@ const next = () => {
     payload = clean(payload);
 
     // ---------- API CALL ----------
-    const res = await fetch("http://localhost:1337/api/firstnames", {
+    const res = await fetch(`http://localhost:1337/api/${changeApi}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ data: payload }),
     });
 
-    const result = await res.json();
-    console.log("STRAPI RESPONSE:", result);
+    let resultText;
+    try {
+      const ct = res.headers.get("content-type") || "";
+      if (ct.includes("application/json")) resultText = await res.json();
+      else resultText = await res.text();
+    } catch (err) {
+      resultText = "(unable to parse response)";
+    }
+
+    console.log("STRAPI RESPONSE:", resultText);
     console.log("SENT PAYLOAD:", payload);
 
     if (!res.ok) {
-      toast.error("Strapi error — check console for details");
+      console.error("Strapi error:", res.status, resultText);
+      const msg = (resultText && resultText.error && resultText.error.message)
+        || (typeof resultText === 'string' ? resultText : JSON.stringify(resultText));
+      toast.error(`Strapi error: ${msg}`);
+      setSubmitting(false);
       return;
+    }
+
+    // Call destination-specific mail API to send confirmation email
+    // Call consolidated register API to send confirmation email
+    try {
+      await fetch(`/api/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: form.email || groupEmail, name: form.name, data: payload, destination: form.destination }),
+      });
+    } catch (mailErr) {
+      console.error("Register API error:", mailErr);
     }
 
     // ---------- SUCCESS ----------
     toast.success("Registration Completed!");
     setStep(3);
     setSubmitted(true);
+    setSubmitting(false);
 
   } catch (err) {
     console.error("SUBMIT ERROR:", err);
     toast.error("Submission failed");
+    setSubmitting(false);
   }
 };
 
@@ -247,6 +326,11 @@ const inputClass =
 "w-full px-4 py-3 border-2 mt-1 border-gray-300 rounded-xl bg-white shadow-md text-sm " +
 "focus:outline-none focus:ring-2 focus:ring-indigo-400 transition duration-300 " +
 "hover:shadow-xl";
+
+// derive selected destination and display date (trim user selection to be safe)
+const _selectedDestKey = (form.destination || "").trim();
+const selectedDestLabel = _selectedDestKey || "";
+const selectedDestDate = DEST_DATE_MAP[_selectedDestKey] || DEST_DATE_MAP[""];
 
 return (
 <> <Navbar />
@@ -307,11 +391,35 @@ return (
 
 >
 
-    <div className="text-white text-center">
-      <h2 className="text-2xl md:text-3xl font-bold mb-2 ">World Diplomats</h2>
-      <p className="text-sm md:text-lg">Dubai, UAE</p>
-      <p className="mt-1 text-xs md:text-sm">13th – 16th February</p>
-    </div>
+    <div className="w-full flex justify-center px-4">
+  <div
+    className="
+      backdrop-blur-md
+      bg-white/10
+      border border-white/20
+      rounded-2xl
+      shadow-lg
+      text-white
+      text-center
+      px-6 py-4
+      max-w-md
+      w-full
+    "
+  >
+    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-wide">
+      World Diplomats
+    </h2>
+
+    <p className="mt-1 text-sm sm:text-base md:text-lg text-white/90">
+      {selectedDestLabel}
+    </p>
+
+    <p className="mt-1 text-xs sm:text-sm md:text-base text-white/70">
+      {selectedDestDate}
+    </p>
+  </div>
+</div>
+
   </div>  
         {/* Form Fields */}
         <div className="md:w-2/3 w-full p-8 md:p-12">
@@ -442,14 +550,20 @@ return (
                       {/* Destination */}
                       <div>
                         <label className="block text-sm font-medium text-gray-700">Destination *</label>
-                        <select name="destination" value={form.destination} onChange={handleChange} className={inputClass}>
-                          <option value="">Destination</option>
-                          <option>Istanbul, Turkey</option>
-                          <option>Dubai, UAE</option>
-                          <option> Kuala Lumpur, Malaysia</option>
-                          <option> London, UK</option>
-                          <option> Riyadh, Saudi Arabia</option>
-                        </select>
+                        {isDestinationLocked ? (
+                          <div className="mt-1">
+                            <p className="px-4 py-3 bg-gray-100 rounded-xl text-sm text-gray-800">{selectedDestLabel}</p>
+                          </div>
+                        ) : (
+                          <select name="destination" value={form.destination} onChange={handleChange} className={inputClass}>
+                            <option value="">Destination</option>
+                            <option value="Istanbul, Turkey">Istanbul, Turkey</option>
+                            <option value="Dubai, UAE">Dubai, UAE</option>
+                            <option value="Kuala Lumpur, Malaysia">Kuala Lumpur, Malaysia</option>
+                            <option value="London, UK">London, UK</option>
+                            <option value="Riyadh, Saudi Arabia">Riyadh, Saudi Arabia</option>
+                          </select>
+                        )}
                       </div>
 
                       {/* Institution */}
@@ -489,13 +603,13 @@ return (
                       <div className={delegates.length > 6 ? "max-h-[420px] md:max-h-[220px] overflow-auto pr-2" : "pr-2"}>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                           {delegates.map((name, idx) => (
-                            <div key={idx} className="relative p-2 border rounded-md bg-white">
-                              <label className="block text-sm font-medium text-gray-700">Delegate {idx + 1} Name</label>
+                            <div key={idx} className="relative p-2  bg-white">
+                              <label  className="block  text-sm font-medium text-gray-700">Delegate {idx + 1} Name</label>
                               <input
                                 type="text"
                                 value={name}
                                 onChange={(e) => updateDelegateName(idx, e.target.value)}
-                                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-300 mt-1"
+                                className="w-full px-4 py-3 border-2 mt-1 border-gray-300 rounded-xl bg-white shadow-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 transition duration-300 hover:shadow-xl"
                                 placeholder={`Delegate ${idx + 1} full name`}
                                 required
                               />
@@ -581,14 +695,20 @@ return (
 
                         <div>
                           <label className="block text-sm font-medium text-gray-700">Destination *</label>
-                          <select name="destination" value={form.destination} onChange={handleChange} className={inputClass}>
-                            <option value="">Destination</option>
-                          <option>Istanbul, Turkey</option>
-                          <option>Dubai, UAE</option>
-                          <option> Kuala Lumpur, Malaysia</option>
-                          <option> London, UK</option>
-                          <option> Riyadh, Saudi Arabia</option>
-                          </select>
+                          {isDestinationLocked ? (
+                            <div className="mt-1">
+                              <p className="px-4 py-3 bg-gray-100 rounded-xl text-sm text-gray-800">{selectedDestLabel}</p>
+                            </div>
+                          ) : (
+                            <select name="destination" value={form.destination} onChange={handleChange} className={inputClass}>
+                              <option value="">Destination</option>
+                              <option value="Istanbul, Turkey">Istanbul, Turkey</option>
+                              <option value="Dubai, UAE">Dubai, UAE</option>
+                              <option value="Kuala Lumpur, Malaysia">Kuala Lumpur, Malaysia</option>
+                              <option value="London, UK">London, UK</option>
+                              <option value="Riyadh, Saudi Arabia">Riyadh, Saudi Arabia</option>
+                            </select>
+                          )}
                         </div>
 
                         <div>
@@ -643,7 +763,7 @@ return (
                           <div key={idx} className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
                             <div className="sm:col-span-1">
                               <label className="block text-sm font-medium text-gray-700">Name</label>
-                              <input type="text" value={name} readOnly className="w-full px-3 py-2 border rounded-md bg-gray-50" />
+                              <input type="text" value={name} readOnly className={inputClass} />
                             </div>
                             <div>
                               <label className="block text-sm font-medium text-gray-700">Shirt Size *</label>
@@ -777,7 +897,9 @@ return (
                 <button type="button" onClick={next} className="ml-auto px-6 py-2 cursor-pointer rounded-xl text-white" style={{ backgroundColor: 'var(--royal)' }}>Next →</button>
               )}
               {step === 2 && (
-                <button type="submit" className="ml-auto px-6 py-2 rounded-xl cursor-pointer text-white" style={{ backgroundColor: 'var(--royal)' }}>Submit</button>
+                <button type="submit" disabled={submitting} className="ml-auto px-6 py-2 rounded-xl cursor-pointer text-white disabled:opacity-60" style={{ backgroundColor: 'var(--royal)' }}>
+                  {submitting ? 'Submitting...' : 'Submit'}
+                </button>
               )}
             </div>
           </form>

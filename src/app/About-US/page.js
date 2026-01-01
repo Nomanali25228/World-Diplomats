@@ -28,50 +28,70 @@ const Page = () => {
           </div>
 
           {/* CONTENT */}
-          <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-10 space-y-6 text-black leading-relaxed">
+         {/* CONTENT */}
+<div className="bg-white rounded-3xl shadow-xl p-6 sm:p-10 space-y-8 text-black leading-relaxed">
 
-            <p>
-              <strong>World Diplomats</strong> is an international diplomacy and
-              leadership platform committed to advancing global dialogue through
-              high-level United Nations simulations. The initiative is designed
-              to provide an intellectually rigorous and professionally structured
-              environment where participants engage with complex global issues
-              through the principles and practices of multilateral diplomacy.
-            </p>
+  <div>
+    <h2 className="text-xl sm:text-2xl font-bold mb-3">Who We Are</h2>
+    <p>
+      <strong>World Diplomats</strong> is an international youth diplomacy
+      initiative grounded in the core values of human rights, international
+      peace and security, and global cooperation. Operating as a flagship
+      project of <strong>Globnix Youth Forum Ltd (UK)</strong>, licence #
+      <strong>16913427</strong>, the platform provides an inclusive and
+      academically driven environment where young people engage with global
+      issues aligned with the United Nations Sustainable Development Goals
+      (SDGs).
+    </p>
+  </div>
 
-            <p>
-              Grounded in the core values of human rights, international peace and
-              security, and global cooperation, World Diplomats offers
-              participants an opportunity to analyze policy challenges,
-              represent state and institutional perspectives, and negotiate
-              consensus-driven solutions. The program emphasizes critical
-              thinking, diplomacy, public speaking, policy research, and
-              cross-cultural engagement.
-            </p>
+  <div>
+    <h2 className="text-xl sm:text-2xl font-bold mb-3">What We Do</h2>
+    <p>
+      World Diplomats offers participants the opportunity to analyze global
+      policy challenges, represent state and institutional perspectives, and
+      negotiate consensus-driven solutions through structured Model United
+      Nations simulations, international forums, and leadership programs. Our
+      approach emphasizes critical thinking, diplomacy, public speaking,
+      policy research, and cross-cultural engagement.
+    </p>
+  </div>
 
-            <p>
-              Established in <strong>Istanbul, Turkey</strong>, World Diplomats
-              aims to position itself among the leading global UN simulation
-              initiatives by fostering inclusive participation across academic
-              levels and professional backgrounds. Its structured committee
-              formats and academic approach ensure an authentic and impactful
-              simulation experience aligned with real-world international
-              governance frameworks.
-            </p>
+  <div>
+    <h2 className="text-xl sm:text-2xl font-bold mb-3">Our Academic Approach</h2>
+    <p>
+      World Diplomats aims to position itself among leading global United
+      Nations simulation initiatives by fostering inclusive participation
+      across diverse academic levels and professional backgrounds. Through
+      structured committee formats, rigorous preparation, and an academically
+      grounded methodology, we deliver an authentic and impactful simulation
+      experience aligned with real-world international governance frameworks.
+    </p>
+  </div>
 
-            <p>
-              World Diplomats believes that diplomacy is an essential instrument
-              for global stability and sustainable development. By cultivating
-              informed, ethical, and globally conscious leaders, the initiative
-              seeks to contribute meaningfully to international understanding
-              and cooperation.
-            </p>
+  <div>
+    <h2 className="text-xl sm:text-2xl font-bold mb-3">Why It Matters</h2>
+    <p>
+      World Diplomats believes diplomacy is a vital instrument for global
+      stability and sustainable development. By cultivating informed,
+      ethical, and globally conscious leaders, the initiative seeks to
+      contribute meaningfully to international understanding, cooperation,
+      and responsible global citizenship.
+    </p>
+  </div>
 
-            <p className="text-center font-semibold pt-6 border-t">
-              © World Diplomats. All Rights Reserved.
-            </p>
+  <p className="text-center font-medium pt-4">
+    By empowering youth through dialogue and diplomacy, World Diplomats aims
+    to shape a generation ready to lead with integrity and global
+    responsibility.
+  </p>
 
-          </div>
+  <p className="text-center font-semibold pt-6 border-t">
+    © World Diplomats. All Rights Reserved.
+  </p>
+
+</div>
+
         </div>
       </section>
     </>

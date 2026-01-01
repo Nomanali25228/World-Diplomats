@@ -25,7 +25,7 @@ export default function Home() {
 <BecomeDiplomets />
 <OurImpact />
 <Gallery />
-<ContactUS />
+{/* <ContactUS /> */}
 
 
     </>

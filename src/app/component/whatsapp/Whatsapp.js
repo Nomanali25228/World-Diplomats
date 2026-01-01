@@ -13,7 +13,7 @@ const Whatsapp = () => {
     "Hello! I have questions regarding world diplomats."
   );
   const [showEmojis, setShowEmojis] = useState(false);
-  const phoneNumber = "+447487302322";
+  const phoneNumber = "+447490344639";
   const chatRef = useRef(null);
 
   // NOTE: `isMobile` is computed directly to avoid calling setState in an effect.

@@ -3,16 +3,14 @@ import React, { useState } from "react";
 import Image from "next/image";
 
 // Example images
-import taksimImg from "../../../../public/img/IstanbulCityTour1.jpg";
-import arastaImg from "../../../../public/img/IstanbulCityTour2.jpg";
-import bosporusImg from "../../../../public/img/IstanbulCityTour3.jpg";
+
 // import unLogo from "../../../../public/img/un-logo.png"; // Background UN logo (commented for now)
 
-const DestinationCityTour = () => {
+const DestinationCityTour = ({ image1, title2, image2, title3, image3 }) => {
   const tours = [
-    { title: "Taksim Square", image: taksimImg },
-    { title: "Arasta Bazar", image: arastaImg },
-    { title: "Bosporus Cruise Dinner", image: bosporusImg },
+    {  image: image1 },
+    {  image: image2 },
+    {  image: image3 },
   ];
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -58,15 +56,7 @@ const DestinationCityTour = () => {
         </h2>
 
         {/* Divider */}
-         <div
-          className="flex items-center justify-center gap-2 mt-4"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          <span className="w-10 h-[2px] bg-[#1a2a9c] side-line-animate"></span>
-          <span className="w-3 h-3 bg-[#b00000] rounded-full dot-animate"></span>
-          <span className="w-10 h-[2px] bg-[#1a2a9c] side-line-animate"></span>
-        </div>
+        
       </div>
 
         {/* City Tour Images Grid */}
@@ -82,9 +72,9 @@ const DestinationCityTour = () => {
                 alt={tour.title}
                 className="w-full h-48 sm:h-56 lg:h-60 object-cover"
               />
-              <div className="absolute bottom-0 w-full bg-black/50 text-white text-center py-1 text-sm sm:text-base font-semibold">
+              {/* <div className="absolute bottom-0 w-full bg-black/50 text-white text-center py-1 text-sm sm:text-base font-semibold">
                 {tour.title}
-              </div>
+              </div> */}
             </div>
           ))}
         </div>

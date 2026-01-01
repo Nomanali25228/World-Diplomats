@@ -39,9 +39,6 @@ const OurYouthLeaders = () => {
 
       {/* ================= TITLE ================= */}
       <div className="text-center mb-12" data-aos="fade-up">
-        <p className="text-gray-500 text-sm sm:text-base md:text-lg">
-          Our Youth Leaders
-        </p>
 
         <h2
           className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl 
@@ -52,15 +49,7 @@ const OurYouthLeaders = () => {
         </h2>
 
         {/* Decorative Line */}
-        <div
-          className="flex items-center justify-center gap-2 mt-4"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          <span className="w-10 h-[2px] bg-[#1a2a9c] side-line-animate"></span>
-          <span className="w-3 h-3 bg-[#b00000] rounded-full dot-animate"></span>
-          <span className="w-10 h-[2px] bg-[#1a2a9c] side-line-animate"></span>
-        </div>
+       
       </div>
 
       {/* ================= GRID ================= */}
@@ -128,6 +117,7 @@ const OurYouthLeaders = () => {
                   text-center px-4
                 "
               >
+                
                 <h3 className="text-white text-xl sm:text-2xl font-bold">
                   {speaker.name}
                 </h3>

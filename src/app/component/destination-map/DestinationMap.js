@@ -42,15 +42,7 @@ const DestinationMap = (props) => {
           Event venue location info and gallery
         </p>
 
-         <div
-          className="flex items-center justify-center gap-2 mt-4"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          <span className="w-10 h-[2px] bg-[#1a2a9c] side-line-animate"></span>
-          <span className="w-3 h-3 bg-[#b00000] rounded-full dot-animate"></span>
-          <span className="w-10 h-[2px] bg-[#1a2a9c] side-line-animate"></span>
-        </div>
+        
       </div>
 
       {/* Map & Description Section */}

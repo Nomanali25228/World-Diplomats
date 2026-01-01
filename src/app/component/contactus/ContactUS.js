@@ -1,45 +1,92 @@
 "use client";
 import React from "react";
 import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
-import { FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTiktok, FaWhatsapp } from "react-icons/fa";
 
 const ContactUS = () => {
-  const items = [
-    {
-      icon: <MdEmail size={22} className="text-[#1a2a9c]" />,
-      title: "Email",
-      value: "support@neotericsummit.com",
-    },
-    {
-      icon: <MdLocationOn size={22} className="text-[#1a2a9c]" />,
-      title: "Location",
-      value: (
-        <>
-          1309 Coffeen Avenue STE 1200 <br /> Sheridan, Wyoming 82801
-        </>
-      ),
-    },
-    {
-      icon: <MdPhone size={22} className="text-[#1a2a9c]" />,
-      title: "Phone",
-      value: "+1 (484) 263-4682",
-    },
-    {
-      icon: <FaWhatsapp size={22} className="text-[#1a2a9c]" />,
-      title: "Whatsapp",
-      value: "+1 (484) 263-4682",
-    },
-    {
-      icon: <FaFacebook size={22} className="text-[#1a2a9c]" />,
-      title: "Facebook",
-      value: "facebook.com/neotericsummit",
-    },
-    {
-      icon: <FaInstagram size={22} className="text-[#1a2a9c]" />,
-      title: "Instagram",
-      value: "instagram.com/neotericsummit",
-    },
-  ];
+ const items = [
+  {
+    icon: <MdEmail size={22} className="text-[#1a2a9c]" />,
+    title: "Email",
+    value: (
+      <a
+        href="mailto:info@worlddiplomats.org"
+        className="hover:text-[#1a2a9c] transition hover:underline"
+      >
+        info@worlddiplomats.org
+      </a>
+    ),
+  },
+
+  {
+    icon: <MdPhone size={22} className="text-[#1a2a9c]" />,
+    title: "Phone",
+    value: (
+      <a
+        href="tel:+447490344639"
+        className="hover:text-[#1a2a9c] transition hover:underline"
+      >
+        +44 7490 344639
+      </a>
+    ),
+  },
+
+  
+  {
+    icon: <FaWhatsapp size={22} className="text-[#1a2a9c]" />,
+    title: "Whatsapp",
+    value: (
+      <a
+        href="https://wa.me/447490344639"
+        target="_blank"
+        className="hover:text-[#1a2a9c] transition hover:underline"
+      >
+        +44 7490 344639
+      </a>
+    ),
+  },
+
+  {
+  icon: <FaTiktok size={22} className="text-[#1a2a9c]" />,
+  title: "TikTok",
+  value: (
+    <a
+      href="https://www.tiktok.com/@worlddiplomatsmun"
+      target="_blank"
+      className="hover:text-[#1a2a9c] transition hover:underline"
+    >
+      tiktok.com/@worlddiplomatsmun
+    </a>
+  ),
+},
+
+  {
+    icon: <FaFacebook size={22} className="text-[#1a2a9c]" />,
+    title: "Facebook",
+    value: (
+      <a
+        href="https://www.facebook.com/worlddiplomats"
+        target="_blank"
+        className="hover:text-[#1a2a9c] transition hover:underline"
+      >
+        facebook.com/worlddiplomats
+      </a>
+    ),
+  },
+  {
+    icon: <FaInstagram size={22} className="text-[#1a2a9c]" />,
+    title: "Instagram",
+    value: (
+      <a
+        href="https://www.instagram.com/worlddiplomatsmun"
+        target="_blank"
+        className="hover:text-[#1a2a9c] transition hover:underline"
+      >
+        instagram.com/worlddiplomatsmun
+      </a>
+    ),
+  },
+];
 
   return (
     <section className="py-16 bg-[#F1F2F4]">
@@ -58,15 +105,7 @@ const ContactUS = () => {
         </p>
 
         {/* PREMIUM DIVIDER */}
-           <div
-          className="flex items-center justify-center gap-2 mt-4"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          <span className="w-10 h-[2px] bg-[#1a2a9c] side-line-animate"></span>
-          <span className="w-3 h-3 bg-[#b00000] rounded-full dot-animate"></span>
-          <span className="w-10 h-[2px] bg-[#1a2a9c] side-line-animate"></span>
-        </div>
+          
       </div>
 
       {/* ================= CONTENT ================= */}

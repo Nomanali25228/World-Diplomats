@@ -164,14 +164,14 @@ const HeroSection = () => {
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-extrabold leading-tight"
           >
-            Crowning the Future of
+            Crowning the Future 
 
           </h1>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-extrabold leading-tight bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent 
               drop-shadow-[0_0_18px_rgba(59,130,246,0.35)] mt-2 sm:mt-3"
           >
-            Global  Diplomats
+            Diplomats
           </h1>
 
 
@@ -181,7 +181,7 @@ const HeroSection = () => {
             data-aos-delay="300"
             className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 leading-relaxed px-2 sm:px-0"
           >
-            Join the world{"'"}s most prestigious youth diplomatic network and connect with leaders from over 150 countries.
+            (Explore Conferences) (Register Now) There should be a button that people can click and it will take them to the registrations portal.
           </p>
 
           {/* Buttons */}

@@ -1,5 +1,7 @@
 "use client";
 import React from "react";
+import { useRouter } from 'next/navigation';
+import { useDestination } from '@/app/context/DestinationContext';
 import istanbulImg from "../../../../public/img/cardIstanbul.jpg";
 import dubaiImg from "../../../../public/img/cardDubai.jpg";
 import kualaLumpurImg from "../../../../public/img/cardMalaysia.jpg";
@@ -37,21 +39,21 @@ const destinations = [
   },
   {
     title: "World Diplomats London, UK",
-    date: "2026",
+    date: "3rd-6th September, 2026",
     description:
       "The World Diplomats contestants are immersed in London, which is a multicultural hub.",
     cardimg: londonImg,
-      // link: "/Register-Now",
-      // link1: "/London-UK",
+      link: "/Register-Now",
+      link1: "/London-UK",
   },
   {
     title: "World Diplomats Riyadh, Saudi Arabia",
-    date: "2026",
+    date: "15th-18th October, 2026",
     description:
       "By fusing modern vision with cultural heritage, World Diplomats in Riyadh offers a life-changing event.",
     cardimg: riyadhImg,
-    // link: "/Register-Now",
-    // link1: "/Riyadh-Saudi-Arabia",
+    link: "/Register-Now",
+    link1: "/Riyadh-Saudi-Arabia",
   },
 ];
 
@@ -77,8 +79,28 @@ const DestiCard = () => {
   );
 };
 
-const Card = ({ dest }) => (
-  <div className="group relative w-72 h-96 [perspective:1000px]">
+const Card = ({ dest }) => {
+  const router = useRouter();
+  const { selectDestination } = useDestination();
+
+  const PATH_TO_DEST = {
+    '/Istanbul-Turkey': 'Istanbul, Turkey',
+    '/Dubai-UAE': 'Dubai, UAE',
+    '/Kuala-Lumpur-Malaysia': 'Kuala Lumpur, Malaysia',
+    '/London-UK': 'London, UK',
+    '/Riyadh-Saudi-Arabia': 'Riyadh, Saudi Arabia',
+    '/Baku-Azerbaijan': 'Baku, Azerbaijan',
+  };
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const destLabel = PATH_TO_DEST[dest.link1] || (dest.title.split(',')[1] ? dest.title.split(',')[0].trim() : dest.title);
+    selectDestination(destLabel, true);
+    router.push('/Register-Now');
+  };
+
+  return (
+    <div className="group relative w-72 h-96 [perspective:1000px]">
     <div className="absolute w-full h-full duration-1000 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
 
       {/* FRONT */}
@@ -111,8 +133,8 @@ const Card = ({ dest }) => (
 
           <div className="flex flex-col gap-3 mt-6 items-center">
             {/* REGISTER */}
-            <a
-              href={dest.link}
+            <button
+              onClick={handleRegister}
               className="
                 px-5 py-2 rounded-lg font-semibold text-sm
                 bg-gradient-to-r from-[#1a2a9c] to-[#1a2a9c]
@@ -121,7 +143,7 @@ const Card = ({ dest }) => (
               "
             >
               Register Now
-            </a>
+            </button>
 
             {/* VIEW */}
             <a
@@ -142,7 +164,8 @@ const Card = ({ dest }) => (
       </div>
 
     </div>
-  </div>
-);
+    </div>
+  );
+};
 
 export default DestiCard;

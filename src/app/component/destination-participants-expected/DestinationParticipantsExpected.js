@@ -6,13 +6,14 @@ import { useInView } from "react-intersection-observer";
 // import unBg from "@/public/un-bg.png"; // 👈 BG IMAGE COMMENTED
 
 const DestinationParticipantsExpected = ({   title,
+  ParticipantsExpected,
 subtitle1,subtitle2,cardimage}) => {
     const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.5,
   });
   return (
-    <section className="relative overflow-hidden bg-[#f7f9fc] py-16 sm:py-20 md:py-24">
+    <section className="relative overflow-hidden bg-[#f7f9fc] py-10">
 
       {/* UN watermark background */}
       <div
@@ -56,7 +57,7 @@ subtitle1,subtitle2,cardimage}) => {
   </div>
   <div className="text-center sm:text-left" ref={ref}>
 <p className="text-xl sm:text-2xl md:text-3xl font-bold text-[#0b1d4d]">
-  {inView ? <>+<CountUp start={1} end={500} duration={2.5} /></> : "+0"}
+  {inView ? <>+<CountUp start={1} end={ParticipantsExpected} duration={2.5} /></> : "+0"}
 </p>
 
 

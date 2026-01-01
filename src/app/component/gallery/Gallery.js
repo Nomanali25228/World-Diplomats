@@ -27,7 +27,6 @@ const Gallery = () => {
 
       {/* HEADING */}
       <div className="text-center mb-10">
-        <p className="text-gray-500 text-lg mt-2">EVENT GALLERY</p>
 
         <h2
           className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl 
@@ -36,11 +35,7 @@ const Gallery = () => {
           OUR PREVIOUS <span className="text-[#b00000]">ENGAGEMENTS</span>
         </h2>
 
-        <div className="flex items-center justify-center gap-2 mt-4">
-          <span className="w-10 h-[2px] bg-[#1a2a9c]"></span>
-          <span className="w-3 h-3 bg-[#b00000] rounded-full"></span>
-          <span className="w-10 h-[2px] bg-[#1a2a9c]"></span>
-        </div>
+      
       </div>
 
       {/* SCROLLING GALLERY */}

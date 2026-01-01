@@ -3,9 +3,13 @@ import Link from "next/link";
 import React, { useState } from "react";
 import Image from "next/image";
 import bgimportdates from "../../../../public/img/bgimportandates.jpg";
+import { useDestination } from "../../context/DestinationContext";
 
 const MalaysiaImportantDates = () => {
   const [openIndex, setOpenIndex] = useState(4);
+
+  const { getDates } = useDestination();
+  const dates = getDates("Kuala Lumpur, Malaysia") || {};
 
   const toggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -51,13 +55,13 @@ Early Bird Registration Deadline: January 15th, 2026
     <div className="flex-1">
       <p className="text-base sm:text-lg text-white leading-relaxed">
         Registration for World Diplomats is now open. <br />
-        <strong>Deadline:</strong> January 15th, 2026
+        <strong>Deadline:</strong> {dates.registrationDeadline || "TBA"}
       </p>
     </div>
 
     {/* Right Button */}
-    <div className="flex-shrink-0 self-stretch sm:self-auto flex items-center">
-      <Link href="/Register-Now">
+      <div className="flex-shrink-0 self-stretch sm:self-auto flex items-center">
+      <Link href={dates.registerLink || "/Register-Now?destination=Kuala%20Lumpur,%20Malaysia"}>
         <button className="bg-white cursor-pointer text-blue-600 font-semibold hover:bg-gray-100 transition px-8 py-3 rounded-lg text-base shadow-lg">
           Register Now
         </button>
@@ -89,7 +93,7 @@ Early Bird Registration Deadline: January 15th, 2026
               </span>
             </button>
 
-           {openIndex === 0 && (
+          {openIndex === 0 && (
   <div className="px-8 py-7 bg-white text-gray-700 text-base leading-relaxed space-y-5">
 
     <p>
@@ -107,22 +111,25 @@ Early Bird Registration Deadline: January 15th, 2026
       Junior Diplomats (Middle School)<br />
       Senior Diplomats (High School)<br />
       Advanced Diplomats (University)<br />
-      Individual delegates (No Institutions)<br />
+      Individual Delegates (No Institutions)
+    </p>
+
+    <p>
       While each level is structured separately, all simulations run simultaneously, creating a dynamic and diverse environment where delegates of varying ages and backgrounds learn, collaborate, and grow together.
     </p>
 
     <p>
       <strong>A Global Platform for Diplomacy</strong><br />
-      Designed as the largest UN simulation initiative in the world, World Diplomats provides professional training and committee sessions held entirely in English. Delegates will engage in high-level debates, develop critical thinking and leadership skills, and immerse themselves in real-world global challenges all while being part of a truly international diplomatic community.
+      Designed as the largest UN simulation initiative in the world, World Diplomats provides professional training and committee sessions held entirely in English. Delegates will engage in high-level debates, develop critical thinking and leadership skills, and immerse themselves in real-world global challenges, all while being part of a truly international diplomatic community.
     </p>
 
     <p>
-      This extraordinary journey begins in Dubai, United Arab Emirates, setting the stage for a global platform that aims to redefine MUN experiences worldwide.
+      This extraordinary journey begins in <strong>Kuala Lumpur, Malaysia</strong>, setting the stage for a global platform that aims to redefine MUN experiences worldwide.
     </p>
 
     <p>
       <strong>Registration</strong><br />
-      <em>For Students:</em> Choose your preferred package, complete the form, and secure your spot at World Diplomats.<br />
+      <em>For Students:</em> Choose your preferred package, complete the form, and secure your spot at World Diplomats.<br /><br />
       <em>For Teachers & Delegation Leaders:</em> Use the delegation option to register your entire group efficiently.
     </p>
 
@@ -131,7 +138,7 @@ Early Bird Registration Deadline: January 15th, 2026
       Join us in shaping the world’s largest and most transformative UN simulation experience. Step into diplomacy, expand your perspectives, and become part of a global movement. We look forward to welcoming you to World Diplomats.
     </p>
 
-    <Link href="/Register-Now">
+    <Link href="/Register-Now?destination=Kuala%20Lumpur,%20Malaysia">
       <button className="mt-4 bg-[#2563eb] cursor-pointer hover:bg-blue-700 transition px-7 py-3 rounded-lg text-white text-base">
         Register Now
       </button>
@@ -139,34 +146,50 @@ Early Bird Registration Deadline: January 15th, 2026
 
     <p>
       <strong>Visa Information for World Diplomats Participants</strong><br />
-      Participation in World Diplomats does not require a study visa. Delegates will need to apply for a tourist or conference visa to enter Malaysia, unless they are from a visa-exempt country.
+      Participation in World Diplomats does not require a study visa. Delegates traveling to Kuala Lumpur, Malaysia are required to obtain a tourist or conference visa, unless they are citizens of visa-exempt countries under Malaysian immigration regulations.
     </p>
 
     <p>
-      <strong>Traveling to the Malaysia</strong><br />
-      We advise all participants to review the official entry requirements and travel regulations before planning their trip. Complete and updated information can be found on the official government website.<br />
-      You can apply for your visa in your country of residence. When submitting your application, ensure that all required documents are included:<br />
-      - A recent color photograph of the applicant<br />
-      - A color copy of your passport (valid for at least six months from the date of travel)<br />
-      - If you are traveling to the Malaysia, please check with the Embassy or Consulate in your country for specific requirements and procedures.
+      <strong>Traveling to Malaysia</strong><br />
+      We advise all participants to review the official entry requirements and travel regulations before planning their trip. Complete and updated information can be found on the official government website.<br /><br />
+      You may apply for your visa from your country of residence. At the time of submission, please ensure that all required documents are provided, including:
+    </p>
+
+    <ul className="list-disc pl-6">
+      <li>A recent passport-sized color photograph</li>
+      <li>A clear color copy of your passport, valid for at least six (6) months from the intended date of travel</li>
+    </ul>
+
+    <p>
+      If you are traveling to Malaysia, kindly consult the Malaysian Embassy or Consulate in your country of residence for the most up-to-date visa requirements, eligibility criteria, and application procedures, as these may vary by nationality.
     </p>
 
     <p>
       <strong>Visa Support Letter from World Diplomats</strong><br />
-      Once you register, World Diplomats can issue an official confirmation-of-participation letter to support your visa application. This letter does not guarantee visa approval and cannot replace an official visa. Visas are granted only by the Malaysia government authorities.<br />
-      <strong>How to Request Your Visa Support Letter:</strong><br />
-      1. Register yourself or your delegation for World Diplomats and confirm your participation by completing the payment.<br />
-      2. After we receive your payment, send an email to <a href="mailto:info@worlddiplomats.org" className="text-blue-600 underline">info@worlddiplomats.org</a> or contact us on WhatsApp at (number) to request your letter.<br />
-      3. Our Secretariat will process your request within 2–3 working days and send you the document.
+      Once you register, World Diplomats can issue an official confirmation-of-participation letter to support your visa application. This letter does not guarantee visa approval and cannot replace an official visa. Visas are granted only by the Malaysian government authorities.
+    </p>
+
+    <p>
+      <strong>How to Request Your Visa Support Letter</strong><br />
+      1- Register yourself or your delegation for World Diplomats and confirm your participation by completing the payment.<br />
+      2- After we receive your payment, send an email to{" "}
+      <a href="mailto:info@worlddiplomats.org" className="text-blue-600 underline">
+        info@worlddiplomats.org
+      </a>{" "}
+      or contact us on WhatsApp at (number) to request your letter.<br />
+      3- Our Secretariat will process your request within 2–3 working days and send you the document.
     </p>
 
     <p>
       <strong>Location:</strong><br />
-      The World Diplomats conference will be organised at [insert venue/address here].
+      The World Diplomats conference Malaysia will be organised at<br />
+      100, Jalan Putra, Chow Kit, 50350 Kuala Lumpur,<br />
+      Wilayah Persekutuan Kuala Lumpur, Malaysia
     </p>
 
   </div>
 )}
+
 
 
           </div>
@@ -185,23 +208,30 @@ Early Bird Registration Deadline: January 15th, 2026
               </span>
             </button>
 
-            {openIndex === 1 && (
+          {openIndex === 1 && (
   <div className="px-8 py-7 bg-white text-gray-700 text-base leading-relaxed space-y-5">
 
-    <p><strong>Preparation for World Diplomats</strong></p>
+    <p>
+      <strong>Preparation for World Diplomats</strong>
+    </p>
 
     <p>
       <strong>General Information</strong><br />
       Once you receive your country and committee assignments, each delegate must submit a Position Paper representing their nation’s official stance on the committee topic. This document should briefly outline key issues, your country’s policies, and any relevant international agreements or resolutions that support your position. It should also include practical recommendations your country would advocate for during the conference.
     </p>
 
-    <p><strong>Format and Guidelines</strong></p>
+    <p>
+      <strong>Format and Guidelines</strong>
+    </p>
+
     <ul className="list-disc pl-6 space-y-1">
       <li>The length of the document must not exceed one page.</li>
       <li>Standard margins, with Arial 10pt font and justified text.</li>
       <li>The inclusion of the flag or national coat of arms in the header is accepted.</li>
       <li>The represented country, the committee, and the topic must be clearly indicated before the text.</li>
-      <li>Do not include citations or bibliography: the Position Paper is a political statement and must be written as if it were a real diplomatic representative writing it; it is not an academic paper.</li>
+      <li>
+        Do not include citations or bibliography: the Position Paper is a political statement and must be written as if it were a real diplomatic representative writing it; it is not an academic paper.
+      </li>
       <li>The document must be submitted in a PDF format.</li>
       <li>Each delegate may submit only one Position Paper related to their assignment.</li>
       <li>Each delegate will represent the country in the committee individually.</li>
@@ -212,19 +242,37 @@ Early Bird Registration Deadline: January 15th, 2026
     </p>
 
     <p>
-      <strong>Deadline for submitting Position Papers:</strong> 05th March, 2026 at 23:59
+      <strong>Deadline for submitting Position Papers:</strong> 05th July, 2026 at 23:59
     </p>
 
-    <p><strong>Disclaimer:</strong></p>
+    <p>
+      <strong>Disclaimer:</strong>
+    </p>
+
     <ul className="list-disc pl-6 space-y-1">
       <li>Get a personalized quote for flights, accommodation and transfers only if you need them.</li>
-      <li>Write to us at <a href="mailto:info@worlddiplomats.org" className="text-blue-600 underline">info@worlddiplomats.org</a> and we will give you all the support you need.</li>
-      <li>Include our MUN in your program to incentivize and encourage students to embrace active citizenship and develop soft skills through an innovative and exciting training program like the Simulation.</li>
-      <li>Write to us at <a href="mailto:info@worlddiplomats.org" className="text-blue-600 underline">info@worlddiplomats.org</a> to become our official partner.</li>
+      <li>
+        Write to us at{" "}
+        <a href="mailto:info@worlddiplomats.org" className="text-blue-600 underline">
+          info@worlddiplomats.org
+        </a>{" "}
+        and we will give you all the support you need.
+      </li>
+      <li>
+        Include our MUN in your program to incentivize and encourage students to embrace active citizenship and develop soft skills through an innovative and exciting training program like this UN Simulation.
+      </li>
+      <li>
+        Write to us at{" "}
+        <a href="mailto:info@worlddiplomats.org" className="text-blue-600 underline">
+          info@worlddiplomats.org
+        </a>{" "}
+        to become our official partner.
+      </li>
     </ul>
 
   </div>
 )}
+
 
           </div>
 
@@ -260,7 +308,7 @@ Early Bird Registration Deadline: January 15th, 2026
           ["05:00 pm – 06:00 pm", "Preparation Opening Ceremony"],
           ["06:00 pm – 07:00 pm", "Opening Ceremony"],
           ["07:00 pm – 08:00 pm", "Opening Dinner"],
-          ["08:00 pm – 09:00 pm", "Scavenger Hunt"],
+          ["08:00 pm – 09:00 pm", "Masquerade Prom Dance"],
           ["09:00 pm – 10:00 pm", "Ice Breaking – First Committee Session"],
           ["10:00 pm – Onwards", "Free Night"],
         ],
@@ -288,11 +336,10 @@ Early Bird Registration Deadline: January 15th, 2026
         items: [
           ["06:00 am – 08:00 am", "Breakfast"],
           ["08:00 am – 09:00 am", "Lobby for City Tour"],
-          ["09:00 am – 01:00 pm", "Aya Sofia and Blue Mosque"],
-          ["01:00 pm – 03:00 pm", "Rooftop Lunch"],
-          ["03:00 pm – 06:00 pm", "Taksim Square and Galata Tower"],
-          ["06:00 pm – 11:00 pm", "Bosphorus Cruise Dinner"],
-          ["11:00 pm – Onwards", "Back to Hotel"],
+          ["09:00 am – 01:00 pm", "City Tour"],
+          ["01:00 pm – 05:00 pm", "Batu Caves"],
+          ["05:00 pm – 07:00 pm", "Back to Hotel"],
+          ["08:00 pm – Onwards", "Dinner"],
         ],
       },
       {
@@ -304,12 +351,22 @@ Early Bird Registration Deadline: January 15th, 2026
       },
     ].map((day, idx) => (
       <div key={idx}>
-        <h4 className="font-semibold text-[#2563eb] mb-3 text-lg">{day.day}</h4>
+        <h4 className="font-semibold text-[#2563eb] mb-3 text-lg">
+          {day.day}
+        </h4>
+
         <div className="space-y-2">
           {day.items.map((item, i) => (
-            <div key={i} className="flex gap-6 bg-[#f1f3f8] rounded-lg px-5 py-3">
-              <span className="w-40 sm:w-48 font-semibold text-[#2563eb]">{item[0]}</span>
-              <span className="text-gray-700">{item[1]}</span>
+            <div
+              key={i}
+              className="flex gap-6 bg-[#f1f3f8] rounded-lg px-5 py-3"
+            >
+              <span className="w-44 sm:w-52 font-semibold text-[#2563eb]">
+                {item[0]}
+              </span>
+              <span className="text-gray-700">
+                {item[1]}
+              </span>
             </div>
           ))}
         </div>
@@ -318,6 +375,7 @@ Early Bird Registration Deadline: January 15th, 2026
 
   </div>
 )}
+
 
 
           </div>
@@ -337,32 +395,81 @@ Early Bird Registration Deadline: January 15th, 2026
               </span>
             </button>
 
-           {openIndex === 3 && (
+        {openIndex === 3 && (
   <div className="px-8 py-7 bg-white text-gray-700 text-base leading-relaxed space-y-5">
 
-    <h3 className="font-semibold text-[#0b1d4d] text-lg">1. UN Human Rights Council (UNHRC)</h3>
-    <p className="font-semibold">Committee Agenda: “Safeguarding Human Rights Amid Global Conflict and Emerging Technologies.”</p>
-    <ul className="list-disc pl-6 space-y-1">
-      <li>The Protection of Civilian Rights in Ongoing Conflict Zones – addressing human rights violations in war-torn regions, refugee protection, humanitarian access, etc.</li>
-      <li>Safeguarding Freedom of Movement, Access to Basic Services, and Human Dignity in the Occupied Palestinian Territory.</li>
+    {/* UNHRC */}
+    <h3 className="font-semibold text-[#0b1d4d] text-lg">
+      1. United Nations Human Rights Council (UNHRC)
+    </h3>
+
+    <p className="font-semibold">
+      Committee Agenda:<br />
+      “Upholding Human Rights and International Humanitarian Law During Protracted Armed Conflicts.”
+    </p>
+
+    <p className="font-semibold">Topics for Debate:</p>
+
+    <ul className="list-disc pl-6 space-y-2">
+      <li>
+        <strong>Ensuring the Protection of Civilians in Gaza Under International Human Rights and Humanitarian Law</strong><br />
+        Focus on civilian casualties, protection of women and children, access to humanitarian assistance, and the responsibilities of state and non-state actors under international law.
+      </li>
+      <li>
+        <strong>Accountability Mechanisms for Alleged Human Rights Violations in Occupied and Conflict-Affected Territories</strong><br />
+        Examining fact-finding missions, international investigations, the role of UN bodies, and challenges in enforcing accountability while maintaining diplomatic engagement.
+      </li>
     </ul>
 
-    <h3 className="font-semibold text-[#0b1d4d] text-lg">2. United Nations Security Council (UNSC)</h3>
-    <p className="font-semibold">Committee Agenda: “Strengthening International Peace and Security in a Multipolar World.”</p>
-    <ul className="list-disc pl-6 space-y-1">
-      <li>Reforming UN Peacekeeping to Respond to Modern Conflicts – mandate modernization, accountability, rules of engagement.</li>
-      <li>The Threat of Nuclear Proliferation Amid Rising Geopolitical Tensions – North Korea, Iran, nuclear modernization by major powers.</li>
+    {/* UNSC */}
+    <h3 className="font-semibold text-[#0b1d4d] text-lg mt-6">
+      2. United Nations Security Council (UNSC)
+    </h3>
+
+    <p className="font-semibold">
+      Committee Agenda:<br />
+      “Preserving International Peace and Security Amid Escalating Regional Conflicts.”
+    </p>
+
+    <p className="font-semibold">Topics for Debate:</p>
+
+    <ul className="list-disc pl-6 space-y-2">
+      <li>
+        <strong>The Gaza Conflict and Its Implications for Regional Stability in the Middle East</strong><br />
+        Analyzing ceasefire efforts, cross-border tensions, regional power involvement, and the impact of veto politics on conflict resolution.
+      </li>
+      <li>
+        <strong>The Effectiveness and Limitations of the United Nations Security Council in Responding to Protracted Conflicts</strong><br />
+        Assessing peace enforcement tools, sanctions, diplomatic mediation, and structural reforms to enhance UNSC responsiveness in crises like Gaza.
+      </li>
     </ul>
 
-    <h3 className="font-semibold text-[#0b1d4d] text-lg">3. World Health Organization (WHO)</h3>
-    <p className="font-semibold">Committee Agenda: “Building Resilient Global Health Systems for Future Pandemics.”</p>
-    <ul className="list-disc pl-6 space-y-1">
-      <li>Mental Health as a Global Health Priority – post-pandemic mental health crisis, youth mental health, stigma reduction.</li>
-      <li>Strengthening Health Systems in Low-Income Countries – financing mechanisms, health worker shortages, universal health coverage (UHC).</li>
+    {/* WHO */}
+    <h3 className="font-semibold text-[#0b1d4d] text-lg mt-6">
+      3. World Health Organization (WHO)
+    </h3>
+
+    <p className="font-semibold">
+      Committee Agenda:<br />
+      “Safeguarding Public Health Systems in Conflict and Post-Conflict Environments.”
+    </p>
+
+    <p className="font-semibold">Topics for Debate:</p>
+
+    <ul className="list-disc pl-6 space-y-2">
+      <li>
+        <strong>Protecting Healthcare Infrastructure and Medical Personnel in Active Conflict Zones</strong><br />
+        Addressing attacks on hospitals, shortages of medical supplies, protection of health workers, and international obligations to ensure uninterrupted healthcare services in Gaza.
+      </li>
+      <li>
+        <strong>Managing Public Health Emergencies Arising from Armed Conflicts</strong><br />
+        Examining disease outbreaks, mental health crises, displacement-related health risks, and the role of international cooperation in rebuilding health systems during and after conflict.
+      </li>
     </ul>
 
   </div>
 )}
+
 
 
           </div>

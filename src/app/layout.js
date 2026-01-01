@@ -4,6 +4,7 @@ import NextTopLoader from "nextjs-toploader";
 import Footer from "./component/footer/Footer";
 import ScrollToTop from "./component/Scrolltotop/ScrollToTop";
 import Whatsapp from "./component/whatsapp/Whatsapp";
+import { DestinationProvider } from './context/DestinationContext';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +32,9 @@ export default function RootLayout({ children }) {
           height={3}
           showSpinner={false}
         />
-        {children}
+        <DestinationProvider>
+          {children}
+        </DestinationProvider>
         <Footer />
         <ScrollToTop />
         <Whatsapp />

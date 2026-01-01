@@ -41,14 +41,15 @@ const useCountUp = (end, active) => {
 // SINGLE CARD COMPONENT
 const ImpactCard = ({ value, label, visible, index }) => {
   const count = useCountUp(value, visible);
-  const themeColors = [
-    { blob: '#b00000', number: '#b00000' },
-    { blob: '#e3f2fd', number: '#1a2a9c' },
-    { blob: '#1a2a9c', number: '#1a2a9c' },
-    { blob: '#d32f2f', number: '#d32f2f' },
-    { blob: '#e3f2fd', number: '#1a2a9c' },
-    { blob: '#0d1b4c', number: '#0d1b4c' }
-  ];
+const themeColors = [
+  { blob: '#EB1C2E', number: '#EB1C2E' }, // 0–7.69%
+  { blob: '#D4A02A', number: '#D4A02A' }, // 7.69–15.38%
+  { blob: '#279B48', number: '#279B48' }, // 15.38–23.07%
+  { blob: '#F44D24', number: '#F44D24' }, // 23.07–30.76%
+  { blob: '#00B0DA', number: '#00B0DA' }, // 30.76–38.46%
+  { blob: '#FDBD18', number: '#FDBD18' }  // 38.46–46.15%
+];
+
   const color = themeColors[index % themeColors.length];
 
   return (
@@ -108,15 +109,7 @@ const OurImpact = () => {
       
 
         {/* Decorative line */}
-        <div
-          className="flex items-center justify-center gap-2 mt-4"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          <span className="w-10 h-[2px] bg-[#1a2a9c] side-line-animate"></span>
-          <span className="w-3 h-3 bg-[#b00000] rounded-full dot-animate"></span>
-          <span className="w-10 h-[2px] bg-[#1a2a9c] side-line-animate"></span>
-        </div>
+       
       </div>
       
 
@@ -124,7 +117,7 @@ const OurImpact = () => {
 
         {/* LEFT BOX */}
         <div className="bg-white shadow-xl border border-gray-200 rounded-3xl p-6 sm:p-10 relative overflow-hidden flex flex-col justify-center" data-aos="fade-up" data-aos-delay="100">
-          <div className="absolute -top-8 -right-8 w-24 sm:w-28 h-24 sm:h-28 rounded-full opacity-60" style={{ backgroundColor: '#d32f2f' }}></div>
+          <div className="absolute -top-8 -right-8 w-24 sm:w-28 h-24 sm:h-28 rounded-full opacity-60" style={{ backgroundColor: '#b00000' }}></div>
           <h3 className="mb-4 font-bold" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.25rem)' }}>
             Why We Matter
           </h3>

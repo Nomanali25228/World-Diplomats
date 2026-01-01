@@ -6,7 +6,6 @@ const pricingData = [
   {
     destination: "Istanbul, Turkey",
     date: "26th – 29th March 2026",
-    price: "$299",
     image: "/img/cardIstanbul.jpg",
     link: "/Istanbul-Turkey#pricing",
     payNow: "Pay for Istanbul, Turkey"
@@ -14,7 +13,6 @@ const pricingData = [
   {
     destination: "Dubai, UAE",
     date: "14th – 17th May 2026",
-    price: "$349",
     image: "/img/cardDubai.jpg",
     link: "/Dubai-UAE#pricing",
     payNow: "Pay for Dubai, UAE"  
@@ -22,26 +20,23 @@ const pricingData = [
   {
     destination: "Kuala Lumpur, Malaysia",
     date: "9th – 12th July 2026",
-    price: "$279",
     image: "/img/cardMalaysia.jpg",
-    link: "/Register-Now",
+    link: "/Kuala-Lumpur-Malaysia#pricing",
     payNow: "Pay for Kuala Lumpur, Malaysia"
   },
 
   {
     destination: "London, UK",
-    date: "2026",
-    price: "$399",
+    date: "3th – 6th September 2026",
     image: "/img/cardUK.jpg",
-    link: "/Register-Now",
+    link: "/London-UK#pricing",
     payNow: "Pay for London, UK"
   },
   {
     destination: "Riyadh, Saudi Arabia",
-    date: "2026",
-    price: "$319",
+    date: "15th – 18th October 2026",
     image: "/img/cardSaudi.jpg",
-    link: "/Register-Now",
+    link: "/Riyadh-Saudi-Arabia#pricing",
     payNow: "Pay for Riyadh, Saudi Arabia"
   },
 ];

@@ -6,6 +6,8 @@ const DestinationPrice = ({
   Basic,
   DelegateAccommodationExperience,
   DelegatefullExperience,
+  Experience1,
+  
 }) => {
   return (
     <section id="pricing"
@@ -30,15 +32,7 @@ const DestinationPrice = ({
           </p>
 
           {/* Divider */}
-          <div
-            className="flex items-center justify-center gap-2 mt-4"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <span className="w-10 h-[2px] bg-[#1a2a9c] side-line-animate"></span>
-            <span className="w-3 h-3 bg-[#b00000] rounded-full dot-animate"></span>
-            <span className="w-10 h-[2px] bg-[#1a2a9c] side-line-animate"></span>
-          </div>
+          
         </div>
 
         {/* PRICING GRID */}
@@ -57,7 +51,7 @@ const DestinationPrice = ({
               {Basic}
             </p>
             <span className="text-xs text-gray-500 mb-6 text-center block">
-              +5% tax
+              +5% processing fee
             </span>
 
             <ul className="space-y-3 text-xs sm:text-sm text-gray-600">
@@ -105,14 +99,14 @@ const DestinationPrice = ({
             </span>
 
             <h3 className="text-lg sm:text-xl font-semibold text-[#0d1b4c] mb-2 text-center">
-              Accommodation Experience
+              Shepandum Experience
             </h3>
 
             <p className="text-3xl sm:text-4xl font-extrabold text-[#1a2a9c] mb-1 text-center">
               {DelegateAccommodationExperience}
             </p>
             <span className="text-xs text-gray-500 mb-6 text-center block">
-              +5% tax
+              +5% processing fee
             </span>
 
             <ul className="space-y-3 text-xs sm:text-sm text-gray-600">
@@ -142,21 +136,20 @@ const DestinationPrice = ({
                           hover:shadow-2xl hover:-translate-y-2
                           transition-all duration-500 flex flex-col">
             <h3 className="text-lg sm:text-xl font-semibold text-[#0d1b4c] mb-2 text-center">
-              Full Experience
+              Zagatiya Experience
             </h3>
 
             <p className="text-3xl sm:text-4xl font-extrabold text-[#1a2a9c] mb-1 text-center">
               {DelegatefullExperience}
             </p>
             <span className="text-xs text-gray-500 mb-6 text-center block">
-              +5% tax
+              +5% processing fee
             </span>
 
             <ul className="space-y-3 text-xs sm:text-sm text-gray-600">
-              <li>✔ Everything in Delegate Accommodation Experience</li>
-              <li>✔ Istanbul City Tour</li>
-              <li>✔ Bosphorus Rooftop Lunch Tour</li>
-              <li>✔ Cruise Trip & Dinner at Bosphorus</li>
+             {Experience1.map((item, index) => (
+    <li key={index}>{item}</li>
+  ))}
             </ul>
 
           <Link href="/Register-Now" className="mt-3 md:mt-auto">

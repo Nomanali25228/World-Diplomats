@@ -3,9 +3,13 @@ import Link from "next/link";
 import React, { useState } from "react";
 import Image from "next/image";
 import bgimportdates from "../../../../public/img/bgimportandates.jpg";
+import { useDestination } from "../../context/DestinationContext";
 
 const IstanbulImportantDates = () => {
   const [openIndex, setOpenIndex] = useState(4);
+
+  const { getDates } = useDestination();
+  const dates = getDates("Istanbul, Turkey") || {};
 
   const toggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -13,6 +17,16 @@ const IstanbulImportantDates = () => {
 
   return (
     <section className="bg-[#EEEEEE] py-20 px-4">
+
+       <div className="text-center mb-12 sm:mb-14">
+          <h2
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl
+                       font-bold text-[#0d1b4c]"
+            data-aos="fade-up"
+          >
+            preparation <span className="text-[#b00000]">Readiness</span>
+          </h2>
+        </div>
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[0.9fr_1.3fr] gap-14">
 
         {/* LEFT SIDE (SMALLER) */}
@@ -40,19 +54,19 @@ const IstanbulImportantDates = () => {
   <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-500 opacity-80 z-10"></div>
 
   {/* Content */}
-  <div className="relative z-10 p-8 mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-    
+      <div className="relative z-10 p-8 mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+
     {/* Left Content */}
     <div className="flex-1">
       <p className="text-base sm:text-lg text-white leading-relaxed">
         Registration for World Diplomats is now open. <br />
-        <strong>Deadline:</strong> January 5th, 2026
+        <strong>Deadline:</strong> {dates.registrationDeadline || "TBA"}
       </p>
     </div>
 
     {/* Right Button */}
-    <div className="flex-shrink-0 self-stretch sm:self-auto flex items-center">
-      <Link href="/Register-Now">
+      <div className="flex-shrink-0 self-stretch sm:self-auto flex items-center">
+      <Link href={dates.registerLink || "/Register-Now?destination=Istanbul,%20Turkey"}>
         <button className="bg-white cursor-pointer text-blue-600 font-semibold hover:bg-gray-100 transition px-8 py-3 rounded-lg text-base shadow-lg">
           Register Now
         </button>
@@ -146,7 +160,7 @@ const IstanbulImportantDates = () => {
                   <strong>Location:</strong><br />
                   The World Diplomats conference will be organised at G Rotana Mahmutbey, 2664.Sokak, 34218 Bağcılar/İstanbul, Türkiye
                 </p>
-      <Link href="/Register-Now">
+      <Link href="/Register-Now?destination=Istanbul,%20Turkey">
 
                 <button className="mt-4 bg-[#2563eb] cursor-pointer hover:bg-blue-700 transition px-7 py-3 rounded-lg text-white text-base">
                   Register Now
@@ -199,7 +213,7 @@ const IstanbulImportantDates = () => {
 
                 <p>
                   <strong>Deadline for submitting Position Papers:</strong><br />
-                  05th March, 2026 at 23:59
+                  {dates.positionPaperDeadline || "TBA"} at 23:59
                 </p>
 
                 <p className="italic text-gray-500">

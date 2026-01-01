@@ -9,13 +9,16 @@ import DestinationPrice from '../component/destination-price/DestinationPrice'
 import DubaiImportantDates from '../component/dubai-important-dates/DubaiImportantDates'
 import DestinationQuestions from '../component/destinationquestions/DestinationQuestions'
 import DestinationMap from '../component/destination-map/DestinationMap'
-import hotelx1 from "../../../public/img/bghotelistanbul1.jpg";
-import hotelx2 from "../../../public/img/hotelistanbul2.jpg";
-import hotelx3 from "../../../public/img/hotelistanbul3.jpg";
-import hotelx4 from "../../../public/img/hotelistanbul4.jpg";
-import hotelx5 from "../../../public/img/hotelistanbul5.jpg";
+import hotelx1 from "../../../public/img/bghoteldubai1.jpg";
+import hotelx2 from "../../../public/img/hoteldubai2.jpg";
+import hotelx3 from "../../../public/img/hoteldubai3.jpg";
+import hotelx4 from "../../../public/img/hoteldubai4.jpg";
+import hotelx5 from "../../../public/img/hoteldubai5.jpg";
 import DestinationCityTour from '../component/destination-city-tour/DestinationCityTour'
-
+import taksimImg from "../../../public/img/DubaiCityTour1.jpg";
+import arastaImg from "../../../public/img/DubaiCityTour2.jpg";
+import bosporusImg from "../../../public/img/DubaiCityTour3.jpg";
+import DestinationSeriesofEveent from '../component/destination-seriesofeveent/DestinationSeriesofEveent'
 const page = () => {
 
   // Example props data
@@ -25,7 +28,7 @@ const page = () => {
     dates: "14 - 15 - 16 - 17 May, 2026",
     agenda: "Conference Agenda: Reimagining Global Governance — Protecting Human Rights, Peace, and Public Health in an Era of Uncertainty.",
     bgImage: DubaibgImage,
-    registerlinke: "/Register-Now",
+    registerlinke: "/Register-Now?destination=Dubai,%20UAE",
     pricinglink: "#pricing",
   }
 
@@ -37,17 +40,34 @@ const page = () => {
 
   const participantsData = {
     title: "The most competitive United Nations Simulation in the World",
+    ParticipantsExpected: 500,
     subtitle1: "World Diplomats centers on the urgent need to strengthen global cooperation as the world faces rising conflicts, rapid technological change, and unprecedented public health challenges. This year's agenda invites delegates to explore innovative frameworks for safeguarding human rights, promoting sustainable peace, and building resilient health systems.",
     subtitle2: "Through thoughtful diplomacy and informed debate, participants will work toward reimagining international governance for a more secure and equitable future.",
-    cardimage: DubaicityImg,
+    cardimage: DubaibgImage,
   }
+
+
 
   const DestinationPriceData = {
     tital: "Dubai UAE ",
     Basic: "$389",
     DelegateAccommodationExperience: "$551",
     DelegatefullExperience: "$670",
+     Experience1: [
+    "✔ Everything in Delegate Accommodation Experience",
+    "✔ Desert Safari",
+  ],
   };
+
+  const DestinationCityTourData = {
+    title1: "Taksim Square",
+    image1: taksimImg,
+    title2: "Arasta Bazar",
+    image2: arastaImg,
+    title3: "Bosporus Cruise Dinner",
+    image3: bosporusImg,
+  };
+
   return (
     <div>
       <Navbar />
@@ -74,11 +94,13 @@ const page = () => {
       {/* Pass props to Participants Expected */}
       <DestinationParticipantsExpected
         title={participantsData.title}
+        ParticipantsExpected={participantsData.ParticipantsExpected}
         subtitle1={participantsData.subtitle1}
         subtitle2={participantsData.subtitle2}
         cardimage={participantsData.cardimage}
       />
 
+<DestinationSeriesofEveent />
 
 
       <DestinationPrice
@@ -86,8 +108,16 @@ const page = () => {
         Basic={DestinationPriceData.Basic}
         DelegateAccommodationExperience={DestinationPriceData.DelegateAccommodationExperience}
         DelegatefullExperience={DestinationPriceData.DelegatefullExperience}
+        Experience1={DestinationPriceData.Experience1}
       />
-            <DestinationCityTour  />
+            <DestinationCityTour 
+              title1={DestinationCityTourData.title1}
+              image1={DestinationCityTourData.image1}
+              title2={DestinationCityTourData.title2}
+              image2={DestinationCityTourData.image2}
+              title3={DestinationCityTourData.title3}
+              image3={DestinationCityTourData.image3}
+             />
       
 
       <DubaiImportantDates />

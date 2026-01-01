@@ -3,9 +3,13 @@ import Link from "next/link";
 import React, { useState } from "react";
 import Image from "next/image";
 import bgimportdates from "../../../../public/img/bgimportandates.jpg";
+import { useDestination } from "../../context/DestinationContext";
 
 const DubaiImportantDates = () => {
   const [openIndex, setOpenIndex] = useState(4);
+
+  const { getDates } = useDestination();
+  const dates = getDates("Dubai, UAE") || {};
 
   const toggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -51,13 +55,13 @@ Early Bird Registration Deadline: January 15th, 2026
     <div className="flex-1">
       <p className="text-base sm:text-lg text-white leading-relaxed">
         Registration for World Diplomats is now open. <br />
-        <strong>Deadline:</strong> January 15th, 2026
+        <strong>Deadline:</strong> {dates.registrationDeadline || "TBA"}
       </p>
     </div>
 
     {/* Right Button */}
     <div className="flex-shrink-0 self-stretch sm:self-auto flex items-center">
-      <Link href="/Register-Now">
+      <Link href={dates.registerLink || "/Register-Now?destination=Dubai,%20UAE"}>
         <button className="bg-white cursor-pointer text-blue-600 font-semibold hover:bg-gray-100 transition px-8 py-3 rounded-lg text-base shadow-lg">
           Register Now
         </button>
@@ -131,7 +135,7 @@ Early Bird Registration Deadline: January 15th, 2026
       Join us in shaping the world’s largest and most transformative UN simulation experience. Step into diplomacy, expand your perspectives, and become part of a global movement. We look forward to welcoming you to World Diplomats.
     </p>
 
-    <Link href="/Register-Now">
+    <Link href={dates.registerLink || "/Register-Now?destination=Dubai,%20UAE"}>
       <button className="mt-4 bg-[#2563eb] cursor-pointer hover:bg-blue-700 transition px-7 py-3 rounded-lg text-white text-base">
         Register Now
       </button>
@@ -212,7 +216,7 @@ Early Bird Registration Deadline: January 15th, 2026
     </p>
 
     <p>
-      <strong>Deadline for submitting Position Papers:</strong> 05th March, 2026 at 23:59
+      <strong>Deadline for submitting Position Papers:</strong> {dates.positionPaperDeadline || "TBA"} at 23:59
     </p>
 
     <p><strong>Disclaimer:</strong></p>

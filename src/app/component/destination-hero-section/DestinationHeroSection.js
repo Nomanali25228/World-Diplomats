@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
+import { useDestination } from '@/app/context/DestinationContext';
 import { motion, AnimatePresence } from "framer-motion";
 
 const DestinationHeroSection = ({
@@ -63,6 +65,20 @@ const DestinationHeroSection = ({
     { label: "M", value: timeLeft.minutes },
     { label: "S", value: timeLeft.seconds },
   ];
+
+  const router = useRouter();
+  const { selectDestination } = useDestination();
+
+  const handleRegisterClick = (e) => {
+    // if this component has title/subtitle, set destination in context and navigate
+    if (title && subtitle) {
+      const dest = `${title}, ${subtitle}`;
+      selectDestination(dest, true);
+      e.preventDefault();
+      router.push('/Register-Now');
+      return;
+    }
+  };
 
   return (
     <section className="relative w-full min-h-screen flex items-center overflow-hidden">
@@ -148,6 +164,7 @@ const DestinationHeroSection = ({
   {/* Registration */}
   <Link
     href={registerlinke}
+    onClick={handleRegisterClick}
     className="
       group
       relative

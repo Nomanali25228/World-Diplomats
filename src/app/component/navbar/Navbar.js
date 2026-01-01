@@ -8,6 +8,8 @@ import {
   AiOutlineClose,
 } from "react-icons/ai";
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from 'next/navigation';
+import { useDestination } from '@/app/context/DestinationContext';
 import { usePathname } from "next/navigation";
 import logo from "../../../../public/img/logo3.png";
 
@@ -108,6 +110,31 @@ function Navbar() {
 
   const isRegisterActive = pathname === "/Register-Now";
 
+  const router = useRouter();
+  const { selectDestination, clearDestination } = useDestination();
+
+  const PATH_TO_DEST = {
+    '/Istanbul-Turkey': 'Istanbul, Turkey',
+    '/Dubai-UAE': 'Dubai, UAE',
+    '/Kuala-Lumpur-Malaysia': 'Kuala Lumpur, Malaysia',
+    '/London-UK': 'London, UK',
+    '/Riyadh-Saudi-Arabia': 'Riyadh, Saudi Arabia',
+  };
+
+  const handleRegisterNow = (e) => {
+    // if current path maps to a destination, set it and navigate
+    const dest = PATH_TO_DEST[pathname];
+    if (dest) {
+      e.preventDefault && e.preventDefault();
+      selectDestination(dest, true);
+      router.push('/Register-Now');
+      return;
+    }
+    // otherwise clear any previous selection so dropdown shows, then navigate
+    clearDestination();
+    router.push('/Register-Now');
+  };
+
   const parentClass = (active) =>
     `relative flex items-center space-x-1 cursor-pointer transition
      after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-[#60A5FA] after:transition-all
@@ -177,17 +204,17 @@ function Navbar() {
             >
               Kuala Lumpur, Malaysia
             </Link>
-            <Link href="" className={dropdownLinkClass("/London")}>
+            <Link href="/London-UK" className={dropdownLinkClass("/London-UK")}>
               London, UK
             </Link>
-            <Link href="" className={dropdownLinkClass("/Riyadh")}>
+            <Link href="/Riyadh-Saudi-Arabia" className={dropdownLinkClass("/Riyadh-Saudi-Arabia")}>
               Riyadh, Saudi Arabia
             </Link>
           </div>
         )}
       </div>
 
-      <Link href="/Blog" className={linkClass("/Blog")}>
+      <Link href="/Blogs/1" className={linkClass("/Blogs/1")}>
         Blog
       </Link>
 
@@ -249,9 +276,24 @@ function Navbar() {
 
     {/* Desktop Register Button */}
     <div className="hidden lg:block">
-      <Link href="/Register-Now">
+      <button
+        onClick={handleRegisterNow}
+        className={`cursor-pointer font-semibold py-1 px-4 rounded-full border-2 border-blue-600 transition ${
+          isRegisterActive
+            ? "bg-transparent text-white"
+            : "bg-blue-600 text-white hover:bg-transparent hover:text-white"
+        }`}
+      >
+        Register Now
+      </button>
+    </div>
+
+    {/* Mobile Top Bar */}
+    <div className="relative flex items-center justify-between lg:hidden w-full">
+      <div className="absolute left-1/3 transform -translate-x-1/3">
         <button
-          className={`cursor-pointer font-semibold py-1 px-4 rounded-full border-2 border-blue-600 transition ${
+          onClick={handleRegisterNow}
+          className={`font-semibold py-2 px-3 rounded-full border-2 border-blue-600 transition text-[12px] sm:text-sm ${
             isRegisterActive
               ? "bg-transparent text-white"
               : "bg-blue-600 text-white hover:bg-transparent hover:text-white"
@@ -259,23 +301,6 @@ function Navbar() {
         >
           Register Now
         </button>
-      </Link>
-    </div>
-
-    {/* Mobile Top Bar */}
-    <div className="relative flex items-center justify-between lg:hidden w-full">
-      <div className="absolute left-1/3 transform -translate-x-1/3">
-        <Link href="/Register-Now">
-          <button
-            className={`font-semibold py-2 px-3 rounded-full border-2 border-blue-600 transition text-[12px] sm:text-sm ${
-              isRegisterActive
-                ? "bg-transparent text-white"
-                : "bg-blue-600 text-white hover:bg-transparent hover:text-white"
-            }`}
-          >
-            Register Now
-          </button>
-        </Link>
       </div>
 
       <button
@@ -331,10 +356,10 @@ function Navbar() {
           <Link href="/Kuala-Lumpur-Malaysia" className={mobileDropdownLinkClass("/Kuala-Lumpur-Malaysia")}>
             Kuala Lumpur, Malaysia
           </Link>
-          <Link href="" className={mobileDropdownLinkClass("/London")}>
+          <Link href="/London-UK" className={mobileDropdownLinkClass("/London-UK")}>
             London, UK
           </Link>
-          <Link href="" className={mobileDropdownLinkClass("/Riyadh")}>
+          <Link href="/Riyadh-Saudi-Arabia" className={mobileDropdownLinkClass("/Riyadh-Saudi-Arabia")}>
             Riyadh, Saudi Arabia
           </Link>
         </div>
