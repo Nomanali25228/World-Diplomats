@@ -14,25 +14,28 @@ import * as Flags from "country-flag-icons/react/1x1";
 import { countryOptions } from "@/app/utils/countryList";
 import Navbar from "../component/navbar/Navbar";
 import { useDestination } from '@/app/context/DestinationContext';
+
 export default function FunRegistration() {
+  
 const [step, setStep] = useState(1);
 const [submitted, setSubmitted] = useState(false);
 const [form, setForm] = useState({
-name: "",
-email: "",
-number: "",
-countryResidence: "",
-nationality: "",
-gender: "",
-dob: "",
-institution: "",
-reason: "",
-representCountry: "",
-committee: "",
-shirtSize: "",
-foodPreference: "",
-destination: ""
+  name: "",
+  email: "",
+  number: "",
+  countryResidence: "",
+  nationality: "",
+  gender: "",
+  dob: "",
+  institution: "",
+  reason: "",
+  representCountry: "",
+  committee: "",
+  shirtSize: "",
+  foodPreference: "",
+  destination: ""
 });
+
 // Map destination labels to backend API resource names
 const DEST_API_MAP = {
   "Istanbul, Turkey": "firstnames",
@@ -44,11 +47,10 @@ const DEST_API_MAP = {
 };
 
 const [changeApi, setChangeApi] = useState("firstnames");
-
 const [isDestinationLocked, setIsDestinationLocked] = useState(false);
 const [submitting, setSubmitting] = useState(false);
 
-// Map destination labels to a display date (used in the left "World Diplomats" card)
+// Map destination labels to a display date
 const DEST_DATE_MAP = {
   "Istanbul, Turkey": "26th – 29th March 2026",
   "Dubai, UAE": "14th – 17th May 2026",
@@ -57,41 +59,47 @@ const DEST_DATE_MAP = {
   "Riyadh, Saudi Arabia": "15th – 18th October 2026",
 };
 
+// Safe effect to update API endpoint when destination changes
 useEffect(() => {
   const dest = (form.destination || "").trim();
   const api = DEST_API_MAP[dest] || "firstnames";
-  setChangeApi(api);
-}, [form.destination]);
+  if (changeApi !== api) setChangeApi(api);
+}, [form.destination, changeApi]);
 
-// Use destination from global context (or fallback to URL param)
+// Use destination from global context or URL param
 const searchParams = useSearchParams();
 const { destination: ctxDestination, locked: ctxLocked, selectDestination } = useDestination();
+
 useEffect(() => {
   if (ctxDestination) {
     setForm(prev => ({ ...prev, destination: ctxDestination }));
     setIsDestinationLocked(!!ctxLocked);
     return;
   }
+
   const destParam = searchParams?.get?.('destination') || '';
   if (destParam) {
-    // populate context from URL param so app state is consistent
     selectDestination(destParam, true);
     setForm(prev => ({ ...prev, destination: destParam }));
     setIsDestinationLocked(true);
   }
 }, [ctxDestination, ctxLocked, searchParams, selectDestination]);
+
 // Registration type: 'single' or 'group'
 const [registrationType, setRegistrationType] = useState("single");
+
 // Group delegates state
 const MIN_DELEGATES = 2;
 const MAX_DELEGATES = 25;
 const [delegates, setDelegates] = useState(["", ""]);
 const [groupEmail, setGroupEmail] = useState("");
+
 // Per-delegate details for group (shirt size, food)
 const [delegateDetails, setDelegateDetails] = useState(() => delegates.map(() => ({ shirtSize: "", foodPreference: "" })));
+
+// Safe effect to sync delegateDetails length with delegates
 useEffect(() => {
-  // sync delegateDetails length with delegates length
-  setDelegateDetails((prev) => {
+  setDelegateDetails(prev => {
     const copy = [...prev];
     while (copy.length < delegates.length) copy.push({ shirtSize: "", foodPreference: "" });
     if (copy.length > delegates.length) copy.splice(delegates.length);
@@ -100,17 +108,18 @@ useEffect(() => {
 }, [delegates.length]);
 
 const updateDelegateDetail = (index, field, value) => {
-  setDelegateDetails((prev) => {
+  setDelegateDetails(prev => {
     const copy = [...prev];
     copy[index] = { ...copy[index], [field]: value };
     return copy;
   });
 };
 
+// Vercel-safe effect to ensure minimum delegates for group registration
 useEffect(() => {
   if (registrationType === "group" && delegates.length < MIN_DELEGATES) {
-    setDelegates((d) => {
-      const copy = [...d];
+    setDelegates(prev => {
+      const copy = [...prev];
       while (copy.length < MIN_DELEGATES) copy.push("");
       return copy;
     });
@@ -122,11 +131,11 @@ const handleRegistrationTypeChange = (type) => {
 };
 
 const addDelegate = () => {
-  setDelegates((prev) => (prev.length >= MAX_DELEGATES ? prev : [...prev, ""]));
+  setDelegates(prev => (prev.length >= MAX_DELEGATES ? prev : [...prev, ""]));
 };
 
 const removeDelegate = (index) => {
-  setDelegates((prev) => {
+  setDelegates(prev => {
     if (prev.length <= MIN_DELEGATES) return prev;
     const copy = [...prev];
     copy.splice(index, 1);
@@ -135,7 +144,7 @@ const removeDelegate = (index) => {
 };
 
 const updateDelegateName = (index, value) => {
-  setDelegates((prev) => {
+  setDelegates(prev => {
     const copy = [...prev];
     copy[index] = value;
     return copy;
@@ -143,35 +152,31 @@ const updateDelegateName = (index, value) => {
 };
 
 const selectStyles = {
-control: (provided) => ({
-...provided,
-minHeight: "48px",
-borderRadius: "0.75rem",
-border: "2px solid #d1d5db",
-paddingLeft: "8px",
-boxShadow: "0 1px 4px rgba(0,0,0,0.15)",
-"&:hover": { borderColor: "#6366f1" },
-}),
-valueContainer: (provided) => ({ ...provided, padding: "0 6px" }),
-singleValue: (provided) => ({ ...provided, fontSize: "14px" }),
-menu: (provided) => ({ ...provided, borderRadius: "0.75rem", overflow: "hidden" }),
+  control: (provided) => ({
+    ...provided,
+    minHeight: "48px",
+    borderRadius: "0.75rem",
+    border: "2px solid #d1d5db",
+    paddingLeft: "8px",
+    boxShadow: "0 1px 4px rgba(0,0,0,0.15)",
+    "&:hover": { borderColor: "#6366f1" },
+  }),
+  valueContainer: (provided) => ({ ...provided, padding: "0 6px" }),
+  singleValue: (provided) => ({ ...provided, fontSize: "14px" }),
+  menu: (provided) => ({ ...provided, borderRadius: "0.75rem", overflow: "hidden" }),
 };
 
 const totalFields = Object.keys(form).length;
 const filledFields = Object.values(form).filter(v => v !== "").length;
 const progressPercent = (filledFields / totalFields) * 100;
 
-const step1Required = [];
-const step2Required = [];
-
 const validateStep = (fields) => {
-const notFilled = fields.filter((f) => form[f].trim() === "");
-return notFilled.length === 0;
+  const notFilled = fields.filter(f => form[f].trim() === "");
+  return notFilled.length === 0;
 };
 
 const next = () => {
   if (step === 1) {
-    // Basic validation: for single require name/email, for group require groupEmail and at least two delegate names
     if (registrationType === "single") {
       if (!form.name.trim() || !form.email.trim() || !form.destination.trim()) {
         toast.error("Please fill Name, Email and destination for single delegate");
@@ -186,7 +191,7 @@ const next = () => {
         toast.error("Please select a Destination for the delegation");
         return;
       }
-      const filledNames = delegates.filter((d) => d.trim() !== "");
+      const filledNames = delegates.filter(d => d.trim() !== "");
       if (filledNames.length < MIN_DELEGATES) {
         toast.error("Please provide delegate names");
         return;
@@ -194,14 +199,15 @@ const next = () => {
     }
   }
   setStep(2);
-};const handleSubmit = async (e) => {
+};
+
+const handleSubmit = async (e) => {
   e.preventDefault();
   setSubmitting(true);
   try {
-    // ---------- BASE PAYLOAD ----------
     let payload = {
-      registrationType,                     // "single" | "group"
-      DateBirth: form.dob || null,          // Strapi field key
+      registrationType,
+      DateBirth: form.dob || null,
       Institution: form.institution || null,
       Nationality: form.nationality || null,
       Gender: form.gender || null,
@@ -212,21 +218,17 @@ const next = () => {
       CountryDoYouWantToRepresent: form.representCountry || null,
     };
 
-    // ---------- SINGLE ----------
     if (registrationType === "single") {
       payload = {
         ...payload,
-        Name: form.name || null,                       // Strapi key
+        Name: form.name || null,
         Email: form.email || null,
         PhoneNumber: form.number || null,
         WhatIsYourShirtSize: form.shirtSize || null,
         DoYouHaveAFoodpreference: form.foodPreference || null,
-        delegates: [],                                 // empty array
+        delegates: [],
       };
-    }
-
-    // ---------- GROUP ----------
-    if (registrationType === "group") {
+    } else {
       payload = {
         ...payload,
         Name: null,
@@ -234,25 +236,22 @@ const next = () => {
         PhoneNumber: null,
         WhatIsYourShirtSize: null,
         DoYouHaveAFoodpreference: null,
-        groupEmail,                                   // Make sure this field exists in Strapi
+        groupEmail,
         delegates: delegates
           .map((name, idx) => ({
-            name: name.trim(),                         // Strapi component field key
+            name: name.trim(),
             whatIsYourShirtSize: delegateDetails[idx]?.shirtSize || null,
             doYouHaveAFoodpreference: delegateDetails[idx]?.foodPreference || null,
           }))
-          .filter(d => d.name),                        // remove empty names
+          .filter(d => d.name),
       };
     }
 
-    // ---------- CLEAN NULL / EMPTY ----------
-    const clean = obj =>
-      Object.fromEntries(
-        Object.entries(obj).filter(([_, v]) => v !== null && v !== "")
-      );
+    const clean = obj => Object.fromEntries(
+      Object.entries(obj).filter(([_, v]) => v !== null && v !== "")
+    );
     payload = clean(payload);
 
-    // ---------- API CALL ----------
     const res = await fetch(`http://localhost:1337/api/${changeApi}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -268,11 +267,7 @@ const next = () => {
       resultText = "(unable to parse response)";
     }
 
-    console.log("STRAPI RESPONSE:", resultText);
-    console.log("SENT PAYLOAD:", payload);
-
     if (!res.ok) {
-      console.error("Strapi error:", res.status, resultText);
       const msg = (resultText && resultText.error && resultText.error.message)
         || (typeof resultText === 'string' ? resultText : JSON.stringify(resultText));
       toast.error(`Strapi error: ${msg}`);
@@ -280,8 +275,6 @@ const next = () => {
       return;
     }
 
-    // Call destination-specific mail API to send confirmation email
-    // Call consolidated register API to send confirmation email
     try {
       await fetch(`/api/register`, {
         method: "POST",
@@ -292,7 +285,6 @@ const next = () => {
       console.error("Register API error:", mailErr);
     }
 
-    // ---------- SUCCESS ----------
     toast.success("Registration Completed!");
     setStep(3);
     setSubmitted(true);
@@ -305,29 +297,28 @@ const next = () => {
   }
 };
 
-
-
-
 const handleChange = (e) => {
-const { name, value } = e.target;
-setForm(prev => ({ ...prev, [name]: value }));
+  const { name, value } = e.target;
+  setForm(prev => ({ ...prev, [name]: value }));
 };
 
 const formatOptionLabel = ({ label, code }) => {
-const Flag = Flags[code];
-return ( <div className="flex items-center gap-2">
-{Flag && <Flag style={{ width: "20px", height: "20px" }} />} <span>{label}</span> </div>
-);
+  const Flag = Flags[code];
+  return (
+    <div className="flex items-center gap-2">
+      {Flag && <Flag style={{ width: "20px", height: "20px" }} />}
+      <span>{label}</span>
+    </div>
+  );
 };
 
 const back = () => setStep(prev => Math.max(prev - 1, 1));
 
 const inputClass =
-"w-full px-4 py-3 border-2 mt-1 border-gray-300 rounded-xl bg-white shadow-md text-sm " +
-"focus:outline-none focus:ring-2 focus:ring-indigo-400 transition duration-300 " +
-"hover:shadow-xl";
+  "w-full px-4 py-3 border-2 mt-1 border-gray-300 rounded-xl bg-white shadow-md text-sm " +
+  "focus:outline-none focus:ring-2 focus:ring-indigo-400 transition duration-300 " +
+  "hover:shadow-xl";
 
-// derive selected destination and display date (trim user selection to be safe)
 const _selectedDestKey = (form.destination || "").trim();
 const selectedDestLabel = _selectedDestKey || "";
 const selectedDestDate = DEST_DATE_MAP[_selectedDestKey] || DEST_DATE_MAP[""];
