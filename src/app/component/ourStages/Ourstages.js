@@ -51,7 +51,7 @@ const Card = ({ item }) => {
             <div className="absolute inset-0 [backface-visibility:hidden]">
               <img
                 src={item.image.src}
-                alt={item.title}
+alt="Stage image"
                 className="w-full h-full object-cover"
               />
               <div className="absolute justify-center flex bottom-0 w-full bg-[#0d1b4c]/80 p-4 text-white">
@@ -63,7 +63,7 @@ const Card = ({ item }) => {
             <div className="absolute inset-0 [transform:rotateY(180deg)] [backface-visibility:hidden]">
   <img
     src={item.image.src}
-    alt={item.title}
+alt="Stage image"
     className="w-full h-full object-cover brightness-50"
   />
       <div className="absolute inset-0 bg-gradient-to-br from-[#0d1b4c]/95 via-[#1a2a9c]/25 to-[#b00000]/80"></div>

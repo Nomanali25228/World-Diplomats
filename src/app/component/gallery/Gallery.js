@@ -45,6 +45,7 @@ const Gallery = () => {
         <div className="flex gap-4 animate-scroll-left whitespace-nowrap">
           {[...images, ...images].map((img, i) => (
             <img
+            alt="Gallery image"
               key={i}
               src={img}
               onClick={() => setActiveIndex(i % images.length)}
@@ -58,6 +59,7 @@ const Gallery = () => {
         <div className="flex gap-4 mt-6 animate-scroll-right whitespace-nowrap">
           {[...images, ...images].map((img, i) => (
             <img
+            alt="Gallery image"
               key={i}
               src={img}
               onClick={() => setActiveIndex(i % images.length)}
@@ -94,6 +96,7 @@ const Gallery = () => {
 
       {/* Image */}
       <img
+      alt="Gallery image"
         src={images[activeIndex]}
         className="max-w-full max-h-[70vh] rounded-xl shadow-2xl"
       />
