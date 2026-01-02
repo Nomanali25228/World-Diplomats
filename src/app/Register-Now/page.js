@@ -1,12 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import bgimg from '../../../public/img/registerbg.jpg';
-import dynamic from "next/dynamic";
-import { useSearchParams } from "next/navigation";
-
-
+import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from "framer-motion";
-import { FaWhatsapp, FaInstagram, FaEnvelope } from "react-icons/fa";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import { FaWhatsapp, FaInstagram, FaEnvelope } from 'react-icons/fa';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-phone-input-2/lib/style.css";
@@ -15,9 +13,10 @@ import Select from "react-select";
 import * as Flags from "country-flag-icons/react/1x1";
 import { countryOptions } from "@/app/utils/countryList";
 import Navbar from "../component/navbar/Navbar";
-import { useDestination } from "@/app/context/DestinationContext";
+import { useDestination } from '@/app/context/DestinationContext';
+import bgimg from '../../../public/img/registerbg.jpg';
 
-// Dynamically import Confetti for client-side only
+// Dynamic import for Confetti (SSR-safe)
 const Confetti = dynamic(() => import("react-confetti").then(mod => mod.default), {
   ssr: false,
 });
@@ -25,23 +24,9 @@ const Confetti = dynamic(() => import("react-confetti").then(mod => mod.default)
 export default function FunRegistration() {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-
   const [form, setForm] = useState({
-    name: "",
-    email: "",
-    number: "",
-    countryResidence: "",
-    nationality: "",
-    gender: "",
-    dob: "",
-    institution: "",
-    reason: "",
-    representCountry: "",
-    committee: "",
-    shirtSize: "",
-    foodPreference: "",
-    destination: "",
+    name: "", email: "", number: "", countryResidence: "", nationality: "", gender: "", dob: "",
+    institution: "", reason: "", representCountry: "", committee: "", shirtSize: "", foodPreference: "", destination: ""
   });
 
   const DEST_API_MAP = {
@@ -63,39 +48,37 @@ export default function FunRegistration() {
 
   const [changeApi, setChangeApi] = useState("firstnames");
   const [isDestinationLocked, setIsDestinationLocked] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const searchParams = useSearchParams();
-  const { destination: ctxDestination, locked: ctxLocked, selectDestination } =
-    useDestination();
+  const { destination: ctxDestination, locked: ctxLocked, selectDestination } = useDestination();
 
   useEffect(() => {
     const dest = (form.destination || "").trim();
-    setChangeApi(DEST_API_MAP[dest] || "firstnames");
+    const api = DEST_API_MAP[dest] || "firstnames";
+    setChangeApi(api);
   }, [form.destination]);
 
   useEffect(() => {
     if (ctxDestination) {
-      setForm((prev) => ({ ...prev, destination: ctxDestination }));
+      setForm(prev => ({ ...prev, destination: ctxDestination }));
       setIsDestinationLocked(!!ctxLocked);
       return;
     }
-    const destParam = searchParams?.get?.("destination") || "";
+    const destParam = searchParams?.get?.('destination') || '';
     if (destParam) {
       selectDestination(destParam, true);
-      setForm((prev) => ({ ...prev, destination: destParam }));
+      setForm(prev => ({ ...prev, destination: destParam }));
       setIsDestinationLocked(true);
     }
   }, [ctxDestination, ctxLocked, searchParams, selectDestination]);
 
   const [registrationType, setRegistrationType] = useState("single");
-
   const MIN_DELEGATES = 2;
   const MAX_DELEGATES = 25;
   const [delegates, setDelegates] = useState(["", ""]);
   const [groupEmail, setGroupEmail] = useState("");
-  const [delegateDetails, setDelegateDetails] = useState(
-    delegates.map(() => ({ shirtSize: "", foodPreference: "" }))
-  );
+  const [delegateDetails, setDelegateDetails] = useState(() => delegates.map(() => ({ shirtSize: "", foodPreference: "" })));
 
   useEffect(() => {
     setDelegateDetails((prev) => {
@@ -116,95 +99,61 @@ export default function FunRegistration() {
     }
   }, [registrationType, delegates.length]);
 
-  const handleRegistrationTypeChange = (type) => setRegistrationType(type);
-  const addDelegate = () => setDelegates((prev) => (prev.length >= MAX_DELEGATES ? prev : [...prev, ""]));
-  const removeDelegate = (index) =>
-    setDelegates((prev) => {
-      if (prev.length <= MIN_DELEGATES) return prev;
-      const copy = [...prev];
-      copy.splice(index, 1);
-      return copy;
-    });
-  const updateDelegateName = (index, value) =>
-    setDelegates((prev) => {
-      const copy = [...prev];
-      copy[index] = value;
-      return copy;
-    });
-  const updateDelegateDetail = (index, field, value) =>
+  const updateDelegateDetail = (index, field, value) => {
     setDelegateDetails((prev) => {
       const copy = [...prev];
       copy[index] = { ...copy[index], [field]: value };
       return copy;
     });
+  };
+
+  const handleRegistrationTypeChange = (type) => setRegistrationType(type);
+  const addDelegate = () => setDelegates((prev) => (prev.length >= MAX_DELEGATES ? prev : [...prev, ""]));
+  const removeDelegate = (index) => setDelegates((prev) => {
+    if (prev.length <= MIN_DELEGATES) return prev;
+    const copy = [...prev]; copy.splice(index, 1); return copy;
+  });
+  const updateDelegateName = (index, value) => setDelegates((prev) => { const copy = [...prev]; copy[index] = value; return copy; });
 
   const selectStyles = {
     control: (provided) => ({
-      ...provided,
-      minHeight: "48px",
-      borderRadius: "0.75rem",
-      border: "2px solid #d1d5db",
-      paddingLeft: "8px",
-      boxShadow: "0 1px 4px rgba(0,0,0,0.15)",
-      "&:hover": { borderColor: "#6366f1" },
+      ...provided, minHeight: "48px", borderRadius: "0.75rem", border: "2px solid #d1d5db",
+      paddingLeft: "8px", boxShadow: "0 1px 4px rgba(0,0,0,0.15)", "&:hover": { borderColor: "#6366f1" },
     }),
     valueContainer: (provided) => ({ ...provided, padding: "0 6px" }),
     singleValue: (provided) => ({ ...provided, fontSize: "14px" }),
     menu: (provided) => ({ ...provided, borderRadius: "0.75rem", overflow: "hidden" }),
   };
 
+  const handleChange = (e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  const formatOptionLabel = ({ label, code }) => {
+    const Flag = Flags[code]; return (<div className="flex items-center gap-2">{Flag && <Flag style={{ width: "20px", height: "20px" }} />}<span>{label}</span></div>);
+  };
+  const back = () => setStep(prev => Math.max(prev - 1, 1));
+
   const inputClass =
     "w-full px-4 py-3 border-2 mt-1 border-gray-300 rounded-xl bg-white shadow-md text-sm " +
     "focus:outline-none focus:ring-2 focus:ring-indigo-400 transition duration-300 " +
     "hover:shadow-xl";
 
-  const formatOptionLabel = ({ label, code }) => {
-    const Flag = Flags[code];
-    return (
-      <div className="flex items-center gap-2">
-        {Flag && <Flag style={{ width: "20px", height: "20px" }} />}
-        <span>{label}</span>
-      </div>
-    );
-  };
-
   const next = () => {
     if (step === 1) {
       if (registrationType === "single") {
         if (!form.name.trim() || !form.email.trim() || !form.destination.trim()) {
-          toast.error("Please fill Name, Email and destination for single delegate");
-          return;
+          toast.error("Please fill Name, Email and destination for single delegate"); return;
         }
       } else {
-        if (!groupEmail.trim()) {
-          toast.error("Please provide a contact email for the delegation");
-          return;
-        }
-        if (!form.destination.trim()) {
-          toast.error("Please select a Destination for the delegation");
-          return;
-        }
+        if (!groupEmail.trim()) { toast.error("Please provide a contact email for the delegation"); return; }
+        if (!form.destination.trim()) { toast.error("Please select a Destination for the delegation"); return; }
         const filledNames = delegates.filter((d) => d.trim() !== "");
-        if (filledNames.length < MIN_DELEGATES) {
-          toast.error("Please provide delegate names");
-          return;
-        }
+        if (filledNames.length < MIN_DELEGATES) { toast.error("Please provide delegate names"); return; }
       }
     }
     setStep(2);
   };
 
-  const back = () => setStep((prev) => Math.max(prev - 1, 1));
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
-
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSubmitting(true);
-
+    e.preventDefault(); setSubmitting(true);
     try {
       let payload = {
         registrationType,
@@ -232,79 +181,48 @@ export default function FunRegistration() {
       } else {
         payload = {
           ...payload,
-          Name: null,
-          Email: null,
-          PhoneNumber: null,
-          WhatIsYourShirtSize: null,
-          DoYouHaveAFoodpreference: null,
+          Name: null, Email: null, PhoneNumber: null,
+          WhatIsYourShirtSize: null, DoYouHaveAFoodpreference: null,
           groupEmail,
-          delegates: delegates
-            .map((name, idx) => ({
-              name: name.trim(),
-              whatIsYourShirtSize: delegateDetails[idx]?.shirtSize || null,
-              doYouHaveAFoodpreference: delegateDetails[idx]?.foodPreference || null,
-            }))
-            .filter((d) => d.name),
+          delegates: delegates.map((name, idx) => ({
+            name: name.trim(),
+            whatIsYourShirtSize: delegateDetails[idx]?.shirtSize || null,
+            doYouHaveAFoodpreference: delegateDetails[idx]?.foodPreference || null,
+          })).filter(d => d.name),
         };
       }
 
-      const clean = (obj) =>
-        Object.fromEntries(Object.entries(obj).filter(([_, v]) => v !== null && v !== ""));
+      // Clean nulls
+      const clean = obj => Object.fromEntries(Object.entries(obj).filter(([_, v]) => v !== null && v !== ""));
       payload = clean(payload);
 
-      const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL; // add this in Vercel env
-      const res = await fetch(`${STRAPI_URL}/api/${changeApi}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ data: payload }),
+      const res = await fetch(`http://localhost:1337/api/${changeApi}`, {
+        method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ data: payload }),
       });
 
       let resultText;
-      try {
-        const ct = res.headers.get("content-type") || "";
-        resultText = ct.includes("application/json") ? await res.json() : await res.text();
-      } catch (err) {
-        resultText = "(unable to parse response)";
-      }
+      try { const ct = res.headers.get("content-type") || ""; if (ct.includes("application/json")) resultText = await res.json(); else resultText = await res.text(); } catch (err) { resultText = "(unable to parse response)"; }
+
+      console.log("STRAPI RESPONSE:", resultText);
+      console.log("SENT PAYLOAD:", payload);
 
       if (!res.ok) {
-        const msg =
-          (resultText && resultText.error && resultText.error.message) ||
-          (typeof resultText === "string" ? resultText : JSON.stringify(resultText));
+        const msg = (resultText && resultText.error && resultText.error.message) || (typeof resultText === 'string' ? resultText : JSON.stringify(resultText));
         toast.error(`Strapi error: ${msg}`);
-        setSubmitting(false);
-        return;
+        setSubmitting(false); return;
       }
 
-      try {
-        await fetch(`/api/register`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: form.email || groupEmail,
-            name: form.name,
-            data: payload,
-            destination: form.destination,
-          }),
-        });
-      } catch (mailErr) {
-        console.error("Register API error:", mailErr);
-      }
+      try { await fetch(`/api/register`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: form.email || groupEmail, name: form.name, data: payload, destination: form.destination }) }); } catch (mailErr) { console.error("Register API error:", mailErr); }
 
       toast.success("Registration Completed!");
-      setStep(3);
-      setSubmitted(true);
-      setSubmitting(false);
-    } catch (err) {
-      console.error("SUBMIT ERROR:", err);
-      toast.error("Submission failed");
-      setSubmitting(false);
-    }
+      setStep(3); setSubmitted(true); setSubmitting(false);
+
+    } catch (err) { console.error("SUBMIT ERROR:", err); toast.error("Submission failed"); setSubmitting(false); }
   };
 
   const _selectedDestKey = (form.destination || "").trim();
   const selectedDestLabel = _selectedDestKey || "";
-  const selectedDestDate = DEST_DATE_MAP[_selectedDestKey] || "";
+  const selectedDestDate = DEST_DATE_MAP[_selectedDestKey] || DEST_DATE_MAP[""];
 
 return (
 <> <Navbar />
