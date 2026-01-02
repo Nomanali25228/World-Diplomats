@@ -1,10 +1,11 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { useSearchParams } from 'next/navigation';
+
+import React, { useState, useEffect, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { FaWhatsapp, FaInstagram, FaEnvelope } from 'react-icons/fa';
+import { FaWhatsapp, FaInstagram, FaEnvelope } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-phone-input-2/lib/style.css";
@@ -13,21 +14,17 @@ import Select from "react-select";
 import * as Flags from "country-flag-icons/react/1x1";
 import { countryOptions } from "@/app/utils/countryList";
 import Navbar from "../component/navbar/Navbar";
-import { useDestination } from '@/app/context/DestinationContext';
-import bgimg from '../../../public/img/registerbg.jpg';
+import { useDestination } from "@/app/context/DestinationContext";
+import bgimg from "../../../public/img/registerbg.jpg";
 
 // Dynamic import for Confetti (SSR-safe)
-const Confetti = dynamic(() => import("react-confetti").then(mod => mod.default), {
+const Confetti = dynamic(() => import("react-confetti").then((mod) => mod.default), {
   ssr: false,
 });
 
 export default function FunRegistration() {
-  const [step, setStep] = useState(1);
-  const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({
-    name: "", email: "", number: "", countryResidence: "", nationality: "", gender: "", dob: "",
-    institution: "", reason: "", representCountry: "", committee: "", shirtSize: "", foodPreference: "", destination: ""
-  });
+  const searchParams = useSearchParams();
+  const { destination: ctxDestination, locked: ctxLocked, selectDestination } = useDestination();
 
   const DEST_API_MAP = {
     "Istanbul, Turkey": "firstnames",
@@ -42,44 +39,63 @@ export default function FunRegistration() {
     "Istanbul, Turkey": "26th – 29th March 2026",
     "Dubai, UAE": "14th – 17th May 2026",
     "Kuala Lumpur, Malaysia": "9th – 12th July 2026",
-    "London, UK": "3th – 6th September 2026",
+    "London, UK": "3rd – 6th September 2026",
     "Riyadh, Saudi Arabia": "15th – 18th October 2026",
   };
 
-  const [changeApi, setChangeApi] = useState("firstnames");
-  const [isDestinationLocked, setIsDestinationLocked] = useState(false);
+  const MIN_DELEGATES = 2;
+  const MAX_DELEGATES = 25;
+
+  const [step, setStep] = useState(1);
+  const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    number: "",
+    countryResidence: "",
+    nationality: "",
+    gender: "",
+    dob: "",
+    institution: "",
+    reason: "",
+    representCountry: "",
+    committee: "",
+    shirtSize: "",
+    foodPreference: "",
+    destination: "",
+  });
+  const [registrationType, setRegistrationType] = useState("single");
+  const [delegates, setDelegates] = useState(Array(MIN_DELEGATES).fill(""));
+  const [delegateDetails, setDelegateDetails] = useState(() =>
+    Array(MIN_DELEGATES).fill({ shirtSize: "", foodPreference: "" })
+  );
+  const [groupEmail, setGroupEmail] = useState("");
+  const [isDestinationLocked, setIsDestinationLocked] = useState(false);
+  const [changeApi, setChangeApi] = useState("firstnames");
 
-  const searchParams = useSearchParams();
-  const { destination: ctxDestination, locked: ctxLocked, selectDestination } = useDestination();
-
+  // Update API when destination changes
   useEffect(() => {
     const dest = (form.destination || "").trim();
-    const api = DEST_API_MAP[dest] || "firstnames";
-    setChangeApi(api);
+    setChangeApi(DEST_API_MAP[dest] || "firstnames");
   }, [form.destination]);
 
+  // Handle context destination or search param
   useEffect(() => {
     if (ctxDestination) {
-      setForm(prev => ({ ...prev, destination: ctxDestination }));
+      setForm((prev) => ({ ...prev, destination: ctxDestination }));
       setIsDestinationLocked(!!ctxLocked);
       return;
     }
-    const destParam = searchParams?.get?.('destination') || '';
+    const destParam = searchParams?.get?.("destination") || "";
     if (destParam) {
       selectDestination(destParam, true);
-      setForm(prev => ({ ...prev, destination: destParam }));
+      setForm((prev) => ({ ...prev, destination: destParam }));
       setIsDestinationLocked(true);
     }
   }, [ctxDestination, ctxLocked, searchParams, selectDestination]);
 
-  const [registrationType, setRegistrationType] = useState("single");
-  const MIN_DELEGATES = 2;
-  const MAX_DELEGATES = 25;
-  const [delegates, setDelegates] = useState(["", ""]);
-  const [groupEmail, setGroupEmail] = useState("");
-  const [delegateDetails, setDelegateDetails] = useState(() => delegates.map(() => ({ shirtSize: "", foodPreference: "" })));
-
+  // Keep delegateDetails in sync with delegates
   useEffect(() => {
     setDelegateDetails((prev) => {
       const copy = [...prev];
@@ -89,6 +105,7 @@ export default function FunRegistration() {
     });
   }, [delegates.length]);
 
+  // Ensure minimum delegates for group
   useEffect(() => {
     if (registrationType === "group" && delegates.length < MIN_DELEGATES) {
       setDelegates((d) => {
@@ -99,61 +116,62 @@ export default function FunRegistration() {
     }
   }, [registrationType, delegates.length]);
 
-  const updateDelegateDetail = (index, field, value) => {
-    setDelegateDetails((prev) => {
-      const copy = [...prev];
-      copy[index] = { ...copy[index], [field]: value };
-      return copy;
-    });
-  };
-
-  const handleRegistrationTypeChange = (type) => setRegistrationType(type);
-  const addDelegate = () => setDelegates((prev) => (prev.length >= MAX_DELEGATES ? prev : [...prev, ""]));
-  const removeDelegate = (index) => setDelegates((prev) => {
-    if (prev.length <= MIN_DELEGATES) return prev;
-    const copy = [...prev]; copy.splice(index, 1); return copy;
-  });
-  const updateDelegateName = (index, value) => setDelegates((prev) => { const copy = [...prev]; copy[index] = value; return copy; });
+  const inputClass =
+    "w-full px-4 py-3 border-2 mt-1 border-gray-300 rounded-xl bg-white shadow-md text-sm " +
+    "focus:outline-none focus:ring-2 focus:ring-indigo-400 transition duration-300 hover:shadow-xl";
 
   const selectStyles = {
     control: (provided) => ({
-      ...provided, minHeight: "48px", borderRadius: "0.75rem", border: "2px solid #d1d5db",
-      paddingLeft: "8px", boxShadow: "0 1px 4px rgba(0,0,0,0.15)", "&:hover": { borderColor: "#6366f1" },
+      ...provided,
+      minHeight: "48px",
+      borderRadius: "0.75rem",
+      border: "2px solid #d1d5db",
+      paddingLeft: "8px",
+      boxShadow: "0 1px 4px rgba(0,0,0,0.15)",
+      "&:hover": { borderColor: "#6366f1" },
     }),
     valueContainer: (provided) => ({ ...provided, padding: "0 6px" }),
     singleValue: (provided) => ({ ...provided, fontSize: "14px" }),
     menu: (provided) => ({ ...provided, borderRadius: "0.75rem", overflow: "hidden" }),
   };
 
-  const handleChange = (e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   const formatOptionLabel = ({ label, code }) => {
-    const Flag = Flags[code]; return (<div className="flex items-center gap-2">{Flag && <Flag style={{ width: "20px", height: "20px" }} />}<span>{label}</span></div>);
+    const Flag = Flags[code];
+    return (
+      <div className="flex items-center gap-2">
+        {Flag && <Flag style={{ width: "20px", height: "20px" }} />}
+        <span>{label}</span>
+      </div>
+    );
   };
-  const back = () => setStep(prev => Math.max(prev - 1, 1));
 
-  const inputClass =
-    "w-full px-4 py-3 border-2 mt-1 border-gray-300 rounded-xl bg-white shadow-md text-sm " +
-    "focus:outline-none focus:ring-2 focus:ring-indigo-400 transition duration-300 " +
-    "hover:shadow-xl";
+  const handleChange = (e) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const updateDelegateName = (idx, value) => setDelegates((prev) => { const copy = [...prev]; copy[idx] = value; return copy; });
+  const updateDelegateDetail = (idx, field, value) => setDelegateDetails((prev) => { const copy = [...prev]; copy[idx] = { ...copy[idx], [field]: value }; return copy; });
+  const addDelegate = () => setDelegates((prev) => (prev.length >= MAX_DELEGATES ? prev : [...prev, ""]));
+  const removeDelegate = (idx) => setDelegates((prev) => (prev.length <= MIN_DELEGATES ? prev : prev.filter((_, i) => i !== idx)));
+  const handleRegistrationTypeChange = (type) => setRegistrationType(type);
 
+  const back = () => setStep((prev) => Math.max(prev - 1, 1));
   const next = () => {
     if (step === 1) {
       if (registrationType === "single") {
         if (!form.name.trim() || !form.email.trim() || !form.destination.trim()) {
-          toast.error("Please fill Name, Email and destination for single delegate"); return;
+          toast.error("Please fill Name, Email, and Destination"); return;
         }
       } else {
-        if (!groupEmail.trim()) { toast.error("Please provide a contact email for the delegation"); return; }
-        if (!form.destination.trim()) { toast.error("Please select a Destination for the delegation"); return; }
-        const filledNames = delegates.filter((d) => d.trim() !== "");
-        if (filledNames.length < MIN_DELEGATES) { toast.error("Please provide delegate names"); return; }
+        if (!groupEmail.trim()) { toast.error("Please provide a group email"); return; }
+        if (!form.destination.trim()) { toast.error("Please select a Destination"); return; }
+        const filled = delegates.filter((d) => d.trim() !== "");
+        if (filled.length < MIN_DELEGATES) { toast.error("Please provide delegate names"); return; }
       }
     }
     setStep(2);
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); setSubmitting(true);
+    e.preventDefault();
+    setSubmitting(true);
     try {
       let payload = {
         registrationType,
@@ -192,37 +210,36 @@ export default function FunRegistration() {
         };
       }
 
-      // Clean nulls
+      // Remove nulls
       const clean = obj => Object.fromEntries(Object.entries(obj).filter(([_, v]) => v !== null && v !== ""));
       payload = clean(payload);
 
       const res = await fetch(`http://localhost:1337/api/${changeApi}`, {
-        method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ data: payload }),
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ data: payload }),
       });
 
-      let resultText;
-      try { const ct = res.headers.get("content-type") || ""; if (ct.includes("application/json")) resultText = await res.json(); else resultText = await res.text(); } catch (err) { resultText = "(unable to parse response)"; }
-
-      console.log("STRAPI RESPONSE:", resultText);
-      console.log("SENT PAYLOAD:", payload);
+      const resultText = await res.json().catch(() => "(unable to parse response)");
 
       if (!res.ok) {
-        const msg = (resultText && resultText.error && resultText.error.message) || (typeof resultText === 'string' ? resultText : JSON.stringify(resultText));
+        const msg = (resultText?.error?.message) || JSON.stringify(resultText);
         toast.error(`Strapi error: ${msg}`);
         setSubmitting(false); return;
       }
 
-      try { await fetch(`/api/register`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: form.email || groupEmail, name: form.name, data: payload, destination: form.destination }) }); } catch (mailErr) { console.error("Register API error:", mailErr); }
+      // Optional: register API
+      try { await fetch(`/api/register`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: form.email || groupEmail, name: form.name, data: payload, destination: form.destination }) }); } catch (_) {}
 
       toast.success("Registration Completed!");
       setStep(3); setSubmitted(true); setSubmitting(false);
 
-    } catch (err) { console.error("SUBMIT ERROR:", err); toast.error("Submission failed"); setSubmitting(false); }
+    } catch (err) { console.error(err); toast.error("Submission failed"); setSubmitting(false); }
   };
 
-  const _selectedDestKey = (form.destination || "").trim();
-  const selectedDestLabel = _selectedDestKey || "";
-  const selectedDestDate = DEST_DATE_MAP[_selectedDestKey] || DEST_DATE_MAP[""];
+  const selectedDestKey = (form.destination || "").trim();
+  const selectedDestLabel = selectedDestKey || "";
+  const selectedDestDate = DEST_DATE_MAP[selectedDestKey] || "";
 
 return (
 <> <Navbar />
