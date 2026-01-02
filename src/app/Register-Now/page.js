@@ -75,46 +75,67 @@ export default function FunRegistration() {
   const [changeApi, setChangeApi] = useState("firstnames");
 
   // Update API when destination changes
-  useEffect(() => {
-    const dest = (form.destination || "").trim();
-    setChangeApi(DEST_API_MAP[dest] || "firstnames");
-  }, [form.destination]);
+useEffect(() => {
+  const dest = (form.destination || "").trim();
+  // Only update if it actually changes to avoid cascading re-renders
+  const newApi = DEST_API_MAP[dest] || "firstnames";
+  setChangeApi((prev) => (prev !== newApi ? newApi : prev));
+}, [form.destination]);
 
   // Handle context destination or search param
   useEffect(() => {
-    if (ctxDestination) {
-      setForm((prev) => ({ ...prev, destination: ctxDestination }));
-      setIsDestinationLocked(!!ctxLocked);
-      return;
-    }
-    const destParam = searchParams?.get?.("destination") || "";
-    if (destParam) {
-      selectDestination(destParam, true);
-      setForm((prev) => ({ ...prev, destination: destParam }));
-      setIsDestinationLocked(true);
-    }
-  }, [ctxDestination, ctxLocked, searchParams, selectDestination]);
+  // If context destination exists and is different from current state
+  if (ctxDestination && form.destination !== ctxDestination) {
+    setForm((prev) => ({ ...prev, destination: ctxDestination }));
+    setIsDestinationLocked(!!ctxLocked);
+    return;
+  }
+
+  // Check for destination from search params
+  const destParam = searchParams?.get?.("destination") || "";
+  if (destParam && form.destination !== destParam) {
+    selectDestination(destParam, true);
+    setForm((prev) => ({ ...prev, destination: destParam }));
+    setIsDestinationLocked(true);
+  }
+}, [ctxDestination, ctxLocked, searchParams, selectDestination, form.destination]);
 
   // Keep delegateDetails in sync with delegates
-  useEffect(() => {
-    setDelegateDetails((prev) => {
-      const copy = [...prev];
-      while (copy.length < delegates.length) copy.push({ shirtSize: "", foodPreference: "" });
-      if (copy.length > delegates.length) copy.splice(delegates.length);
-      return copy;
-    });
-  }, [delegates.length]);
+ useEffect(() => {
+  setDelegateDetails((prev) => {
+    // Agar length already match karti ho to state update na kare
+    if (prev.length === delegates.length) return prev;
+
+    const copy = [...prev];
+
+    // Add empty delegate details if delegates length increased
+    while (copy.length < delegates.length) {
+      copy.push({ shirtSize: "", foodPreference: "" });
+    }
+
+    // Trim if delegates length decreased
+    if (copy.length > delegates.length) {
+      copy.splice(delegates.length);
+    }
+
+    return copy;
+  });
+}, [delegates.length]);
+
 
   // Ensure minimum delegates for group
-  useEffect(() => {
-    if (registrationType === "group" && delegates.length < MIN_DELEGATES) {
-      setDelegates((d) => {
-        const copy = [...d];
-        while (copy.length < MIN_DELEGATES) copy.push("");
-        return copy;
-      });
-    }
-  }, [registrationType, delegates.length]);
+ useEffect(() => {
+  if (registrationType === "group" && delegates.length < MIN_DELEGATES) {
+    setDelegates((prev) => {
+      if (prev.length >= MIN_DELEGATES) return prev; // prevent unnecessary re-render
+
+      const copy = [...prev];
+      while (copy.length < MIN_DELEGATES) copy.push("");
+      return copy;
+    });
+  }
+}, [registrationType, delegates.length]);
+
 
   const inputClass =
     "w-full px-4 py-3 border-2 mt-1 border-gray-300 rounded-xl bg-white shadow-md text-sm " +
