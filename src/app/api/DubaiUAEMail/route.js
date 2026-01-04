@@ -36,8 +36,8 @@ export async function POST(request) {
         const closingMessage = `at World Diplomats MUN and await, in <br /> anticipation, to host you at ${country}.`;
         const subject = `World Diplomats — Registration Received (${desname})`;
 
-    const username = process.env.NEXT_PUBLIC_SMTP_USERNAME;
-    const password = process.env.NEXT_PUBLIC_SMTP_PASSWORD;
+    const username = "info@worlddiplomats.org";
+    const password = "eqqxvxhdtgfbxuiu";
 
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',

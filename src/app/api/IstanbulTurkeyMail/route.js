@@ -3,8 +3,8 @@ import nodemailer from 'nodemailer';
 import puppeteer from 'puppeteer'; // Install puppeteer using npm
 
 export async function POST(request) {
-    const username = process.env.NEXT_PUBLIC_SMTP_USERNAME;
-    const password = process.env.NEXT_PUBLIC_SMTP_PASSWORD;
+    const username = "info@worlddiplomats.org";
+    const password = "eqqxvxhdtgfbxuiu";
 
     try {
                 const { email, name, data, iduser, destination } = await request.json();
@@ -50,7 +50,7 @@ export async function POST(request) {
         const pdfPath = 'https://res.cloudinary.com/dhqbmpldd/image/upload/v1735156197/Rundown_br2xjm.pdf'; // Corrected Google Drive link for direct download
         //  first email template 
         const mailOptions = {
-            from: 'Atsas MUN',
+            from: 'World Diplomats <info@worlddiplomats.org>',
             to: email,
             subject,
             html: `<!DOCTYPE html>
