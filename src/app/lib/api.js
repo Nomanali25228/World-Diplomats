@@ -2,7 +2,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "http://localhost:1337/",
+  baseURL: "https://world-diplomats-backend.onrender.com/",
 
 });
 

@@ -5,7 +5,7 @@ import { FaInstagram } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
 
 const MIN_DELEGATES = 2;
-const STRAPI_URL = "http://localhost:1337"; // 👈 STRAPI URL HERE
+const STRAPI_URL = "https://world-diplomats-backend.onrender.com"; // 👈 STRAPI URL HERE
 
 const Page = () => {
   const [delegationName, setDelegationName] = useState("");

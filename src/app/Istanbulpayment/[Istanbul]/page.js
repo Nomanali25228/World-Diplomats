@@ -49,7 +49,7 @@ export default function Home() {
     const fetchData = async () => {
       try {
         const res = await fetch(
-          `http://localhost:1337/api/firstnames?filters[id][$eq]=${id}`
+          `https://world-diplomats-backend.onrender.com/api/firstnames?filters[id][$eq]=${id}`
         );
         const data = await res.json();
         setCustID(data?.data?.[0]?.customerId || '');

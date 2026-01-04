@@ -314,7 +314,7 @@ const RegisterNowClient = () => {
       const clean = (obj) => Object.fromEntries(Object.entries(obj).filter(([_, v]) => v !== null && v !== ""));
       payload = clean(payload);
 
-      const res = await fetch(`http://localhost:1337/api/${changeApi}`, {
+      const res = await fetch(`https://world-diplomats-backend.onrender.com/api/${changeApi}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ data: payload }),
@@ -370,7 +370,7 @@ const RegisterNowClient = () => {
       console.log("Cronjob payload:", { id, name, email });
 
       const response = await axios.post(
-        "http://localhost:1337/api/notifications",
+        "https://world-diplomats-backend.onrender.com/api/notifications",
         {
           data: {
             Email: email,
