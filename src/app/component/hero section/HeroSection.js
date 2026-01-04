@@ -181,7 +181,7 @@ const HeroSection = () => {
             data-aos-delay="300"
             className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 leading-relaxed px-2 sm:px-0"
           >
-            (Explore Conferences) (Register Now) There should be a button that people can click and it will take them to the registrations portal.
+            Join the world{"'"}s most prestigious youth diplomatic network and connect with leaders from over 150 countries.
           </p>
 
           {/* Buttons */}

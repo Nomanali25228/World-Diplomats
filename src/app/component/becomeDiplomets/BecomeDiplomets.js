@@ -31,7 +31,7 @@ const BecomeDiplomets = () => {
       <div className="w-full bg-white py-6 sm:py-8 md:py-10">
 
         {/* ================= IMAGE BACKGROUND SECTION ================= */}
-        <div className="relative w-full max-w-[1200px] mx-auto rounded-lg overflow-hidden">
+        <div className="relative w-full max-w-[1400px] mx-auto rounded-lg overflow-hidden">
           <div
             className="w-full h-[60vh] sm:h-[65vh] md:h-[70vh] lg:h-[75vh] bg-center bg-cover rounded-lg"
             style={{ backgroundImage: `url(${bgImage.src})` }}

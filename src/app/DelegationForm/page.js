@@ -5,16 +5,28 @@ import { FaInstagram } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
 
 const MIN_DELEGATES = 2;
+const STRAPI_URL = "http://localhost:1337"; // 👈 STRAPI URL HERE
 
 const Page = () => {
   const [delegationName, setDelegationName] = useState("");
-  const [delegates, setDelegates] = useState(["", ""]); // Initial 2 delegates
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+
+  const [headChaperone, setHeadChaperone] = useState("");
+  const [chaperone2, setChaperone2] = useState("");
+  const [chaperone3, setChaperone3] = useState("");
+
+  const [delegates, setDelegates] = useState(["", ""]);
+
+  const [additionalEmail, setAdditionalEmail] = useState("");
+  const [institution, setInstitution] = useState("");
+  const [accommodation, setAccommodation] = useState(null);
+
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const addDelegate = () => {
-    if (delegates.length < 25) {
-      setDelegates([...delegates, ""]);
-    }
+    if (delegates.length < 25) setDelegates([...delegates, ""]);
   };
 
   const removeDelegate = (idx) => {
@@ -24,174 +36,151 @@ const Page = () => {
   };
 
   const updateDelegateName = (idx, value) => {
-    const newDelegates = [...delegates];
-    newDelegates[idx] = value;
-    setDelegates(newDelegates);
+    const updated = [...delegates];
+    updated[idx] = value;
+    setDelegates(updated);
   };
 
-  const handleSubmit = (e) => {
+  // 🔥 STRAPI SUBMIT
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+
+    try {
+      const res = await fetch(`${STRAPI_URL}/api/delegation-applications`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          data: {
+            delegationName,
+            phone,
+            email,
+            headChaperone,
+            chaperone2,
+            chaperone3,
+            delegates: delegates.filter((d) => d.trim() !== ""),
+            additionalEmail,
+            institution,
+            accommodation,
+          },
+        }),
+      });
+
+      if (!res.ok) throw new Error("Submission failed");
+
+      setSubmitted(true);
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
       <Navbar />
       <section
-        className="relative min-h-screen py-16 px-4 sm:px-6 bg-fixed bg-cover bg-center"
+        className="relative min-h-screen py-16 px-4 bg-cover bg-center"
         style={{ backgroundImage: "url('/img/registerbg.jpg')" }}
       >
         <div className="absolute inset-0 bg-gradient-to-br from-[#0d1b4c]/90 via-[#1a2a9c]/80 to-[#b00000]/75"></div>
-        <div className="relative z-10 max-w-5xl mx-auto">
 
-          {/* HEADER */}
+        <div className="relative z-10 max-w-5xl mx-auto">
           <div className="text-center mt-16 mb-12">
-            <h1 className="text-2xl sm:text-2xl md:text-4xl font-bold text-white">
+            <h1 className="text-3xl md:text-4xl font-bold text-white">
               Delegation Application Form
             </h1>
-            <p className="mt-3 text-[12px] sm:text-md md:text-lg text-blue-200">
-              World Diplomats
-            </p>
+            <p className="mt-3 text-blue-200">World Diplomats</p>
           </div>
 
-          {/* FORM OR SUCCESS CARD */}
           {!submitted ? (
             <form
               onSubmit={handleSubmit}
-              className="bg-white/95 backdrop-blur-md rounded-2xl shadow-xl p-4 sm:p-6 md:p-8 space-y-8 text-black"
+              className="bg-white/95 rounded-2xl shadow-xl p-6 space-y-8"
             >
-              {/* DELEGATION NAME & CONTACT */}
               <Grid>
-                <Field
-                  label="Delegation Name"
-                  required
-                  small
-                  value={delegationName}
-                  onChange={(e) => setDelegationName(e.target.value)}
-                />
-                <Field label="Phone Number" required small />
-                <Field label="Email" type="email" required small />
+                <Field label="Delegation Name" required small value={delegationName} onChange={(e)=>setDelegationName(e.target.value)} />
+                <Field label="Phone Number" required small value={phone} onChange={(e)=>setPhone(e.target.value)} />
+                <Field label="Email" type="email" required small value={email} onChange={(e)=>setEmail(e.target.value)} />
               </Grid>
 
-              {/* CHAPERONES */}
               <Grid>
-                <Field label="Head Chaperone Name" required small />
-                <Field label="Chaperone 2 (optional) (if any)" small />
-                <Field label="Chaperone 3 (optional) (if any)" small />
+                <Field label="Head Chaperone Name" required small value={headChaperone} onChange={(e)=>setHeadChaperone(e.target.value)} />
+                <Field label="Chaperone 2 (optional)" small value={chaperone2} onChange={(e)=>setChaperone2(e.target.value)} />
+                <Field label="Chaperone 3 (optional)" small value={chaperone3} onChange={(e)=>setChaperone3(e.target.value)} />
               </Grid>
 
-              {/* DELEGATES */}
               <div>
                 <h2 className="font-semibold mb-3 text-lg">Delegates</h2>
-                <div className={delegates.length > 6 ? "max-h-[420px] md:max-h-[220px] overflow-auto pr-2" : "pr-2"}>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                    {delegates.map((name, idx) => (
-                      <div key={idx} className="relative p-2 border rounded-md bg-white/10">
-                        <label className="block text-sm font-medium text-gray-700">
-                          Delegate {idx + 1} Name
-                        </label>
-                        <input
-                          type="text"
-                          value={name}
-                          onChange={(e) => updateDelegateName(idx, e.target.value)}
-                          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-300 mt-1 text-sm"
-                          placeholder={`Delegate ${idx + 1} full name`}
-                          required
-                        />
-                        {delegates.length > MIN_DELEGATES && (
-                          <button
-                            type="button"
-                            onClick={() => removeDelegate(idx)}
-                            className="absolute top-2 right-2 text-black rounded-full w-6 h-6 flex items-center justify-center shadow-sm hover:scale-110 transition"
-                          >
-                            ×
-                          </button>
-                        )}
-                      </div>
-                    ))}
-                  </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                  {delegates.map((name, idx) => (
+                    <div key={idx} className="relative p-2 border rounded-md">
+                      <label className="text-sm font-medium">
+                        Delegate {idx + 1}
+                      </label>
+                      <input
+                        value={name}
+                        onChange={(e) => updateDelegateName(idx, e.target.value)}
+                        className="w-full px-3 py-2 border rounded-md mt-1 text-sm"
+                        required
+                      />
+                      {delegates.length > MIN_DELEGATES && (
+                        <button
+                          type="button"
+                          onClick={() => removeDelegate(idx)}
+                          className="absolute top-2 right-2"
+                        >
+                          ×
+                        </button>
+                      )}
+                    </div>
+                  ))}
                 </div>
 
                 {delegates.length < 25 && (
-                  <button
-                    type="button"
-                    onClick={addDelegate}
-                    className="mt-3 text-blue-700 font-semibold hover:underline flex items-center gap-2 text-sm"
-                  >
+                  <button type="button" onClick={addDelegate} className="mt-3 text-blue-600 text-sm">
                     ➜ Add more delegates
                   </button>
                 )}
               </div>
 
-              {/* ADDITIONAL INFO */}
               <Grid>
-                <Field label="Additional Email" type="email" small />
-                <Field label="Institution (optional) (if any)" small />
+                <Field label="Additional Email" type="email" small value={additionalEmail} onChange={(e)=>setAdditionalEmail(e.target.value)} />
+                <Field label="Institution (optional)" small value={institution} onChange={(e)=>setInstitution(e.target.value)} />
               </Grid>
 
-              {/* ACCOMMODATION */}
               <div>
-                <label className="block font-semibold mb-2 text-sm">
+                <label className="font-semibold text-sm block mb-2">
                   Will your delegation require accommodation?
                 </label>
                 <div className="flex gap-6 text-sm">
-                  <label className="flex items-center gap-1">
-                    <input type="radio" name="accommodation" />
-                    Yes
-                  </label>
-                  <label className="flex items-center gap-1">
-                    <input type="radio" name="accommodation" />
-                    No
-                  </label>
+                  <label><input type="radio" name="acc" onChange={()=>setAccommodation(true)} /> Yes</label>
+                  <label><input type="radio" name="acc" onChange={()=>setAccommodation(false)} /> No</label>
                 </div>
               </div>
 
-              <p className="text-xs sm:text-sm text-gray-700">
-                Once your application is submitted, a member of our Outreach Team will contact you.
-              </p>
-
               <button
                 type="submit"
-                className="w-full cursor-pointer bg-gradient-to-r from-[#b00000] to-[#1a2a9c] text-white py-2.5 rounded-lg font-semibold text-sm sm:text-base hover:opacity-90 transition"
+                disabled={loading}
+                className="w-full bg-gradient-to-r from-red-600 to-indigo-700 text-white py-3 rounded-lg"
               >
-                Submit Application
+                {loading ? "Submitting..." : "Submit Application"}
               </button>
             </form>
           ) : (
-            <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl p-6 sm:p-10 text-center space-y-4">
-              <div className="text-6xl animate-bounce">🎉</div>
-              <h2 className="text-2xl font-bold text-gray-800">
-                🎓 Thanks <span className="text-indigo-600">{delegates[0] || "Lead Delegate"}</span> for submitting your delegation application!
-              </h2>
-              <p className="text-gray-700 text-sm sm:text-base">
-                Total Delegates: <span className="font-semibold">{delegates.length}</span>
-              </p>
-              <p className="text-green-600 font-semibold text-sm sm:text-base">
-                ✅ Your application has been successfully submitted!
-              </p>
-              <p className="text-gray-700 text-sm sm:text-base">
-                Our Outreach Team will contact you soon with instructions. Keep an eye on your inbox!
-              </p>
-              <p className="text-gray-500 text-xs sm:text-sm">
-                🎯 Get ready to lead your team to success in the upcoming conference! ✨
-              </p>
+            <div className="bg-white rounded-2xl p-10 text-center">
+              <h2 className="text-2xl font-bold mb-3">🎉 Application Submitted!</h2>
+              <p>Total Delegates: <b>{delegates.length}</b></p>
 
-              {/* Gmail + Instagram */}
-              <p className="text-gray-500 text-xs sm:text-sm flex flex-col sm:flex-row items-center justify-center gap-3">
-                <a href="mailto:info@worlddiplomats.org" className="flex items-center gap-1 text-red-500 hover:underline transition">
+              <div className="mt-4 flex justify-center gap-4 text-sm">
+                <a href="mailto:info@worlddiplomats.org" className="flex items-center gap-1">
                   <SiGmail /> info@worlddiplomats.org
                 </a>
-                <a href="https://www.instagram.com/WorldDiplomats" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-pink-500 hover:underline transition">
+                <a href="https://instagram.com/WorldDiplomats" className="flex items-center gap-1">
                   <FaInstagram /> @WorldDiplomats
                 </a>
-              </p>
-
-              <button
-                onClick={() => setSubmitted(false)}
-                className="mt-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white py-2 px-5 rounded-2xl hover:opacity-90 transition font-semibold"
-              >
-                Submit Another
-              </button>
+              </div>
             </div>
           )}
         </div>
@@ -200,15 +189,14 @@ const Page = () => {
   );
 };
 
-/* GRID → 3 per line on desktop */
+/* Helpers */
 const Grid = ({ children }) => (
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">{children}</div>
 );
 
-/* FIELD with optional small variant */
-const Field = ({ label, type = "text", required = false, small = false, value, onChange }) => (
+const Field = ({ label, type="text", required=false, small=false, value, onChange }) => (
   <div>
-    <label className={`block font-semibold mb-1 ${small ? "text-sm" : ""}`}>
+    <label className="block font-semibold mb-1 text-sm">
       {label} {required && <span className="text-red-600">*</span>}
     </label>
     <input
@@ -216,7 +204,7 @@ const Field = ({ label, type = "text", required = false, small = false, value, o
       required={required}
       value={value}
       onChange={onChange}
-      className={`w-full border rounded-lg px-${small ? "3" : "4"} py-${small ? "2" : "3"} ${small ? "text-sm" : ""} focus:outline-none focus:ring-2 focus:ring-indigo-300`}
+      className="w-full border rounded-lg px-3 py-2 text-sm"
     />
   </div>
 );

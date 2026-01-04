@@ -8,12 +8,7 @@ const WorldDiplomats = () => {
 
       {/* ================= Heading Section ================= */}
       <div className="text-center mb-10 px-4">
-        <h2
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-[#0d1b4c]"
-          data-aos="fade-up"
-        >
-          World <span className="text-[#b00000]">Diplomats</span>
-        </h2>
+       
        
       </div>
 
@@ -21,16 +16,15 @@ const WorldDiplomats = () => {
       <div className="w-full bg-white py-6 sm:py-8 md:py-10">
 
         {/* ================= IMAGE BACKGROUND SECTION ================= */}
-        <div
-          className="relative w-full h-screen overflow-hidden rounded-lg mx-auto max-w-[1200px]"
-          style={{
-            backgroundImage: `url(${bg.src})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            
-            // backgroundAttachment: "fixed",
-          }}
-        >
+       <div
+        className="relative w-full h-screen overflow-hidden"
+        style={{
+          backgroundImage: `url(${bg.src})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed", // PARALLAX EFFECT
+        }}
+      >
           {/* Dark Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0d1b4c]/95 via-[#1a2a9c]/25 to-[#b00000]/80"></div>
 
@@ -43,7 +37,7 @@ const WorldDiplomats = () => {
               max-w-full
               h-[65%] sm:h-[70%] md:h-[75%] lg:h-[70%]
               bg-[#0d1b4c]/20
-              backdrop-blur-3xl
+              backdrop-blur-sm
               p-6 sm:p-8 md:p-10 lg:p-12
               rounded-t-[30px]
               shadow-2xl

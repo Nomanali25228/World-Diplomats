@@ -40,7 +40,7 @@ const Footer = () => {
 
 
       {/* MAIN CONTENT */}
-      <div className="relative z-10 max-w-7xl  mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16">
+      <div className="relative z-10 max-w-7[1400px]  mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16">
 
         {/* LOGO + ABOUT */}
         <div>
@@ -115,7 +115,7 @@ const Footer = () => {
             <strong>Email:</strong>{" "}
             <a
               href="mailto:info@worlddiplomats.org"
-              className="text-blue-400 hover:underline"
+              className="hover:text-blue-400 hover:underline"
             >
               info@worlddiplomats.org
             </a>
@@ -123,12 +123,12 @@ const Footer = () => {
             <strong>Phone:</strong>{" "}
             <a
               href="tel:+447490344639"
-              className="text-blue-400 hover:underline"
+              className="hover:text-blue-400 hover:underline"
             >
               +44 7490 344639
             </a>
             <br />
-            <strong>Address:</strong> Coming Soon
+            <strong>Address:</strong> 128, City Road,  London,<br/> United Kingdom, EC1V 2NX
           </p>
 
           {/* SOCIAL ICONS */}
@@ -147,7 +147,7 @@ const Footer = () => {
       </div>
 
 {/* COPYRIGHT */}
-<div className="relative z-10 mt-24 border-t border-gray-700 pt-4 text-base text-gray-400 max-w-7xl mx-auto">
+<div className="relative z-10 mt-24 border-t border-gray-700 pt-4 text-base text-gray-400 max-w-[1400px] mx-auto">
         <div className="text-center">
           © Copyright <span className="text-white">World Diplomats</span>. All
           Rights Reserved
@@ -156,7 +156,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-5 text-center md:text-right">
-          Design & Development by{" "}
+          Design & Developed by{" "}
           <a
             href="mailto:websitedeveloper431@gmail.com"
             className="text-white hover:underline"

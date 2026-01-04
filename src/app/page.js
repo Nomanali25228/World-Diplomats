@@ -21,8 +21,8 @@ export default function Home() {
 <WorldDiplomats />
 <Ourstages />
 <EligibilityCriteria />
-<OurYouthLeaders />
 <BecomeDiplomets />
+<OurYouthLeaders />
 <OurImpact />
 <Gallery />
 {/* <ContactUS /> */}

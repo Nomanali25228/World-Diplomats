@@ -35,7 +35,8 @@ export function DestinationProvider({ children }) {
   const [destination, setDestination] = useState('');
   const [locked, setLocked] = useState(false);
   const [destinations, setDestinations] = useState(initialDestinations);
-
+const [amounts,setAmounts] = useState(0)
+  const [check,setCheck] = useState("");
   const selectDestination = (dest, lock = true) => {
     setDestination(dest || '');
     setLocked(!!lock);
@@ -56,7 +57,7 @@ export function DestinationProvider({ children }) {
   const getDates = (key) => destinations[key] || null;
 
   return (
-    <DestinationContext.Provider value={{ destination, locked, selectDestination, clearDestination, destinations, updateDestinationDates, getDates }}>
+    <DestinationContext.Provider value={{ check, setCheck, amounts, setAmounts, destination, locked, selectDestination, clearDestination, destinations, updateDestinationDates, getDates }}>
       {children}
     </DestinationContext.Provider>
   );

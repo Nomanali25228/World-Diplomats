@@ -23,7 +23,7 @@ const Gallery = () => {
     setActiveIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
 
   return (
-    <section className="py-12 px-4 sm:px-8 max-w-7xl mx-auto">
+    <section className="py-12 px-4 sm:px-8 max-w-[1450px] mx-auto">
 
       {/* HEADING */}
       <div className="text-center mb-10">

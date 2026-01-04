@@ -33,7 +33,7 @@ const EligibilityCriteria = () => {
   ];
 
   return (
-    <section className="w-full bg-[#ffffff] pb-12 px-4">
+    <section className="w-full bg-[#ffffff] pt-15 pb-12 px-4">
 
       {/* ================= TITLE ================= */}
       <div className="text-center mb-12">

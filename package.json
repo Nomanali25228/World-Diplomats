@@ -13,6 +13,8 @@
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.4.2",
     "@react-three/rapier": "^2.2.0",
+    "@stripe/react-stripe-js": "^5.4.1",
+    "@stripe/stripe-js": "^8.6.0",
     "@uiw/react-markdown-editor": "^6.1.4",
     "aos": "^2.3.4",
     "axios": "^1.13.2",
@@ -44,6 +46,7 @@
     "react-toastify": "^11.0.5",
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1",
+    "stripe": "^20.1.0",
     "three": "^0.182.0"
   },
   "devDependencies": {

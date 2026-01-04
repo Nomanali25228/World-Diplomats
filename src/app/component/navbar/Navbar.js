@@ -8,8 +8,8 @@ import {
   AiOutlineClose,
 } from "react-icons/ai";
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from 'next/navigation';
-import { useDestination } from '@/app/context/DestinationContext';
+import { useRouter } from "next/navigation";
+import { useDestination } from "@/app/context/DestinationContext";
 import { usePathname } from "next/navigation";
 import logo from "../../../../public/img/logo3.png";
 
@@ -22,10 +22,11 @@ function Navbar() {
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
   const [mobileDropdownOpen2, setMobileDropdownOpen2] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showNav, setShowNav] = useState(true);
 
-  // ✅ FIX: useRef instead of normal variables
   const dropdownTimeout1 = useRef(null);
   const dropdownTimeout2 = useRef(null);
+  const prevScrollY = useRef(0);
 
   // ---------------- Desktop Hover Handlers ----------------
   const handleMouseEnter1 = () => {
@@ -50,16 +51,44 @@ function Navbar() {
     }, 400);
   };
 
-  // ---------------- Scroll Effect ----------------
+  // ---------------- Background on scroll ----------------
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
-    // run once on mount to set initial state (handles refresh when page already scrolled)
     handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ---------------- Lock body scroll on mobile menu ----------------
+  // ---------------- FIXED Hide / Show Logic ----------------
+  useEffect(() => {
+    const handleScrollDirection = () => {
+      const currentScrollY = window.scrollY;
+
+      // page top → always show
+      if (currentScrollY === 0) {
+        setShowNav(true);
+        prevScrollY.current = 0;
+        return;
+      }
+
+      // scroll down → hide
+      if (currentScrollY > prevScrollY.current) {
+        setShowNav(false);
+      }
+      // scroll up → show
+      else {
+        setShowNav(true);
+      }
+
+      prevScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScrollDirection, { passive: true });
+    return () =>
+      window.removeEventListener("scroll", handleScrollDirection);
+  }, []);
+
+  // ---------------- Lock body scroll on mobile ----------------
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "auto";
     return () => {
@@ -68,7 +97,6 @@ function Navbar() {
   }, [mobileMenuOpen]);
 
   // ---------------- Active link styles ----------------
-
   const linkClass = (href) =>
     `relative text-white hover:text-[#60A5FA] transition
      after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-[#60A5FA] after:transition-all
@@ -84,14 +112,12 @@ function Navbar() {
     }`;
 
   const mobileDropdownLinkClass = (href) =>
-  `block py-2 px-4 rounded transition-colors
-   ${
-     pathname === href
-       ? "bg-[#1a2a9c] text-white"
-       : "text-gray-200 hover:bg-[#e3f2fd] hover:text-[#0d1b4c]"
-   }`;
-
-    
+    `block py-2 px-4 rounded transition-colors
+     ${
+       pathname === href
+         ? "bg-[#1a2a9c] text-white"
+         : "text-gray-200 hover:bg-[#e3f2fd] hover:text-[#0d1b4c]"
+     }`;
 
   const destinations = [
     "/Destinations",
@@ -101,6 +127,7 @@ function Navbar() {
     "/London",
     "/Riyadh",
   ];
+
   const isDestinationActive = destinations.some((d) =>
     pathname?.startsWith(d)
   );
@@ -114,25 +141,23 @@ function Navbar() {
   const { selectDestination, clearDestination } = useDestination();
 
   const PATH_TO_DEST = {
-    '/Istanbul-Turkey': 'Istanbul, Turkey',
-    '/Dubai-UAE': 'Dubai, UAE',
-    '/Kuala-Lumpur-Malaysia': 'Kuala Lumpur, Malaysia',
-    '/London-UK': 'London, UK',
-    '/Riyadh-Saudi-Arabia': 'Riyadh, Saudi Arabia',
+    "/Istanbul-Turkey": "Istanbul, Turkey",
+    "/Dubai-UAE": "Dubai, UAE",
+    "/Kuala-Lumpur-Malaysia": "Kuala Lumpur, Malaysia",
+    "/London-UK": "London, UK",
+    "/Riyadh-Saudi-Arabia": "Riyadh, Saudi Arabia",
   };
 
   const handleRegisterNow = (e) => {
-    // if current path maps to a destination, set it and navigate
     const dest = PATH_TO_DEST[pathname];
     if (dest) {
       e.preventDefault && e.preventDefault();
       selectDestination(dest, true);
-      router.push('/Register-Now');
+      router.push("/Register-Now");
       return;
     }
-    // otherwise clear any previous selection so dropdown shows, then navigate
     clearDestination();
-    router.push('/Register-Now');
+    router.push("/Register-Now");
   };
 
   const parentClass = (active) =>
@@ -143,12 +168,15 @@ function Navbar() {
          ? "text-[#60A5FA] after:w-full"
          : "text-white after:w-0 hover:after:w-full hover:text-[#60A5FA]"
      }`;
-
   return (
     <nav
-  className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-    isScrolled ? "bg-[#071429f8]  text-white shadow-md" : "bg-transparent text-white"
-  }`}
+    className={`fixed top-0 w-full z-[999] transition-transform duration-300 ${
+        showNav ? "translate-y-0" : "-translate-y-full"
+      } ${
+        isScrolled
+          ? "bg-[#071429f8] text-white shadow-md"
+          : "bg-transparent text-white"
+      }`}
 >
   <div className="container mx-auto flex items-center justify-between px-2 py-4 lg:py-2">
     {/* Logo */}
@@ -276,6 +304,7 @@ function Navbar() {
 
     {/* Desktop Register Button */}
     <div className="hidden lg:block">
+      <Link href="/Register-Now">
       <button
         onClick={handleRegisterNow}
         className={`cursor-pointer font-semibold py-1 px-4 rounded-full border-2 border-blue-600 transition ${
@@ -286,6 +315,7 @@ function Navbar() {
       >
         Register Now
       </button>
+      </Link>
     </div>
 
     {/* Mobile Top Bar */}
@@ -313,109 +343,62 @@ function Navbar() {
   </div>
 
   {/* Mobile Menu */}
-  {mobileMenuOpen && (
-  <div className="lg:hidden fixed top-4 bottom-4 left-4 right-4 z-50 bg-[#0c1629] text-white p-6 rounded-xl shadow-lg overflow-y-auto">
-    <div className="flex justify-end">
-      <button onClick={() => setMobileMenuOpen(false)}>
-        <AiOutlineClose className="w-6 h-6 text-white" />
-      </button>
+{/* Mobile Menu */}
+{mobileMenuOpen && (
+  <div className="lg:hidden fixed inset-0 z-50 flex justify-center items-start pt-6 px-4">
+  {/* inset-0 = पूरी स्क्रीन, px-4 = साइड्स से margin */}
+    <div className="w-full max-w-md bg-[#0c1629] text-white rounded-lg p-6 h-[calc(100vh-2.5rem)] overflow-y-auto shadow-xl">
+      {/* Close Button */}
+      <div className="flex justify-end mb-4">
+        <button onClick={() => setMobileMenuOpen(false)}>
+          <AiOutlineClose className="w-6 h-6 text-white" />
+        </button>
+      </div>
+
+      <nav className="space-y-4">
+        <Link href="/" className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors">Home</Link>
+
+        {/* Destinations */}
+        <button
+          className="flex justify-between w-full items-center py-2 px-4 rounded hover:bg-[#1e2a4d]"
+          onClick={() => setMobileDropdownOpen2(!mobileDropdownOpen2)}
+        >
+          <span>Destinations</span>
+          {mobileDropdownOpen2 ? <AiOutlineUp /> : <AiOutlineDown />}
+        </button>
+        {mobileDropdownOpen2 && (
+          <div className="ml-4 space-y-2">
+            <Link href="/Istanbul-Turkey" className={mobileDropdownLinkClass("/Istanbul-Turkey")}>Istanbul, Turkey</Link>
+            <Link href="/Dubai-UAE" className={mobileDropdownLinkClass("/Dubai-UAE")}>Dubai, UAE</Link>
+            <Link href="/Kuala-Lumpur-Malaysia" className={mobileDropdownLinkClass("/Kuala-Lumpur-Malaysia")}>Kuala Lumpur, Malaysia</Link>
+            <Link href="/London-UK" className={mobileDropdownLinkClass("/London-UK")}>London, UK</Link>
+            <Link href="/Riyadh-Saudi-Arabia" className={mobileDropdownLinkClass("/Riyadh-Saudi-Arabia")}>Riyadh, Saudi Arabia</Link>
+          </div>
+        )}
+
+        <Link href="/Blogs/1" className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors">Blog</Link>
+
+        {/* Information */}
+        <button
+          className="flex justify-between w-full items-center py-2 px-4 rounded hover:bg-[#1e2a4d]"
+          onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
+        >
+          <span>Information</span>
+          {mobileDropdownOpen ? <AiOutlineUp /> : <AiOutlineDown />}
+        </button>
+        {mobileDropdownOpen && (
+          <div className="ml-4 space-y-2">
+            <Link href="/Pricing" className={mobileDropdownLinkClass("/Pricing")}>Pricing</Link>
+            <Link href="/FAQs" className={mobileDropdownLinkClass("/FAQs")}>FAQs</Link>
+            <Link href="/Terms&Conditions" className={mobileDropdownLinkClass("/Terms&Conditions")}>Terms & Conditions</Link>
+            <Link href="/Privacy-Policy" className={mobileDropdownLinkClass("/Privacy-Policy")}>Privacy Policy</Link>
+          </div>
+        )}
+
+        <Link href="/About-US" className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors">About Us</Link>
+        <Link href="/Scholarships" className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors">Scholarships</Link>
+      </nav>
     </div>
-
-    <nav className="mt-6 space-y-4">
-      <Link
-        href="/"
-        className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors"
-      >
-        Home
-      </Link>
-
-      {/* Destinations Mobile */}
-      <button
-        className={`flex justify-between w-full items-center py-2 px-4 rounded relative transition-colors ${
-          isDestinationActive
-            ? "text-blue-500 after:w-full"
-            : "text-white after:w-0 hover:after:w-full"
-        } hover:bg-[#1e2a4d] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-blue-500 after:transition-all`}
-        onClick={() => setMobileDropdownOpen2(!mobileDropdownOpen2)}
-      >
-        <span>Destinations</span>
-        {mobileDropdownOpen2 ? <AiOutlineUp /> : <AiOutlineDown />}
-      </button>
-
-      {mobileDropdownOpen2 && (
-        <div className="ml-4 space-y-2">
-          <Link href="/Destinations" className={mobileDropdownLinkClass("/Destinations")}>
-            Destinations
-          </Link>
-          <Link href="/Istanbul-Turkey" className={mobileDropdownLinkClass("/Istanbul-Turkey")}>
-            Istanbul, Turkey
-          </Link>
-          <Link href="/Dubai-UAE" className={mobileDropdownLinkClass("/Dubai-UAE")}>
-            Dubai, UAE
-          </Link>
-          <Link href="/Kuala-Lumpur-Malaysia" className={mobileDropdownLinkClass("/Kuala-Lumpur-Malaysia")}>
-            Kuala Lumpur, Malaysia
-          </Link>
-          <Link href="/London-UK" className={mobileDropdownLinkClass("/London-UK")}>
-            London, UK
-          </Link>
-          <Link href="/Riyadh-Saudi-Arabia" className={mobileDropdownLinkClass("/Riyadh-Saudi-Arabia")}>
-            Riyadh, Saudi Arabia
-          </Link>
-        </div>
-      )}
-
-      <Link
-        href="/Blog"
-        className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors"
-      >
-        Blog
-      </Link>
-
-      {/* Information Mobile (expandable) */}
-      <button
-        className={`flex justify-between w-full items-center py-2 px-4 rounded relative transition-colors ${
-          isInfoActive
-            ? "text-blue-500 after:w-full"
-            : "text-white after:w-0 hover:after:w-full"
-        } hover:bg-[#1e2a4d] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-blue-500 after:transition-all`}
-        onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
-      >
-        <span>Information</span>
-        {mobileDropdownOpen ? <AiOutlineUp /> : <AiOutlineDown />}
-      </button>
-
-      {mobileDropdownOpen && (
-        <div className="ml-4 space-y-2">
-          <Link href="/Pricing" className={mobileDropdownLinkClass("/Pricing")}>
-            Pricing
-          </Link>
-          <Link href="/FAQs" className={mobileDropdownLinkClass("/FAQs")}>
-            FAQs
-          </Link>
-          <Link href="/Terms&Conditions" className={mobileDropdownLinkClass("/Terms&Conditions")}>
-            Terms & Conditions
-          </Link>
-          <Link href="/Privacy-Policy" className={mobileDropdownLinkClass("/Privacy-Policy")}>
-            Privacy Policy
-          </Link>
-        </div>
-      )}
-
-      <Link
-        href="/About-US"
-        className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors"
-      >
-        About Us
-      </Link>
-
-      <Link
-        href="/Scholarships"
-        className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors"
-      >
-        Scholarships
-      </Link>
-    </nav>
   </div>
 )}
 
