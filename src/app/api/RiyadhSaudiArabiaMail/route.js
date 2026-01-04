@@ -352,7 +352,7 @@ export async function POST(request) {
 
                                            <tr>
     <td align="center" valign="bottom">
-        <a href="http://localhost:3000/Saudipayment/1?userid=${id}" target="_blank" style="text-decoration:none;">
+        <a href="https://www.worlddiplomats.org/Saudipayment/1?userid=${id}" target="_blank" style="text-decoration:none;">
             <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);
                   color:#fff;padding:12px 24px;border-radius:14px;font-weight:600;">
                 CHOOSE PLAN
@@ -392,7 +392,7 @@ export async function POST(request) {
 </tr>
                                             <tr>
                                                 <td align="center" valign="bottom">
-                                                    <a href="http://localhost:3000/Saudipayment/2?userid=${id}" target="_blank" style="text-decoration:none;">
+                                                    <a href="https://www.worlddiplomats.org/Saudipayment/2?userid=${id}" target="_blank" style="text-decoration:none;">
                                                         <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);
                                                               color:#fff;padding:12px 24px;border-radius:14px;font-weight:600;">
                                                             CHOOSE PLAN
@@ -420,7 +420,7 @@ export async function POST(request) {
 
                                            <tr>
                                             <td align="center" valign="bottom">
-                                                <a href="http://localhost:3000/Saudipayment/3?userid=${id}" target="_blank" style="text-decoration:none;">
+                                                <a href="https://www.worlddiplomats.org/Saudipayment/3?userid=${id}" target="_blank" style="text-decoration:none;">
                                                     <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);
                                                           color:#fff;padding:12px 24px;border-radius:14px;font-weight:600;">
                                                         CHOOSE PLAN
