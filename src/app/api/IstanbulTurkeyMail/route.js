@@ -3,8 +3,8 @@ import nodemailer from 'nodemailer';
 import puppeteer from 'puppeteer'; // Install puppeteer using npm
 
 export async function POST(request) {
-    const username = process.env.NEXT_PUBLIC_SMTP_USERNAME;
-    const password = process.env.NEXT_PUBLIC_SMTP_PASSWORD;
+    const username = process.env.SMTP_USERNAME;
+    const password = process.env.SMTP_PASSWORD;
 
     try {
                 const { email, name, data, iduser, destination } = await request.json();

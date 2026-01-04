@@ -12,12 +12,12 @@ async function sendEmail(to, subject, text) {
     port: 587,
     secure: false,
     auth: {
-      user: process.env.NEXT_PUBLIC_SMTP_USERNAME,
-      pass: process.env.NEXT_PUBLIC_SMTP_PASSWORD,
+      user: process.env.SMTP_USERNAME,
+      pass: process.env.SMTP_PASSWORD,
     },
   });
 
-  const mailOptions = { from: process.env.NEXT_PUBLIC_SMTP_USERNAME, to, subject, text };
+  const mailOptions = { from: process.env.SMTP_USERNAME, to, subject, text };
 
   try {
     await transporter.sendMail(mailOptions);
