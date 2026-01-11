@@ -54,7 +54,7 @@ const BecomeDiplomets = () => {
                 </h2>
 
                 <p className="text-gray-200 text-sm sm:text-base lg:text-lg mt-4 leading-relaxed">
-                  Join the world's most prestigious youth diplomatic network
+                  Join the world{"'"}s most prestigious youth diplomatic network
                   and connect with leaders from over 150+ countries.
                 </p>
               </div>

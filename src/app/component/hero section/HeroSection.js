@@ -113,28 +113,30 @@ const HeroSection = () => {
   }, []);
 
   useEffect(() => {
-    const currentCity = cities[currentCityIndex];
-    let timer;
+  const currentCity = cities[currentCityIndex];
+  let timer;
 
-    if (!isDeleting && charIndex < currentCity.length) {
-      timer = setTimeout(() => {
-        setCurrentText(prev => prev + currentCity[charIndex]);
-        setCharIndex(prev => prev + 1);
-      }, 70);
-    } else if (isDeleting && charIndex > 0) {
-      timer = setTimeout(() => {
-        setCurrentText(prev => prev.slice(0, -1));
-        setCharIndex(prev => prev - 1);
-      }, 50);
-    } else if (!isDeleting && charIndex === currentCity.length) {
-      timer = setTimeout(() => setIsDeleting(true), 1000);
-    } else if (isDeleting && charIndex === 0) {
+  if (!isDeleting && charIndex < currentCity.length) {
+    timer = setTimeout(() => {
+      setCurrentText(prev => prev + currentCity[charIndex]);
+      setCharIndex(prev => prev + 1);
+    }, 70);
+  } else if (isDeleting && charIndex > 0) {
+    timer = setTimeout(() => {
+      setCurrentText(prev => prev.slice(0, -1));
+      setCharIndex(prev => prev - 1);
+    }, 50);
+  } else if (!isDeleting && charIndex === currentCity.length) {
+    timer = setTimeout(() => setIsDeleting(true), 1000);
+  } else if (isDeleting && charIndex === 0) {
+    timer = setTimeout(() => {
       setIsDeleting(false);
       setCurrentCityIndex(prev => (prev + 1) % cities.length);
-    }
+    }, 500);
+  }
 
-    return () => clearTimeout(timer);
-  }, [charIndex, isDeleting, currentCityIndex]);
+  return () => clearTimeout(timer);
+}, [charIndex, isDeleting, currentCityIndex]);
 
   return (
     <>
