@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 
 const CountdownTimer = ({ targetDate }) => {
@@ -12,7 +12,7 @@ const CountdownTimer = ({ targetDate }) => {
         completed: false,
     });
 
-    const calculateTimeLeft = () => {
+    const calculateTimeLeft = useCallback(() => {
         const now = new Date();
         const target = new Date(targetDate);
         let difference = target - now;
@@ -27,19 +27,19 @@ const CountdownTimer = ({ targetDate }) => {
         const seconds = Math.floor((difference / 1000) % 60);
 
         return { days, hours, minutes, seconds, completed: false };
-    };
+    }, [targetDate]);
 
     useEffect(() => {
-        // Initial calculation
-        setTimeLeft(calculateTimeLeft());
-
         // Update every second
         const timer = setInterval(() => {
             setTimeLeft(calculateTimeLeft());
         }, 1000);
 
+        // Initial calculation
+        setTimeLeft(calculateTimeLeft());
+
         return () => clearInterval(timer);
-    }, [targetDate]);
+    }, [calculateTimeLeft]);
 
     if (timeLeft.completed) {
         return (
