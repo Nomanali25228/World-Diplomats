@@ -55,7 +55,7 @@ const DestinationQuestions = () => {
 
           {/* Buttons */}
           <div className="relative z-10 flex flex-col sm:flex-row justify-center gap-4">
-            
+
             {/* Delegation Form Button */}
             <motion.div
               whileHover={{ scale: 1.05 }}
@@ -63,7 +63,7 @@ const DestinationQuestions = () => {
             >
               <Link href="/DelegationForm">
                 <button className="inline-flex cursor-pointer items-center gap-2 px-7 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 transition rounded-lg text-white text-sm sm:text-base font-medium shadow-lg">
-                  <FaComments /> Talk with us
+                  <FaComments /> Register with a delegation
                 </button>
               </Link>
             </motion.div>
@@ -79,7 +79,7 @@ const DestinationQuestions = () => {
                 rel="noopener noreferrer"
               >
                 <button className="inline-flex cursor-pointer items-center gap-2 px-7 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 transition rounded-lg text-white text-sm sm:text-base font-medium shadow-lg">
-                  <FaWhatsapp /> Chat on WhatsApp
+                  <FaWhatsapp /> Talk with us
                 </button>
               </a>
             </motion.div>

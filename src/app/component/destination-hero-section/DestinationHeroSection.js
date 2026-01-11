@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import { useDestination } from '@/app/context/DestinationContext';
 import { motion, AnimatePresence } from "framer-motion";
+import CountdownTimer from "../countdown-timer/CountdownTimer";
 
 const DestinationHeroSection = ({
   title,
@@ -15,57 +16,8 @@ const DestinationHeroSection = ({
   bgImage,
   registerlinke,
   pricinglink,
+  targetDate, // New prop for countdown
 }) => {
-  const targetDate = new Date("2026-03-29T23:59:59");
-  const [timeLeft, setTimeLeft] = useState({
-    months: 0,
-    weeks: 0,
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-    completed: false,
-  });
-
-  const calculateTimeLeft = () => {
-    const now = new Date();
-    let difference = targetDate - now;
-
-    if (difference <= 0) {
-      return { months: 0, weeks: 0, days: 0, hours: 0, minutes: 0, seconds: 0, completed: true };
-    }
-
-    let seconds = Math.floor((difference / 1000) % 60);
-    let minutes = Math.floor((difference / 1000 / 60) % 60);
-    let hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-    let totalDays = Math.floor(difference / (1000 * 60 * 60 * 24));
-
-    let weeks = Math.floor(totalDays / 7);
-    let days = totalDays % 7;
-
-    let months = 0;
-    if (weeks >= 4) {
-      months = Math.floor(weeks / 4);
-      weeks = weeks % 4;
-    }
-
-    return { months, weeks, days, hours, minutes, seconds, completed: false };
-  };
-
-  useEffect(() => {
-    const timer = setInterval(() => setTimeLeft(calculateTimeLeft()), 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const units = [
-    { label: "M", value: timeLeft.months },
-    { label: "W", value: timeLeft.weeks },
-    { label: "D", value: timeLeft.days },
-    { label: "H", value: timeLeft.hours },
-    { label: "M", value: timeLeft.minutes },
-    { label: "S", value: timeLeft.seconds },
-  ];
-
   const router = useRouter();
   const { selectDestination } = useDestination();
 
@@ -98,8 +50,8 @@ const DestinationHeroSection = ({
       {/* Content */}
       <div className="relative z-10 w-full px-4 sm:px-10 lg:px-20 text-white flex flex-col justify-center min-h-screen">
 
-        
-      
+
+
 
         {/* Heading */}
         <motion.div
@@ -122,28 +74,9 @@ const DestinationHeroSection = ({
           </h1>
 
           {/* Dates */}
-        <p className="mt-4 sm:mt-5 text-base sm:text-lg md:text-xl lg:text-2xl text-blue-200 tracking-widest uppercase">
-  {dates}
-</p>
-
-
-        {/* Countdown Cards */}
-
-
-{/* <div className="mt-3 flex flex-wrap gap-3 sm:gap-4 text-white font-semibold text-sm sm:text-base md:text-lg justify-center sm:justify-start">
-  {timeLeft.completed ? (
-    <span className="text-lg sm:text-xl md:text-2xl">Event Started!</span>
-  ) : (
-    <>
-      {timeLeft.months > 0 && <span>{timeLeft.months} Month{timeLeft.months > 1 ? "s" : ""}</span>}
-      {timeLeft.weeks > 0 && <span>{timeLeft.weeks} Week{timeLeft.weeks > 1 ? "s" : ""}</span>}
-      {timeLeft.days > 0 && <span>{timeLeft.days} Day{timeLeft.days > 1 ? "s" : ""}</span>}
-      <span>{timeLeft.hours.toString().padStart(2, "0")}h</span>
-      <span>{timeLeft.minutes.toString().padStart(2, "0")}m</span>
-      <span>{timeLeft.seconds.toString().padStart(2, "0")}s</span>
-    </>
-  )}
-</div> */}
+          <p className="mt-4 sm:mt-5 text-base sm:text-lg md:text-xl lg:text-2xl text-blue-200 tracking-widest uppercase">
+            {dates}
+          </p>
 
 
 
@@ -154,7 +87,7 @@ const DestinationHeroSection = ({
           </p>
 
           {/* Actions */}
-        <div className="
+          <div className="
   mt-8 sm:mt-10
   flex flex-col sm:flex-row
   gap-4 sm:gap-8
@@ -162,11 +95,11 @@ const DestinationHeroSection = ({
   justify-center sm:justify-start
 ">
 
-  {/* Registration */}
-  <Link
-    href={registerlinke}
-    onClick={handleRegisterClick}
-    className="
+            {/* Registration */}
+            <Link
+              href={registerlinke}
+              onClick={handleRegisterClick}
+              className="
       group
       relative
       text-sm sm:text-base
@@ -177,27 +110,27 @@ const DestinationHeroSection = ({
       transition
      
     "
-  >
-    <span className="relative z-10">
-      Registrations →
-    </span>
+            >
+              <span className="relative z-10">
+                Registrations →
+              </span>
 
-    {/* underline */}
-    <span
-      className="
+              {/* underline */}
+              <span
+                className="
         absolute left-4 right-4 -bottom-1 h-[2px]
         bg-blue-400
         scale-x-0 group-hover:scale-x-100
         origin-left
         transition-transform duration-300
       "
-    />
-  </Link>
+              />
+            </Link>
 
-  {/* Pricing */}
-  <Link
-    href={pricinglink}
-    className="
+            {/* Pricing */}
+            <Link
+              href={pricinglink}
+              className="
       group
       relative
       text-sm sm:text-base
@@ -208,24 +141,24 @@ const DestinationHeroSection = ({
       transition
       
     "
-  >
-    <span className="relative z-10">
-      Pricing & Details →
-    </span>
+            >
+              <span className="relative z-10">
+                Pricing & Details →
+              </span>
 
-    {/* underline */}
-    <span
-      className="
+              {/* underline */}
+              <span
+                className="
         absolute left-4 right-4 -bottom-1 h-[2px]
         bg-white/70
         scale-x-0 group-hover:scale-x-100
         origin-left
         transition-transform duration-300
       "
-    />
-  </Link>
+              />
+            </Link>
 
-</div>
+          </div>
 
         </motion.div>
       </div>

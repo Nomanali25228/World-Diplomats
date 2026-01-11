@@ -4,7 +4,7 @@ import DestinationHeroSection from '../component/destination-hero-section/Destin
 import DestinationOverview from '../component/destination-overview/DestinationOverview'
 import DestinationParticipantsExpected from '../component/destination-participants-expected/DestinationParticipantsExpected'
 import istanbulbgImage from "../../../public/img/Istanbul-Hero-Section.jpg";
-import IstanbulcityImg from "../../../public/img/Istanbul-Participants-Expected.jpg"; 
+import IstanbulcityImg from "../../../public/img/Istanbul-Participants-Expected.jpg";
 import DestinationPrice from '../component/destination-price/DestinationPrice'
 import DestinationCityTour from '../component/destination-city-tour/DestinationCityTour'
 import IstanbulImportantDates from '../component/istanbul-important-dates/IstanbulImportantDates'
@@ -19,8 +19,9 @@ import hotelx5 from "../../../public/img/hotelistanbul5.jpg";
 import taksimImg from "../../../public/img/IstanbulCityTour1.jpg";
 import arastaImg from "../../../public/img/IstanbulCityTour2.jpg";
 import bosporusImg from "../../../public/img/IstanbulCityTour3.jpg";
-import DestinationSeriesofEveent from '../component/destination-seriesofeveent/DestinationSeriesofEveent'
+import DestinationSeriesofEveent from '../component/destination-seriesofeveent/DestinationSeriesofEveent';
 import culturalImage from "../../../public/img/culturalglobalvillageTurkey.jpg";
+import CountdownSection from '../component/countdown-section/CountdownSection';
 
 
 
@@ -35,6 +36,7 @@ const page = () => {
     bgImage: istanbulbgImage,
     registerlinke: "/Register-Now?destination=Istanbul,%20Turkey",
     pricinglink: "#pricing",
+    targetDate: "2026-03-26T00:00:00", // Event start date
   }
 
   const delegatesData = {
@@ -51,28 +53,28 @@ const page = () => {
     subtitle2: "This year's agenda invites delegates to explore innovative frameworks for safeguarding human rights, promoting sustainable peace, and building resilient health systems.",
     cardimage: istanbulbgImage,
   };
-   const DestinationPriceData = {
+  const DestinationPriceData = {
     tital: "Istanbul Turkey",
     Basic: "$289",
     DelegateAccommodationExperience: "$498",
     DelegatefullExperience: "$568",
-   Experience1: [
-    "✔ Everything in Delegate Accommodation Experience",
-    "✔ Istanbul City Tour",
-    "✔ Bosphorus Rooftop Lunch Tour",
-    "✔ Cruise Trip & Dinner at Bosphorus"
-  ],
+    Experience1: [
+      "✔ Everything in Delegate Accommodation Experience",
+      "✔ Istanbul City Tour",
+      "✔ Bosphorus Rooftop Lunch Tour",
+      "✔ Cruise Trip & Dinner at Bosphorus"
+    ],
 
   };
 
-   const DestinationCityTourData = {
-      title1: "Taksim Square",
-      image1: taksimImg,
-      title2: "Arasta Bazar",
-      image2: arastaImg,
-      title3: "Bosporus Cruise Dinner",
-      image3: bosporusImg,
-    };
+  const DestinationCityTourData = {
+    title1: "Taksim Square",
+    image1: taksimImg,
+    title2: "Arasta Bazar",
+    image2: arastaImg,
+    title3: "Bosporus Cruise Dinner",
+    image3: bosporusImg,
+  };
   return (
     <div>
       <Navbar />
@@ -86,8 +88,11 @@ const page = () => {
         bgImage={heroData.bgImage}
         registerlinke={heroData.registerlinke}  // match component prop
         pricinglink={heroData.pricinglink}      // match component prop
+        targetDate={heroData.targetDate}        // countdown date
       />
 
+      {/* Countdown Section */}
+      <CountdownSection targetDate={heroData.targetDate} />
 
       {/* Pass props to Delegates Attending */}
       <DestinationOverview
@@ -102,14 +107,14 @@ const page = () => {
         ParticipantsExpected={participantsData.ParticipantsExpected}
         subtitle1={participantsData.subtitle1}
         subtitle2={participantsData.subtitle2}
-        cardimage={participantsData.cardimage}  
+        cardimage={participantsData.cardimage}
       />
 
-      <DestinationSeriesofEveent  culturImagee={culturalImage} />
+      <DestinationSeriesofEveent culturImagee={culturalImage} />
 
 
       <DestinationPrice
-            
+
         tital={DestinationPriceData.tital}
         Basic={DestinationPriceData.Basic}
         DelegateAccommodationExperience={DestinationPriceData.DelegateAccommodationExperience}
@@ -117,17 +122,17 @@ const page = () => {
         Experience1={DestinationPriceData.Experience1}
       />
 
-  <DestinationCityTour 
-              title1={DestinationCityTourData.title1}
-              image1={DestinationCityTourData.image1}
-              title2={DestinationCityTourData.title2}
-              image2={DestinationCityTourData.image2}
-              title3={DestinationCityTourData.title3}
-              image3={DestinationCityTourData.image3}
-             />
-      <IstanbulImportantDates  />
+      <DestinationCityTour
+        title1={DestinationCityTourData.title1}
+        image1={DestinationCityTourData.image1}
+        title2={DestinationCityTourData.title2}
+        image2={DestinationCityTourData.image2}
+        title3={DestinationCityTourData.title3}
+        image3={DestinationCityTourData.image3}
+      />
+      <IstanbulImportantDates />
 
-       <DestinationMap
+      <DestinationMap
         bgimg5={hotelx1}
         img1={hotelx4}
         img2={hotelx3}

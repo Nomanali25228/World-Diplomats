@@ -84,10 +84,27 @@ export default function Home() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
 
+      // Download PDF through proxy to avoid CORS issues
+      const downloadRes = await fetch('/api/download-invoice', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ invoicePdfUrl: data.invoicePdf }),
+      });
+
+      if (!downloadRes.ok) {
+        throw new Error('Failed to download invoice');
+      }
+
+      // Create blob and download
+      const blob = await downloadRes.blob();
+      const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
-      link.href = data.invoicePdf;
-      link.download = 'invoice.pdf';
+      link.href = url;
+      link.download = `invoice-${Date.now()}.pdf`;
+      document.body.appendChild(link);
       link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
 
       toast.success('Invoice downloaded successfully!');
     } catch {

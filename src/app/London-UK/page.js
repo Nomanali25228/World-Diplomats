@@ -18,8 +18,9 @@ import taksimImg from "../../../public/img/LondonCityTour1.jpeg";
 import arastaImg from "../../../public/img/LondonCityTour2.jpg";
 import bosporusImg from "../../../public/img/LondonCityTour3.jpeg";
 import LondonImportantDates from '../component/londonimportantdates/LondonImportantDates'
-import DestinationSeriesofEveent from '../component/destination-seriesofeveent/DestinationSeriesofEveent'
+import DestinationSeriesofEveent from '../component/destination-seriesofeveent/DestinationSeriesofEveent';
 import culturalImage from "../../../public/img/CulturalGlobalVillagelondon.jpg";
+import CountdownSection from '../component/countdown-section/CountdownSection';
 
 
 
@@ -34,6 +35,7 @@ const page = () => {
     bgImage: LondonbgImage,
     registerlinke: "/Register-Now?destination=London,%20UK",
     pricinglink: "#pricing",
+    targetDate: "2026-09-15T00:00:00", // Event start date (placeholder - TBD)
   }
 
   const delegatesData = {
@@ -55,11 +57,11 @@ const page = () => {
     Basic: "$859",
     DelegateAccommodationExperience: "$1191",
     DelegatefullExperience: "$1628",
-        Experience1: [
-    "✔ Everything in Delegate Accommodation Experience",
-    "✔ London city tour",
+    Experience1: [
+      "✔ Everything in Delegate Accommodation Experience",
+      "✔ London city tour",
 
-  ]
+    ]
   };
 
   const DestinationCityTourData = {
@@ -84,8 +86,11 @@ const page = () => {
         bgImage={heroData.bgImage}
         registerlinke={heroData.registerlinke}  // match component prop
         pricinglink={heroData.pricinglink}      // match component prop
+        targetDate={heroData.targetDate}        // countdown date
       />
 
+      {/* Countdown Section */}
+      <CountdownSection targetDate={heroData.targetDate} />
 
       {/* Pass props to Delegates Attending */}
       <DestinationDelegatesAttending
@@ -102,9 +107,9 @@ const page = () => {
         subtitle2={participantsData.subtitle2}
         cardimage={participantsData.cardimage}
       />
-      
-      <DestinationSeriesofEveent  culturImagee={culturalImage} />
-      
+
+      <DestinationSeriesofEveent culturImagee={culturalImage} />
+
 
       <DestinationPrice
         tital={DestinationPriceData.tital}
@@ -113,29 +118,29 @@ const page = () => {
         DelegatefullExperience={DestinationPriceData.DelegatefullExperience}
         Experience1={DestinationPriceData.Experience1}
       />
-            <DestinationCityTour 
-              title1={DestinationCityTourData.title1}
-              image1={DestinationCityTourData.image1}
-              title2={DestinationCityTourData.title2}
-              image2={DestinationCityTourData.image2}
-              title3={DestinationCityTourData.title3}
-              image3={DestinationCityTourData.image3}
-             />
-      
+      <DestinationCityTour
+        title1={DestinationCityTourData.title1}
+        image1={DestinationCityTourData.image1}
+        title2={DestinationCityTourData.title2}
+        image2={DestinationCityTourData.image2}
+        title3={DestinationCityTourData.title3}
+        image3={DestinationCityTourData.image3}
+      />
 
-      <LondonImportantDates/>
 
-      
-             <DestinationMap
-              bgimg5={hotelx1}
-              img1={hotelx4}
-              img2={hotelx3}
-              img3={hotelx2}
-              img4={hotelx5}
-              map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2073.8410809691873!2d-0.44376192414652993!3d51.48152681259408!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48767248b4db8263%3A0x13eaaf45e2a032b0!2sRadisson%20Blu%20Hotel%2C%20London%20Heathrow!5e1!3m2!1sen!2sus!4v1766936521239!5m2!1sen!2sus"
-              hname="Radisson Blu Hotel, London "
-              disc="Radisson Blu Hotel, London Heathrow is unique from the outset. Perfect for weekend stays, relaxing breaks, and business travel, the hotel features 464 bedrooms and suites, two restaurants, as well as a health club with state-of-the-art Technogym equipment, perfect for morning energizing and evening downtime"
-            />
+      <LondonImportantDates />
+
+
+      <DestinationMap
+        bgimg5={hotelx1}
+        img1={hotelx4}
+        img2={hotelx3}
+        img3={hotelx2}
+        img4={hotelx5}
+        map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2073.8410809691873!2d-0.44376192414652993!3d51.48152681259408!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48767248b4db8263%3A0x13eaaf45e2a032b0!2sRadisson%20Blu%20Hotel%2C%20London%20Heathrow!5e1!3m2!1sen!2sus!4v1766936521239!5m2!1sen!2sus"
+        hname="Radisson Blu Hotel, London "
+        disc="Radisson Blu Hotel, London Heathrow is unique from the outset. Perfect for weekend stays, relaxing breaks, and business travel, the hotel features 464 bedrooms and suites, two restaurants, as well as a health club with state-of-the-art Technogym equipment, perfect for morning energizing and evening downtime"
+      />
 
       <DestinationQuestions />
 

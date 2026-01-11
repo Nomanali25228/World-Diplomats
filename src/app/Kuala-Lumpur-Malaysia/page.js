@@ -18,8 +18,9 @@ import MalaysiaImportantDates from '../component/malaysiaimportantdates/Malaysia
 import taksimImg from "../../../public/img/MalaysiaCityTour1.jpg";
 import arastaImg from "../../../public/img/MalaysiaCityTour2.jpg";
 import bosporusImg from "../../../public/img/MalaysiaCityTour3.jpg";
-import DestinationSeriesofEveent from '../component/destination-seriesofeveent/DestinationSeriesofEveent'
+import DestinationSeriesofEveent from '../component/destination-seriesofeveent/DestinationSeriesofEveent';
 import culturalImage from "../../../public/img/CulturalGloblVillageMalaysia.jpg";
+import CountdownSection from '../component/countdown-section/CountdownSection';
 
 
 const page = () => {
@@ -33,6 +34,7 @@ const page = () => {
     bgImage: MalaysiabgImage,
     registerlinke: "/Register-Now?destination=Kuala%20Lumpur,%20Malaysia",
     pricinglink: "#pricing",
+    targetDate: "2026-07-09T00:00:00", // Event start date
   }
 
   const delegatesData = {
@@ -54,12 +56,12 @@ const page = () => {
     Basic: "$501",
     DelegateAccommodationExperience: "$678",
     DelegatefullExperience: "$809",
-      Experience1: [
-    "✔ Everything in Delegate Accommodation Experience",
-    "✔ Batu Caves",
-    "✔ Petronas Twin Towers",
-    "✔ Merdeka Square"
-  ]
+    Experience1: [
+      "✔ Everything in Delegate Accommodation Experience",
+      "✔ Batu Caves",
+      "✔ Petronas Twin Towers",
+      "✔ Merdeka Square"
+    ]
   };
 
 
@@ -85,8 +87,11 @@ const page = () => {
         bgImage={heroData.bgImage}
         registerlinke={heroData.registerlinke}  // match component prop
         pricinglink={heroData.pricinglink}      // match component prop
+        targetDate={heroData.targetDate}        // countdown date
       />
 
+      {/* Countdown Section */}
+      <CountdownSection targetDate={heroData.targetDate} />
 
       {/* Pass props to Delegates Attending */}
       <DestinationDelegatesAttending
@@ -104,10 +109,10 @@ const page = () => {
         cardimage={participantsData.cardimage}
       />
 
-      <DestinationSeriesofEveent  culturImagee={culturalImage} />
+      <DestinationSeriesofEveent culturImagee={culturalImage} />
 
 
-      <DestinationPrice 
+      <DestinationPrice
         tital={DestinationPriceData.tital}
         Basic={DestinationPriceData.Basic}
         DelegateAccommodationExperience={DestinationPriceData.DelegateAccommodationExperience}
@@ -115,14 +120,14 @@ const page = () => {
         Experience1={DestinationPriceData.Experience1}
       />
 
-  <DestinationCityTour 
-              title1={DestinationCityTourData.title1}
-              image1={DestinationCityTourData.image1}
-              title2={DestinationCityTourData.title2}
-              image2={DestinationCityTourData.image2}
-              title3={DestinationCityTourData.title3}
-              image3={DestinationCityTourData.image3}
-             />
+      <DestinationCityTour
+        title1={DestinationCityTourData.title1}
+        image1={DestinationCityTourData.image1}
+        title2={DestinationCityTourData.title2}
+        image2={DestinationCityTourData.image2}
+        title3={DestinationCityTourData.title3}
+        image3={DestinationCityTourData.image3}
+      />
 
       <MalaysiaImportantDates />
 

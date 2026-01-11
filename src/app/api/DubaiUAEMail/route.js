@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
 export async function POST(request) {
-  try {
+    try {
         const { email, name, data, iduser, destination } = await request.json();
         const id = iduser;
 
@@ -36,15 +36,15 @@ export async function POST(request) {
         const closingMessage = `at World Diplomats MUN and await, in <br /> anticipation, to host you at ${country}.`;
         const subject = `World Diplomats — Registration Received (${desname})`;
 
-    const username = "info@worlddiplomats.org";
-    const password = "eqqxvxhdtgfbxuiu";
+        const username = "info@worlddiplomats.org";
+        const password = "eqqxvxhdtgfbxuiu";
 
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
-      auth: { user: username, pass: password },
-    });
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
+            auth: { user: username, pass: password },
+        });
 
         const mailOptions = {
             from: 'World Diplomats <info@worlddiplomats.org>',
@@ -357,7 +357,7 @@ export async function POST(request) {
 
                                            <tr>
     <td align="center" valign="bottom">
-        <a href="https://www.worlddiplomats.org/Dubaipayment/1?userid=${id}" target="_blank" style="text-decoration:none;">
+        <a href=" http://localhost:3000/Dubaipayment/1?userid=${id}" target="_blank" style="text-decoration:none;">
             <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);
                   color:#fff;padding:12px 24px;border-radius:14px;font-weight:600;">
                 CHOOSE PLAN
@@ -590,12 +590,12 @@ export async function POST(request) {
 </body>
 
 </html>`,
-    };
+        };
 
-    await transporter.sendMail(mailOptions);
-    return NextResponse.json({ message: 'Email sent' });
-  } catch (err) {
-    console.error('DubaiUAEMail error', err);
-    return NextResponse.json({ message: 'Failed to send email' }, { status: 500 });
-  }
+        await transporter.sendMail(mailOptions);
+        return NextResponse.json({ message: 'Email sent' });
+    } catch (err) {
+        console.error('DubaiUAEMail error', err);
+        return NextResponse.json({ message: 'Failed to send email' }, { status: 500 });
+    }
 }

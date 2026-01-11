@@ -18,8 +18,9 @@ import taksimImg from "../../../public/img/RiyadhCityTour1.jpg";
 import arastaImg from "../../../public/img/RiyadhCityTour2.jpg";
 import bosporusImg from "../../../public/img/RiyadhCityTour3.jpg";
 import RiyadhImportantDates from '../component/riyadhimportantdates/RiyadhImportantDates'
-import DestinationSeriesofEveent from '../component/destination-seriesofeveent/DestinationSeriesofEveent'
+import DestinationSeriesofEveent from '../component/destination-seriesofeveent/DestinationSeriesofEveent';
 import culturalImage from "../../../public/img/culturalglobalvillageriyadh.jpg";
+import CountdownSection from '../component/countdown-section/CountdownSection';
 
 
 
@@ -34,6 +35,7 @@ const page = () => {
     bgImage: RiyadhbgImage,
     registerlinke: "/Register-Now?destination=Riyadh,%20Saudi%20Arabia",
     pricinglink: "#pricing",
+    targetDate: "2026-10-15T00:00:00", // Event start date (placeholder - TBD)
   }
 
   const delegatesData = {
@@ -55,10 +57,10 @@ const page = () => {
     Basic: "$499",
     DelegateAccommodationExperience: "$879",
     DelegatefullExperience: "$1050",
-      Experience1: [
-    "✔ Everything in Delegate Accommodation Experience",
-    "✔ Riyadh City Tour ",
-  ]
+    Experience1: [
+      "✔ Everything in Delegate Accommodation Experience",
+      "✔ Riyadh City Tour ",
+    ]
   };
 
 
@@ -84,8 +86,11 @@ const page = () => {
         bgImage={heroData.bgImage}
         registerlinke={heroData.registerlinke}  // match component prop
         pricinglink={heroData.pricinglink}      // match component prop
+        targetDate={heroData.targetDate}        // countdown date
       />
 
+      {/* Countdown Section */}
+      <CountdownSection targetDate={heroData.targetDate} />
 
       {/* Pass props to Delegates Attending */}
       <DestinationDelegatesAttending
@@ -104,11 +109,11 @@ const page = () => {
       />
 
 
-      <DestinationSeriesofEveent  culturImagee={culturalImage} />
+      <DestinationSeriesofEveent culturImagee={culturalImage} />
 
 
 
-      <DestinationPrice 
+      <DestinationPrice
         tital={DestinationPriceData.tital}
         Basic={DestinationPriceData.Basic}
         DelegateAccommodationExperience={DestinationPriceData.DelegateAccommodationExperience}
@@ -116,14 +121,14 @@ const page = () => {
         Experience1={DestinationPriceData.Experience1}
       />
 
-  <DestinationCityTour 
-              title1={DestinationCityTourData.title1}
-              image1={DestinationCityTourData.image1}
-              title2={DestinationCityTourData.title2}
-              image2={DestinationCityTourData.image2}
-              title3={DestinationCityTourData.title3}
-              image3={DestinationCityTourData.image3}
-             />
+      <DestinationCityTour
+        title1={DestinationCityTourData.title1}
+        image1={DestinationCityTourData.image1}
+        title2={DestinationCityTourData.title2}
+        image2={DestinationCityTourData.image2}
+        title3={DestinationCityTourData.title3}
+        image3={DestinationCityTourData.image3}
+      />
 
       <RiyadhImportantDates />
 

@@ -18,8 +18,9 @@ import DestinationCityTour from '../component/destination-city-tour/DestinationC
 import taksimImg from "../../../public/img/DubaiCityTour1.jpg";
 import arastaImg from "../../../public/img/DubaiCityTour2.jpg";
 import bosporusImg from "../../../public/img/DubaiCityTour3.jpg";
-import DestinationSeriesofEveent from '../component/destination-seriesofeveent/DestinationSeriesofEveent'
+import DestinationSeriesofEveent from '../component/destination-seriesofeveent/DestinationSeriesofEveent';
 import culturalImage from "../../../public/img/culturalgloalvillagedubai.webp";
+import CountdownSection from '../component/countdown-section/CountdownSection';
 
 
 
@@ -35,6 +36,7 @@ const page = () => {
     bgImage: DubaibgImage,
     registerlinke: "/Register-Now?destination=Dubai,%20UAE",
     pricinglink: "#pricing",
+    targetDate: "2026-05-14T00:00:00", // Event start date
   }
 
   const delegatesData = {
@@ -58,10 +60,10 @@ const page = () => {
     Basic: "$389",
     DelegateAccommodationExperience: "$551",
     DelegatefullExperience: "$670",
-     Experience1: [
-    "✔ Everything in Delegate Accommodation Experience",
-    "✔ Desert Safari",
-  ],
+    Experience1: [
+      "✔ Everything in Delegate Accommodation Experience",
+      "✔ Desert Safari",
+    ],
   };
 
   const DestinationCityTourData = {
@@ -86,8 +88,11 @@ const page = () => {
         bgImage={heroData.bgImage}
         registerlinke={heroData.registerlinke}  // match component prop
         pricinglink={heroData.pricinglink}      // match component prop
+        targetDate={heroData.targetDate}        // countdown date
       />
 
+      {/* Countdown Section */}
+      <CountdownSection targetDate={heroData.targetDate} />
 
       {/* Pass props to Delegates Attending */}
       <DestinationDelegatesAttending
@@ -105,7 +110,7 @@ const page = () => {
         cardimage={participantsData.cardimage}
       />
 
-<DestinationSeriesofEveent  culturImagee={culturalImage} />
+      <DestinationSeriesofEveent culturImagee={culturalImage} />
 
 
       <DestinationPrice
@@ -115,29 +120,29 @@ const page = () => {
         DelegatefullExperience={DestinationPriceData.DelegatefullExperience}
         Experience1={DestinationPriceData.Experience1}
       />
-            <DestinationCityTour 
-              title1={DestinationCityTourData.title1}
-              image1={DestinationCityTourData.image1}
-              title2={DestinationCityTourData.title2}
-              image2={DestinationCityTourData.image2}
-              title3={DestinationCityTourData.title3}
-              image3={DestinationCityTourData.image3}
-             />
-      
+      <DestinationCityTour
+        title1={DestinationCityTourData.title1}
+        image1={DestinationCityTourData.image1}
+        title2={DestinationCityTourData.title2}
+        image2={DestinationCityTourData.image2}
+        title3={DestinationCityTourData.title3}
+        image3={DestinationCityTourData.image3}
+      />
+
 
       <DubaiImportantDates />
 
-      
-             <DestinationMap
-              bgimg5={hotelx1}
-              img1={hotelx4}
-              img2={hotelx3}
-              img3={hotelx2}
-              img4={hotelx5}
-              map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d376.7757589586041!2d55.299970984918254!3d25.15581725010392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f688c5516ea0f%3A0x44800f32689f57e2!2sThe%20Meydan%20Hotel!5e1!3m2!1sen!2sus!4v1742271411150!5m2!1sen!2sus"
-              hname="Meydan Hotel, Dubai, UAE"
-              disc="The Meydan Hotel is Dubai’s ultimate destination for contemporary rooms, social dining and trackside views, with Dubai’s thrilling racing culture at its core."
-            />
+
+      <DestinationMap
+        bgimg5={hotelx1}
+        img1={hotelx4}
+        img2={hotelx3}
+        img3={hotelx2}
+        img4={hotelx5}
+        map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d376.7757589586041!2d55.299970984918254!3d25.15581725010392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f688c5516ea0f%3A0x44800f32689f57e2!2sThe%20Meydan%20Hotel!5e1!3m2!1sen!2sus!4v1742271411150!5m2!1sen!2sus"
+        hname="Meydan Hotel, Dubai, UAE"
+        disc="The Meydan Hotel is Dubai’s ultimate destination for contemporary rooms, social dining and trackside views, with Dubai’s thrilling racing culture at its core."
+      />
 
 
       <DestinationQuestions />
