@@ -230,9 +230,7 @@ const BlogPostPage = () => {
         </div>
       </header>
 
-      <Footer />
-      <ScrollToTop />
-      <Whatsapp />
+      
     </>
   );
 };

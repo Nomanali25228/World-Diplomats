@@ -19,6 +19,9 @@ import arastaImg from "../../../public/img/LondonCityTour2.jpg";
 import bosporusImg from "../../../public/img/LondonCityTour3.jpeg";
 import LondonImportantDates from '../component/londonimportantdates/LondonImportantDates'
 import DestinationSeriesofEveent from '../component/destination-seriesofeveent/DestinationSeriesofEveent'
+import culturalImage from "../../../public/img/CulturalGlobalVillagelondon.jpg";
+
+
 
 const page = () => {
 
@@ -26,7 +29,7 @@ const page = () => {
   const heroData = {
     title: "London",
     subtitle: "UK",
-    dates: "03 - 04 - 05 - 06 September 2026",
+    dates: "TBD September 2026",
     agenda: "Conference Agenda: Multilateral Governance, Sustainable Development, and Global Stability in a Fragmented World.",
     bgImage: LondonbgImage,
     registerlinke: "/Register-Now?destination=London,%20UK",
@@ -100,7 +103,7 @@ const page = () => {
         cardimage={participantsData.cardimage}
       />
       
-      <DestinationSeriesofEveent />
+      <DestinationSeriesofEveent  culturImagee={culturalImage} />
       
 
       <DestinationPrice

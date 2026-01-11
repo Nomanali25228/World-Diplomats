@@ -1,11 +1,11 @@
 import React from "react";
 import Image from "next/image"; // Import Next.js Image component
-import commitImage from "../../../../public/img/CommitteeSessions.png"; // Import images
-import culturalImage from "../../../../public/img/CulturalGlobal.jpg";
-import openingCeremonyImage from "../../../../public/img/OpeningCeremony.jpg";
+import commitImage from "../../../../public/img/CommitteeSessions.jpg"; // Import images
+import openingCeremonyImage from "../../../../public/img/prom.png";
 
 
-const DestinationSeriesofEveent = () => {
+const DestinationSeriesofEveent = ({culturImagee}) => {
+  
   // Mock data for the events
   const events = [
     {      
@@ -14,10 +14,10 @@ const DestinationSeriesofEveent = () => {
     },
     {
       title: "Cultural Global Village",
-      image: culturalImage,
+      image: culturImagee,
     },
     {
-      title: "Opening Ceremony",
+      title: "Masquerade Prom",
       image: openingCeremonyImage,
     },
  

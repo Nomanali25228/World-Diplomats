@@ -19,6 +19,11 @@ import taksimImg from "../../../public/img/DubaiCityTour1.jpg";
 import arastaImg from "../../../public/img/DubaiCityTour2.jpg";
 import bosporusImg from "../../../public/img/DubaiCityTour3.jpg";
 import DestinationSeriesofEveent from '../component/destination-seriesofeveent/DestinationSeriesofEveent'
+import culturalImage from "../../../public/img/culturalgloalvillagedubai.webp";
+
+
+
+
 const page = () => {
 
   // Example props data
@@ -26,7 +31,7 @@ const page = () => {
     title: "Dubai",
     subtitle: "UAE",
     dates: "14 - 15 - 16 - 17 May, 2026",
-    agenda: "Conference Agenda: Reimagining Global Governance — Protecting Human Rights, Peace, and Public Health in an Era of Uncertainty.",
+    agenda: "Conference Agenda: Reimagining Global Governance, Protecting Human Rights, Peace, and Public Health in an Era of Uncertainty.",
     bgImage: DubaibgImage,
     registerlinke: "/Register-Now?destination=Dubai,%20UAE",
     pricinglink: "#pricing",
@@ -100,7 +105,7 @@ const page = () => {
         cardimage={participantsData.cardimage}
       />
 
-<DestinationSeriesofEveent />
+<DestinationSeriesofEveent  culturImagee={culturalImage} />
 
 
       <DestinationPrice

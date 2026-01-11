@@ -19,15 +19,17 @@ import arastaImg from "../../../public/img/RiyadhCityTour2.jpg";
 import bosporusImg from "../../../public/img/RiyadhCityTour3.jpg";
 import RiyadhImportantDates from '../component/riyadhimportantdates/RiyadhImportantDates'
 import DestinationSeriesofEveent from '../component/destination-seriesofeveent/DestinationSeriesofEveent'
+import culturalImage from "../../../public/img/culturalglobalvillageriyadh.jpg";
+
 
 
 const page = () => {
 
   // Example props data
   const heroData = {
-    title: "Riyadh-Saudi",
+    title: "Riyadh Saudi",
     subtitle: "Arabia",
-    dates: "15 - 16 - 17 - 18 October , 2026",
+    dates: " TBD October , 2026",
     agenda: "Conference Agenda: Strategic Stability, Sustainable Development, and Global Cooperation in a Multipolar World.",
     bgImage: RiyadhbgImage,
     registerlinke: "/Register-Now?destination=Riyadh,%20Saudi%20Arabia",
@@ -35,7 +37,7 @@ const page = () => {
   }
 
   const delegatesData = {
-    title: "Riyadh-Saudi Conference",
+    title: "Riyadh Conference",
     DelegatesAttending: 400,
     Location: "Riyadh, Saudi Arabia",
   }
@@ -102,7 +104,7 @@ const page = () => {
       />
 
 
-      <DestinationSeriesofEveent />
+      <DestinationSeriesofEveent  culturImagee={culturalImage} />
 
 
 

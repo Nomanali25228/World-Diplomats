@@ -164,9 +164,7 @@ export default function Home() {
                     </div>
                 </Suspense>
             </header>
-            <Footer />
-            <ScrollToTop />
-            <Whatsapp />
+           
 
         </div>
     );

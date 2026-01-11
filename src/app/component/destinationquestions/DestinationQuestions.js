@@ -2,10 +2,17 @@
 
 import React from "react";
 import Link from "next/link";
-import { FaComments } from "react-icons/fa";
+import { FaComments, FaWhatsapp } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const DestinationQuestions = () => {
+  // WhatsApp link example: +44 7490 344639 (replace with your number)
+  const whatsappNumber = "+447490344639";
+  const whatsappLink = `https://wa.me/${whatsappNumber.replace(
+    /[^0-9]/g,
+    ""
+  )}?text=Hello! I have a question about the MUN.`;
+
   return (
     <section className="w-full bg-white py-16 px-4">
       <div className="max-w-3xl mx-auto">
@@ -46,18 +53,38 @@ const DestinationQuestions = () => {
             Questions about MUN? Talk with our Specialist
           </p>
 
-          {/* Button */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className="relative z-10"
-          >
-            <Link href="/DelegationForm">
-              <button className="inline-flex cursor-pointer items-center gap-2 px-7 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 transition rounded-lg text-white text-sm sm:text-base font-medium shadow-lg">
-                Talk with us
-              </button>
-            </Link>
-          </motion.div>
+          {/* Buttons */}
+          <div className="relative z-10 flex flex-col sm:flex-row justify-center gap-4">
+            
+            {/* Delegation Form Button */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              <Link href="/DelegationForm">
+                <button className="inline-flex cursor-pointer items-center gap-2 px-7 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 transition rounded-lg text-white text-sm sm:text-base font-medium shadow-lg">
+                  <FaComments /> Talk with us
+                </button>
+              </Link>
+            </motion.div>
+
+            {/* WhatsApp Button */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="inline-flex cursor-pointer items-center gap-2 px-7 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 transition rounded-lg text-white text-sm sm:text-base font-medium shadow-lg">
+                  <FaWhatsapp /> Chat on WhatsApp
+                </button>
+              </a>
+            </motion.div>
+
+          </div>
 
         </motion.div>
 

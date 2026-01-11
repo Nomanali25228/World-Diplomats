@@ -27,14 +27,14 @@ const pricingData = [
 
   {
     destination: "London, UK",
-    date: "3th – 6th September 2026",
+    date: "TBD September 2026",
     image: "/img/cardUK.jpg",
     link: "/London-UK#pricing",
     payNow: "Pay for London, UK"
   },
   {
     destination: "Riyadh, Saudi Arabia",
-    date: "15th – 18th October 2026",
+    date: "TBD October 2026",
     image: "/img/cardSaudi.jpg",
     link: "/Riyadh-Saudi-Arabia#pricing",
     payNow: "Pay for Riyadh, Saudi Arabia"

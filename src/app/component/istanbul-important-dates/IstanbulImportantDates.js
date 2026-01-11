@@ -24,7 +24,7 @@ const IstanbulImportantDates = () => {
                        font-bold text-[#0d1b4c]"
             data-aos="fade-up"
           >
-            preparation <span className="text-[#b00000]">Readiness</span>
+            Preparation for World<span className="text-[#b00000]"> Diplomats</span>
           </h2>
         </div>
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[0.9fr_1.3fr] gap-14">

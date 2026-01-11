@@ -122,9 +122,10 @@ const DestinationHeroSection = ({
           </h1>
 
           {/* Dates */}
-          <p className="mt-4 sm:mt-5 text-sm sm:text-sm md:text-base text-blue-200 tracking-widest uppercase">
-            {dates}
-          </p>
+        <p className="mt-4 sm:mt-5 text-base sm:text-lg md:text-xl lg:text-2xl text-blue-200 tracking-widest uppercase">
+  {dates}
+</p>
+
 
         {/* Countdown Cards */}
 

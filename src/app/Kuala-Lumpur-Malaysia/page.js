@@ -19,6 +19,8 @@ import taksimImg from "../../../public/img/MalaysiaCityTour1.jpg";
 import arastaImg from "../../../public/img/MalaysiaCityTour2.jpg";
 import bosporusImg from "../../../public/img/MalaysiaCityTour3.jpg";
 import DestinationSeriesofEveent from '../component/destination-seriesofeveent/DestinationSeriesofEveent'
+import culturalImage from "../../../public/img/CulturalGloblVillageMalaysia.jpg";
+
 
 const page = () => {
 
@@ -102,7 +104,7 @@ const page = () => {
         cardimage={participantsData.cardimage}
       />
 
-      <DestinationSeriesofEveent />
+      <DestinationSeriesofEveent  culturImagee={culturalImage} />
 
 
       <DestinationPrice 

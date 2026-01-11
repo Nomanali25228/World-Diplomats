@@ -39,7 +39,7 @@ const destinations = [
   },
   {
     title: "World Diplomats London, UK",
-    date: "3rd-6th September, 2026",
+    date: "TBD September, 2026",
     description:
       "The World Diplomats contestants are immersed in London, which is a multicultural hub.",
     cardimg: londonImg,
@@ -48,7 +48,7 @@ const destinations = [
   },
   {
     title: "World Diplomats Riyadh, Saudi Arabia",
-    date: "15th-18th October, 2026",
+    date: "TBD October, 2026",
     description:
       "By fusing modern vision with cultural heritage, World Diplomats in Riyadh offers a life-changing event.",
     cardimg: riyadhImg,

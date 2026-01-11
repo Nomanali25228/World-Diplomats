@@ -20,6 +20,9 @@ import taksimImg from "../../../public/img/IstanbulCityTour1.jpg";
 import arastaImg from "../../../public/img/IstanbulCityTour2.jpg";
 import bosporusImg from "../../../public/img/IstanbulCityTour3.jpg";
 import DestinationSeriesofEveent from '../component/destination-seriesofeveent/DestinationSeriesofEveent'
+import culturalImage from "../../../public/img/culturalglobalvillageTurkey.jpg";
+
+
 
 const page = () => {
 
@@ -28,7 +31,7 @@ const page = () => {
     title: "Istanbul",
     subtitle: "Turkey",
     dates: "26 – 27 – 28 – 29 March 2026",
-    agenda: "Conference Agenda: Reimagining Global Governance — Protecting Human Rights, Peace, and Public Health in an Era of Uncertainty.",
+    agenda: "Conference Agenda: Reimagining Global Governance, Protecting Human Rights, Peace, and Public Health in an Era of Uncertainty.",
     bgImage: istanbulbgImage,
     registerlinke: "/Register-Now?destination=Istanbul,%20Turkey",
     pricinglink: "#pricing",
@@ -102,7 +105,7 @@ const page = () => {
         cardimage={participantsData.cardimage}  
       />
 
-      <DestinationSeriesofEveent />
+      <DestinationSeriesofEveent  culturImagee={culturalImage} />
 
 
       <DestinationPrice

@@ -39,8 +39,8 @@ const RegisterNowClient = () => {
     "Istanbul, Turkey": "26th – 29th March 2026",
     "Dubai, UAE": "14th – 17th May 2026",
     "Kuala Lumpur, Malaysia": "9th – 12th July 2026",
-    "London, UK": "3rd – 6th September 2026",
-    "Riyadh, Saudi Arabia": "15th – 18th October 2026",
+    "London, UK": "TBD September 2026",
+    "Riyadh, Saudi Arabia": "TBD October 2026",
   };
 
   const DEST_EMAIL_MAP = {
