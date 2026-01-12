@@ -7,8 +7,8 @@ import {
   PaymentElement,
 } from "@stripe/react-stripe-js";
 function convertToSubcurrency(amount, factor = 100) {
-    return Math.round(amount * factor);
-  }
+  return Math.round(amount * factor);
+}
 const CheckoutPage = ({ amount }) => {
   const stripe = useStripe();
   const elements = useElements();
@@ -48,7 +48,7 @@ const CheckoutPage = ({ amount }) => {
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `http://www.localhost:3000/payment-success?amount=${amount}`,
+        return_url: `https://www.worlddiplomats.org/payment-success?amount=${amount}`,
       },
     });
 
@@ -63,7 +63,7 @@ const CheckoutPage = ({ amount }) => {
 
     setLoading(false);
   };
-  const hyu =()=>{
+  const hyu = () => {
     localStorage.removeItem('amounts')
   }
   if (!clientSecret || !stripe || !elements) {
@@ -90,7 +90,7 @@ const CheckoutPage = ({ amount }) => {
       <button
         disabled={!stripe || loading}
         className="text-white w-full p-5 bg-black mt-2 rounded-md font-bold disabled:opacity-50 disabled:animate-pulse"
-      onClick={()=>hyu()}>
+        onClick={() => hyu()}>
         {!loading ? `Pay $${amount}` : "Processing..."}
       </button>
     </form>

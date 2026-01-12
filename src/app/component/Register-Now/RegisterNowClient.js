@@ -911,7 +911,7 @@ const RegisterNowClient = () => {
                       </p>
 
                       <a
-                        href="https://www.instagram.com/atsasmun/"
+                        href="https://www.instagram.com/worlddiplomatsmun"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex flex-col items-center mb-16"
