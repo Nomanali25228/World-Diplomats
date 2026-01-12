@@ -37,7 +37,19 @@ export const getPostBySlug = async (slug) => {
     throw new Error("Post not found.");
   } catch (error) {
     // console.error("Error fetching post:", error);
-    throw new Error("Server error");
+    throw error;
+  }
+};
+
+// Fetch a post by its documentId
+export const getPostById = async (id) => {
+  try {
+    const response = await api.get(
+      `api/blog-posts/${id}?populate=*`
+    );
+    return response.data.data;
+  } catch (error) {
+    throw new Error("Post not found.");
   }
 };
 

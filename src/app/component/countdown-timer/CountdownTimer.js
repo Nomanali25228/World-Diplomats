@@ -4,18 +4,10 @@ import React, { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 
 const CountdownTimer = ({ targetDate }) => {
-    const [timeLeft, setTimeLeft] = useState({
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-        completed: false,
-    });
-
-    const calculateTimeLeft = useCallback(() => {
+    const calculateTimeLeft = (target) => {
         const now = new Date();
-        const target = new Date(targetDate);
-        let difference = target - now;
+        const tgt = new Date(target);
+        let difference = tgt - now;
 
         if (difference <= 0) {
             return { days: 0, hours: 0, minutes: 0, seconds: 0, completed: true };
@@ -27,19 +19,17 @@ const CountdownTimer = ({ targetDate }) => {
         const seconds = Math.floor((difference / 1000) % 60);
 
         return { days, hours, minutes, seconds, completed: false };
-    }, [targetDate]);
+    };
+
+    const [timeLeft, setTimeLeft] = useState(() => calculateTimeLeft(targetDate));
 
     useEffect(() => {
-        // Update every second
         const timer = setInterval(() => {
-            setTimeLeft(calculateTimeLeft());
+            setTimeLeft(calculateTimeLeft(targetDate));
         }, 1000);
 
-        // Initial calculation
-        setTimeLeft(calculateTimeLeft());
-
         return () => clearInterval(timer);
-    }, [calculateTimeLeft]);
+    }, [targetDate]);
 
     if (timeLeft.completed) {
         return (
@@ -61,23 +51,14 @@ const CountdownTimer = ({ targetDate }) => {
     return (
         <div className=" w-full">
             {/* Countdown Title */}
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="mb-4"
-            >
-                <h3 className="text-xl sm:text-2xl font-bold text-white text-center">
-                    EVENT DESTINATION
-                </h3>
-            </motion.div>
+
 
             {/* Countdown Cards */}
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto"
+                className="grid mt-4 grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto"
             >
                 {timeUnits.map((unit, index) => (
                     <motion.div
@@ -88,9 +69,19 @@ const CountdownTimer = ({ targetDate }) => {
                         className="relative group"
                     >
                         {/* Card */}
-                        <div className="relative bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                        <div className="relative bg-gradient-to-b from-[#e3f2fd] to-white rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden border border-white/60">
+
+                            {/* Decorative Blobs */}
+                            <div
+                                className="absolute -top-10 -right-10 w-24 h-24 rounded-full opacity-30"
+                                style={{ backgroundColor: "#b00000" }}
+                            ></div>
+                            <div
+                                className="absolute top-10 -left-6 w-10 h-10 rounded-full opacity-20 bg-[#0D1B4C]"
+                            ></div>
+
                             {/* Shine effect */}
-                            <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/40 to-white/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                             {/* Value */}
                             <div className="relative z-10 text-center">
@@ -99,19 +90,19 @@ const CountdownTimer = ({ targetDate }) => {
                                     initial={{ y: -10, opacity: 0 }}
                                     animate={{ y: 0, opacity: 1 }}
                                     transition={{ duration: 0.3 }}
-                                    className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-2 sm:mb-3"
+                                    className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#0d1b4c] mb-2 sm:mb-3"
                                 >
                                     {unit.value}
                                 </motion.p>
 
                                 {/* Label */}
-                                <p className="text-sm sm:text-base font-semibold text-blue-100 uppercase tracking-wider">
+                                <p className="text-sm sm:text-base font-semibold text-gray-500 uppercase tracking-wider">
                                     {unit.label}
                                 </p>
                             </div>
 
                             {/* Bottom accent */}
-                            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 rounded-b-2xl" />
+                            <div className="absolute bottom-0 left-0 right-0 h-1  rounded-b-2xl opacity-80" />
                         </div>
                     </motion.div>
                 ))}

@@ -31,12 +31,12 @@ const page = () => {
   const heroData = {
     title: "Istanbul",
     subtitle: "Turkey",
-    dates: "26 – 27 – 28 – 29 March 2026",
+    dates: "22 - 23 - 24 - 25 April, 2026",
     agenda: "Conference Agenda: Reimagining Global Governance, Protecting Human Rights, Peace, and Public Health in an Era of Uncertainty.",
     bgImage: istanbulbgImage,
     registerlinke: "/Register-Now?destination=Istanbul,%20Turkey",
     pricinglink: "#pricing",
-    targetDate: "2026-03-26T00:00:00", // Event start date
+    targetDate: "2026-04-22T00:00:00", // Event start date
   }
 
   const delegatesData = {

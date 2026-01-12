@@ -21,39 +21,39 @@ const Confetti = dynamic(() => import("react-confetti").then((mod) => mod.defaul
   ssr: false,
 });
 
+const DEST_API_MAP = {
+  "Istanbul, Türkiye": "firstnames",
+  "Dubai, UAE": "secondenames",
+  "Baku, Azerbaijan": "thirdnames",
+  "Riyadh, Saudi Arabia": "fivenames",
+  "London, UK": "fivthnames",
+  "Kuala Lumpur, Malaysia": "fournames",
+};
+
+const DEST_DATE_MAP = {
+  "Istanbul, Türkiye": "22nd – 25th April 2026",
+  "Dubai, UAE": "14th – 17th May 2026",
+  "Kuala Lumpur, Malaysia": "9th – 12th July 2026",
+  "London, UK": "TBD September 2026",
+  "Riyadh, Saudi Arabia": "TBD October 2026",
+};
+
+const DEST_EMAIL_MAP = {
+  "Istanbul, Türkiye": "/api/IstanbulTurkeyMail",
+  "Dubai, UAE": "/api/DubaiUAEMail",
+  "Baku, Azerbaijan": "/api/BakuAzerbaijanMail",
+  "Riyadh, Saudi Arabia": "/api/RiyadhSaudiArabiaMail",
+  "London, UK": "/api/LondonUKMail",
+  "Kuala Lumpur, Malaysia": "/api/KualaLumpurMalaysiaMail",
+};
+
+const MIN_DELEGATES = 2;
+const MAX_DELEGATES = 25;
+
 const RegisterNowClient = () => {
   const searchParams = useSearchParams();
   const { destination: ctxDestination, locked: ctxLocked, selectDestination } = useDestination();
   const { getDates } = useDestination();
-
-  const DEST_API_MAP = {
-    "Istanbul, Turkey": "firstnames",
-    "Dubai, UAE": "secondenames",
-    "Baku, Azerbaijan": "thirdnames",
-    "Riyadh, Saudi Arabia": "fivenames",
-    "London, UK": "fivthnames",
-    "Kuala Lumpur, Malaysia": "fournames",
-  };
-
-  const DEST_DATE_MAP = {
-    "Istanbul, Turkey": "26th – 29th March 2026",
-    "Dubai, UAE": "14th – 17th May 2026",
-    "Kuala Lumpur, Malaysia": "9th – 12th July 2026",
-    "London, UK": "TBD September 2026",
-    "Riyadh, Saudi Arabia": "TBD October 2026",
-  };
-
-  const DEST_EMAIL_MAP = {
-    "Istanbul, Turkey": "/api/IstanbulTurkeyMail",
-    "Dubai, UAE": "/api/DubaiUAEMail",
-    "Baku, Azerbaijan": "/api/BakuAzerbaijanMail",
-    "Riyadh, Saudi Arabia": "/api/RiyadhSaudiArabiaMail",
-    "London, UK": "/api/LondonUKMail",
-    "Kuala Lumpur, Malaysia": "/api/KualaLumpurMalaysiaMail",
-  };
-
-  const MIN_DELEGATES = 2;
-  const MAX_DELEGATES = 25;
 
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
@@ -338,7 +338,7 @@ const RegisterNowClient = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: form.email || groupEmail, name: form.name, data: payload, destination: form.destination, iduser: Id }),
         });
-      } catch (_) {}
+      } catch (_) { }
 
       await cronjob({
         id: Id,
@@ -627,7 +627,7 @@ const RegisterNowClient = () => {
                             ) : (
                               <select name="destination" value={form.destination} onChange={handleChange} className={inputClass}>
                                 <option value="">Destination</option>
-                                <option value="Istanbul, Turkey">Istanbul, Turkey</option>
+                                <option value="Istanbul, Türkiye">Istanbul, Türkiye</option>
                                 <option value="Dubai, UAE">Dubai, UAE</option>
                                 <option value="Kuala Lumpur, Malaysia">Kuala Lumpur, Malaysia</option>
                                 <option value="London, UK">London, UK</option>

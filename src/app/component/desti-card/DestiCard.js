@@ -11,8 +11,8 @@ import { HiArrowLongRight } from "react-icons/hi2";
 
 const destinations = [
   {
-    title: "World Diplomats Istanbul, Turkey",
-    date: "26th-29th March, 2026",
+    title: "World Diplomats Istanbul, Türkiye",
+    date: "22nd-25th April, 2026",
     description:
       "Attending the World Diplomats in Istanbul, which is situated at the intersection of civilizations, is open to aspiring diplomatic leaders.",
     cardimg: istanbulImg,
@@ -43,8 +43,8 @@ const destinations = [
     description:
       "The World Diplomats contestants are immersed in London, which is a multicultural hub.",
     cardimg: londonImg,
-      link: "/Register-Now",
-      link1: "/London-UK",
+    link: "/Register-Now",
+    link1: "/London-UK",
   },
   {
     title: "World Diplomats Riyadh, Saudi Arabia",
@@ -84,7 +84,7 @@ const Card = ({ dest }) => {
   const { selectDestination } = useDestination();
 
   const PATH_TO_DEST = {
-    '/Istanbul-Turkey': 'Istanbul, Turkey',
+    '/Istanbul-Turkey': 'Istanbul, Türkiye',
     '/Dubai-UAE': 'Dubai, UAE',
     '/Kuala-Lumpur-Malaysia': 'Kuala Lumpur, Malaysia',
     '/London-UK': 'London, UK',
@@ -101,69 +101,69 @@ const Card = ({ dest }) => {
 
   return (
     <div className="group relative w-72 h-96 [perspective:1000px]">
-    <div className="absolute w-full h-full duration-1000 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+      <div className="absolute w-full h-full duration-1000 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
 
-      {/* FRONT */}
-      <div className="absolute w-full h-full rounded-2xl overflow-hidden shadow-xl [backface-visibility:hidden]">
-        <img
-          src={dest.cardimg.src}
-          alt={dest.title}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute bottom-0 w-full bg-[#0d1b4c]/80 text-white text-center py-2 text-sm font-semibold tracking-wide">
-          {dest.title.split(",")[1]
-            ? dest.title.split(",")[1].trim()
-            : dest.title}
+        {/* FRONT */}
+        <div className="absolute w-full h-full rounded-2xl overflow-hidden shadow-xl [backface-visibility:hidden]">
+          <img
+            src={dest.cardimg.src}
+            alt={dest.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute bottom-0 w-full bg-[#0d1b4c]/80 text-white text-center py-2 text-sm font-semibold tracking-wide">
+            {dest.title.split(",")[1]
+              ? dest.title.split(",")[1].trim()
+              : dest.title}
+          </div>
         </div>
-      </div>
 
-      {/* BACK */}
-      <div className="absolute w-full h-full rounded-2xl overflow-hidden shadow-xl [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col justify-center items-center p-4">
-        <img
-          src={dest.cardimg.src}
-          alt={dest.title}
-          className="absolute w-full h-full object-cover opacity-90 sm:blur-[1px]"
-        />
-        <div className="absolute w-full h-full bg-[#0d1b4c]/50"></div>
+        {/* BACK */}
+        <div className="absolute w-full h-full rounded-2xl overflow-hidden shadow-xl [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col justify-center items-center p-4">
+          <img
+            src={dest.cardimg.src}
+            alt={dest.title}
+            className="absolute w-full h-full object-cover opacity-90 sm:blur-[1px]"
+          />
+          <div className="absolute w-full h-full bg-[#0d1b4c]/50"></div>
 
-        <div className="relative z-10 text-center text-white">
-          <h2 className="text-lg font-bold mb-1">{dest.title}</h2>
-          <p className="text-sm mb-2  text-white">{dest.date}</p>
-          <p className="text-xs mb-4 text-white/90">{dest.description}</p>
+          <div className="relative z-10 text-center text-white">
+            <h2 className="text-lg font-bold mb-1">{dest.title}</h2>
+            <p className="text-sm mb-2  text-white">{dest.date}</p>
+            <p className="text-xs mb-4 text-white/90">{dest.description}</p>
 
-          <div className="flex flex-col gap-3 mt-6 items-center">
-            {/* REGISTER */}
-            <button
-              onClick={handleRegister}
-              className="
+            <div className="flex flex-col gap-3 mt-6 items-center">
+              {/* REGISTER */}
+              <button
+                onClick={handleRegister}
+                className="
                 px-5 py-2 rounded-lg font-semibold text-sm
                 bg-gradient-to-r from-[#1a2a9c] to-[#1a2a9c]
                 text-white shadow-md
                 hover:scale-105 transition-all duration-300
               "
-            >
-              Register Now
-            </button>
+              >
+                Register Now
+              </button>
 
-            {/* VIEW */}
-            <a
-              href={dest.link1}
-              className="
+              {/* VIEW */}
+              <a
+                href={dest.link1}
+                className="
                 inline-flex items-center gap-2
                 text-blue-200 font-semibold
                 border-b-2 border-blue-200
                 hover:text-white hover:border-white
                 transition-all duration-300
               "
-            >
-              View
-              <HiArrowLongRight className="text-lg" />
-            </a>
+              >
+                View
+                <HiArrowLongRight className="text-lg" />
+              </a>
+            </div>
           </div>
         </div>
-      </div>
 
-    </div>
+      </div>
     </div>
   );
 };

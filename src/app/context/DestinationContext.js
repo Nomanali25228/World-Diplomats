@@ -9,10 +9,10 @@ const initialDestinations = {
     positionPaperDeadline: "05th March, 2026",
     registerLink: "/Register-Now?destination=Dubai,%20UAE",
   },
-  "Istanbul, Turkey": {
+  "Istanbul, Türkiye": {
     registrationDeadline: "January 5th, 2026",
     positionPaperDeadline: "05th March, 2026",
-    registerLink: "/Register-Now?destination=Istanbul,%20Turkey",
+    registerLink: "/Register-Now?destination=Istanbul,%20Türkiye",
   },
   "London, UK": {
     registrationDeadline: "February 15th, 2026",
@@ -35,8 +35,8 @@ export function DestinationProvider({ children }) {
   const [destination, setDestination] = useState('');
   const [locked, setLocked] = useState(false);
   const [destinations, setDestinations] = useState(initialDestinations);
-const [amounts,setAmounts] = useState(0)
-  const [check,setCheck] = useState("");
+  const [amounts, setAmounts] = useState(0)
+  const [check, setCheck] = useState("");
   const selectDestination = (dest, lock = true) => {
     setDestination(dest || '');
     setLocked(!!lock);

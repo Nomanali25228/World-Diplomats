@@ -15,12 +15,12 @@ import Loader from "@/app/component/loader/Loader";
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { getAllPosts } from "@/app/lib/api";
- import Pagination from "../../component/pagination/Pagination";
+import Pagination from "../../component/pagination/Pagination";
 import Navbar from '@/app/component/navbar/Navbar';
 
 
 export default function Home() {
-   
+
     // start blog ///////////////////////////////////////////////////////////////////
 
     const [posts, setPosts] = useState([]);
@@ -68,12 +68,12 @@ export default function Home() {
             <header
                 className="relative bg-cover  bg-center min-h-screen flex items-center justify-center text-white"
                 style={{
-                          backgroundImage: `url(${bgImage.src})`,
-                          backgroundAttachment: "fixed",
-                        }}
+                    backgroundImage: `url(${bgImage.src})`,
+                    backgroundAttachment: "fixed",
+                }}
             >
                 {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0d1b4c]/95 via-[#1a2a9c]/85 to-[#b00000]/80"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0d1b4c]/95 via-[#1a2a9c]/85 to-[#b00000]/80"></div>
 
                 {/* Hero Content */}
                 <Suspense fallback={<Loader />}>
@@ -103,12 +103,19 @@ export default function Home() {
                                                     className="a-box w-full sm:w-[280px] mx-auto text-center rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden"
                                                 >
                                                     {/* Image Container */}
-                                                    {post.cover?.url ? (
+                                                    {post.cover ? (
                                                         <div className="img-container h-[200px] w-full sm:w-[260px] overflow-hidden rounded-b-[20px] mx-auto">
                                                             <div className="img-inner">
                                                                 <div className="rounded-[20px] overflow-hidden mt-[30px] bg-[#c8c2c2] h-[200px] w-full sm:w-[260px]">
                                                                     <img
-                                                                        src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${post.cover.url}`}
+                                                                        src={(() => {
+                                                                            const cover = post.cover;
+                                                                            const url = cover?.url || cover?.data?.attributes?.url || cover?.data?.url;
+                                                                            if (!url) return "";
+                                                                            if (url.startsWith('http')) return url;
+                                                                            const baseUrl = (process.env.NEXT_PUBLIC_STRAPI_URL || 'https://world-diplomats-backend.onrender.com').replace(/\/$/, '');
+                                                                            return `${baseUrl}${url.startsWith('/') ? '' : '/'}${url}`;
+                                                                        })()}
                                                                         width={260} // specify the width
                                                                         height={200} // specify the height
                                                                         alt={post.title || "Post Image"}
@@ -132,7 +139,7 @@ export default function Home() {
                                                             {post.title || "Untitled Post"}
                                                         </h2>
 
-                                                        <Link href={`/blog/${post.slug}`} className="block mt-4">
+                                                        <Link href={`/blog/${post.slug || post.documentId}`} className="block mt-4">
                                                             <span className="inline-block px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-full shadow-lg hover:bg-blue-600 transition-all duration-300">
                                                                 Read More
                                                             </span>
@@ -164,7 +171,7 @@ export default function Home() {
                     </div>
                 </Suspense>
             </header>
-           
+
 
         </div>
     );

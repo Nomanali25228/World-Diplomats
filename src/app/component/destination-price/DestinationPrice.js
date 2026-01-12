@@ -7,8 +7,14 @@ const DestinationPrice = ({
   DelegateAccommodationExperience,
   DelegatefullExperience,
   Experience1,
-  
+
 }) => {
+  const getOriginalPrice = (priceStr) => {
+    if (!priceStr) return "";
+    const numericPrice = parseInt(priceStr.replace(/[^0-9]/g, ""), 10);
+    return isNaN(numericPrice) ? "" : `$${numericPrice + 200}`;
+  };
+
   return (
     <section id="pricing"
       className="py-16 sm:py-18 md:py-20 px-4 sm:px-6
@@ -32,7 +38,7 @@ const DestinationPrice = ({
           </p>
 
           {/* Divider */}
-          
+
         </div>
 
         {/* PRICING GRID */}
@@ -50,6 +56,11 @@ const DestinationPrice = ({
             <p className="text-3xl sm:text-4xl font-extrabold text-[#1a2a9c] mb-1 text-center">
               {Basic}
             </p>
+
+            <p className="text-sm text-gray-400 text-center line-through mb-1">
+              {getOriginalPrice(Basic)} Early Applicant Discount
+            </p>
+
             <span className="text-xs text-gray-500 mb-6 text-center block">
               +5% processing fee
             </span>
@@ -67,17 +78,17 @@ const DestinationPrice = ({
               <li>✔ World Diplomats merch and Kit</li>
             </ul>
 
-          <Link href="/Register-Now" className="mt-3 md:mt-auto">
-  <button
-    className="w-full  rounded-xl cursor-pointer
+            <Link href="/Register-Now" className="mt-3 md:mt-auto">
+              <button
+                className="w-full  rounded-xl cursor-pointer
                bg-[#1a2a9c] text-white py-3
                text-xs sm:text-sm font-semibold
                hover:bg-[#0d1b4c]
                transition-all"
-  >
-    Register Now →
-  </button>
-</Link>
+              >
+                Register Now →
+              </button>
+            </Link>
 
           </div>
 
@@ -105,6 +116,11 @@ const DestinationPrice = ({
             <p className="text-3xl sm:text-4xl font-extrabold text-[#1a2a9c] mb-1 text-center">
               {DelegateAccommodationExperience}
             </p>
+
+            <p className="text-sm text-gray-400 text-center line-through mb-1">
+              {getOriginalPrice(DelegateAccommodationExperience)} Early Applicant Discount
+            </p>
+
             <span className="text-xs text-gray-500 mb-6 text-center block">
               +5% processing fee
             </span>
@@ -115,18 +131,18 @@ const DestinationPrice = ({
               <li>✔ Gourmet Morning Breakfast everyday</li>
             </ul>
 
-            
-             <Link href="/Register-Now" className="mt-3 md:mt-auto">
-  <button
-    className="w-full rounded-xl cursor-pointer
+
+            <Link href="/Register-Now" className="mt-3 md:mt-auto">
+              <button
+                className="w-full rounded-xl cursor-pointer
                bg-[#1a2a9c] text-white py-3
                text-xs sm:text-sm font-semibold
                hover:bg-[#0d1b4c]
                transition-all"
-  >
-    Register Now →
-  </button>
-</Link>
+              >
+                Register Now →
+              </button>
+            </Link>
 
           </div>
 
@@ -142,27 +158,32 @@ const DestinationPrice = ({
             <p className="text-3xl sm:text-4xl font-extrabold text-[#1a2a9c] mb-1 text-center">
               {DelegatefullExperience}
             </p>
+
+            <p className="text-sm text-gray-400 text-center line-through mb-1">
+              {getOriginalPrice(DelegatefullExperience)} Early Applicant Discount
+            </p>
+
             <span className="text-xs text-gray-500 mb-6 text-center block">
               +5% processing fee
             </span>
 
             <ul className="space-y-3 text-xs sm:text-sm text-gray-600">
-             {Experience1.map((item, index) => (
-    <li key={index}>{item}</li>
-  ))}
+              {Experience1.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
             </ul>
 
-          <Link href="/Register-Now" className="mt-3 md:mt-auto">
-  <button
-    className="w-full rounded-xl cursor-pointer
+            <Link href="/Register-Now" className="mt-3 md:mt-auto">
+              <button
+                className="w-full rounded-xl cursor-pointer
                bg-[#1a2a9c] text-white py-3
                text-xs sm:text-sm font-semibold
                hover:bg-[#0d1b4c]
                transition-all"
-  >
-    Register Now →
-  </button>
-</Link>
+              >
+                Register Now →
+              </button>
+            </Link>
 
           </div>
 

@@ -13,21 +13,20 @@ import ContactUS from "./component/contactus/ContactUS";
 import Footer from "./component/footer/Footer";
 import ScrollToTop from "./component/Scrolltotop/ScrollToTop";
 import Whatsapp from "./component/whatsapp/Whatsapp";
+
 export default function Home() {
   return (
     <>
-<Navbar/>
-<HeroSection/>    
-<WorldDiplomats />
-<Ourstages />
-<EligibilityCriteria />
-<BecomeDiplomets />
-<OurYouthLeaders />
-<OurImpact />
-<Gallery />
-{/* <ContactUS /> */}
-
-
+      <Navbar />
+      <HeroSection />
+      <WorldDiplomats />
+      <Ourstages />
+      <EligibilityCriteria />
+      <BecomeDiplomets />
+      <OurYouthLeaders />
+      <OurImpact />
+      <Gallery />
+      <ContactUS />
     </>
   );
 }

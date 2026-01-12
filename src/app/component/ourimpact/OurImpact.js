@@ -41,30 +41,25 @@ const useCountUp = (end, active) => {
 // SINGLE CARD COMPONENT
 const ImpactCard = ({ value, label, visible, index }) => {
   const count = useCountUp(value, visible);
-const themeColors = [
-  { blob: '#EB1C2E', number: '#EB1C2E' }, // 0–7.69%
-  { blob: '#D4A02A', number: '#D4A02A' }, // 7.69–15.38%
-  { blob: '#279B48', number: '#279B48' }, // 15.38–23.07%
-  { blob: '#F44D24', number: '#F44D24' }, // 23.07–30.76%
-  { blob: '#00B0DA', number: '#00B0DA' }, // 30.76–38.46%
-  { blob: '#FDBD18', number: '#FDBD18' }  // 38.46–46.15%
-];
-
-  const color = themeColors[index % themeColors.length];
 
   return (
     <div
       className="dancing-card bg-white border border-gray-200 rounded-3xl
                  shadow-lg hover:shadow-2xl transition-all duration-300 p-2
-                 flex flex-col justify-center items-center overflow-hidden min-h-[120px] sm:min-h-[130px]"
+                 flex flex-col justify-center items-center overflow-hidden min-h-[120px] sm:min-h-[130px] relative"
       data-aos="fade-up"
       data-aos-delay={index * 100}
     >
+      {/* Decorative Blob from OurYouthLeaders */}
       <div
-        className="floating-blob absolute -top-7 -right-7 w-20 h-20 sm:w-24 sm:h-24 rounded-full opacity-60"
-        style={{ backgroundColor: color.blob }}
+        className="absolute -top-6 -right-6 w-20 h-20 sm:-top-8 sm:-right-8 sm:w-24 sm:h-24 lg:-top-10 lg:-right-10 lg:w-32 lg:h-32 rounded-full opacity-30"
+        style={{ backgroundColor: "#b00000" }}
       ></div>
-      <h3 className="font-extrabold relative z-10" style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)'}}>
+      <div
+        className="absolute top-6 -left-4 w-10 h-10 sm:top-8 sm:-left-5 sm:w-12 sm:h-12 lg:top-10 lg:-left-6 lg:w-16 lg:h-16 rounded-full opacity-20 bg-[#0D1B4C]"
+      ></div>
+
+      <h3 className="font-extrabold relative z-10 text-[#0d1b4c]" style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)' }}>
         {count}+
       </h3>
       <p className="text-gray-700 mt-2 relative z-10 flex text-sm sm:text-base" style={{ fontSize: 'clamp(0.8rem, 2.5vw, 1rem)', textAlign: 'center' }}>
@@ -92,11 +87,11 @@ const OurImpact = () => {
   }, []);
 
   return (
-    <section ref={ref} className="py-16 bg-[#F1F2F4] px-4 sm:px-8 lg:px-12  mx-auto relative" data-aos="fade-up">
-    
+    <section ref={ref} className="py-10 bg-[#F1F2F4] px-4 sm:px-8 lg:px-12  mx-auto relative" data-aos="fade-up">
 
 
-  <div className="text-center mb-12">
+
+      <div className="text-center mb-12">
         <h2
           className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl 
                      font-bold text-[#0d1b4c]"
@@ -104,20 +99,23 @@ const OurImpact = () => {
         >
           Our <span className="text-[#b00000]">Impact</span>
         </h2>
-        
 
-      
+
+
 
         {/* Decorative line */}
-       
+
       </div>
-      
+
 
       <div className="grid lg:grid-cols-3 gap-8">
 
         {/* LEFT BOX */}
         <div className="bg-white shadow-xl border border-gray-200 rounded-3xl p-6 sm:p-10 relative overflow-hidden flex flex-col justify-center" data-aos="fade-up" data-aos-delay="100">
-          <div className="absolute -top-8 -right-8 w-24 sm:w-28 h-24 sm:h-28 rounded-full opacity-60" style={{ backgroundColor: '#b00000' }}></div>
+          <div className="absolute -top-6 -right-6 w-20 h-20 sm:-top-8 sm:-right-8 sm:w-24 sm:h-24 lg:-top-10 lg:-right-10 lg:w-32 lg:h-32 rounded-full opacity-60" style={{ backgroundColor: '#b00000' }}></div>
+          {/* Blue Blob match */}
+          <div className="absolute top-6 -left-4 w-10 h-10 sm:top-8 sm:-left-5 sm:w-12 sm:h-12 lg:top-10 lg:-left-6 lg:w-16 lg:h-16 rounded-full opacity-20 bg-[#0D1B4C]"></div>
+
           <h3 className="mb-4 font-bold" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.25rem)' }}>
             Why We Matter
           </h3>
@@ -148,20 +146,6 @@ const OurImpact = () => {
           0% { transform: translateY(0px); }
           50% { transform: translateY(-4px); }
           100% { transform: translateY(0px); }
-        }
-        .floating-blob {
-          animation: blobDance 7s ease-in-out infinite;
-          transition: transform 0.7s ease;
-        }
-        .dancing-card:hover .floating-blob {
-          transform: translate(-40px, 30px) scale(1.2);
-        }
-        @keyframes blobDance {
-          0% { transform: translate(0px, 0px) scale(1); }
-          25% { transform: translate(6px, -4px) scale(1.05); }
-          50% { transform: translate(-4px, 6px) scale(1); }
-          75% { transform: translate(4px, -3px) scale(1.08); }
-          100% { transform: translate(0px, 0px) scale(1); }
         }
       `}</style>
     </section>

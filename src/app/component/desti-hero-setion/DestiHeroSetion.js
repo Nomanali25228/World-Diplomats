@@ -25,7 +25,7 @@ const DestiHeroSection = () => {
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/60 flex flex-col justify-center items-center text-center px-4">
-        
+
         {/* Main Heading */}
         <h1 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-4">
           World Diplomats
@@ -41,7 +41,7 @@ const DestiHeroSection = () => {
 
         {/* Date & Destination */}
         <p className="text-white/90 text-lg sm:text-xl md:text-2xl mb-8">
-          Istanbul, Turkey | 26th–29th March, 2026
+          Istanbul, Türkiye | 22nd–25th April, 2026
         </p>
 
         {/* Register Button */}

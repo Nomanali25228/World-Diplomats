@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 /* ===================== DATA ===================== */
 const destinations = [
-  "Istanbul, Turkey",
+  "Istanbul, Türkiye",
   "Dubai, UAE",
   "Kuala Lumpur, Malaysia",
   "London, UK",
@@ -14,12 +14,11 @@ const destinations = [
 ];
 
 const cities = [
-  'Istanbul, Turkey',
-  'London, UK',
-  'Riyadh, Saudi Arabia',
-  'Baku, Azerbaijan',
-  'Dubai, UAE',
-  'New York, USA',
+  "Istanbul, Türkiye",
+  "Dubai, UAE",
+  "Kuala Lumpur, Malaysia",
+  "London, UK",
+  "Riyadh, Saudi Arabia",
 ];
 
 /* ===================== Destinations Marquee ===================== */
@@ -113,30 +112,30 @@ const HeroSection = () => {
   }, []);
 
   useEffect(() => {
-  const currentCity = cities[currentCityIndex];
-  let timer;
+    const currentCity = cities[currentCityIndex];
+    let timer;
 
-  if (!isDeleting && charIndex < currentCity.length) {
-    timer = setTimeout(() => {
-      setCurrentText(prev => prev + currentCity[charIndex]);
-      setCharIndex(prev => prev + 1);
-    }, 70);
-  } else if (isDeleting && charIndex > 0) {
-    timer = setTimeout(() => {
-      setCurrentText(prev => prev.slice(0, -1));
-      setCharIndex(prev => prev - 1);
-    }, 50);
-  } else if (!isDeleting && charIndex === currentCity.length) {
-    timer = setTimeout(() => setIsDeleting(true), 1000);
-  } else if (isDeleting && charIndex === 0) {
-    timer = setTimeout(() => {
-      setIsDeleting(false);
-      setCurrentCityIndex(prev => (prev + 1) % cities.length);
-    }, 500);
-  }
+    if (!isDeleting && charIndex < currentCity.length) {
+      timer = setTimeout(() => {
+        setCurrentText(prev => prev + currentCity[charIndex]);
+        setCharIndex(prev => prev + 1);
+      }, 70);
+    } else if (isDeleting && charIndex > 0) {
+      timer = setTimeout(() => {
+        setCurrentText(prev => prev.slice(0, -1));
+        setCharIndex(prev => prev - 1);
+      }, 50);
+    } else if (!isDeleting && charIndex === currentCity.length) {
+      timer = setTimeout(() => setIsDeleting(true), 1000);
+    } else if (isDeleting && charIndex === 0) {
+      timer = setTimeout(() => {
+        setIsDeleting(false);
+        setCurrentCityIndex(prev => (prev + 1) % cities.length);
+      }, 500);
+    }
 
-  return () => clearTimeout(timer);
-}, [charIndex, isDeleting, currentCityIndex]);
+    return () => clearTimeout(timer);
+  }, [charIndex, isDeleting, currentCityIndex]);
 
   return (
     <>
@@ -150,7 +149,7 @@ const HeroSection = () => {
           loop
           playsInline
         >
-          <source src="/video/three.mp4" type="video/mp4" />
+          <source src="/video/one.mp4" type="video/mp4" />
         </video>
 
         {/* Overlay */}
@@ -191,17 +190,26 @@ const HeroSection = () => {
             >
               Diplomats
             </span>
+            {/* <span
+              className="
+                bg-gradient-to-r from-[#ff4d4d] to-[#b00000]
+                bg-clip-text text-transparent
+                drop-shadow-[0_0_10px_rgba(176,0,0,0.6)]
+              "
+            >
+              Diplomats
+            </span> */}
           </h1>
 
           {/* DATE */}
-         <p
-  data-aos="fade-up"
-  data-aos-delay="300"
-  className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg lg:text-xl font-bold text-gray-200"
->
-  26<sup className="text-[0.6em] align-super">th</sup> to 29
-  <sup className="text-[0.6em] align-super">th</sup> March, 2026 at Istanbul, Turkiye
-</p>
+          <p
+            data-aos="fade-up"
+            data-aos-delay="300"
+            className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg lg:text-xl font-bold text-gray-200"
+          >
+            22<sup className="text-[0.6em] align-super">nd</sup> to 25
+            <sup className="text-[0.6em] align-super">th</sup> April, 2026 at Istanbul, Türkiye
+          </p>
 
           {/* TYPING CITY */}
           <div className="text-center py-6">
@@ -221,13 +229,13 @@ const HeroSection = () => {
             className="flex flex-col mt-5 sm:flex-row gap-3 sm:gap-6 w-full justify-center"
           >
             <Link href="/Destinations" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-700 transition font-semibold shadow-lg">
+              <button className="  w-full cursor-pointer sm:w-auto px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-700 transition font-semibold shadow-lg">
                 Explore Conferences
               </button>
             </Link>
 
             <Link href="/Register-Now" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto px-6 py-3 rounded-full border border-white/50 hover:bg-white/20 backdrop-blur-md transition font-semibold">
+              <button className="w-full cursor-pointer sm:w-auto px-6 py-3 rounded-full border border-white/50 hover:bg-white/20  transition font-semibold">
                 Register Now
               </button>
             </Link>

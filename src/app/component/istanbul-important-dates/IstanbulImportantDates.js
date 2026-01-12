@@ -9,7 +9,7 @@ const IstanbulImportantDates = () => {
   const [openIndex, setOpenIndex] = useState(4);
 
   const { getDates } = useDestination();
-  const dates = getDates("Istanbul, Turkey") || {};
+  const dates = getDates("Istanbul, Türkiye") || {};
 
   const toggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -18,63 +18,63 @@ const IstanbulImportantDates = () => {
   return (
     <section className="bg-[#EEEEEE] py-20 px-4">
 
-       <div className="text-center mb-12 sm:mb-14">
-          <h2
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl
+      <div className="text-center mb-12 sm:mb-14">
+        <h2
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl
                        font-bold text-[#0d1b4c]"
-            data-aos="fade-up"
-          >
-            Preparation for World<span className="text-[#b00000]"> Diplomats</span>
-          </h2>
-        </div>
+          data-aos="fade-up"
+        >
+          Preparation for World<span className="text-[#b00000]"> Diplomats</span>
+        </h2>
+      </div>
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[0.9fr_1.3fr] gap-14">
 
         {/* LEFT SIDE (SMALLER) */}
         <div>
-        <p className="text-xs font-semibold text-gray-500 mb-2 tracking-widest text-center sm:text-left">
-  WORLD DIPLOMATS
-</p>
+          <p className="text-xs font-semibold text-gray-500 mb-2 tracking-widest text-center sm:text-left">
+            WORLD DIPLOMATS
+          </p>
 
-<h2 className="text-2xl md:text-3xl font-bold text-[#2C3E50] mb-6 leading-snug text-center sm:text-left">
-  Registrations and Important<br /> Dates
-</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#2C3E50] mb-6 leading-snug text-center sm:text-left">
+            Registrations and Important<br /> Dates
+          </h2>
 
 
- <div className="relative rounded-3xl overflow-hidden shadow-xl min-h-[220px]">
-  {/* Background Image */}
-  <Image
-    src={bgimportdates} // yaha apni image ka path do
-    alt="Background"
-    fill
-    className="object-cover z-0"
-    priority
-  />
+          <div className="relative rounded-3xl overflow-hidden shadow-xl min-h-[220px]">
+            {/* Background Image */}
+            <Image
+              src={bgimportdates} // yaha apni image ka path do
+              alt="Background"
+              fill
+              className="object-cover z-0"
+              priority
+            />
 
-  {/* Gradient Overlay */}
-  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-500 opacity-80 z-10"></div>
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-500 opacity-80 z-10"></div>
 
-  {/* Content */}
-      <div className="relative z-10 p-8 mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            {/* Content */}
+            <div className="relative z-10 p-8 mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
 
-    {/* Left Content */}
-    <div className="flex-1">
-      <p className="text-base sm:text-lg text-white leading-relaxed">
-        Registration for World Diplomats is now open. <br />
-        <strong>Deadline:</strong> {dates.registrationDeadline || "TBA"}
-      </p>
-    </div>
+              {/* Left Content */}
+              <div className="flex-1">
+                <p className="text-base sm:text-lg text-white leading-relaxed">
+                  Registration for World Diplomats is now open. <br />
+                  <strong>Deadline:</strong> {dates.registrationDeadline || "TBA"}
+                </p>
+              </div>
 
-    {/* Right Button */}
-      <div className="flex-shrink-0 self-stretch sm:self-auto flex items-center">
-      <Link href={dates.registerLink || "/Register-Now?destination=Istanbul,%20Turkey"}>
-        <button className="bg-white cursor-pointer text-blue-600 font-semibold hover:bg-gray-100 transition px-8 py-3 rounded-lg text-base shadow-lg">
-          Register Now
-        </button>
-      </Link>
-    </div>
+              {/* Right Button */}
+              <div className="flex-shrink-0 self-stretch sm:self-auto flex items-center">
+                <Link href={dates.registerLink || "/Register-Now?destination=Istanbul,%20Türkiye"}>
+                  <button className="bg-white cursor-pointer text-blue-600 font-semibold hover:bg-gray-100 transition px-8 py-3 rounded-lg text-base shadow-lg">
+                    Register Now
+                  </button>
+                </Link>
+              </div>
 
-  </div>
-</div>
+            </div>
+          </div>
 
 
 
@@ -126,7 +126,7 @@ const IstanbulImportantDates = () => {
                 </p>
 
                 <p>
-                  This extraordinary journey begins in Istanbul, Turkey, setting the stage for a global platform that aims to redefine MUN experiences worldwide.
+                  This extraordinary journey begins in Istanbul, Türkiye, setting the stage for a global platform that aims to redefine MUN experiences worldwide.
                 </p>
 
                 <p>
@@ -160,12 +160,12 @@ const IstanbulImportantDates = () => {
                   <strong>Location:</strong><br />
                   The World Diplomats conference will be organised at G Rotana Mahmutbey, 2664.Sokak, 34218 Bağcılar/İstanbul, Türkiye
                 </p>
-      <Link href="/Register-Now?destination=Istanbul,%20Turkey">
+                <Link href="/Register-Now?destination=Istanbul,%20Türkiye">
 
-                <button className="mt-4 bg-[#2563eb] cursor-pointer hover:bg-blue-700 transition px-7 py-3 rounded-lg text-white text-base">
-                  Register Now
-                </button>
-      </Link>
+                  <button className="mt-4 bg-[#2563eb] cursor-pointer hover:bg-blue-700 transition px-7 py-3 rounded-lg text-white text-base">
+                    Register Now
+                  </button>
+                </Link>
               </div>
             )}
 

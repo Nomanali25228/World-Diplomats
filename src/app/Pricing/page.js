@@ -4,18 +4,18 @@ import Navbar from "../component/navbar/Navbar";
 
 const pricingData = [
   {
-    destination: "Istanbul, Turkey",
-    date: "26th – 29th March 2026",
+    destination: "Istanbul, Türkiye",
+    date: "22nd – 25th April 2026",
     image: "/img/cardIstanbul.jpg",
     link: "/Istanbul-Turkey#pricing",
-    payNow: "Pay for Istanbul, Turkey"
+    payNow: "Pay for Istanbul, Türkiye"
   },
   {
     destination: "Dubai, UAE",
     date: "14th – 17th May 2026",
     image: "/img/cardDubai.jpg",
     link: "/Dubai-UAE#pricing",
-    payNow: "Pay for Dubai, UAE"  
+    payNow: "Pay for Dubai, UAE"
   },
   {
     destination: "Kuala Lumpur, Malaysia",
@@ -43,7 +43,7 @@ const pricingData = [
 
 const Card = ({ item }) => (
   <div className="relative w-72 h-[22rem] rounded-2xl overflow-hidden shadow-2xl group">
-    
+
     {/* Image */}
     <img
       src={item.image}
@@ -78,34 +78,34 @@ const Card = ({ item }) => (
 const page = () => {
   return (
     <>
-    <Navbar />
-    <section className="min-h-screen py-20 px-4 bg-gradient-to-br from-[#0d1b4c]  via-[#1a2a9c]  to-[#b00000]">
+      <Navbar />
+      <section className="min-h-screen py-20 px-4 bg-gradient-to-br from-[#0d1b4c]  via-[#1a2a9c]  to-[#b00000]">
 
-      {/* Heading */}
-      <div className="text-center mt-12 mb-16">
-  <h1 className="text-2xl sm:text-2xl md:text-4xl font-bold text-white">
-         Destinations Pricing 
-        </h1>
+        {/* Heading */}
+        <div className="text-center mt-12 mb-16">
+          <h1 className="text-2xl sm:text-2xl md:text-4xl font-bold text-white">
+            Destinations Pricing
+          </h1>
           <p className="mt-3 text-[12px] sm:text-md md:text-lg text-blue-200">
-          Select your destination and register today
-        </p>
-      </div>
+            Select your destination and register today
+          </p>
+        </div>
 
-      {/* Top Row – 3 Cards */}
-      <div className="flex justify-center gap-8 flex-wrap mb-10">
-        {pricingData.slice(0, 3).map((item, index) => (
-          <Card key={index} item={item} />
-        ))}
-      </div>
+        {/* Top Row – 3 Cards */}
+        <div className="flex justify-center gap-8 flex-wrap mb-10">
+          {pricingData.slice(0, 3).map((item, index) => (
+            <Card key={index} item={item} />
+          ))}
+        </div>
 
-      {/* Bottom Row – 2 Cards */}
-      <div className="flex justify-center gap-8 flex-wrap">
-        {pricingData.slice(3, 5).map((item, index) => (
-          <Card key={index} item={item} />
-        ))}
-      </div>
+        {/* Bottom Row – 2 Cards */}
+        <div className="flex justify-center gap-8 flex-wrap">
+          {pricingData.slice(3, 5).map((item, index) => (
+            <Card key={index} item={item} />
+          ))}
+        </div>
 
-    </section>
+      </section>
     </>
   );
 };

@@ -100,24 +100,21 @@ function Navbar() {
   const linkClass = (href) =>
     `relative text-white hover:text-[#60A5FA] transition
      after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-[#60A5FA] after:transition-all
-     ${
-       pathname === href
-         ? "text-[#60A5FA] after:w-full"
-         : "after:w-0 hover:after:w-full"
-     }`;
+     ${pathname === href
+      ? "text-[#60A5FA] after:w-full"
+      : "after:w-0 hover:after:w-full"
+    }`;
 
   const dropdownLinkClass = (href) =>
-    `block px-4 py-2 hover:text-[#60A5FA] transition ${
-      pathname === href ? "text-[#60A5FA]" : ""
+    `block px-4 py-2 hover:text-[#60A5FA] transition ${pathname === href ? "text-[#60A5FA]" : ""
     }`;
 
   const mobileDropdownLinkClass = (href) =>
     `block py-2 px-4 rounded transition-colors
-     ${
-       pathname === href
-         ? "bg-[#1a2a9c] text-white"
-         : "text-gray-200 hover:bg-[#e3f2fd] hover:text-[#0d1b4c]"
-     }`;
+     ${pathname === href
+      ? "bg-[#1a2a9c] text-white"
+      : "text-gray-200 hover:bg-[#e3f2fd] hover:text-[#0d1b4c]"
+    }`;
 
   const destinations = [
     "/Destinations",
@@ -141,7 +138,7 @@ function Navbar() {
   const { selectDestination, clearDestination } = useDestination();
 
   const PATH_TO_DEST = {
-    "/Istanbul-Turkey": "Istanbul, Turkey",
+    "/Istanbul-Turkey": "Istanbul, Türkiye",
     "/Dubai-UAE": "Dubai, UAE",
     "/Kuala-Lumpur-Malaysia": "Kuala Lumpur, Malaysia",
     "/London-UK": "London, UK",
@@ -163,246 +160,250 @@ function Navbar() {
   const parentClass = (active) =>
     `relative flex items-center space-x-1 cursor-pointer transition
      after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-[#60A5FA] after:transition-all
-     ${
-       active
-         ? "text-[#60A5FA] after:w-full"
-         : "text-white after:w-0 hover:after:w-full hover:text-[#60A5FA]"
-     }`;
+     ${active
+      ? "text-[#60A5FA] after:w-full"
+      : "text-white after:w-0 hover:after:w-full hover:text-[#60A5FA]"
+    }`;
   return (
     <nav
-    className={`fixed top-0 w-full z-[999] transition-transform duration-300 ${
-        showNav ? "translate-y-0" : "-translate-y-full"
-      } ${
-        isScrolled
+      className={`fixed top-0 w-full z-[999] transition-transform duration-300 ${showNav ? "translate-y-0" : "-translate-y-full"
+        } ${isScrolled
           ? "bg-[#071429f8] text-white shadow-md"
           : "bg-transparent text-white"
-      }`}
->
-  <div className="container mx-auto flex items-center justify-between px-2 py-4 lg:py-2">
-    {/* Logo */}
-    <Link href="/">
-<Image 
-  src={logo} 
-  alt="Logo" 
-  className="h-16 sm:h-20 md:h-24 w-auto max-w-[150px] object-contain"
-/>
-    </Link>
-
-    {/* Desktop Links */}
-    <div className="hidden lg:flex space-x-8 items-center">
-      <Link href="/" className={linkClass("/")}>
-        Home
-      </Link>
-
-      {/* Destinations Dropdown */}
-      <div
-        className="relative"
-        onMouseEnter={handleMouseEnter2}
-        onMouseLeave={handleMouseLeave2}
-      >
-        <Link
-          href="/Destinations"
-          className={parentClass(isDestinationActive)}
-        >
-          <span>Destinations</span>
-          {dropdownOpen2 ? (
-            <AiOutlineUp className="text-sm" />
-          ) : (
-            <AiOutlineDown className="text-sm" />
-          )}
+        }`}
+    >
+      <div className="container mx-auto flex items-center justify-between px-2 py-2 lg:py-1">
+        {/* Logo */}
+        <Link href="/">
+          <Image
+            src={logo}
+            alt="Logo"
+            className="h-20 sm:h-24 md:h-28 w-auto max-w-[170px] object-contain"
+          />
         </Link>
 
-        {dropdownOpen2 && (
-          <div className="absolute top-full mt-2 w-52 bg-white text-black rounded shadow-lg">
+        {/* Desktop Links */}
+        <div className="hidden lg:flex space-x-8 items-center">
+          <Link href="/" className={linkClass("/")}>
+            Home
+          </Link>
+
+          {/* Destinations Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={handleMouseEnter2}
+            onMouseLeave={handleMouseLeave2}
+          >
             <Link
-              href="/Istanbul-Turkey"
-              className={dropdownLinkClass("/Istanbul-Turkey")}
+              href="/Destinations"
+              className={parentClass(isDestinationActive)}
             >
-              Istanbul, Turkey
+              <span>Destinations</span>
+              {dropdownOpen2 ? (
+                <AiOutlineUp className="text-sm" />
+              ) : (
+                <AiOutlineDown className="text-sm" />
+              )}
             </Link>
-            <Link
-              href="/Dubai-UAE"
-              className={dropdownLinkClass("/Dubai-UAE")}
-            >
-              Dubai, UAE
-            </Link>
-            <Link
-              href="/Kuala-Lumpur-Malaysia"
-              className={dropdownLinkClass("/Kuala-Lumpur-Malaysia")}
-            >
-              Kuala Lumpur, Malaysia
-            </Link>
-            <Link href="/London-UK" className={dropdownLinkClass("/London-UK")}>
-              London, UK
-            </Link>
-            <Link href="/Riyadh-Saudi-Arabia" className={dropdownLinkClass("/Riyadh-Saudi-Arabia")}>
-              Riyadh, Saudi Arabia
-            </Link>
+
+            {dropdownOpen2 && (
+              <div className="absolute top-full mt-2 w-52 bg-white text-black rounded shadow-lg">
+                <Link
+                  href="/Istanbul-Turkey"
+                  className={dropdownLinkClass("/Istanbul-Turkey")}
+                >
+                  Istanbul, Türkiye
+                </Link>
+                <Link
+                  href="/Dubai-UAE"
+                  className={dropdownLinkClass("/Dubai-UAE")}
+                >
+                  Dubai, UAE
+                </Link>
+                <Link
+                  href="/Kuala-Lumpur-Malaysia"
+                  className={dropdownLinkClass("/Kuala-Lumpur-Malaysia")}
+                >
+                  Kuala Lumpur, Malaysia
+                </Link>
+                <Link href="/London-UK" className={dropdownLinkClass("/London-UK")}>
+                  London, UK
+                </Link>
+                <Link href="/Riyadh-Saudi-Arabia" className={dropdownLinkClass("/Riyadh-Saudi-Arabia")}>
+                  Riyadh, Saudi Arabia
+                </Link>
+              </div>
+            )}
           </div>
-        )}
+
+          {/* Blog Link with Active State Logic */}
+          <Link
+            href="/Blogs/1"
+            className={`relative transition
+              after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-[#60A5FA] after:transition-all
+              ${pathname?.startsWith("/Blogs") || pathname?.startsWith("/blog")
+                ? "text-[#60A5FA] after:w-full"
+                : "text-white after:w-0 hover:after:w-full hover:text-[#60A5FA]"
+              }`}
+          >
+            Blog
+          </Link>
+
+          {/* Information Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={handleMouseEnter1}
+            onMouseLeave={handleMouseLeave1}
+          >
+            <button className={parentClass(isInfoActive)}>
+              <span>Information</span>
+              {dropdownOpen ? (
+                <AiOutlineUp className="text-sm" />
+              ) : (
+                <AiOutlineDown className="text-sm" />
+              )}
+            </button>
+
+            {dropdownOpen && (
+              <div className="absolute top-full mt-2 w-44 bg-white text-black rounded shadow-lg">
+                <Link
+                  href="/Pricing"
+                  className={dropdownLinkClass("/Pricing")}
+                >
+                  Pricing
+                </Link>
+
+                <Link
+                  href="/FAQs"
+                  className={dropdownLinkClass("/FAQs")}
+                >
+                  FAQs
+                </Link>
+
+                <Link
+                  href="/Terms&Conditions"
+                  className={dropdownLinkClass("/Terms&Conditions")}
+                >
+                  Terms & Conditions
+                </Link>
+                <Link
+                  href="/Privacy-Policy"
+                  className={dropdownLinkClass("/Privacy-Policy")}
+                >
+                  Privacy Policy
+                </Link>
+              </div>
+            )}
+          </div>
+
+          <Link href="/About-US" className={linkClass("/AboutUs")}>
+            About Us
+          </Link>
+
+          <Link href="/Scholarships" className={linkClass("/Scholarships")}>
+            Scholarships
+          </Link>
+        </div>
+
+        {/* Desktop Register Button */}
+        <div className="hidden lg:block">
+          <Link href="/Register-Now">
+            <button
+              onClick={handleRegisterNow}
+              className={`cursor-pointer font-semibold py-1 px-4 rounded-full border-2 border-blue-600 transition ${isRegisterActive
+                ? "bg-transparent text-white"
+                : "bg-blue-600 text-white hover:bg-transparent hover:text-white"
+                }`}
+            >
+              Register Now
+            </button>
+          </Link>
+        </div>
+
+        {/* Mobile Top Bar */}
+        <div className="relative flex items-center justify-between lg:hidden w-full">
+          <div className="absolute left-1/3 transform -translate-x-1/3">
+            <button
+              onClick={handleRegisterNow}
+              className={`font-semibold py-2 px-3 rounded-full border-2 border-blue-600 transition text-[12px] sm:text-sm ${isRegisterActive
+                ? "bg-transparent text-white"
+                : "bg-blue-600 text-white hover:bg-transparent hover:text-white"
+                }`}
+            >
+              Register Now
+            </button>
+          </div>
+
+          <button
+            className="text-white ml-auto"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {!mobileMenuOpen && <AiOutlineMenu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
 
-      <Link href="/Blogs/1" className={linkClass("/Blogs/1")}>
-        Blog
-      </Link>
+      {/* Mobile Menu */}
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden fixed inset-0 z-50 flex justify-center items-start pt-6 px-4">
+          {/* inset-0 = पूरी स्क्रीन, px-4 = साइड्स से margin */}
+          <div className="w-full max-w-md bg-[#0c1629] text-white rounded-lg p-6 h-[calc(100vh-2.5rem)] overflow-y-auto shadow-xl">
+            {/* Close Button */}
+            <div className="flex justify-end mb-4">
+              <button onClick={() => setMobileMenuOpen(false)}>
+                <AiOutlineClose className="w-6 h-6 text-white" />
+              </button>
+            </div>
 
-      {/* Information Dropdown */}
-      <div
-        className="relative"
-        onMouseEnter={handleMouseEnter1}
-        onMouseLeave={handleMouseLeave1}
-      >
-        <button className={parentClass(isInfoActive)}>
-          <span>Information</span>
-          {dropdownOpen ? (
-            <AiOutlineUp className="text-sm" />
-          ) : (
-            <AiOutlineDown className="text-sm" />
-          )}
-        </button>
+            <nav className="space-y-4">
+              <Link href="/" className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors">Home</Link>
 
-        {dropdownOpen && (
-          <div className="absolute top-full mt-2 w-44 bg-white text-black rounded shadow-lg">
-            <Link
-              href="/Pricing"
-              className={dropdownLinkClass("/Pricing")}
-            >
-              Pricing
-            </Link>
+              {/* Destinations */}
+              <button
+                className="flex justify-between w-full items-center py-2 px-4 rounded hover:bg-[#1e2a4d]"
+                onClick={() => setMobileDropdownOpen2(!mobileDropdownOpen2)}
+              >
+                <span>Destinations</span>
+                {mobileDropdownOpen2 ? <AiOutlineUp /> : <AiOutlineDown />}
+              </button>
+              {mobileDropdownOpen2 && (
+                <div className="ml-4 space-y-2">
+                  <Link href="/Istanbul-Turkey" className={mobileDropdownLinkClass("/Istanbul-Turkey")}>Istanbul, Türkiye</Link>
+                  <Link href="/Dubai-UAE" className={mobileDropdownLinkClass("/Dubai-UAE")}>Dubai, UAE</Link>
+                  <Link href="/Kuala-Lumpur-Malaysia" className={mobileDropdownLinkClass("/Kuala-Lumpur-Malaysia")}>Kuala Lumpur, Malaysia</Link>
+                  <Link href="/London-UK" className={mobileDropdownLinkClass("/London-UK")}>London, UK</Link>
+                  <Link href="/Riyadh-Saudi-Arabia" className={mobileDropdownLinkClass("/Riyadh-Saudi-Arabia")}>Riyadh, Saudi Arabia</Link>
+                </div>
+              )}
 
-             <Link
-              href="/FAQs"
-              className={dropdownLinkClass("/FAQs")}
-            >
-              FAQs
-            </Link>
+              <Link href="/Blogs/1" className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors">Blog</Link>
 
-            <Link
-              href="/Terms&Conditions"
-              className={dropdownLinkClass("/Terms&Conditions")}
-            >
-              Terms & Conditions
-            </Link>
-            <Link
-              href="/Privacy-Policy"
-              className={dropdownLinkClass("/Privacy-Policy")}
-            >
-              Privacy Policy
-            </Link>
+              {/* Information */}
+              <button
+                className="flex justify-between w-full items-center py-2 px-4 rounded hover:bg-[#1e2a4d]"
+                onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
+              >
+                <span>Information</span>
+                {mobileDropdownOpen ? <AiOutlineUp /> : <AiOutlineDown />}
+              </button>
+              {mobileDropdownOpen && (
+                <div className="ml-4 space-y-2">
+                  <Link href="/Pricing" className={mobileDropdownLinkClass("/Pricing")}>Pricing</Link>
+                  <Link href="/FAQs" className={mobileDropdownLinkClass("/FAQs")}>FAQs</Link>
+                  <Link href="/Terms&Conditions" className={mobileDropdownLinkClass("/Terms&Conditions")}>Terms & Conditions</Link>
+                  <Link href="/Privacy-Policy" className={mobileDropdownLinkClass("/Privacy-Policy")}>Privacy Policy</Link>
+                </div>
+              )}
+
+              <Link href="/About-US" className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors">About Us</Link>
+              <Link href="/Scholarships" className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors">Scholarships</Link>
+            </nav>
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
-      <Link href="/About-US" className={linkClass("/AboutUs")}>
-        About Us
-      </Link>
-
-      <Link href="/Scholarships" className={linkClass("/Scholarships")}>
-        Scholarships
-      </Link>
-    </div>
-
-    {/* Desktop Register Button */}
-    <div className="hidden lg:block">
-      <Link href="/Register-Now">
-      <button
-        onClick={handleRegisterNow}
-        className={`cursor-pointer font-semibold py-1 px-4 rounded-full border-2 border-blue-600 transition ${
-          isRegisterActive
-            ? "bg-transparent text-white"
-            : "bg-blue-600 text-white hover:bg-transparent hover:text-white"
-        }`}
-      >
-        Register Now
-      </button>
-      </Link>
-    </div>
-
-    {/* Mobile Top Bar */}
-    <div className="relative flex items-center justify-between lg:hidden w-full">
-      <div className="absolute left-1/3 transform -translate-x-1/3">
-        <button
-          onClick={handleRegisterNow}
-          className={`font-semibold py-2 px-3 rounded-full border-2 border-blue-600 transition text-[12px] sm:text-sm ${
-            isRegisterActive
-              ? "bg-transparent text-white"
-              : "bg-blue-600 text-white hover:bg-transparent hover:text-white"
-          }`}
-        >
-          Register Now
-        </button>
-      </div>
-
-      <button
-        className="text-white ml-auto"
-        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-      >
-        {!mobileMenuOpen && <AiOutlineMenu className="w-6 h-6" />}
-      </button>
-    </div>
-  </div>
-
-  {/* Mobile Menu */}
-{/* Mobile Menu */}
-{mobileMenuOpen && (
-  <div className="lg:hidden fixed inset-0 z-50 flex justify-center items-start pt-6 px-4">
-  {/* inset-0 = पूरी स्क्रीन, px-4 = साइड्स से margin */}
-    <div className="w-full max-w-md bg-[#0c1629] text-white rounded-lg p-6 h-[calc(100vh-2.5rem)] overflow-y-auto shadow-xl">
-      {/* Close Button */}
-      <div className="flex justify-end mb-4">
-        <button onClick={() => setMobileMenuOpen(false)}>
-          <AiOutlineClose className="w-6 h-6 text-white" />
-        </button>
-      </div>
-
-      <nav className="space-y-4">
-        <Link href="/" className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors">Home</Link>
-
-        {/* Destinations */}
-        <button
-          className="flex justify-between w-full items-center py-2 px-4 rounded hover:bg-[#1e2a4d]"
-          onClick={() => setMobileDropdownOpen2(!mobileDropdownOpen2)}
-        >
-          <span>Destinations</span>
-          {mobileDropdownOpen2 ? <AiOutlineUp /> : <AiOutlineDown />}
-        </button>
-        {mobileDropdownOpen2 && (
-          <div className="ml-4 space-y-2">
-            <Link href="/Istanbul-Turkey" className={mobileDropdownLinkClass("/Istanbul-Turkey")}>Istanbul, Turkey</Link>
-            <Link href="/Dubai-UAE" className={mobileDropdownLinkClass("/Dubai-UAE")}>Dubai, UAE</Link>
-            <Link href="/Kuala-Lumpur-Malaysia" className={mobileDropdownLinkClass("/Kuala-Lumpur-Malaysia")}>Kuala Lumpur, Malaysia</Link>
-            <Link href="/London-UK" className={mobileDropdownLinkClass("/London-UK")}>London, UK</Link>
-            <Link href="/Riyadh-Saudi-Arabia" className={mobileDropdownLinkClass("/Riyadh-Saudi-Arabia")}>Riyadh, Saudi Arabia</Link>
-          </div>
-        )}
-
-        <Link href="/Blogs/1" className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors">Blog</Link>
-
-        {/* Information */}
-        <button
-          className="flex justify-between w-full items-center py-2 px-4 rounded hover:bg-[#1e2a4d]"
-          onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
-        >
-          <span>Information</span>
-          {mobileDropdownOpen ? <AiOutlineUp /> : <AiOutlineDown />}
-        </button>
-        {mobileDropdownOpen && (
-          <div className="ml-4 space-y-2">
-            <Link href="/Pricing" className={mobileDropdownLinkClass("/Pricing")}>Pricing</Link>
-            <Link href="/FAQs" className={mobileDropdownLinkClass("/FAQs")}>FAQs</Link>
-            <Link href="/Terms&Conditions" className={mobileDropdownLinkClass("/Terms&Conditions")}>Terms & Conditions</Link>
-            <Link href="/Privacy-Policy" className={mobileDropdownLinkClass("/Privacy-Policy")}>Privacy Policy</Link>
-          </div>
-        )}
-
-        <Link href="/About-US" className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors">About Us</Link>
-        <Link href="/Scholarships" className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors">Scholarships</Link>
-      </nav>
-    </div>
-  </div>
-)}
-
-</nav>
+    </nav>
 
   );
 }

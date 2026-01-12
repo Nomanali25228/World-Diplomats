@@ -13,7 +13,7 @@ import Whatsapp from '@/app/component/whatsapp/Whatsapp';
 
 
 import { useEffect, useState } from "react";
-import { getPostBySlug } from "@/app/lib/api"; // Import your API function
+import { getPostBySlug, getPostById } from "@/app/lib/api"; // Import your API function
 import { useParams } from "next/navigation"; // Import the useParams hook
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -42,14 +42,14 @@ const BlogPostPage = () => {
 
 
 
- 
 
 
 
 
 
 
-    
+
+
 
 
   // blog///////////////////////////////////////////////////////////////////////////
@@ -62,12 +62,18 @@ const BlogPostPage = () => {
     const fetchPost = async () => {
       if (slug) {
         try {
-          // Fetch the post using the slug
+          // Try fetching by slug first
           const fetchedPost = await getPostBySlug(slug);
           setPost(fetchedPost);
-        } catch (err) {
-          setError("Error fetching post.");
-          console.log(err);
+        } catch (slugError) {
+          // If slug fetch fails, try fetching by ID (assuming slug param might be an ID)
+          try {
+            const fetchedPostById = await getPostById(slug);
+            setPost(fetchedPostById);
+          } catch (idError) {
+            setError(`Error fetching post: ${idError.message}`);
+            console.log(idError);
+          }
         } finally {
           setLoading(false);
         }
@@ -90,8 +96,8 @@ const BlogPostPage = () => {
     <>
 
       {/* Navbar */}
-      <Navbar/>
-   
+      <Navbar />
+
 
       <header
         className="relative bg-cover bg-center min-h-screen flex items-center justify-center"
@@ -101,7 +107,7 @@ const BlogPostPage = () => {
         }}
       >
         {/* Overlay only on background image */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0d1b4c]/95 via-[#1a2a9c]/85 to-[#b00000]/80"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0d1b4c]/95 via-[#1a2a9c]/85 to-[#b00000]/80"></div>
 
 
 
@@ -120,7 +126,14 @@ const BlogPostPage = () => {
               <div className="relative h-[40%] w-[90%] sm:w-[60%] -mt-24 sm:-mt-32 mb-6">
                 <img
 
-                  src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${post.cover.url}`}
+                  src={(() => {
+                    const cover = post.cover;
+                    const url = cover?.url || cover?.data?.attributes?.url || cover?.data?.url;
+                    if (!url) return "";
+                    if (url.startsWith('http')) return url;
+                    const baseUrl = (process.env.NEXT_PUBLIC_STRAPI_URL || 'https://world-diplomats-backend.onrender.com').replace(/\/$/, '');
+                    return `${baseUrl}${url.startsWith('/') ? '' : '/'}${url}`;
+                  })()}
                   alt={post.title}
                   width={260} // specify the width
                   height={200} // specify the height
@@ -157,43 +170,43 @@ const BlogPostPage = () => {
           </p>
 
           {/* Content Section */}
-         <div className="leading-[30px] sm:leading-[40px] prose prose-invert prose-purple max-w-full">
-  <Markdown
-    remarkPlugins={[remarkGfm]}
-    rehypePlugins={[rehypeRaw]}
-    components={{
-      code({ inline, className, children, ...props }) {
-        const match = /language-(\w+)/.exec(className || "");
-        const codeString = String(children).replace(/\n$/, "");
+          <div className="leading-[30px] sm:leading-[40px] prose prose-invert prose-purple max-w-full">
+            <Markdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeRaw]}
+              components={{
+                code({ inline, className, children, ...props }) {
+                  const match = /language-(\w+)/.exec(className || "");
+                  const codeString = String(children).replace(/\n$/, "");
 
-        return !inline && match ? (
-          <div className="relative">
-            <button
-              onClick={() => handleCopyCode(codeString)}
-              className="absolute top-2 right-2 bg-gray-700 text-white p-1 rounded-md hover:bg-gray-600"
+                  return !inline && match ? (
+                    <div className="relative">
+                      <button
+                        onClick={() => handleCopyCode(codeString)}
+                        className="absolute top-2 right-2 bg-gray-700 text-white p-1 rounded-md hover:bg-gray-600"
+                      >
+                        <FaClipboard />
+                      </button>
+                      <SyntaxHighlighter
+                        style={dracula}
+                        language={match[1]}
+                        PreTag="div"
+                        {...props}
+                      >
+                        {codeString}
+                      </SyntaxHighlighter>
+                    </div>
+                  ) : (
+                    <code className={className} {...props}>
+                      {children}
+                    </code>
+                  );
+                },
+              }}
             >
-              <FaClipboard />
-            </button>
-            <SyntaxHighlighter
-              style={dracula}
-              language={match[1]}
-              PreTag="div"
-              {...props}
-            >
-              {codeString}
-            </SyntaxHighlighter>
+              {post.content}
+            </Markdown>
           </div>
-        ) : (
-          <code className={className} {...props}>
-            {children}
-          </code>
-        );
-      },
-    }}
-  >
-    {post.content}
-  </Markdown>
-</div>
 
 
           {/* Back Button */}
@@ -230,7 +243,7 @@ const BlogPostPage = () => {
         </div>
       </header>
 
-      
+
     </>
   );
 };

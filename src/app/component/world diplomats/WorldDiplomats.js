@@ -29,8 +29,8 @@ const WorldDiplomats = () => {
               left-1/2 transform -translate-x-1/2
               w-[95%] sm:w-[85%] md:w-[80%] lg:w-[800px]
               max-w-full
-              bg-[#0d1b4c]/25
-              backdrop-blur-sm
+              bg-[#0d1b4c]/55
+              
               p-6 sm:p-8 md:p-10 lg:p-12
               rounded-t-[30px]
               shadow-2xl

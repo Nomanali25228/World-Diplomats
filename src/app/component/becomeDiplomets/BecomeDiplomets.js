@@ -10,7 +10,7 @@ const BecomeDiplomets = () => {
   const { selectDestination } = useDestination();
 
   const PATH_TO_DEST = {
-    "/Istanbul-Turkey": "Istanbul, Turkey",
+    "/Istanbul-Turkey": "Istanbul, Türkiye",
     "/Dubai-UAE": "Dubai, UAE",
     "/Kuala-Lumpur-Malaysia": "Kuala Lumpur, Malaysia",
     "/London-UK": "London, UK",

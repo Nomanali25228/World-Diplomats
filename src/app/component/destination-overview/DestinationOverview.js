@@ -15,8 +15,8 @@ const DestinationOverview = ({
   });
 
   return (
-    <section className="relative py-20 sm:py-24 lg:py-28 px-4 sm:px-6 lg:px-12 
-      bg-gradient-to-b from-[#e3f2fd] to-[#F1F2F4]">
+    <section className="relative py-10 sm:py-12 lg:py-15 px-4 sm:px-6 lg:px-12 
+      bg-[#EBEBEB]">
 
       {/* SECTION HEADER */}
       <div className="text-center mb-16">
@@ -26,12 +26,12 @@ const DestinationOverview = ({
           data-aos="fade-up"
         >
           {title}
-                    <span className="text-[#b00000]"> Overview</span>
+          <span className="text-[#b00000]"> Overview</span>
 
         </h2>
 
         {/* Divider */}
-        
+
       </div>
 
       {/* CARDS GRID */}

@@ -52,7 +52,7 @@ const Footer = () => {
           </h3>
           <ul className="space-y-4 text-base">
             {[
-              ["Istanbul, Turkey", "/Istanbul-Turkey"],
+              ["Istanbul, Türkiye", "/Istanbul-Turkey"],
               ["Dubai, UAE", "/Dubai-UAE"],
               ["Kuala Lumpur, Malaysia", "/Kuala-Lumpur-Malaysia"],
               ["London, UK", "/London-UK"],

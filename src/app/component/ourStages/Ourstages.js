@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 
-import bg from "../../../../public/img/Ourstages.jpg";
+import bg from "../../../../public/img/Ourstages.png";
 import istanbul from "../../../../public/img/Istanbul-Hero-Section.jpg";
 import dubai from "../../../../public/img/Dubai-Hero-Section.jpg";
 import malaysia from "../../../../public/img/Malaysia-Hero-Section.jpg";
@@ -11,9 +11,9 @@ import riyadh from "../../../../public/img/Riyadh-Hero-Section.jpg";
 
 const destinations = [
   {
-    title: "Istanbul, Turkey",
+    title: "Istanbul, Türkiye",
     image: istanbul,
-    date: "26th - 29th March 2026",
+    date: "22nd – 25th April 2026",
     slug: "Istanbul-Turkey",
   },
   {
