@@ -57,8 +57,8 @@ const DestinationPrice = ({
               {Basic}
             </p>
 
-            <p className="text-sm text-gray-400 text-center line-through mb-1">
-              {getOriginalPrice(Basic)} Early Applicant Discount
+            <p className="text-sm text-gray-400 text-center mb-1">
+              <span className="line-through">{getOriginalPrice(Basic)}</span> Early Applicant Discount
             </p>
 
             <span className="text-xs text-gray-500 mb-6 text-center block">
@@ -117,8 +117,8 @@ const DestinationPrice = ({
               {DelegateAccommodationExperience}
             </p>
 
-            <p className="text-sm text-gray-400 text-center line-through mb-1">
-              {getOriginalPrice(DelegateAccommodationExperience)} Early Applicant Discount
+            <p className="text-sm text-gray-400 text-center mb-1">
+              <span className="line-through">{getOriginalPrice(DelegateAccommodationExperience)}</span> Early Applicant Discount
             </p>
 
             <span className="text-xs text-gray-500 mb-6 text-center block">
@@ -159,8 +159,8 @@ const DestinationPrice = ({
               {DelegatefullExperience}
             </p>
 
-            <p className="text-sm text-gray-400 text-center line-through mb-1">
-              {getOriginalPrice(DelegatefullExperience)} Early Applicant Discount
+            <p className="text-sm text-gray-400 text-center mb-1">
+              <span className="line-through">{getOriginalPrice(DelegatefullExperience)}</span> Early Applicant Discount
             </p>
 
             <span className="text-xs text-gray-500 mb-6 text-center block">

@@ -140,7 +140,7 @@ const page = () => {
         img3={hotelx2}
         img4={hotelx5}
         map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.290112078169!2d46.72617367442707!3d24.78557934825164!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2efdbf823ed409%3A0x832121db88558104!2s6623%20Eastern%20Ring%20Rd%2C%20Ghirnatah%2C%20Riyadh%2013241%2C%20Saudi%20Arabia!5e1!3m2!1sen!2s!4v1766952557982!5m2!1sen!2s"
-        hname="6623 Eastern Ring Rd, Saudi Arabia"
+        hname="Hilton Riyadh Hotel"
         disc="The venue is near Granada Mall and Granada Metro Station, with Riyadh’s Financial Plaza and major cultural attractions within easy reach"
       />
 

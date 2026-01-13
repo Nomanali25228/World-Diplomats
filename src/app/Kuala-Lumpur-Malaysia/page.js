@@ -29,7 +29,7 @@ const page = () => {
   const heroData = {
     title: "Kuala Lumpur",
     subtitle: "Malaysia",
-    dates: "09 - 10 - 11 - 12 July, 2026",
+    dates: "TBD July 2026",
     agenda: "Conference Agenda: Diplomacy in an Era of Armed Conflict, Human Rights Accountability, and Global Systemic Resilience.",
     bgImage: MalaysiabgImage,
     registerlinke: "/Register-Now?destination=Kuala%20Lumpur,%20Malaysia",

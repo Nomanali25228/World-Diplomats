@@ -21,55 +21,60 @@ const LondonImportantDates = () => {
 
         {/* LEFT SIDE (SMALLER) */}
         <div>
-        <p className="text-xs font-semibold text-gray-500 mb-2 tracking-widest text-center sm:text-left">
-  WORLD DIPLOMATS
-</p>
+          <p className="text-xs font-semibold text-gray-500 mb-2 tracking-widest text-center sm:text-left">
+            WORLD DIPLOMATS
+          </p>
 
-<h2 className="text-2xl md:text-3xl font-bold text-[#2C3E50] mb-6 leading-snug text-center sm:text-left">
-  Registrations and Important<br /> Dates
-</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#2C3E50] mb-6 leading-snug text-center sm:text-left">
+            Registrations and Important<br /> Dates
+          </h2>
 
 
- <div className="relative rounded-3xl overflow-hidden shadow-xl min-h-[220px]">
-  {/* Background Image */}
-  <Image
-    src={bgimportdates} // yaha apni image ka path do
-    alt="Background"
-    fill
-    className="object-cover z-0"
-    priority
-  />
+          <div className="relative rounded-3xl overflow-hidden shadow-xl min-h-[220px]">
+            {/* Background Image */}
+            <Image
+              src={bgimportdates} // yaha apni image ka path do
+              alt="Background"
+              fill
+              className="object-cover z-0"
+              priority
+            />
 
-  {/* Gradient Overlay */}
-  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-500 opacity-80 z-10"></div>
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-500 opacity-80 z-10"></div>
 
-  {/* Content */}
-  <div className="relative z-10 p-8 mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-    
-{/* Registration for World Diplomats Emirates
+            {/* Content */}
+            <div className="relative z-10 p-8 mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+
+              {/* Registration for World Diplomats Emirates
 Early Bird Registration Deadline: January 15th, 2026
  */}
 
 
-    {/* Left Content */}
-    <div className="flex-1">
-      <p className="text-base sm:text-lg text-white leading-relaxed">
-        Registration for World Diplomats is now open. <br />
-        <strong>Deadline:</strong> {dates.registrationDeadline || "TBA"}
-      </p>
-    </div>
+              {/* Left Content */}
+              <div className="flex-1">
+                <p className="text-base sm:text-lg text-white leading-relaxed">
+                  Registration for World Diplomats is now open.
+                  {dates.registrationDeadline && (
+                    <>
+                      <br />
+                      <strong>Deadline:</strong> {dates.registrationDeadline}
+                    </>
+                  )}
+                </p>
+              </div>
 
-    {/* Right Button */}
-      <div className="flex-shrink-0 self-stretch sm:self-auto flex items-center">
-      <Link href={dates.registerLink || "/Register-Now?destination=London,%20UK"}>
-        <button className="bg-white cursor-pointer text-blue-600 font-semibold hover:bg-gray-100 transition px-8 py-3 rounded-lg text-base shadow-lg">
-          Register Now
-        </button>
-      </Link>
-    </div>
+              {/* Right Button */}
+              <div className="flex-shrink-0 self-stretch sm:self-auto flex items-center">
+                <Link href={dates.registerLink || "/Register-Now?destination=London,%20UK"}>
+                  <button className="bg-white cursor-pointer text-blue-600 font-semibold hover:bg-gray-100 transition px-8 py-3 rounded-lg text-base shadow-lg">
+                    Register Now
+                  </button>
+                </Link>
+              </div>
 
-  </div>
-</div>
+            </div>
+          </div>
 
 
 
@@ -93,95 +98,95 @@ Early Bird Registration Deadline: January 15th, 2026
               </span>
             </button>
 
-           {openIndex === 0 && (
-  <div className="px-8 py-7 bg-white text-gray-700 text-base leading-relaxed space-y-5">
+            {openIndex === 0 && (
+              <div className="px-8 py-7 bg-white text-gray-700 text-base leading-relaxed space-y-5">
 
-    <p>
-      <strong>Registration for World Diplomats</strong>
-    </p>
+                <p>
+                  <strong>Registration for World Diplomats</strong>
+                </p>
 
-    <p>
-      <strong>Who Can Join World Diplomats?</strong><br />
-      World Diplomats welcomes participants from all backgrounds. Whether you are in middle school, high school, university, or simply someone passionate about global affairs, diplomacy, and leadership, this program is designed to offer a meaningful learning experience for everyone. World Diplomats goes beyond traditional student-focused simulations, opening its doors to any individual who wants to take part in one of the world’s most ambitious and expansive UN simulation programs.
-    </p>
+                <p>
+                  <strong>Who Can Join World Diplomats?</strong><br />
+                  World Diplomats welcomes participants from all backgrounds. Whether you are in middle school, high school, university, or simply someone passionate about global affairs, diplomacy, and leadership, this program is designed to offer a meaningful learning experience for everyone. World Diplomats goes beyond traditional student-focused simulations, opening its doors to any individual who wants to take part in one of the world’s most ambitious and expansive UN simulation programs.
+                </p>
 
-    <p>
-      <strong>Four Levels. One Global Experience.</strong><br />
-      World Diplomats offers three tailored simulations:<br />
-      Junior Diplomats (Middle School)<br />
-      Senior Diplomats (High School)<br />
-      Advanced Diplomats (University)<br />
-      Individual Delegates (No Institutions)
-    </p>
+                <p>
+                  <strong>Four Levels. One Global Experience.</strong><br />
+                  World Diplomats offers three tailored simulations:<br />
+                  Junior Diplomats (Middle School)<br />
+                  Senior Diplomats (High School)<br />
+                  Advanced Diplomats (University)<br />
+                  Individual Delegates (No Institutions)
+                </p>
 
-    <p>
-      While each level is structured separately, all simulations run simultaneously, creating a dynamic and diverse environment where delegates of varying ages and backgrounds learn, collaborate, and grow together.
-    </p>
+                <p>
+                  While each level is structured separately, all simulations run simultaneously, creating a dynamic and diverse environment where delegates of varying ages and backgrounds learn, collaborate, and grow together.
+                </p>
 
-    <p>
-      <strong>A Global Platform for Diplomacy</strong><br />
-      Designed as the largest UN simulation initiative in the world, World Diplomats provides professional training and committee sessions held entirely in English. Delegates will engage in high-level debates, develop critical thinking and leadership skills, and immerse themselves in real-world global challenges, all while being part of a truly international diplomatic community.
-    </p>
+                <p>
+                  <strong>A Global Platform for Diplomacy</strong><br />
+                  Designed as the largest UN simulation initiative in the world, World Diplomats provides professional training and committee sessions held entirely in English. Delegates will engage in high-level debates, develop critical thinking and leadership skills, and immerse themselves in real-world global challenges, all while being part of a truly international diplomatic community.
+                </p>
 
-    <p>
-      This extraordinary journey begins in <strong>London, England</strong>, setting the stage for a global platform that aims to redefine MUN experiences worldwide.
-    </p>
+                <p>
+                  This extraordinary journey begins in <strong>London, England</strong>, setting the stage for a global platform that aims to redefine MUN experiences worldwide.
+                </p>
 
-    <p>
-      <strong>Registration</strong><br />
-      <em>For Students:</em> Choose your preferred package, complete the form, and secure your spot at World Diplomats.<br /><br />
-      <em>For Teachers & Delegation Leaders:</em> Use the delegation option to register your entire group efficiently.
-    </p>
+                <p>
+                  <strong>Registration</strong><br />
+                  <em>For Students:</em> Choose your preferred package, complete the form, and secure your spot at World Diplomats.<br /><br />
+                  <em>For Teachers & Delegation Leaders:</em> Use the delegation option to register your entire group efficiently.
+                </p>
 
-    <p>
-      <strong>Start Your Diplomatic Journey</strong><br />
-      Join us in shaping the world’s largest and most transformative UN simulation experience. Step into diplomacy, expand your perspectives, and become part of a global movement. We look forward to welcoming you to World Diplomats.
-    </p>
+                <p>
+                  <strong>Start Your Diplomatic Journey</strong><br />
+                  Join us in shaping the world’s largest and most transformative UN simulation experience. Step into diplomacy, expand your perspectives, and become part of a global movement. We look forward to welcoming you to World Diplomats.
+                </p>
 
-    <Link href="/Register-Now?destination=London,%20UK">
-      <button className="mt-4 bg-[#2563eb] cursor-pointer hover:bg-blue-700 transition px-7 py-3 rounded-lg text-white text-base">
-        Register Now
-      </button>
-    </Link>
+                <Link href="/Register-Now?destination=London,%20UK">
+                  <button className="mt-4 bg-[#2563eb] cursor-pointer hover:bg-blue-700 transition px-7 py-3 rounded-lg text-white text-base">
+                    Register Now
+                  </button>
+                </Link>
 
-    <p>
-      <strong>Visa Information for World Diplomats Participants</strong><br />
-      Participation in World Diplomats does not require a study visa. Delegates will need to apply for a tourist or conference visa to enter the United Kingdom, unless they are from a visa-exempt country.
-    </p>
+                <p>
+                  <strong>Visa Information for World Diplomats Participants</strong><br />
+                  Participation in World Diplomats does not require a study visa. Delegates will need to apply for a tourist or conference visa to enter the United Kingdom, unless they are from a visa-exempt country.
+                </p>
 
-    <p>
-      Citizens of the European Union may travel freely within EU and Schengen Area countries using a valid national ID card or passport. However, as the United Kingdom is no longer a member of the European Union, EU citizens are required to review and comply with UK entry and visa requirements prior to travel. Delegates from South Asian countries are likewise advised to verify the applicable UK visa and entry regulations in advance.
-    </p>
+                <p>
+                  Citizens of the European Union may travel freely within EU and Schengen Area countries using a valid national ID card or passport. However, as the United Kingdom is no longer a member of the European Union, EU citizens are required to review and comply with UK entry and visa requirements prior to travel. Delegates from South Asian countries are likewise advised to verify the applicable UK visa and entry regulations in advance.
+                </p>
 
-    <p>
-      If you are a non-EU citizen, you should consult the official UK government visa portal to determine whether you need an e-Visa or a standard embassy/consulate visa.
-    </p>
+                <p>
+                  If you are a non-EU citizen, you should consult the official UK government visa portal to determine whether you need an e-Visa or a standard embassy/consulate visa.
+                </p>
 
-    <p>
-      <strong>Visa Support Letter from World Diplomats</strong><br />
-      Once you register, World Diplomats can issue an official confirmation-of-participation letter to support your visa application. This letter does not guarantee visa approval and cannot replace an official visa. Visas are granted only by the relevant government authorities.
-    </p>
+                <p>
+                  <strong>Visa Support Letter from World Diplomats</strong><br />
+                  Once you register, World Diplomats can issue an official confirmation-of-participation letter to support your visa application. This letter does not guarantee visa approval and cannot replace an official visa. Visas are granted only by the relevant government authorities.
+                </p>
 
-    <p>
-      <strong>How to Request Your Visa Support Letter</strong><br />
-      1- Register yourself or your delegation for World Diplomats and confirm your participation by completing the payment.<br />
-      2- After we receive your payment, send an email to{" "}
-      <a href="mailto:info@worlddiplomats.org" className="text-blue-600 underline">
-        info@worlddiplomats.org
-      </a>{" "}
-      or contact us on WhatsApp at (number) to request your letter.<br />
-      3- Our Secretariat will process your request within 2–3 working days and send you the document.
-    </p>
+                <p>
+                  <strong>How to Request Your Visa Support Letter</strong><br />
+                  1- Register yourself or your delegation for World Diplomats and confirm your participation by completing the payment.<br />
+                  2- After we receive your payment, send an email to{" "}
+                  <a href="mailto:info@worlddiplomats.org" className="text-blue-600 underline">
+                    info@worlddiplomats.org
+                  </a>{" "}
+                  or contact us on WhatsApp at (number) to request your letter.<br />
+                  3- Our Secretariat will process your request within 2–3 working days and send you the document.
+                </p>
 
-    <p>
-      <strong>Location:</strong><br />
-      The World Diplomats conference will be organised at<br />
-      140 Bath Rd, Heathrow, Harlington,<br />
-      Hayes UB3 5AW, United Kingdom
-    </p>
+                <p>
+                  <strong>Location:</strong><br />
+                  The World Diplomats conference will be organised at<br />
+                  140 Bath Rd, Heathrow, Harlington,<br />
+                  Hayes UB3 5AW, United Kingdom
+                </p>
 
-  </div>
-)}
+              </div>
+            )}
 
 
 
@@ -202,69 +207,71 @@ Early Bird Registration Deadline: January 15th, 2026
             </button>
 
             {openIndex === 1 && (
-  <div className="px-8 py-7 bg-white text-gray-700 text-base leading-relaxed space-y-5">
+              <div className="px-8 py-7 bg-white text-gray-700 text-base leading-relaxed space-y-5">
 
-    <p>
-      <strong>Preparation for World Diplomats</strong>
-    </p>
+                <p>
+                  <strong>Preparation for World Diplomats</strong>
+                </p>
 
-    <p>
-      <strong>General Information</strong><br />
-      Once you receive your country and committee assignments, each delegate must submit a Position Paper representing their nation’s official stance on the committee topic. This document should briefly outline key issues, your country’s policies, and any relevant international agreements or resolutions that support your position. It should also include practical recommendations your country would advocate for during the conference.
-    </p>
+                <p>
+                  <strong>General Information</strong><br />
+                  Once you receive your country and committee assignments, each delegate must submit a Position Paper representing their nation’s official stance on the committee topic. This document should briefly outline key issues, your country’s policies, and any relevant international agreements or resolutions that support your position. It should also include practical recommendations your country would advocate for during the conference.
+                </p>
 
-    <p>
-      <strong>Format and Guidelines</strong>
-    </p>
+                <p>
+                  <strong>Format and Guidelines</strong>
+                </p>
 
-    <ul className="list-disc pl-6 space-y-1">
-      <li>The length of the document must not exceed one page.</li>
-      <li>Standard margins, with Arial 10pt font and justified text.</li>
-      <li>The inclusion of the flag or national coat of arms in the header is accepted.</li>
-      <li>The represented country, the committee, and the topic must be clearly indicated before the text.</li>
-      <li>
-        Do not include citations or bibliography: the Position Paper is a political statement and must be written as if it were a real diplomatic representative writing it; it is not an academic paper.
-      </li>
-      <li>The document must be submitted in a PDF format.</li>
-      <li>Each delegate may submit only one Position Paper related to their assignment.</li>
-      <li>Each delegate will represent the country in the committee individually.</li>
-    </ul>
+                <ul className="list-disc pl-6 space-y-1">
+                  <li>The length of the document must not exceed one page.</li>
+                  <li>Standard margins, with Arial 10pt font and justified text.</li>
+                  <li>The inclusion of the flag or national coat of arms in the header is accepted.</li>
+                  <li>The represented country, the committee, and the topic must be clearly indicated before the text.</li>
+                  <li>
+                    Do not include citations or bibliography: the Position Paper is a political statement and must be written as if it were a real diplomatic representative writing it; it is not an academic paper.
+                  </li>
+                  <li>The document must be submitted in a PDF format.</li>
+                  <li>Each delegate may submit only one Position Paper related to their assignment.</li>
+                  <li>Each delegate will represent the country in the committee individually.</li>
+                </ul>
 
-    <p>
-      Please note that Position Papers must consist entirely of original writing. Based on their research, delegates must develop their own ideas and recommendations and present them in their own words.
-    </p>
+                <p>
+                  Please note that Position Papers must consist entirely of original writing. Based on their research, delegates must develop their own ideas and recommendations and present them in their own words.
+                </p>
 
-    <p>
-      <strong>Deadline for submitting Position Papers:</strong> 25th August, 2026 at 23:59
-    </p>
+                {dates.positionPaperDeadline && (
+                  <p>
+                    <strong>Deadline for submitting Position Papers:</strong> {dates.positionPaperDeadline}
+                  </p>
+                )}
 
-    <p>
-      <strong>Disclaimer:</strong>
-    </p>
+                <p>
+                  <strong>Disclaimer:</strong>
+                </p>
 
-    <ul className="list-disc pl-6 space-y-1">
-      <li>Get a personalized quote for flights, accommodation and transfers only if you need them.</li>
-      <li>
-        Write to us at{" "}
-        <a href="mailto:info@worlddiplomats.org" className="text-blue-600 underline">
-          info@worlddiplomats.org
-        </a>{" "}
-        and we will give you all the support you need.
-      </li>
-      <li>
-        Include our MUN in your program to incentivize and encourage students to embrace active citizenship and develop soft skills through an innovative and exciting training program like the Simulation.
-      </li>
-      <li>
-        Write to us at{" "}
-        <a href="mailto:info@worlddiplomats.org" className="text-blue-600 underline">
-          info@worlddiplomats.org
-        </a>{" "}
-        to become our official partner.
-      </li>
-    </ul>
+                <ul className="list-disc pl-6 space-y-1">
+                  <li>Get a personalized quote for flights, accommodation and transfers only if you need them.</li>
+                  <li>
+                    Write to us at{" "}
+                    <a href="mailto:info@worlddiplomats.org" className="text-blue-600 underline">
+                      info@worlddiplomats.org
+                    </a>{" "}
+                    and we will give you all the support you need.
+                  </li>
+                  <li>
+                    Include our MUN in your program to incentivize and encourage students to embrace active citizenship and develop soft skills through an innovative and exciting training program like the Simulation.
+                  </li>
+                  <li>
+                    Write to us at{" "}
+                    <a href="mailto:info@worlddiplomats.org" className="text-blue-600 underline">
+                      info@worlddiplomats.org
+                    </a>{" "}
+                    to become our official partner.
+                  </li>
+                </ul>
 
-  </div>
-)}
+              </div>
+            )}
 
 
           </div>
@@ -283,87 +290,87 @@ Early Bird Registration Deadline: January 15th, 2026
               </span>
             </button>
 
-           {openIndex === 2 && (
-  <div className="px-8 py-7 bg-white text-base space-y-6">
+            {openIndex === 2 && (
+              <div className="px-8 py-7 bg-white text-base space-y-6">
 
-    <h3 className="font-semibold text-[#0b1d4d] text-xl mb-4">
-      Conference Schedule and Committee Topics of Discussion
-    </h3>
+                <h3 className="font-semibold text-[#0b1d4d] text-xl mb-4">
+                  Conference Schedule and Committee Topics of Discussion
+                </h3>
 
-    <p className="font-semibold mb-4">Preliminary Schedule:</p>
+                <p className="font-semibold mb-4">Preliminary Schedule:</p>
 
-    {[
-      {
-        day: "Day 1",
-        items: [
-          ["02:00 pm – 03:00 pm", "Arrival and Registrations"],
-          ["03:00 pm – 04:00 pm", "Check-In"],
-          ["05:00 pm – 06:00 pm", "Preparation Opening Ceremony"],
-          ["06:00 pm – 07:00 pm", "Opening Ceremony"],
-          ["07:00 pm – 08:00 pm", "Opening Dinner"],
-          ["08:00 pm – 09:00 pm", "Masquerade Prom Dance"],
-          ["09:00 pm – 10:00 pm", "Ice Breaking – First Committee Session"],
-          ["10:00 pm – Onwards", "Free Night"],
-        ],
-      },
-      {
-        day: "Day 2",
-        items: [
-          ["06:00 am – 08:00 am", "Breakfast"],
-          ["08:00 am – 09:00 am", "Committee Session Preparation"],
-          ["09:00 am – 11:00 am", "Committee Session 2"],
-          ["11:00 am – 11:30 am", "Break"],
-          ["11:30 am – 01:30 pm", "Committee Session 3"],
-          ["01:30 pm – 03:00 pm", "Lunch"],
-          ["03:00 pm – 04:30 pm", "Committee Session 4"],
-          ["04:30 pm – 04:45 pm", "Break"],
-          ["04:45 pm – 05:30 pm", "Crisis Session"],
-          ["05:30 pm – 06:15 pm", "Preparation for Cultural Global Village"],
-          ["06:30 pm – 07:30 pm", "Awarding Ceremony"],
-          ["07:30 pm – 08:15 pm", "Dinner"],
-          ["08:15 pm – 11:00 pm", "Cultural Global Village"],
-        ],
-      },
-      {
-        day: "Day 3",
-        items: [
-          ["06:00 am – 08:00 am", "Breakfast"],
-          ["08:00 am – 09:00 am", "Lobby for City Tour"],
-          ["09:00 am – 01:00 pm", "London Tower Bridge"],
-          ["01:00 pm – 03:00 pm", "London Eye"],
-          ["03:00 pm – 06:00 pm", "Big Ben"],
-          ["06:00 pm – 08:00 pm", "Dinner"],
-          ["09:00 pm – Onwards", "Back to Hotel"],
-        ],
-      },
-      {
-        day: "Day 4",
-        items: [
-          ["06:00 am – 09:00 am", "Breakfast"],
-          ["12:00 pm – Onwards", "Check-Out"],
-        ],
-      },
-    ].map((day, idx) => (
-      <div key={idx}>
-        <h4 className="font-semibold text-[#2563eb] mb-3 text-lg">{day.day}</h4>
-        <div className="space-y-2">
-          {day.items.map((item, i) => (
-            <div
-              key={i}
-              className="flex gap-6 bg-[#f1f3f8] rounded-lg px-5 py-3"
-            >
-              <span className="w-40 sm:w-48 font-semibold text-[#2563eb]">
-                {item[0]}
-              </span>
-              <span className="text-gray-700">{item[1]}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    ))}
+                {[
+                  {
+                    day: "Day 1",
+                    items: [
+                      ["02:00 pm – 03:00 pm", "Arrival and Registrations"],
+                      ["03:00 pm – 04:00 pm", "Check-In"],
+                      ["05:00 pm – 06:00 pm", "Preparation Opening Ceremony"],
+                      ["06:00 pm – 07:00 pm", "Opening Ceremony"],
+                      ["07:00 pm – 08:00 pm", "Opening Dinner"],
+                      ["08:00 pm – 09:00 pm", "Masquerade Prom Dance"],
+                      ["09:00 pm – 10:00 pm", "Ice Breaking – First Committee Session"],
+                      ["10:00 pm – Onwards", "Free Night"],
+                    ],
+                  },
+                  {
+                    day: "Day 2",
+                    items: [
+                      ["06:00 am – 08:00 am", "Breakfast"],
+                      ["08:00 am – 09:00 am", "Committee Session Preparation"],
+                      ["09:00 am – 11:00 am", "Committee Session 2"],
+                      ["11:00 am – 11:30 am", "Break"],
+                      ["11:30 am – 01:30 pm", "Committee Session 3"],
+                      ["01:30 pm – 03:00 pm", "Lunch"],
+                      ["03:00 pm – 04:30 pm", "Committee Session 4"],
+                      ["04:30 pm – 04:45 pm", "Break"],
+                      ["04:45 pm – 05:30 pm", "Crisis Session"],
+                      ["05:30 pm – 06:15 pm", "Preparation for Cultural Global Village"],
+                      ["06:30 pm – 07:30 pm", "Awarding Ceremony"],
+                      ["07:30 pm – 08:15 pm", "Dinner"],
+                      ["08:15 pm – 11:00 pm", "Cultural Global Village"],
+                    ],
+                  },
+                  {
+                    day: "Day 3",
+                    items: [
+                      ["06:00 am – 08:00 am", "Breakfast"],
+                      ["08:00 am – 09:00 am", "Lobby for City Tour"],
+                      ["09:00 am – 01:00 pm", "London Tower Bridge"],
+                      ["01:00 pm – 03:00 pm", "London Eye"],
+                      ["03:00 pm – 06:00 pm", "Big Ben"],
+                      ["06:00 pm – 08:00 pm", "Dinner"],
+                      ["09:00 pm – Onwards", "Back to Hotel"],
+                    ],
+                  },
+                  {
+                    day: "Day 4",
+                    items: [
+                      ["06:00 am – 09:00 am", "Breakfast"],
+                      ["12:00 pm – Onwards", "Check-Out"],
+                    ],
+                  },
+                ].map((day, idx) => (
+                  <div key={idx}>
+                    <h4 className="font-semibold text-[#2563eb] mb-3 text-lg">{day.day}</h4>
+                    <div className="space-y-2">
+                      {day.items.map((item, i) => (
+                        <div
+                          key={i}
+                          className="flex gap-6 bg-[#f1f3f8] rounded-lg px-5 py-3"
+                        >
+                          <span className="w-40 sm:w-48 font-semibold text-[#2563eb]">
+                            {item[0]}
+                          </span>
+                          <span className="text-gray-700">{item[1]}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
 
-  </div>
-)}
+              </div>
+            )}
 
 
 
@@ -384,89 +391,89 @@ Early Bird Registration Deadline: January 15th, 2026
               </span>
             </button>
 
-           {openIndex === 3 && (
-  <div className="px-8 py-7 bg-white text-gray-700 text-base leading-relaxed space-y-6">
+            {openIndex === 3 && (
+              <div className="px-8 py-7 bg-white text-gray-700 text-base leading-relaxed space-y-6">
 
-    {/* UNHRC */}
-    <h3 className="font-semibold text-[#0b1d4d] text-lg">
-      1. UN Human Rights Council (UNHRC)
-    </h3>
+                {/* UNHRC */}
+                <h3 className="font-semibold text-[#0b1d4d] text-lg">
+                  1. UN Human Rights Council (UNHRC)
+                </h3>
 
-    <p className="font-semibold">
-      Committee Agenda: “Safeguarding Human Rights Amid Global Conflict and Emerging Technologies.”
-    </p>
+                <p className="font-semibold">
+                  Committee Agenda: “Safeguarding Human Rights Amid Global Conflict and Emerging Technologies.”
+                </p>
 
-    <ul className="list-disc pl-6 space-y-2">
-      <li>
-        <span className="font-semibold">
-          The Protection of Civilian Rights in Ongoing Conflict Zones
-        </span>
-        <br />
-        Addressing human rights violations in war-torn regions, refugee protection,
-        humanitarian access, etc.
-      </li>
-      <li>
-        <span className="font-semibold">
-          Safeguarding Freedom of Movement, Access to Basic Services, and Human Dignity
-          in the Occupied Palestinian Territory
-        </span>
-      </li>
-    </ul>
+                <ul className="list-disc pl-6 space-y-2">
+                  <li>
+                    <span className="font-semibold">
+                      The Protection of Civilian Rights in Ongoing Conflict Zones
+                    </span>
+                    <br />
+                    Addressing human rights violations in war-torn regions, refugee protection,
+                    humanitarian access, etc.
+                  </li>
+                  <li>
+                    <span className="font-semibold">
+                      Safeguarding Freedom of Movement, Access to Basic Services, and Human Dignity
+                      in the Occupied Palestinian Territory
+                    </span>
+                  </li>
+                </ul>
 
-    {/* UNSC */}
-    <h3 className="font-semibold text-[#0b1d4d] text-lg">
-      2. United Nations Security Council (UNSC)
-    </h3>
+                {/* UNSC */}
+                <h3 className="font-semibold text-[#0b1d4d] text-lg">
+                  2. United Nations Security Council (UNSC)
+                </h3>
 
-    <p className="font-semibold">
-      Committee Agenda: “Strengthening International Peace and Security in a Multipolar World.”
-    </p>
+                <p className="font-semibold">
+                  Committee Agenda: “Strengthening International Peace and Security in a Multipolar World.”
+                </p>
 
-    <ul className="list-disc pl-6 space-y-2">
-      <li>
-        <span className="font-semibold">
-          Reforming UN Peacekeeping to Respond to Modern Conflicts
-        </span>
-        <br />
-        Mandate modernization, accountability, rules of engagement.
-      </li>
-      <li>
-        <span className="font-semibold">
-          The Threat of Nuclear Proliferation Amid Rising Geopolitical Tensions
-        </span>
-        <br />
-        North Korea, Iran, nuclear modernization by major powers.
-      </li>
-    </ul>
+                <ul className="list-disc pl-6 space-y-2">
+                  <li>
+                    <span className="font-semibold">
+                      Reforming UN Peacekeeping to Respond to Modern Conflicts
+                    </span>
+                    <br />
+                    Mandate modernization, accountability, rules of engagement.
+                  </li>
+                  <li>
+                    <span className="font-semibold">
+                      The Threat of Nuclear Proliferation Amid Rising Geopolitical Tensions
+                    </span>
+                    <br />
+                    North Korea, Iran, nuclear modernization by major powers.
+                  </li>
+                </ul>
 
-    {/* WHO */}
-    <h3 className="font-semibold text-[#0b1d4d] text-lg">
-      3. World Health Organization (WHO)
-    </h3>
+                {/* WHO */}
+                <h3 className="font-semibold text-[#0b1d4d] text-lg">
+                  3. World Health Organization (WHO)
+                </h3>
 
-    <p className="font-semibold">
-      Committee Agenda: “Building Resilient Global Health Systems for Future Pandemics.”
-    </p>
+                <p className="font-semibold">
+                  Committee Agenda: “Building Resilient Global Health Systems for Future Pandemics.”
+                </p>
 
-    <ul className="list-disc pl-6 space-y-2">
-      <li>
-        <span className="font-semibold">
-          Mental Health as a Global Health Priority
-        </span>
-        <br />
-        Post-pandemic mental health crisis, youth mental health, stigma reduction.
-      </li>
-      <li>
-        <span className="font-semibold">
-          Strengthening Health Systems in Low-Income Countries
-        </span>
-        <br />
-        Financing mechanisms, health worker shortages, universal health coverage (UHC).
-      </li>
-    </ul>
+                <ul className="list-disc pl-6 space-y-2">
+                  <li>
+                    <span className="font-semibold">
+                      Mental Health as a Global Health Priority
+                    </span>
+                    <br />
+                    Post-pandemic mental health crisis, youth mental health, stigma reduction.
+                  </li>
+                  <li>
+                    <span className="font-semibold">
+                      Strengthening Health Systems in Low-Income Countries
+                    </span>
+                    <br />
+                    Financing mechanisms, health worker shortages, universal health coverage (UHC).
+                  </li>
+                </ul>
 
-  </div>
-)}
+              </div>
+            )}
 
 
           </div>

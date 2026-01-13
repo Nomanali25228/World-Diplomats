@@ -65,11 +65,11 @@ const ContactUS = () => {
       title: "Facebook",
       value: (
         <a
-          href="https://www.facebook.com/worlddiplomats"
+          href="https://www.facebook.com/profile.php?id=61585300508391"
           target="_blank"
-          className="hover:text-[#1a2a9c] transition hover:underline"
+          className="hover:text-[#1a2a9c] transition hover:underline text-[12px] sm:text-sm"
         >
-          facebook/worlddiplomats
+          World Diplomats
         </a>
       ),
     },
@@ -78,11 +78,11 @@ const ContactUS = () => {
       title: "Instagram",
       value: (
         <a
-          href="https://www.instagram.com/worlddiplomatsmun"
+          href="https://www.instagram.com/worlddiplomats_?igsh=M3ppbG5hcmp5bnJr"
           target="_blank"
-          className="hover:text-[#1a2a9c] transition hover:underline"
+          className="hover:text-[#1a2a9c] transition hover:underline text-[12px] sm:text-sm"
         >
-          instagram/worlddiplomatsmun
+          @worlddiplomats_
         </a>
       ),
     },

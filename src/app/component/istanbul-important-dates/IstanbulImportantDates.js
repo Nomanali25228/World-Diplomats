@@ -59,8 +59,13 @@ const IstanbulImportantDates = () => {
               {/* Left Content */}
               <div className="flex-1">
                 <p className="text-base sm:text-lg text-white leading-relaxed">
-                  Registration for World Diplomats is now open. <br />
-                  <strong>Deadline:</strong> {dates.registrationDeadline || "TBA"}
+                  Registration for World Diplomats is now open.
+                  {dates.registrationDeadline && (
+                    <>
+                      <br />
+                      <strong>Deadline:</strong> {dates.registrationDeadline}
+                    </>
+                  )}
                 </p>
               </div>
 
@@ -211,10 +216,12 @@ const IstanbulImportantDates = () => {
                   Please note that Position Papers must consist entirely of original writing. Based on their research, delegates must develop their own ideas and recommendations and present them in their own words.
                 </p>
 
-                <p>
-                  <strong>Deadline for submitting Position Papers:</strong><br />
-                  {dates.positionPaperDeadline || "TBA"} at 23:59
-                </p>
+                {dates.positionPaperDeadline && (
+                  <p>
+                    <strong>Deadline for submitting Position Papers:</strong><br />
+                    {dates.positionPaperDeadline} at 23:59
+                  </p>
+                )}
 
                 <p className="italic text-gray-500">
                   Need help? <a href="mailto:info@worlddiplomats.org" className="text-blue-600 underline">info@worlddiplomats.org</a>

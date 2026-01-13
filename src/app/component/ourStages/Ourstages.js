@@ -25,7 +25,7 @@ const destinations = [
   {
     title: "Kuala Lumpur, Malaysia",
     image: malaysia,
-    date: "9th – 12th July 2026",
+    date: "TBD July 2026",
     slug: "Kuala-Lumpur-Malaysia",
   },
   {
@@ -37,7 +37,7 @@ const destinations = [
   {
     title: "Riyadh, Saudi Arabia",
     image: riyadh,
-    date: "TBD – 21 October 2026",
+    date: "TBD October 2026",
     slug: "Riyadh-Saudi-Arabia",
   },
 ];

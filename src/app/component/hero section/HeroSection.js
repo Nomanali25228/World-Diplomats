@@ -159,8 +159,8 @@ const HeroSection = () => {
         <div className="relative z-20 max-w-4xl w-full px-4 sm:px-6 text-center flex flex-col items-center">
 
           {/* WORLD DIPLOMATS */}
-          <div data-aos="fade-up" className="mb-2">
-            <span className="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-widest">
+          <div data-aos="fade-up" className="mb-2 sm:mb-2">
+            <span className="text-3xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold sm:font-bold tracking-widest uppercase sm:normal-case text-white">
               WORLD <span>DIPLOMATS</span>
             </span>
           </div>
@@ -170,17 +170,16 @@ const HeroSection = () => {
             data-aos="fade-up"
             data-aos-delay="150"
             className="
-              text-center font-bold leading-tight
-              text-[26px]
-              sm:text-4xl
-              md:text-5xl
-              lg:text-6xl
+              text-center font-black sm:font-bold leading-tight
+              text-[32px] sm:text-4xl md:text-5xl lg:text-6xl
+              uppercase sm:normal-case
               whitespace-normal sm:whitespace-nowrap
             "
           >
             <span className="text-white">
               Crowning the Future{" "}
             </span>
+            <br className="sm:hidden" />
             <span
               className="
                 bg-gradient-to-r from-blue-400 to-cyan-300
@@ -190,22 +189,13 @@ const HeroSection = () => {
             >
               Diplomats
             </span>
-            {/* <span
-              className="
-                bg-gradient-to-r from-[#ff4d4d] to-[#b00000]
-                bg-clip-text text-transparent
-                drop-shadow-[0_0_10px_rgba(176,0,0,0.6)]
-              "
-            >
-              Diplomats
-            </span> */}
           </h1>
 
           {/* DATE */}
           <p
             data-aos="fade-up"
             data-aos-delay="300"
-            className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg lg:text-xl font-bold text-gray-200"
+            className="mt-4 sm:mt-4 text-sm sm:text-base md:text-lg lg:text-xl font-bold text-gray-200"
           >
             22<sup className="text-[0.6em] align-super">nd</sup> to 25
             <sup className="text-[0.6em] align-super">th</sup> April, 2026 at Istanbul, Türkiye
@@ -215,7 +205,7 @@ const HeroSection = () => {
           <div className="text-center py-6">
             <h1
               data-aos="fade-down"
-              className="text-3xl lg:text-4xl font-bold text-white bg-clip-text text-transparent"
+              className="text-4xl sm:text-3xl lg:text-4xl font-bold text-white"
             >
               {currentText}
               <span className="animate-pulse">|</span>

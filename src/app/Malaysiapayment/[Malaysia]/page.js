@@ -226,8 +226,8 @@ function PlanCard({
       <p className="text-center text-4xl font-extrabold text-[#1a2a9c] mt-4">
         ${price}
       </p>
-      <p className="text-sm text-gray-400 text-center line-through mb-1">
-        ${price + 200} Early Applicant Discount
+      <p className="text-sm text-gray-400 text-center mb-1">
+        <span className="line-through">${price + 200}</span> Early Applicant Discount
       </p>
 
       <ul className="mt-6 space-y-2 text-sm text-gray-600">

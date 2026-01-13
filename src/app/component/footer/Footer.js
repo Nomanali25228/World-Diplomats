@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../../../public/img/logo3.png";
+import logo from "../../../../public/img/logo4.png";
 import unbg from "../../../../public/img/unbg.png";
 
 import {
@@ -10,11 +10,13 @@ import {
   FaInstagram,
   FaTiktok,
 } from "react-icons/fa";
+import { SiThreads } from "react-icons/si";
+
 
 const Footer = () => {
   return (
     <footer
-      className="relative text-gray-300 px-6 pt-12 pb-2 min-h-[560px] overflow-hidden"
+      className="relative text-gray-300 px-6 pt-12 pb-2 min-h-[500px] overflow-hidden"
       style={{ backgroundColor: "#071429" }}
     >
       {/* GRADIENT OVERLAY */}
@@ -33,11 +35,15 @@ const Footer = () => {
       <div className="relative z-10 max-w-[1400px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16">
 
         {/* LOGO + ABOUT */}
-        <div>
-          <Link href="/">
-            <Image src={logo} alt="Logo" className="w-18 " />
+        <div className="flex flex-col">
+          <Link href="/" className="inline-block p-0 -mt-8 -ml-2">
+            <Image
+              src={logo}
+              alt="Logo"
+              className="h-24 sm:h-28 w-auto max-w-[220px] object-contain block"
+            />
           </Link>
-          <p className="text-base leading-loose max-w-sm">
+          <p className="text-base leading-relaxed max-w-sm -mt-4">
             The United Nations simulation organised by{" "}
             <b>World Diplomats</b> is globally recognised for its exceptional
             quality and strong commitment to preparing future diplomats for
@@ -137,14 +143,17 @@ const Footer = () => {
 
           {/* SOCIAL ICONS */}
           <div className="flex gap-5 mt-6 text-2xl">
-            <a href="https://www.facebook.com/worlddiplomats" target="_blank">
+            <a href="https://www.facebook.com/profile.php?id=61585300508391" target="_blank">
               <FaFacebookF className="hover:text-white transition" />
             </a>
-            <a href="https://www.instagram.com/worlddiplomatsmun" target="_blank">
+            <a href="https://www.instagram.com/worlddiplomats_?igsh=M3ppbG5hcmp5bnJr" target="_blank">
               <FaInstagram className="hover:text-white transition" />
             </a>
             <a href="https://www.tiktok.com/@worlddiplomatsmun" target="_blank">
               <FaTiktok className="hover:text-white transition" />
+            </a>
+            <a href="https://www.threads.net/@worlddiplomats_" target="_blank">
+              <SiThreads className="hover:text-white transition" />
             </a>
           </div>
         </div>
@@ -156,7 +165,7 @@ const Footer = () => {
           © Copyright <span className="text-white">World Diplomats</span>. All
           Rights Reserved
           <br />
-          A project of <span className="text-blue-400">World Diplomats</span>
+          A project of <span className="text-blue-400"> Globenix Youth Forum Ltd</span>
         </div>
       </div>
     </footer>

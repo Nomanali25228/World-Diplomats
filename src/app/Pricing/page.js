@@ -19,7 +19,7 @@ const pricingData = [
   },
   {
     destination: "Kuala Lumpur, Malaysia",
-    date: "9th – 12th July 2026",
+    date: "TBD July 2026",
     image: "/img/cardMalaysia.jpg",
     link: "/Kuala-Lumpur-Malaysia#pricing",
     payNow: "Pay for Kuala Lumpur, Malaysia"

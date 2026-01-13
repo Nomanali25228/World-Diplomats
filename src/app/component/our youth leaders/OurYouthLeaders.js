@@ -87,12 +87,10 @@ const OurYouthLeaders = () => {
                     src={speaker.img}
                     alt={speaker.name}
                     className="
-                      max-h-full
-                      max-w-full
-                      w-auto
-                      h-auto
-                      object-contain
-                      object-bottom
+                      w-full
+                      h-full
+                      object-cover
+                      object-top
                       transition-transform duration-500
                       group-hover:scale-105
                     "

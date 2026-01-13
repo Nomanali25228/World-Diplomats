@@ -33,7 +33,7 @@ const DEST_API_MAP = {
 const DEST_DATE_MAP = {
   "Istanbul, Türkiye": "22nd – 25th April 2026",
   "Dubai, UAE": "14th – 17th May 2026",
-  "Kuala Lumpur, Malaysia": "9th – 12th July 2026",
+  "Kuala Lumpur, Malaysia": "TBD July 2026",
   "London, UK": "TBD September 2026",
   "Riyadh, Saudi Arabia": "TBD October 2026",
 };
@@ -911,14 +911,14 @@ const RegisterNowClient = () => {
                       </p>
 
                       <a
-                        href="https://www.instagram.com/worlddiplomatsmun"
+                        href="https://www.instagram.com/worlddiplomats_"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex flex-col items-center mb-16"
                       >
                         <FaInstagram size={60} className="text-pink-600 mb-2 sm:mb-3" />
                         <span className="text-gray-700 font-medium text-sm sm:text-base">
-                          @Example
+                          @worlddiplomats_
                         </span>
                         <span className="text-xs text-gray-500 sm:text-sm">
                           Tap above to follow

@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDestination } from "@/app/context/DestinationContext";
 import { usePathname } from "next/navigation";
-import logo from "../../../../public/img/logo3.png";
+import logo from "../../../../public/img/logo4.png";
 
 function Navbar() {
   const pathname = usePathname();
@@ -172,13 +172,13 @@ function Navbar() {
           : "bg-transparent text-white"
         }`}
     >
-      <div className="container mx-auto flex items-center justify-between px-2 py-2 lg:py-1">
+      <div className="container mx-auto nav-compact-container flex items-center justify-between px-4 py-0">
         {/* Logo */}
-        <Link href="/">
+        <Link href="/" className="flex items-center shrink-0">
           <Image
             src={logo}
             alt="Logo"
-            className="h-20 sm:h-24 md:h-28 w-auto max-w-[170px] object-contain"
+            className="h-16 sm:h-24 md:h-28 w-auto max-w-[140px] sm:max-w-[200px] md:max-w-[250px] object-contain block my-0"
           />
         </Link>
 
@@ -305,49 +305,48 @@ function Navbar() {
           </Link>
         </div>
 
-        {/* Desktop Register Button */}
-        <div className="hidden lg:block">
-          <Link href="/Register-Now">
-            <button
-              onClick={handleRegisterNow}
-              className={`cursor-pointer font-semibold py-1 px-4 rounded-full border-2 border-blue-600 transition ${isRegisterActive
-                ? "bg-transparent text-white"
-                : "bg-blue-600 text-white hover:bg-transparent hover:text-white"
-                }`}
-            >
-              Register Now
-            </button>
-          </Link>
-        </div>
-
-        {/* Mobile Top Bar */}
-        <div className="relative flex items-center justify-between lg:hidden w-full">
-          <div className="absolute left-1/3 transform -translate-x-1/3">
-            <button
-              onClick={handleRegisterNow}
-              className={`font-semibold py-2 px-3 rounded-full border-2 border-blue-600 transition text-[12px] sm:text-sm ${isRegisterActive
-                ? "bg-transparent text-white"
-                : "bg-blue-600 text-white hover:bg-transparent hover:text-white"
-                }`}
-            >
-              Register Now
-            </button>
+        {/* Buttons Section */}
+        <div className="flex items-center space-x-2">
+          {/* Desktop Register Button */}
+          <div className="hidden lg:block">
+            <Link href="/Register-Now">
+              <button
+                onClick={handleRegisterNow}
+                className={`cursor-pointer font-semibold py-1 px-4 rounded-full border-2 border-blue-600 transition ${isRegisterActive
+                  ? "bg-transparent text-white"
+                  : "bg-blue-600 text-white hover:bg-transparent hover:text-white"
+                  }`}
+              >
+                Register Now
+              </button>
+            </Link>
           </div>
 
-          <button
-            className="text-white ml-auto"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {!mobileMenuOpen && <AiOutlineMenu className="w-6 h-6" />}
-          </button>
+          {/* Mobile Buttons */}
+          <div className="flex items-center space-x-2 lg:hidden">
+            <button
+              onClick={handleRegisterNow}
+              className={`font-semibold py-1.5 px-3 rounded-full border-2 border-blue-600 transition text-[11px] sm:text-sm shrink-0 ${isRegisterActive
+                ? "bg-transparent text-white"
+                : "bg-blue-600 text-white hover:bg-transparent hover:text-white"
+                }`}
+            >
+              Register Now
+            </button>
+
+            <button
+              className="text-white border border-white/50 rounded-md p-1.5 shrink-0"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {!mobileMenuOpen && <AiOutlineMenu className="w-5 h-5 sm:w-6 sm:h-6" />}
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Mobile Menu */}
-      {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="lg:hidden fixed inset-0 z-50 flex justify-center items-start pt-6 px-4">
-          {/* inset-0 = पूरी स्क्रीन, px-4 = साइड्स से margin */}
           <div className="w-full max-w-md bg-[#0c1629] text-white rounded-lg p-6 h-[calc(100vh-2.5rem)] overflow-y-auto shadow-xl">
             {/* Close Button */}
             <div className="flex justify-end mb-4">
@@ -402,9 +401,7 @@ function Navbar() {
           </div>
         </div>
       )}
-
     </nav>
-
   );
 }
 

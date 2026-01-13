@@ -146,3 +146,12 @@
 
 
 
+
+/* Custom compact container for specific screen range */
+@media (min-width: 1280px) and (max-width: 1400px) {
+  .nav-compact-container {
+    max-width: 1152px !important; /* 6xl equivalent */
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
