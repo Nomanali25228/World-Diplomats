@@ -5,7 +5,7 @@ const DestinationContext = createContext(null);
 
 const initialDestinations = {
   "Dubai, UAE": {
-    registrationDeadline: "30th April, 2026",
+    registrationDeadline: "15th May, 2026",
     positionPaperDeadline: "05th March, 2026",
     registerLink: "/Register-Now?destination=Dubai,%20UAE",
   },

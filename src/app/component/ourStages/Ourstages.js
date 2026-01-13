@@ -19,7 +19,7 @@ const destinations = [
   {
     title: "Dubai, UAE",
     image: dubai,
-    date: "14th – 17th May 2026",
+    date: "4th – 7th June 2026",
     slug: "Dubai-UAE",
   },
   {

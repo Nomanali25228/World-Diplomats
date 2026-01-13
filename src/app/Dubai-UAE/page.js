@@ -31,12 +31,12 @@ const page = () => {
   const heroData = {
     title: "Dubai",
     subtitle: "UAE",
-    dates: "14 - 15 - 16 - 17 May, 2026",
+    dates: "4 - 5 - 6 - 7 June, 2026",
     agenda: "Conference Agenda: Reimagining Global Governance, Protecting Human Rights, Peace, and Public Health in an Era of Uncertainty.",
     bgImage: DubaibgImage,
     registerlinke: "/Register-Now?destination=Dubai,%20UAE",
     pricinglink: "#pricing",
-    targetDate: "2026-05-14T00:00:00", // Event start date
+    targetDate: "2026-06-04T00:00:00", // Event start date
   }
 
   const delegatesData = {

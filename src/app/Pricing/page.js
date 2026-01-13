@@ -12,7 +12,7 @@ const pricingData = [
   },
   {
     destination: "Dubai, UAE",
-    date: "14th – 17th May 2026",
+    date: "4th – 7th June 2026",
     image: "/img/cardDubai.jpg",
     link: "/Dubai-UAE#pricing",
     payNow: "Pay for Dubai, UAE"
