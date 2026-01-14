@@ -89,7 +89,7 @@ const ContactUS = () => {
   ];
 
   return (
-    <section className="py-10 bg-[#F1F2F4]">
+    <section id="contact-us" className="py-10 bg-[#F1F2F4]">
 
       {/* ================= TITLE ================= */}
       <div className="text-center mb-12" data-aos="fade-up">

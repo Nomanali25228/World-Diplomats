@@ -184,7 +184,7 @@ export default function Home() {
                 price={670}
                 features={[
                   'Everything in Delegate Shepandum Experience',
-                  'Dsert Safari',
+                  'Desert Safari',
 
                 ]}
                 activeCard={activeCard}

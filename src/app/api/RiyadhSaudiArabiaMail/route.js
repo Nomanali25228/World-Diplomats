@@ -2,50 +2,51 @@ import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
 export async function POST(request) {
-  try {
-        const { email, name, data ,iduser, destination} = await request.json();
-                const id = iduser
+    try {
+        const { email, name, data, iduser, destination } = await request.json();
+        const id = iduser
 
-                const dest = (destination || 'Riyadh, Saudi Arabia').trim();
-                let desname = dest;
-                let country = 'Saudi Arabia';
-                let CityTour = '';
-                if (dest === 'Riyadh, Saudi Arabia') { desname = 'Riyadh, Saudi Arabia'; country = 'Saudi Arabia'; CityTour = 'Riyadh City Tour'; }
-                else if (dest === 'Dubai, UAE') { desname = 'Dubai, UAE'; country = 'UAE'; CityTour = 'Dubai City Tour'; }
-                else if (dest === 'Istanbul, Turkey') { desname = 'Istanbul, Turkey'; country = 'Turkey'; CityTour = 'Istanbul City Tour'; }
-                else if (dest === 'Kuala Lumpur, Malaysia') { desname = 'Kuala Lumpur, Malaysia'; country = 'Malaysia'; CityTour = 'Batu Caves'; }
-                else if (dest === 'London, UK') { desname = 'London, UK'; country = 'UK'; CityTour = 'London City Tour'; }
-                else if (dest === 'Baku, Azerbaijan') { desname = 'Baku, Azerbaijan'; country = 'Azerbaijan'; CityTour = 'Baku City Tour'; }
+        const dest = (destination || 'Riyadh, Saudi Arabia').trim();
+        let desname = dest;
+        let country = 'Saudi Arabia';
+        let CityTour = '';
+        if (dest.includes('Riyadh')) { desname = 'Riyadh, Saudi Arabia'; country = 'Saudi Arabia'; CityTour = 'Riyadh City Tour'; }
+        else if (dest.includes('Dubai')) { desname = 'Dubai, UAE'; country = 'UAE'; CityTour = 'Desert Safari'; }
+        else if (dest.includes('Istanbul')) { desname = 'Istanbul, Türkiye'; country = 'Turkey'; CityTour = 'Istanbul City Tour'; }
+        else if (dest.includes('Kuala Lumpur')) { desname = 'Kuala Lumpur, Malaysia'; country = 'Malaysia'; CityTour = 'Batu Caves'; }
+        else if (dest.includes('London')) { desname = 'London, UK'; country = 'UK'; CityTour = 'London city tour'; }
+        else if (dest.includes('Baku')) { desname = 'Baku, Azerbaijan'; country = 'Azerbaijan'; CityTour = 'Baku City Tour'; }
 
-                const zagatiyaLines = ['✓ Everything in Delegate Accommodation Experience'];
-                if (CityTour) zagatiyaLines.push('✓ ' + CityTour);
-                const extrasMap = {
-                    'Istanbul, Turkey': ['Bosphorus Rooftop Lunch Tour', 'Cruise Trip & Dinner at Bosphorus'],
-                    'Dubai, UAE': ['Desert Safari'],
-                    'Kuala Lumpur, Malaysia': ['Batu Caves', 'Petronas Twin Towers', 'Merdeka Square'],
-                    'London, UK': [],
-                    'Riyadh, Saudi Arabia': [],
-                    'Baku, Azerbaijan': [],
-                };
-                (extrasMap[dest] || []).forEach(x => zagatiyaLines.push('✓ ' + x));
-                const zagatiyaHTML = zagatiyaLines.join('<br><br>');
-                const closingMessage = `at World Diplomats MUN and await, in <br /> anticipation, to host you at ${country}.`;
-                const subject = `World Diplomats — Registration Received (${desname})`;
-    const username = "info@worlddiplomats.org";
-    const password = "eqqxvxhdtgfbxuiu";
+        const zagatiyaLines = ['✓ Everything in Delegate Shepandum Experience'];
+        if (CityTour) zagatiyaLines.push('✓ ' + CityTour);
+        const extrasMap = {
+            'Istanbul, Türkiye': ['Bosphorus Rooftop Lunch Tour', 'Cruise Trip & Dinner at Bosphorus'],
+            'Dubai, UAE': [],
+            'Kuala Lumpur, Malaysia': ['Petronas Twin Towers', 'Merdeka Square'],
+            'London, UK': [],
+            'Riyadh, Saudi Arabia': [],
+            'Baku, Azerbaijan': [],
+        };
+        const extras = extrasMap[desname] || [];
+        extras.forEach(x => zagatiyaLines.push('✓ ' + x));
+        const zagatiyaHTML = zagatiyaLines.join('<br><br>');
+        const closingMessage = `at World Diplomats MUN and await, in <br /> anticipation, to host you at ${country}.`;
+        const subject = `World Diplomats — Registration Received (${desname})`;
+        const username = "info@worlddiplomats.org";
+        const password = "eqqxvxhdtgfbxuiu";
 
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
-      auth: { user: username, pass: password },
-    });
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
+            auth: { user: username, pass: password },
+        });
 
-    const mailOptions = {
-      from: 'World Diplomats <no-reply@worlddiplomats.org>',
-      to: email,
-      subject,
-      html: `<!DOCTYPE html>
+        const mailOptions = {
+            from: 'World Diplomats <no-reply@worlddiplomats.org>',
+            to: email,
+            subject,
+            html: `<!DOCTYPE html>
 <html>
 
 <head>
@@ -75,19 +76,8 @@ export async function POST(request) {
                                         <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
                                             <tr>
                                                 <td align="center" style="padding:5px;">
-                                                    <table style="margin:0 auto;">
-                                                        <tr>
-                                                            <td style="padding-right:12px; vertical-align:middle;">
-                                                                <img src="https://6a903f8cfa.imgdist.com/public/users/BeeFree/beefree-4862b855-5df1-4b89-a5ec-bb23e0132b7c/Untitled_design-removebg-preview.png"
-                                                                    width="80" style="display:block;">
-                                                            </td>
-                                                            <td
-                                                                style="font-size:25px; font-weight:800; color:#0a3b6d; vertical-align:middle; text-align:left;">
-                                                                WORLD<br><span
-                                                                    style="color:#9aa3ab; font-weight:700;">DIPLOMATS</span>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+                                                    <img src="https://6a903f8cfa.imgdist.com/public/users/BeeFree/beefree-4862b855-5df1-4b89-a5ec-bb23e0132b7c/editor_images/ff2f68ee-4cbf-4cb7-b106-4454554dea46.png"
+                                                        width="250" style="display:block;">
                                                 </td>
                                             </tr>
                                         </table>
@@ -167,7 +157,7 @@ export async function POST(request) {
                                         <table cellpadding="0" cellspacing="0" align="center">
                                             <tr>
                                                 <td align="center" bgcolor="#0b67c2" style="border-radius:22px;">
-                                                    <a href="{{PORTAL_LINK}}" target="_blank" style="
+                                                    <a href="https://www.worlddiplomats.org/Saudipayment/1?userid=${id}" target="_blank" style="
                 display:inline-block;
                 padding:12px 26px;
                 font-family:Arial, Helvetica, sans-serif;
@@ -307,13 +297,13 @@ export async function POST(request) {
                                     <td width="33%">
                                         <div style="background:linear-gradient(90deg,#0b67c2,#8c1537);color:#fff;
             padding:18px;border-radius:16px;text-align:center;font-weight:600;">
-                                            Shepandum
+                                            Shepandum Experience
                                         </div>
                                     </td>
                                     <td width="33%">
                                         <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);color:#fff;
             padding:18px;border-radius:16px;text-align:center;font-weight:600;">
-                                            Zagatiya
+                                            Zagatiya Experience
                                         </div>
                                     </td>
                                 </tr>
@@ -331,65 +321,46 @@ export async function POST(request) {
 
                                     <!-- BASIC -->
                                     <td width="33%" valign="top" style="padding:4px;">
-                                        <table width="100%" height="420" cellpadding="12" cellspacing="0"
+                                        <table width="100%" height="330" cellpadding="12" cellspacing="0"
                                             style="background:#f1f1f1;border-radius:20px;">
                                             <tr>
-                                                <td valign="top" style="font-size:11px;line-height:1.3;color:#333;">
+                                                <td valign="top" style="font-size:11px;line-height:1.5;color:#333;">
                                                     ✓ UN Simulation committee sessions<br>
                                                     ✓ Background Study Guides<br>
                                                     ✓ Official UNHCR endorsed Certificate<br>
                                                     ✓ 1 committee lunch<br>
-                                                    ✓ Opening ceremony<br>
-                                                    ✓ Diplomatic dinner<br>
-                                                    ✓ Closing ceremony<br>
-                                                    ✓ Grand Dinner<br>
+                                                    ✓ Opening ceremony Diplomatic dinner<br>
+                                                    ✓ Closing ceremony Grand Dinner<br>
                                                     ✓ Cultural Performance<br>
                                                     ✓ Musical Night<br>
                                                     ✓ Scavenger Hunt<br>
                                                     ✓ World Diplomats merch and Kit
                                                 </td>
                                             </tr>
-
-                                           <tr>
-    <td align="center" valign="bottom">
-        <a href="https://www.worlddiplomats.org/Saudipayment/1?userid=${id}" target="_blank" style="text-decoration:none;">
-            <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);
-                  color:#fff;padding:12px 24px;border-radius:14px;font-weight:600;">
-                CHOOSE PLAN
-            </div>
-        </a>
-    </td>
-</tr>
+                                            <tr>
+                                                <td align="center" valign="bottom">
+                                                    <a href="https://www.worlddiplomats.org/Saudipayment/1?userid=${id}" target="_blank" style="text-decoration:none;">
+                                                        <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);
+                                                              color:#fff;padding:12px 24px;border-radius:14px;font-weight:600;">
+                                                            CHOOSE PLAN
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                            </tr>
                                         </table>
                                     </td>
 
                                     <!-- SHEPANDUM -->
                                     <td width="33%" valign="top" style="padding:4px;">
-                                        <table width="100%" height="420" cellpadding="12" cellspacing="0"
+                                        <table width="100%" height="330" cellpadding="12" cellspacing="0"
                                             style="background:#f1f1f1;border-radius:20px;">
                                             <tr>
-                                                <td valign="top" style="font-size:11px;line-height:1.4;color:#333;">
-                                                    ✓ Everything in Basic package<br><br>
+                                                <td valign="top" style="font-size:11px;line-height:1.6;color:#333;">
+                                                    ✓ Everything in Basic<br><br>
                                                     ✓ 5-star premium hotel accommodation (Twin Shared)<br><br>
                                                     ✓ Gourmet Morning Breakfast everyday
                                                 </td>
                                             </tr>
-
-                                            <!-- SPACER (extra space for balance) -->
-                                            <tr>
-                                                <td height="60">&nbsp;</td>
-                                            </tr>
-
-                                            <tr>
-    <td align="center" valign="bottom">
-        <a href="https://example.com" target="_blank" style="text-decoration:none;">
-            <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);
-                  color:#fff;padding:12px 24px;border-radius:14px;font-weight:600;">
-                CHOOSE PLAN
-            </div>
-        </a>
-    </td>
-</tr>
                                             <tr>
                                                 <td align="center" valign="bottom">
                                                     <a href="https://www.worlddiplomats.org/Saudipayment/2?userid=${id}" target="_blank" style="text-decoration:none;">
@@ -405,27 +376,13 @@ export async function POST(request) {
 
                                     <!-- ZAGATIYA -->
                                     <td width="33%" valign="top" style="padding:4px;">
-                                        <table width="100%" height="420" cellpadding="12" cellspacing="0"
+                                        <table width="100%" height="330" cellpadding="12" cellspacing="0"
                                             style="background:#f1f1f1;border-radius:20px;">
                                             <tr>
-                                                <td valign="top" style="font-size:11px;line-height:1.4;color:#333;">
+                                                <td valign="top" style="font-size:11px;line-height:1.6;color:#333;">
                                                     ${zagatiyaHTML}
                                                 </td>
                                             </tr>
-
-                                            <!-- SPACER -->
-                                            <tr>
-                                                <td height="60">&nbsp;</td>
-                                            </tr>
-
-                                           <tr>
-                                            <td align="center" valign="bottom">
-                                                <a href="https://www.worlddiplomats.org/Saudipayment/3?userid=${id}" target="_blank" style="text-decoration:none;">
-                                                    <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);
-                                                          color:#fff;padding:12px 24px;border-radius:14px;font-weight:600;">
-                                                        CHOOSE PLAN
-                                                    </div>
-                                                </a>
                                             </td>
                                         </tr>
                                         </table>
@@ -467,14 +424,24 @@ export async function POST(request) {
 
                             <table cellpadding="6" cellspacing="0" align="center">
 
-                                <!-- ROW 1 : 3 ITEMS -->
+                                <!-- ROW 1 : 4 ITEMS -->
                                 <tr>
 
                                     <!-- INSTAGRAM -->
                                     <td align="center" style="font-size:10px;">
-                                        <a href="https://www.instagram.com/worlddiplomatsmun/" target="_blank"
+                                        <a href="https://www.instagram.com/worlddiplomats_?igsh=M3ppbG5hcmp5bnJr" target="_blank"
                                             style="color:#0a3b6d;text-decoration:none;">
                                             <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
+                                                width="12" style="vertical-align:middle;">
+                                            &nbsp;<span style="text-decoration:underline;">@worlddiplomats_</span>
+                                        </a>
+                                    </td>
+
+                                    <!-- TIKTOK -->
+                                    <td align="center" style="font-size:10px;">
+                                        <a href="https://www.tiktok.com/@worlddiplomatsmun" target="_blank"
+                                            style="color:#0a3b6d;text-decoration:none;">
+                                            <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png"
                                                 width="12" style="vertical-align:middle;">
                                             &nbsp;<span style="text-decoration:underline;">@worlddiplomatsmun</span>
                                         </a>
@@ -482,7 +449,7 @@ export async function POST(request) {
 
                                     <!-- FACEBOOK -->
                                     <td align="center" style="font-size:10px;">
-                                        <a href="https://www.facebook.com/worlddiplomats" target="_blank"
+                                        <a href="https://www.facebook.com/profile.php?id=61585300508391" target="_blank"
                                             style="color:#0a3b6d;text-decoration:none;">
                                             <img src="https://cdn-icons-png.flaticon.com/512/2111/2111392.png"
                                                 width="12" style="vertical-align:middle;">
@@ -502,7 +469,7 @@ export async function POST(request) {
                                 </tr>
 
                                 <!-- ROW 2 : 2 ITEMS (CENTERED) -->
-                               
+                                
 
                             </table>
 
@@ -595,12 +562,12 @@ export async function POST(request) {
 </body>
 
 </html>`,
-    };
+        };
 
-    await transporter.sendMail(mailOptions);
-    return NextResponse.json({ message: 'Email sent' });
-  } catch (err) {
-    console.error('RiyadhSaudiArabiaMail error', err);
-    return NextResponse.json({ message: 'Failed to send email' }, { status: 500 });
-  }
+        await transporter.sendMail(mailOptions);
+        return NextResponse.json({ message: 'Email sent' });
+    } catch (err) {
+        console.error('RiyadhSaudiArabiaMail error', err);
+        return NextResponse.json({ message: 'Failed to send email' }, { status: 500 });
+    }
 }

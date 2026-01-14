@@ -24,12 +24,12 @@ const cities = [
 /* ===================== Destinations Marquee ===================== */
 const DestinationsMarquee = () => {
   return (
-    <div className="overflow-hidden w-full py-2 bg-transparent">
-      <div className="flex gap-12 whitespace-nowrap animate-marquee">
+    <div className="overflow-hidden w-full pt-5 bg-white  ">
+      <div className="flex gap-16 whitespace-nowrap animate-marquee w-max">
         {[...destinations, ...destinations].map((dest, i) => (
           <span
             key={i}
-            className="text-[#0d1b4c] text-base sm:text-lg md:text-xl lg:text-2xl font-semibold px-4"
+            className="text-[#0d1b4c] text-xl sm:text-2xl md:text-3xl font-bold px-4"
           >
             {dest}
           </span>
@@ -38,12 +38,13 @@ const DestinationsMarquee = () => {
 
       <style jsx>{`
         @keyframes marquee {
-          0% { transform: translateX(0%); }
+          0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
         .animate-marquee {
-          display: inline-flex;
-          animation: marquee 20s linear infinite;
+          display: flex;
+          width: max-content;
+          animation: marquee 25s linear infinite;
         }
       `}</style>
     </div>
@@ -234,9 +235,11 @@ const HeroSection = () => {
         </div>
       </header>
 
-      {/* Marquee */}
-      <div className="mt-6">
-        <DestinationsMarquee />
+      {/* Marquee Section */}
+      <div className="w-full flex justify-center mt-2">
+        <div className="w-full max-w-[1920px]">
+          <DestinationsMarquee />
+        </div>
       </div>
     </>
   );

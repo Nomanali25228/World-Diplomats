@@ -127,7 +127,7 @@ export default function Home() {
         <section className="relative z-10 py-28">
           <div className="max-w-7xl mx-auto px-4">
             <h2 className="text-center text-4xl font-bold text-white mb-4">
-              Pricing for Londun UK
+              Pricing for London UK
             </h2>
 
             <p className="text-center text-gray-100 mb-16">

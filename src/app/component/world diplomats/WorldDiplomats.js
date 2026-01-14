@@ -4,7 +4,7 @@ import bg from "../../../../public/img/worlddiplomats.png";
 
 const WorldDiplomats = () => {
   return (
-    <section id="world-diplomats" className="w-full mt-12">
+    <section id="world-diplomats" className="w-full ">
 
       {/* ================= WHITE PADDING WRAPPER ================= */}
       <div className="w-full bg-white py-6 sm:py-8 md:py-10">

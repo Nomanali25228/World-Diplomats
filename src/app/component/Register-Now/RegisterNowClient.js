@@ -605,9 +605,11 @@ const RegisterNowClient = () => {
                           <div>
                             <label className="block text-sm font-medium text-gray-700">Gender *</label>
                             <select name="gender" value={form.gender} onChange={handleChange} className={inputClass}>
-                              <option value="">Gender</option>
+                              <option value="" disabled>Select Gender</option>
                               <option>Male</option>
                               <option>Female</option>
+                              <option>Other</option>
+                              <option>Prefer not to say</option>
                             </select>
                           </div>
 
@@ -626,12 +628,13 @@ const RegisterNowClient = () => {
                               </div>
                             ) : (
                               <select name="destination" value={form.destination} onChange={handleChange} className={inputClass}>
-                                <option value="">Destination</option>
+                                <option value="" disabled>Select Destination</option>
                                 <option value="Istanbul, Türkiye">Istanbul, Türkiye</option>
                                 <option value="Dubai, UAE">Dubai, UAE</option>
                                 <option value="Kuala Lumpur, Malaysia">Kuala Lumpur, Malaysia</option>
                                 <option value="London, UK">London, UK</option>
                                 <option value="Riyadh, Saudi Arabia">Riyadh, Saudi Arabia</option>
+
                               </select>
                             )}
                           </div>
@@ -752,9 +755,11 @@ const RegisterNowClient = () => {
                             <div>
                               <label className="block text-sm font-medium text-gray-700">Gender *</label>
                               <select name="gender" value={form.gender} onChange={handleChange} className={inputClass}>
-                                <option value="">Gender</option>
+                                <option value="" disabled>Select Gender</option>
                                 <option>Male</option>
                                 <option>Female</option>
+                                <option>Other</option>
+                                <option>Prefer not to say</option>
                               </select>
                             </div>
 
@@ -771,12 +776,15 @@ const RegisterNowClient = () => {
                                 </div>
                               ) : (
                                 <select name="destination" value={form.destination} onChange={handleChange} className={inputClass}>
-                                  <option value="">Destination</option>
-                                  <option value="Istanbul, Turkey">Istanbul, Turkey</option>
+                                  <option value="" disabled>Select Destination</option>
+
+                                  <option value="Istanbul, Türkiye">Istanbul, Türkiye</option>
                                   <option value="Dubai, UAE">Dubai, UAE</option>
                                   <option value="Kuala Lumpur, Malaysia">Kuala Lumpur, Malaysia</option>
                                   <option value="London, UK">London, UK</option>
                                   <option value="Riyadh, Saudi Arabia">Riyadh, Saudi Arabia</option>
+
+
                                 </select>
                               )}
                             </div>
@@ -838,7 +846,7 @@ const RegisterNowClient = () => {
                                 <div>
                                   <label className="block text-sm font-medium text-gray-700">Shirt Size *</label>
                                   <select value={delegateDetails[idx]?.shirtSize || ""} onChange={(e) => updateDelegateDetail(idx, 'shirtSize', e.target.value)} className={inputClass}>
-                                    <option value="">Shirt Size</option>
+                                    <option value="" disabled>Select Shirt Size</option>
                                     <option>XS</option>
                                     <option>S</option>
                                     <option>M</option>
@@ -850,7 +858,7 @@ const RegisterNowClient = () => {
                                 <div>
                                   <label className="block text-sm font-medium text-gray-700">Food Preference *</label>
                                   <select value={delegateDetails[idx]?.foodPreference || ""} onChange={(e) => updateDelegateDetail(idx, 'foodPreference', e.target.value)} className={inputClass}>
-                                    <option value="">Food Preference</option>
+                                    <option value="" disabled>Select Food Preference</option>
                                     <option>Vegetarian</option>
                                     <option>Non-Vegetarian</option>
                                     <option>Vegan</option>
@@ -865,7 +873,7 @@ const RegisterNowClient = () => {
                           <div className="">
                             <label className="block text-sm font-medium text-gray-700">Shirt Size *</label>
                             <select name="shirtSize" value={form.shirtSize} onChange={handleChange} className={inputClass}>
-                              <option value="">Shirt Size</option>
+                              <option value="" disabled>Select Shirt Size</option>
                               <option>XS</option>
                               <option>S</option>
                               <option>M</option>
@@ -877,7 +885,7 @@ const RegisterNowClient = () => {
                           <div className="">
                             <label className="block text-sm font-medium text-gray-700">Food Preference *</label>
                             <select name="foodPreference" value={form.foodPreference} onChange={handleChange} className={inputClass}>
-                              <option value="">Food Preference</option>
+                              <option value="" disabled>Select Food Preference</option>
                               <option>Vegetarian</option>
                               <option>Non-Vegetarian</option>
                               <option>Vegan</option>
@@ -960,7 +968,14 @@ const RegisterNowClient = () => {
 
                 <div className="flex justify-between mt-6">
                   {step > 1 && step < 3 && (
-                    <button type="button" onClick={back} className="px-6 py-2 rounded-xl cursor-pointer bg-gray-300 hover:bg-gray-400 text-gray-800">← Back</button>
+                    <button
+                      type="button"
+                      onClick={back}
+                      disabled={submitting}
+                      className={`px-6 py-2 rounded-xl bg-gray-300 text-gray-800 transition-colors ${submitting ? 'cursor-not-allowed opacity-60' : 'cursor-pointer hover:bg-gray-400'}`}
+                    >
+                      ← Back
+                    </button>
                   )}
                   {step === 1 && (
                     <button type="button" onClick={next} className="ml-auto px-6 py-2 cursor-pointer rounded-xl text-white" style={{ backgroundColor: 'var(--royal)' }}>Next →</button>

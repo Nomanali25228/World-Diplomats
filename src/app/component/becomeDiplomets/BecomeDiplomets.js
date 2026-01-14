@@ -70,7 +70,7 @@ const BecomeDiplomets = () => {
                 <button
                   onClick={handleRegisterNow}
                   className="
-                    px-7 py-3 text-white font-semibold
+                    px-7 py-3 cursor-pointer text-white font-semibold
                     text-sm md:text-base rounded-xl
                     bg-gradient-to-r from-[#1a2a9c] to-[#0d1b4c]
                     shadow-lg shadow-[#1a2a9c]/30
@@ -83,8 +83,9 @@ const BecomeDiplomets = () => {
                 </button>
 
                 <button
+                  onClick={() => document.getElementById("contact-us")?.scrollIntoView({ behavior: "smooth" })}
                   className="
-                    px-7 py-3 font-semibold
+                    px-7 py-3 cursor-pointer font-semibold
                     text-sm md:text-base rounded-xl
                     bg-white/90 backdrop-blur-md
                     text-[#0d1b4c]
