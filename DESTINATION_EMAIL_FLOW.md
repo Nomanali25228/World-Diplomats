@@ -54,7 +54,7 @@ useEffect(() => {
 When user submits the form:
 
 ```javascript
-const res = await fetch(`https://world-diplomats-backend.onrender.com/ api/${changeApi}`, {
+const res = await fetch(`https://world-diplomats-backend.onrender.com/api/${changeApi}`, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ data: payload }),
@@ -62,7 +62,7 @@ const res = await fetch(`https://world-diplomats-backend.onrender.com/ api/${cha
 ```
 
 **Example for Dubai:**
-- Route called: `https://world-diplomats-backend.onrender.com/ api/secondenames`
+- Route called: `https://world-diplomats-backend.onrender.com/api/secondenames`
 - This sends data to Strapi CMS
 
 ---
@@ -133,7 +133,7 @@ Each destination-specific email route (e.g., `/api/DubaiUAEMail/route.js`) sends
    ↓
 2. changeApi state updates to "secondenames"
    ↓
-3. Form submitted to Strapi: https://world-diplomats-backend.onrender.com/ api/secondenames
+3. Form submitted to Strapi: https://world-diplomats-backend.onrender.com/api/secondenames
    ↓
 4. After successful Strapi response
    ↓
