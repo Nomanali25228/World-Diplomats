@@ -2,7 +2,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://world-diplomats-backend.onrender.com/",
+  baseURL: "https://world-diplomats-backend.onrender.com/ ",
 
 });
 

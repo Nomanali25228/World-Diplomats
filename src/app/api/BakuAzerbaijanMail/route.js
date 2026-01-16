@@ -17,6 +17,9 @@ export async function POST(request) {
         else if (dest.includes('London')) { desname = 'London, UK'; country = 'UK'; CityTour = 'London city tour'; }
         else if (dest.includes('Riyadh')) { desname = 'Riyadh, Saudi Arabia'; country = 'Saudi Arabia'; CityTour = 'Riyadh City Tour'; }
 
+        // Check if this is a delegation/group registration
+        const isDelegation = data?.delegates && Array.isArray(data.delegates) && data.delegates.length > 0;
+
         const zagatiyaLines = ['✓ Everything in Delegate Shepandum Experience'];
         if (CityTour) zagatiyaLines.push('✓ ' + CityTour);
         const extrasMap = {
@@ -33,6 +36,11 @@ export async function POST(request) {
 
         const closingMessage = `at World Diplomats MUN and await, in <br /> anticipation, to host you at ${country}.`;
         const subject = `World Diplomats — Registration Received (${desname})`;
+
+        // Set button text and link based on registration type
+        const buttonText = isDelegation ? 'CHAT WITH US' : 'CLICK HERE FOR PERSONAL PORTAL';
+        const buttonLink = isDelegation ? 'https://wa.me/+447490344639' : `https://www.worlddiplomats.org/Register-Now?userid=${id}&dest=Baku&plan=1`;
+
         const username = process.env.NEXT_PUBLIC_SMTP_USERNAME;
         const password = process.env.NEXT_PUBLIC_SMTP_PASSWORD;
 
@@ -75,11 +83,11 @@ export async function POST(request) {
                                     <td style="padding:0 25px ; width:685px;">
 
                                         <!-- LOGO -->
-                                        <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+                                        <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:10px;">
                                             <tr>
                                                 <td align="center" style="padding:5px;">
-                                                    <img src="https://6a903f8cfa.imgdist.com/public/users/BeeFree/beefree-4862b855-5df1-4b89-a5ec-bb23e0132b7c/editor_images/ff2f68ee-4cbf-4cb7-b106-4454554dea46.png"
-                                                        width="250" style="display:block;">
+                                                    <img src="https://res.cloudinary.com/dhqbmpldd/image/upload/v1768562201/WORLD_DIPLOMATS_International_Model_United_Nations__1_-removebg-preview_pn1vig.png"
+                                                        width="380" style="display:block;">
                                                 </td>
                                             </tr>
                                         </table>
@@ -159,7 +167,7 @@ export async function POST(request) {
                                         <table cellpadding="0" cellspacing="0" align="center">
                                             <tr>
                                                 <td align="center" bgcolor="#0b67c2" style="border-radius:22px;">
-                                                    <a href="https://www.worlddiplomats.org/Register-Now?userid=${id}&dest=Baku&plan=1" target="_blank" style="
+                                                    <a href="${buttonLink}" target="_blank" style="
                 display:inline-block;
                 padding:12px 26px;
                 font-family:Arial, Helvetica, sans-serif;
@@ -169,7 +177,7 @@ export async function POST(request) {
                 text-decoration:none;
                 border-radius:22px;
               ">
-                                                        CLICK HERE FOR PERSONAL PORTAL
+                                                        ${buttonText}
                                                     </a>
                                                 </td>
                                             </tr>
@@ -299,13 +307,13 @@ export async function POST(request) {
                                     <td width="33%">
                                         <div style="background:linear-gradient(90deg,#0b67c2,#8c1537);color:#fff;
             padding:18px;border-radius:16px;text-align:center;font-weight:600;">
-                                            Shepandum Experience
+                                            Shepandum
                                         </div>
                                     </td>
                                     <td width="33%">
                                         <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);color:#fff;
             padding:18px;border-radius:16px;text-align:center;font-weight:600;">
-                                            Zagatiya Experience
+                                            Zagatiya
                                         </div>
                                     </td>
                                 </tr>
@@ -323,7 +331,7 @@ export async function POST(request) {
 
                                     <!-- BASIC -->
                                     <td width="33%" valign="top" style="padding:4px;">
-                                        <table width="100%" height="330" cellpadding="12" cellspacing="0"
+                                        <table width="100%" height="450" cellpadding="12" cellspacing="0"
                                             style="background:#f1f1f1;border-radius:20px;">
                                             <tr>
                                                 <td valign="top" style="font-size:11px;line-height:1.5;color:#333;">
@@ -341,10 +349,10 @@ export async function POST(request) {
                                             </tr>
                                             <tr>
                                                 <td align="center" valign="bottom">
-                                                    <a href="https://www.worlddiplomats.org/Register-Now?userid=${id}&dest=Baku&plan=1" target="_blank" style="text-decoration:none;">
+                                                    <a href="${buttonLink}" target="_blank" style="text-decoration:none;">
                                                         <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);
                                                               color:#fff;padding:12px 24px;border-radius:14px;font-weight:600;">
-                                                            CHOOSE PLAN
+                                                            ${isDelegation ? 'CHAT WITH US' : 'CHOOSE PLAN'}
                                                         </div>
                                                     </a>
                                                 </td>
@@ -354,7 +362,7 @@ export async function POST(request) {
 
                                     <!-- SHEPANDUM -->
                                     <td width="33%" valign="top" style="padding:4px;">
-                                        <table width="100%" height="330" cellpadding="12" cellspacing="0"
+                                        <table width="100%" height="450" cellpadding="12" cellspacing="0"
                                             style="background:#f1f1f1;border-radius:20px;">
                                             <tr>
                                                 <td valign="top" style="font-size:11px;line-height:1.6;color:#333;">
@@ -365,10 +373,10 @@ export async function POST(request) {
                                             </tr>
                                             <tr>
                                                 <td align="center" valign="bottom">
-                                                    <a href="https://www.worlddiplomats.org/Register-Now?userid=${id}&dest=Baku&plan=2" target="_blank" style="text-decoration:none;">
+                                                    <a href="${buttonLink}" target="_blank" style="text-decoration:none;">
                                                         <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);
                                                               color:#fff;padding:12px 24px;border-radius:14px;font-weight:600;">
-                                                            CHOOSE PLAN
+                                                            ${isDelegation ? 'CHAT WITH US' : 'CHOOSE PLAN'}
                                                         </div>
                                                     </a>
                                                 </td>
@@ -378,7 +386,7 @@ export async function POST(request) {
 
                                     <!-- ZAGATIYA -->
                                     <td width="33%" valign="top" style="padding:4px;">
-                                        <table width="100%" height="330" cellpadding="12" cellspacing="0"
+                                        <table width="100%" height="450" cellpadding="12" cellspacing="0"
                                             style="background:#f1f1f1;border-radius:20px;">
                                             <tr>
                                                 <td valign="top" style="font-size:11px;line-height:1.6;color:#333;">
@@ -389,10 +397,10 @@ export async function POST(request) {
                                         <!-- BUTTON WITH LINK -->
                                         <tr>
                                             <td align="center" valign="bottom">
-                                                <a href="https://www.worlddiplomats.org/Register-Now?userid=${id}&dest=Baku&plan=3" target="_blank" style="text-decoration:none;">
+                                                <a href="${buttonLink}" target="_blank" style="text-decoration:none;">
                                                     <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);
                                                           color:#fff;padding:12px 24px;border-radius:14px;font-weight:600;">
-                                                        CHOOSE PLAN
+                                                        ${isDelegation ? 'CHAT WITH US' : 'CHOOSE PLAN'}
                                                     </div>
                                                 </a>
                                             </td>

@@ -73,11 +73,13 @@ const RegisterNowClient = () => {
     shirtSize: "",
     foodPreference: "",
     destination: "",
+    pricePackage: "",
+    priorConferenceExperience: "",
   });
   const [registrationType, setRegistrationType] = useState("single");
   const [delegates, setDelegates] = useState(Array(MIN_DELEGATES).fill(""));
   const [delegateDetails, setDelegateDetails] = useState(
-    Array(MIN_DELEGATES).fill({ shirtSize: "", foodPreference: "" })
+    Array(MIN_DELEGATES).fill({ shirtSize: "", foodPreference: "", pricePackage: "" })
   );
   const [groupEmail, setGroupEmail] = useState("");
   const [isDestinationLocked, setIsDestinationLocked] = useState(false);
@@ -129,7 +131,7 @@ const RegisterNowClient = () => {
       setTimeout(() => {
         setDelegateDetails((prev) => {
           const copy = [...prev];
-          while (copy.length < delegates.length) copy.push({ shirtSize: "", foodPreference: "" });
+          while (copy.length < delegates.length) copy.push({ shirtSize: "", foodPreference: "", pricePackage: "" });
           if (copy.length > delegates.length) copy.splice(delegates.length);
           return copy;
         });
@@ -209,22 +211,37 @@ const RegisterNowClient = () => {
   const next = () => {
     if (step === 1) {
       if (registrationType === "single") {
-        if (!form.name.trim() || !form.email.trim() || !form.destination.trim()) {
-          toast.error("Please fill Name, Email, and Destination");
+        if (
+          !form.name.trim() ||
+          !form.email.trim() ||
+          !form.countryResidence.trim() ||
+          !form.nationality.trim() ||
+          !form.number.trim() ||
+          !form.gender.trim() ||
+          !form.dob.trim() ||
+          !form.destination.trim() ||
+          !form.institution.trim()
+        ) {
+          toast.error("Please fill all required fields marked with *");
           return;
         }
       } else {
-        if (!groupEmail.trim()) {
-          toast.error("Please provide a group email");
-          return;
-        }
-        if (!form.destination.trim()) {
-          toast.error("Please select a Destination");
+        if (
+          !groupEmail.trim() ||
+          !form.countryResidence.trim() ||
+          !form.nationality.trim() ||
+          !form.number.trim() ||
+          !form.gender.trim() ||
+          !form.dob.trim() ||
+          !form.destination.trim() ||
+          !form.institution.trim()
+        ) {
+          toast.error("Please fill all required fields marked with *");
           return;
         }
         const filled = delegates.filter((d) => d.trim() !== "");
         if (filled.length < MIN_DELEGATES) {
-          toast.error("Please provide delegate names");
+          toast.error(`Please provide at least ${MIN_DELEGATES} delegate names`);
           return;
         }
       }
@@ -234,6 +251,28 @@ const RegisterNowClient = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Step 2 Validation
+    if (!form.reason.trim() || !form.committee.trim()) {
+      toast.error("Please provide a reason and select a committee.");
+      return;
+    }
+
+    if (registrationType === "single") {
+      if (!form.shirtSize.trim() || !form.foodPreference.trim()) {
+        toast.error("Please select a shirt size and food preference.");
+        return;
+      }
+    } else {
+      const incomplete = delegateDetails.some((d, idx) => {
+        return delegates[idx].trim() !== "" && (!d.shirtSize.trim() || !d.foodPreference.trim() || !d.pricePackage.trim());
+      });
+      if (incomplete) {
+        toast.error("Please provide shirt size, food preference and price package for all delegates.");
+        return;
+      }
+    }
+
     setSubmitting(true);
 
     const emailToUse = registrationType === "group" ? (groupEmail || "").trim() : (form.email || "").trim();
@@ -280,6 +319,7 @@ const RegisterNowClient = () => {
         Destinations: form.destination || null,
         WhyDoYouWantToJoin: form.reason || null,
         CountryDoYouWantToRepresent: form.representCountry || null,
+        PriorConferenceExperience: form.priorConferenceExperience || null,
       };
 
       if (registrationType === "single") {
@@ -304,8 +344,9 @@ const RegisterNowClient = () => {
           delegates: delegates
             .map((name, idx) => ({
               name: name.trim(),
-              whatIsYourShirtSize: delegateDetails[idx]?.shirtSize || null,
-              doYouHaveAFoodpreference: delegateDetails[idx]?.foodPreference || null,
+              WhatIsYourShirtSize: delegateDetails[idx]?.shirtSize || null,
+              DoYouHaveAFoodpreference: delegateDetails[idx]?.foodPreference || null,
+              pricepackage: delegateDetails[idx]?.pricePackage || null,
             }))
             .filter((d) => d.name),
         };
@@ -314,7 +355,7 @@ const RegisterNowClient = () => {
       const clean = (obj) => Object.fromEntries(Object.entries(obj).filter(([_, v]) => v !== null && v !== ""));
       payload = clean(payload);
 
-      const res = await fetch(`https://world-diplomats-backend.onrender.com/api/${changeApi}`, {
+      const res = await fetch(`https://world-diplomats-backend.onrender.com/ api/${changeApi}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ data: payload }),
@@ -348,6 +389,7 @@ const RegisterNowClient = () => {
         enddate: dates?.enddate,
         month: dates?.month,
         year: dates?.year,
+        isDelegation: registrationType === "group",
       });
 
       toast.success("Registration Completed!");
@@ -365,18 +407,19 @@ const RegisterNowClient = () => {
   const selectedDestLabel = selectedDestKey || "";
   const selectedDestDate = DEST_DATE_MAP[selectedDestKey] || "";
 
-  const cronjob = async ({ name, email, id, startdate, enddate, month, year }) => {
+  const cronjob = async ({ name, email, id, startdate, enddate, month, year, isDelegation }) => {
     try {
-      console.log("Cronjob payload:", { id, name, email });
+      console.log("Cronjob payload:", { id, name, email, isDelegation });
 
       const response = await axios.post(
-        "https://world-diplomats-backend.onrender.com/api/notifications",
+        "https://world-diplomats-backend.onrender.com/ api/notifications",
         {
           data: {
             Email: email,
             FirstName: name,
             Idname: id,
             Destinations: form.destination,
+            isDelegation: isDelegation || false,
             startdate,
             enddate,
             month,
@@ -545,13 +588,13 @@ const RegisterNowClient = () => {
                           {/* Name */}
                           <div>
                             <label className="block text-sm font-medium text-gray-700">Name *</label>
-                            <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="Name" className={inputClass} />
+                            <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="Name" className={inputClass} required />
                           </div>
 
                           {/* Email */}
                           <div>
                             <label className="block text-sm font-medium text-gray-700">Email *</label>
-                            <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="Email" className={inputClass} />
+                            <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="Email" className={inputClass} required />
                           </div>
 
                           {/* Country Residence */}
@@ -604,7 +647,7 @@ const RegisterNowClient = () => {
                           {/* Gender */}
                           <div>
                             <label className="block text-sm font-medium text-gray-700">Gender *</label>
-                            <select name="gender" value={form.gender} onChange={handleChange} className={inputClass}>
+                            <select name="gender" value={form.gender} onChange={handleChange} className={inputClass} required>
                               <option value="" disabled>Select Gender</option>
                               <option>Male</option>
                               <option>Female</option>
@@ -616,7 +659,7 @@ const RegisterNowClient = () => {
                           {/* Date of Birth */}
                           <div>
                             <label className="block text-sm font-medium text-gray-700">Date of Birth *</label>
-                            <input type="date" name="dob" value={form.dob} onChange={handleChange} className={inputClass} />
+                            <input type="date" name="dob" value={form.dob} onChange={handleChange} className={inputClass} required />
                           </div>
 
                           {/* Destination */}
@@ -627,7 +670,7 @@ const RegisterNowClient = () => {
                                 <p className="px-4 py-3 bg-gray-100 rounded-xl text-sm text-gray-800">{selectedDestLabel}</p>
                               </div>
                             ) : (
-                              <select name="destination" value={form.destination} onChange={handleChange} className={inputClass}>
+                              <select name="destination" value={form.destination} onChange={handleChange} className={inputClass} required>
                                 <option value="" disabled>Select Destination</option>
                                 <option value="Istanbul, Türkiye">Istanbul, Türkiye</option>
                                 <option value="Dubai, UAE">Dubai, UAE</option>
@@ -648,12 +691,12 @@ const RegisterNowClient = () => {
                               placeholder="Institution"
                               onChange={handleChange}
                               className={`${inputClass} w-full`}
+                              required
                             />
                           </div>
 
                         </div>
                       ) : (
-                        /* Group / Delegation UI */
                         <div className="space-y-4">
                           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-4">
                             <div>
@@ -677,7 +720,7 @@ const RegisterNowClient = () => {
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                               {delegates.map((name, idx) => (
                                 <div key={idx} className="relative p-2  bg-white">
-                                  <label className="block  text-sm font-medium text-gray-700">Delegate {idx + 1} Name</label>
+                                  <label className="block  text-sm font-medium text-gray-700">Delegate {idx + 1} Name *</label>
                                   <input
                                     type="text"
                                     value={name}
@@ -704,8 +747,8 @@ const RegisterNowClient = () => {
                           <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
 
                             <div>
-                              <label className="block text-sm font-medium text-gray-700">Group Email</label>
-                              <input type="email" value={groupEmail} onChange={(e) => setGroupEmail(e.target.value)} placeholder="group-contact@example.com" className={inputClass} />
+                              <label className="block text-sm font-medium text-gray-700">Group Email *</label>
+                              <input type="email" value={groupEmail} onChange={(e) => setGroupEmail(e.target.value)} placeholder="group-contact@example.com" className={inputClass} required />
                             </div>
 
                             <div>
@@ -754,7 +797,7 @@ const RegisterNowClient = () => {
 
                             <div>
                               <label className="block text-sm font-medium text-gray-700">Gender *</label>
-                              <select name="gender" value={form.gender} onChange={handleChange} className={inputClass}>
+                              <select name="gender" value={form.gender} onChange={handleChange} className={inputClass} required>
                                 <option value="" disabled>Select Gender</option>
                                 <option>Male</option>
                                 <option>Female</option>
@@ -765,7 +808,7 @@ const RegisterNowClient = () => {
 
                             <div>
                               <label className="block text-sm font-medium text-gray-700">Date of Birth *</label>
-                              <input type="date" name="dob" value={form.dob} onChange={handleChange} className={inputClass} />
+                              <input type="date" name="dob" value={form.dob} onChange={handleChange} className={inputClass} required />
                             </div>
 
                             <div>
@@ -775,7 +818,7 @@ const RegisterNowClient = () => {
                                   <p className="px-4 py-3 bg-gray-100 rounded-xl text-sm text-gray-800">{selectedDestLabel}</p>
                                 </div>
                               ) : (
-                                <select name="destination" value={form.destination} onChange={handleChange} className={inputClass}>
+                                <select name="destination" value={form.destination} onChange={handleChange} className={inputClass} required>
                                   <option value="" disabled>Select Destination</option>
 
                                   <option value="Istanbul, Türkiye">Istanbul, Türkiye</option>
@@ -791,11 +834,10 @@ const RegisterNowClient = () => {
 
                             <div>
                               <label className="block text-sm font-medium text-gray-700">Institution *</label>
-                              <input name="institution" value={form.institution} placeholder="Institution" onChange={handleChange} className={inputClass} />
+                              <input name="institution" value={form.institution} placeholder="Institution" onChange={handleChange} className={inputClass} required />
                             </div>
+
                           </div>
-
-
                         </div>
                       )}
                     </motion.div>
@@ -813,7 +855,11 @@ const RegisterNowClient = () => {
                     >
                       {/* Reason */}
                       <label className="block text-sm font-medium text-gray-700">Why do you want to join? *</label>
-                      <textarea name="reason" value={form.reason} onChange={handleChange} placeholder="Why join?" className={inputClass + " min-h-[100px]"} />
+                      <textarea name="reason" value={form.reason} onChange={handleChange} placeholder="Why join?" className={inputClass + " min-h-[100px]"} required />
+
+                      {/* Prior Conference Experience */}
+                      <label className="block text-sm font-medium text-gray-700">Prior Conference Experience (if any)</label>
+                      <textarea name="priorConferenceExperience" value={form.priorConferenceExperience} onChange={handleChange} placeholder="Please list any prior conference experience..." className={inputClass + " min-h-[100px]"} />
 
                       {/* Represent Country */}
                       <div>
@@ -829,23 +875,33 @@ const RegisterNowClient = () => {
 
                       {/* Committee */}
                       <label className="block text-sm font-medium text-gray-700">Committee *</label>
-                      <input name="committee" value={form.committee} onChange={handleChange} placeholder="Committee" className={inputClass} />
+                      <select name="committee" value={form.committee} onChange={handleChange} className={inputClass} required>
+                        <option value="" disabled>Select Committee</option>
+                        <option value="UNGA">UNGA</option>
+                        <option value="UNSC">UNSC</option>
+                        <option value="WHO">WHO</option>
+                        <option value="UNHRC">UNHRC</option>
+                        <option value="DISEC">DISEC</option>
+                        <option value="UN WOMEN">UN WOMEN</option>
+                        <option value="ECOSOC">ECOSOC</option>
+                        <option value="UNEP">UNEP</option>
+                      </select>
 
                       {/* Shirt Size + Food */}
                       {/* Shirt Size + Food */}
                       {registrationType === "group" ? (
                         <div className="space-y-4">
-                          <h3 className="text-lg font-semibold">Delegates: Shirt Size & Food Preference</h3>
+                          <h3 className="text-lg font-semibold">Delegates: Details & Price Package</h3>
                           <div className="grid grid-cols-1 gap-3">
                             {delegates.map((name, idx) => (
-                              <div key={idx} className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
-                                <div className="sm:col-span-1">
+                              <div key={idx} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-end">
+                                <div className="">
                                   <label className="block text-sm font-medium text-gray-700">Name</label>
                                   <input type="text" value={name} readOnly className={inputClass} />
                                 </div>
                                 <div>
                                   <label className="block text-sm font-medium text-gray-700">Shirt Size *</label>
-                                  <select value={delegateDetails[idx]?.shirtSize || ""} onChange={(e) => updateDelegateDetail(idx, 'shirtSize', e.target.value)} className={inputClass}>
+                                  <select value={delegateDetails[idx]?.shirtSize || ""} onChange={(e) => updateDelegateDetail(idx, 'shirtSize', e.target.value)} className={inputClass} required>
                                     <option value="" disabled>Select Shirt Size</option>
                                     <option>XS</option>
                                     <option>S</option>
@@ -857,11 +913,20 @@ const RegisterNowClient = () => {
                                 </div>
                                 <div>
                                   <label className="block text-sm font-medium text-gray-700">Food Preference *</label>
-                                  <select value={delegateDetails[idx]?.foodPreference || ""} onChange={(e) => updateDelegateDetail(idx, 'foodPreference', e.target.value)} className={inputClass}>
+                                  <select value={delegateDetails[idx]?.foodPreference || ""} onChange={(e) => updateDelegateDetail(idx, 'foodPreference', e.target.value)} className={inputClass} required>
                                     <option value="" disabled>Select Food Preference</option>
                                     <option>Vegetarian</option>
                                     <option>Non-Vegetarian</option>
                                     <option>Vegan</option>
+                                  </select>
+                                </div>
+                                <div>
+                                  <label className="block text-sm font-medium text-gray-700">Price Package *</label>
+                                  <select value={delegateDetails[idx]?.pricePackage || ""} onChange={(e) => updateDelegateDetail(idx, 'pricePackage', e.target.value)} className={inputClass} required>
+                                    <option value="" disabled>Select Package</option>
+                                    <option value="Basic">Basic</option>
+                                    <option value="Shepandum">Shepandum</option>
+                                    <option value="Zagatiya">Zagatiya</option>
                                   </select>
                                 </div>
                               </div>
@@ -872,7 +937,7 @@ const RegisterNowClient = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
                           <div className="">
                             <label className="block text-sm font-medium text-gray-700">Shirt Size *</label>
-                            <select name="shirtSize" value={form.shirtSize} onChange={handleChange} className={inputClass}>
+                            <select name="shirtSize" value={form.shirtSize} onChange={handleChange} className={inputClass} required>
                               <option value="" disabled>Select Shirt Size</option>
                               <option>XS</option>
                               <option>S</option>
@@ -884,13 +949,14 @@ const RegisterNowClient = () => {
                           </div>
                           <div className="">
                             <label className="block text-sm font-medium text-gray-700">Food Preference *</label>
-                            <select name="foodPreference" value={form.foodPreference} onChange={handleChange} className={inputClass}>
+                            <select name="foodPreference" value={form.foodPreference} onChange={handleChange} className={inputClass} required>
                               <option value="" disabled>Select Food Preference</option>
                               <option>Vegetarian</option>
                               <option>Non-Vegetarian</option>
                               <option>Vegan</option>
                             </select>
                           </div>
+
                         </div>
                       )}
                     </motion.div>
@@ -989,8 +1055,8 @@ const RegisterNowClient = () => {
               </form>
             </div>
           </motion.div>
-        </div>
-      </div>
+        </div >
+      </div >
 
     </>
   )

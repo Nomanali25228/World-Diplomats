@@ -5,17 +5,14 @@ import Footer from "./component/footer/Footer";
 import ScrollToTop from "./component/Scrolltotop/ScrollToTop";
 import Whatsapp from "./component/whatsapp/Whatsapp";
 import { DestinationProvider } from "./context/DestinationContext";
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
-
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
 export const metadata = {
   metadataBase: new URL("https://www.worlddiplomats.org"),
 
