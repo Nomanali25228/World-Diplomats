@@ -32,10 +32,11 @@ const DEST_API_MAP = {
 
 const DEST_DATE_MAP = {
   "Istanbul, Türkiye": "22nd – 25th April 2026",
-  "Dubai, UAE": "4th – 7th June 2026",
+  "Dubai, UAE": "14th – 17th May 2026",
   "Kuala Lumpur, Malaysia": "TBD July 2026",
   "London, UK": "TBD September 2026",
   "Riyadh, Saudi Arabia": "TBD October 2026",
+  "Baku, Azerbaijan": "TBD 2026",
 };
 
 const DEST_EMAIL_MAP = {
