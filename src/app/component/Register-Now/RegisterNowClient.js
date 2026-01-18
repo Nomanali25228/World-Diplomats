@@ -40,7 +40,7 @@ const DEST_DATE_MAP = {
 };
 
 const DEST_EMAIL_MAP = {
-  "Istanbul, Türkiye": "/api/IstanbulTürkiyeMail",
+  "Istanbul, Türkiye": "/api/IstanbulTurkeyMail",
   "Dubai, UAE": "/api/DubaiUAEMail",
   "Baku, Azerbaijan": "/api/BakuAzerbaijanMail",
   "Riyadh, Saudi Arabia": "/api/RiyadhSaudiArabiaMail",

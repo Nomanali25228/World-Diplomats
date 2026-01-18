@@ -147,8 +147,8 @@ const IstanbulImportantDates = () => {
 
                 <p>
                   <strong>Visa Information for World Diplomats Participants</strong><br />
-                  Participation in World Diplomats does not require a study visa. Delegates will need to apply for a tourist or conference visa to enter Türkiye, unless they are from a visa-exempt country.<br />
-                  EU citizens can travel with a valid ID/passport, but Türkiye is not in the EU.<br />
+                  Participation in World Diplomats does not require a study visa. Delegates will need to apply for a tourist or conference visa to enter Turkey, unless they are from a visa-exempt country.<br />
+                  EU citizens can travel with a valid ID/passport, but Turkey is not in the EU.<br />
                   Non-EU citizens should check <a href="https://www.evisa.gov.tr" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">Turkish e-Visa portal</a>.
                 </p>
 

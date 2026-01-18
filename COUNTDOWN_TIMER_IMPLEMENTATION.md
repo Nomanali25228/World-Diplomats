@@ -38,8 +38,8 @@ All destination pages now include countdown timers with their specific event dat
 - Event Date: **May 14-17, 2026**
 - Target: `2026-05-14T00:00:00`
 
-#### Istanbul Türkiye
-**File:** `src/app/Istanbul-Türkiye/page.js`
+#### Istanbul Turkey
+**File:** `src/app/Istanbul-Turkey/page.js`
 - Event Date: **March 26-29, 2026**
 - Target: `2026-03-26T00:00:00`
 

@@ -14,7 +14,7 @@ const destinations = [
     title: "Istanbul, Türkiye",
     image: istanbul,
     date: "22nd – 25th April 2026",
-    slug: "Istanbul-Türkiye",
+    slug: "Istanbul-Turkey",
   },
   {
     title: "Dubai, UAE",

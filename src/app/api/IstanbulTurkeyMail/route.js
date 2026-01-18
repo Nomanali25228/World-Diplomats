@@ -13,9 +13,9 @@ export async function POST(request) {
         // Inline destination mapping
         const dest = (destination || 'Istanbul, Türkiye').trim();
         let desname = dest;
-        let country = 'Türkiye';
+        let country = 'Turkey';
         let CityTour = '';
-        if (dest.includes('Istanbul')) { desname = 'Istanbul, Türkiye'; country = 'Türkiye'; CityTour = 'Istanbul City Tour'; }
+        if (dest.includes('Istanbul')) { desname = 'Istanbul, Türkiye'; country = 'Turkey'; CityTour = 'Istanbul City Tour'; }
         else if (dest.includes('Dubai')) { desname = 'Dubai, UAE'; country = 'UAE'; CityTour = 'Desert Safari'; }
         else if (dest.includes('Kuala Lumpur')) { desname = 'Kuala Lumpur, Malaysia'; country = 'Malaysia'; CityTour = 'Batu Caves'; }
         else if (dest.includes('London')) { desname = 'London, UK'; country = 'UK'; CityTour = 'London city tour'; }

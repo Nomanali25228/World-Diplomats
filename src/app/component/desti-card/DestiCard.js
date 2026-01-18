@@ -17,7 +17,7 @@ const destinations = [
       "Attending the World Diplomats in Istanbul, which is situated at the intersection of civilizations, is open to aspiring diplomatic leaders.",
     cardimg: istanbulImg,
     link: "/Register-Now",
-    link1: "/Istanbul-Türkiye",
+    link1: "/Istanbul-Turkey",
   },
   {
     title: "World Diplomats Dubai, UAE",
@@ -84,7 +84,7 @@ const Card = ({ dest }) => {
   const { selectDestination } = useDestination();
 
   const PATH_TO_DEST = {
-    '/Istanbul-Türkiye': 'Istanbul, Türkiye',
+    '/Istanbul-Turkey': 'Istanbul, Türkiye',
     '/Dubai-UAE': 'Dubai, UAE',
     '/Kuala-Lumpur-Malaysia': 'Kuala Lumpur, Malaysia',
     '/London-UK': 'London, UK',

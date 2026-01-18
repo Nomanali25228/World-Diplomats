@@ -15,7 +15,7 @@ export async function POST(request) {
         else if (dest.includes('Kuala Lumpur')) { desname = 'Kuala Lumpur, Malaysia'; country = 'Malaysia'; CityTour = 'Batu Caves'; }
         else if (dest.includes('Riyadh')) { desname = 'Riyadh, Saudi Arabia'; country = 'Saudi Arabia'; CityTour = 'Riyadh City Tour'; }
         else if (dest.includes('London')) { desname = 'London, UK'; country = 'UK'; CityTour = 'London city tour'; }
-        else if (dest.includes('Istanbul')) { desname = 'Istanbul, Türkiye'; country = 'Türkiye'; CityTour = 'Istanbul City Tour'; }
+        else if (dest.includes('Istanbul')) { desname = 'Istanbul, Türkiye'; country = 'Turkey'; CityTour = 'Istanbul City Tour'; }
         else if (dest.includes('Baku')) { desname = 'Baku, Azerbaijan'; country = 'Azerbaijan'; CityTour = 'Baku City Tour'; }
 
         // Check if this is a delegation/group registration

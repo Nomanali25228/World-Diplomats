@@ -13,7 +13,7 @@ The destination is mapped to Strapi API endpoints:
 
 ```javascript
 const DEST_API_MAP = {
-  "Istanbul, Türkiye": "firstnames",
+  "Istanbul, Turkey": "firstnames",
   "Dubai, UAE": "secondenames",
   "Baku, Azerbaijan": "thirdnames",
   "Riyadh, Saudi Arabia": "fivenames",
@@ -75,7 +75,7 @@ After successful registration in Strapi, a confirmation email is sent based on d
 
 | Destination | API Route | Email Endpoint |
 |---|---|---|
-| Istanbul, Türkiye | firstnames | `/api/register` |
+| Istanbul, Turkey | firstnames | `/api/register` |
 | Dubai, UAE | secondenames | `/api/DubaiUAEMail` |
 | Baku, Azerbaijan | thirdnames | `/api/BakuAzerbaijanMail` |
 | Kuala Lumpur, Malaysia | fournames | `/api/KualaLumpurMalaysiaMail` |
@@ -111,7 +111,7 @@ In [src/app/api/register/route.js](src/app/api/register/route.js#L16):
 
 ```javascript
 const subjectMap = {
-  'Istanbul, Türkiye': 'World Diplomats — Registration Received (Istanbul, Türkiye)',
+  'Istanbul, Turkey': 'World Diplomats — Registration Received (Istanbul, Turkey)',
   'Dubai, UAE': 'World Diplomats — Registration Received (Dubai, UAE)',
   'Kuala Lumpur, Malaysia': 'World Diplomats — Registration Received (Kuala Lumpur, Malaysia)',
   'London, UK': 'World Diplomats — Registration Received (London, UK)',
@@ -149,5 +149,5 @@ Each destination-specific email route (e.g., `/api/DubaiUAEMail/route.js`) sends
 - [RegisterNowClient.js](src/app/component/Register-Now/RegisterNowClient.js) - Form & routing logic
 - [src/app/api/register/route.js](src/app/api/register/route.js) - Main email sending
 - [src/app/api/DubaiUAEMail/route.js](src/app/api/DubaiUAEMail/route.js) - Dubai-specific email
-- [src/app/api/IstanbulTürkiyeMail/route.js](src/app/api/IstanbulTürkiyeMail/route.js) - Istanbul-specific email
+- [src/app/api/IstanbulTurkeyMail/route.js](src/app/api/IstanbulTurkeyMail/route.js) - Istanbul-specific email
 - Similar routes for other destinations...
