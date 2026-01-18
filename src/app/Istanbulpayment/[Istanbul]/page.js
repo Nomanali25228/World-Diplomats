@@ -24,7 +24,7 @@ export default function Home() {
 
   /* ================= DESTINATION ================= */
   useEffect(() => {
-    setCheck('Istanbul Turkey');
+    setCheck('Istanbul Türkiye');
   }, [setCheck]);
 
   const seo = (amount) => setAmounts(amount);
@@ -49,7 +49,7 @@ export default function Home() {
     const fetchData = async () => {
       try {
         const res = await fetch(
-          `https://world-diplomats-backend.onrender.com/api/firstnames?filters[id][$eq]=${id}`
+          `http://localhost:1337/api/firstnames?filters[id][$eq]=${id}`
         );
         const data = await res.json();
         setCustID(data?.data?.[0]?.customerId || '');
@@ -127,7 +127,7 @@ export default function Home() {
         <section className="relative z-10 py-28">
           <div className="max-w-7xl mx-auto px-4">
             <h2 className="text-center text-4xl font-bold text-white mb-4">
-              Pricing for Istanbul Turkey
+              Pricing for Istanbul Türkiye
             </h2>
 
             <p className="text-center text-gray-100 mb-16">

@@ -7,7 +7,7 @@ const pricingData = [
     destination: "Istanbul, Türkiye",
     date: "22nd – 25th April 2026",
     image: "/img/cardIstanbul.jpg",
-    link: "/Istanbul-Turkey#pricing",
+    link: "/Istanbul-Türkiye#pricing",
     payNow: "Pay for Istanbul, Türkiye"
   },
   {

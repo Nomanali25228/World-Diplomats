@@ -20,7 +20,7 @@ import taksimImg from "../../../public/img/IstanbulCityTour1.jpg";
 import arastaImg from "../../../public/img/IstanbulCityTour2.jpg";
 import bosporusImg from "../../../public/img/IstanbulCityTour3.jpg";
 import DestinationSeriesofEveent from '../component/destination-seriesofeveent/DestinationSeriesofEveent';
-import culturalImage from "../../../public/img/culturalglobalvillageTurkey.jpg";
+import culturalImage from "../../../public/img/culturalglobalvillageTürkiye.jpg";
 import CountdownSection from '../component/countdown-section/CountdownSection';
 
 
@@ -30,11 +30,11 @@ const page = () => {
   // Example props data
   const heroData = {
     title: "Istanbul",
-    subtitle: "Turkey",
+    subtitle: "Türkiye",
     dates: "22 - 23 - 24 - 25 April, 2026",
     agenda: "Conference Agenda: Reimagining Global Governance, Protecting Human Rights, Peace, and Public Health in an Era of Uncertainty.",
     bgImage: istanbulbgImage,
-    registerlinke: "/Register-Now?destination=Istanbul,%20Turkey",
+    registerlinke: "/Register-Now?destination=Istanbul,%20Türkiye",
     pricinglink: "#pricing",
     targetDate: "2026-04-22T00:00:00", // Event start date
   }
@@ -43,7 +43,7 @@ const page = () => {
     title: "Istanbul Conference ",
 
     DelegatesAttending: 500,
-    Location: "Istanbul, Turkey",
+    Location: "Istanbul, Türkiye",
   }
 
   const participantsData = {
@@ -54,7 +54,7 @@ const page = () => {
     cardimage: istanbulbgImage,
   };
   const DestinationPriceData = {
-    tital: "Istanbul Turkey",
+    tital: "Istanbul Türkiye",
     Basic: "$289",
     DelegateAccommodationExperience: "$498",
     DelegatefullExperience: "$568",
@@ -140,7 +140,7 @@ const page = () => {
         img4={hotelx5}
         map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2510.9473144053363!2d28.809779175186865!3d41.05945921627315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa5d52a209bfd%3A0xc941d8ad912e1418!2sG%20Rotana!5e1!3m2!1sen!2sus!4v1744738203590!5m2!1sen!2sus"
         hname="G Rotana Hotel."
-        disc="Our aim is to be noticed in Turkey and Istanbul with our service and quality standards, to combine national and international standards with Turkish hospitality so that our guests prefer us, to be one of the actors that directs the sector and to create our brand value. G Rotana Hotel also aims for new investments in the tourism and hotel management field, which is the rising value of Turkey."
+        disc="Our aim is to be noticed in Türkiye and Istanbul with our service and quality standards, to combine national and international standards with Turkish hospitality so that our guests prefer us, to be one of the actors that directs the sector and to create our brand value. G Rotana Hotel also aims for new investments in the tourism and hotel management field, which is the rising value of Türkiye."
       />
 
 

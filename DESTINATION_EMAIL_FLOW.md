@@ -13,7 +13,7 @@ The destination is mapped to Strapi API endpoints:
 
 ```javascript
 const DEST_API_MAP = {
-  "Istanbul, Turkey": "firstnames",
+  "Istanbul, Türkiye": "firstnames",
   "Dubai, UAE": "secondenames",
   "Baku, Azerbaijan": "thirdnames",
   "Riyadh, Saudi Arabia": "fivenames",
@@ -54,7 +54,7 @@ useEffect(() => {
 When user submits the form:
 
 ```javascript
-const res = await fetch(`https://world-diplomats-backend.onrender.com/api/${changeApi}`, {
+const res = await fetch(`http://localhost:1337/api/${changeApi}`, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ data: payload }),
@@ -62,7 +62,7 @@ const res = await fetch(`https://world-diplomats-backend.onrender.com/api/${chan
 ```
 
 **Example for Dubai:**
-- Route called: `https://world-diplomats-backend.onrender.com/api/secondenames`
+- Route called: `http://localhost:1337/api/secondenames`
 - This sends data to Strapi CMS
 
 ---
@@ -75,7 +75,7 @@ After successful registration in Strapi, a confirmation email is sent based on d
 
 | Destination | API Route | Email Endpoint |
 |---|---|---|
-| Istanbul, Turkey | firstnames | `/api/register` |
+| Istanbul, Türkiye | firstnames | `/api/register` |
 | Dubai, UAE | secondenames | `/api/DubaiUAEMail` |
 | Baku, Azerbaijan | thirdnames | `/api/BakuAzerbaijanMail` |
 | Kuala Lumpur, Malaysia | fournames | `/api/KualaLumpurMalaysiaMail` |
@@ -111,7 +111,7 @@ In [src/app/api/register/route.js](src/app/api/register/route.js#L16):
 
 ```javascript
 const subjectMap = {
-  'Istanbul, Turkey': 'World Diplomats — Registration Received (Istanbul, Turkey)',
+  'Istanbul, Türkiye': 'World Diplomats — Registration Received (Istanbul, Türkiye)',
   'Dubai, UAE': 'World Diplomats — Registration Received (Dubai, UAE)',
   'Kuala Lumpur, Malaysia': 'World Diplomats — Registration Received (Kuala Lumpur, Malaysia)',
   'London, UK': 'World Diplomats — Registration Received (London, UK)',
@@ -133,7 +133,7 @@ Each destination-specific email route (e.g., `/api/DubaiUAEMail/route.js`) sends
    ↓
 2. changeApi state updates to "secondenames"
    ↓
-3. Form submitted to Strapi: https://world-diplomats-backend.onrender.com/api/secondenames
+3. Form submitted to Strapi: http://localhost:1337/api/secondenames
    ↓
 4. After successful Strapi response
    ↓
@@ -149,5 +149,5 @@ Each destination-specific email route (e.g., `/api/DubaiUAEMail/route.js`) sends
 - [RegisterNowClient.js](src/app/component/Register-Now/RegisterNowClient.js) - Form & routing logic
 - [src/app/api/register/route.js](src/app/api/register/route.js) - Main email sending
 - [src/app/api/DubaiUAEMail/route.js](src/app/api/DubaiUAEMail/route.js) - Dubai-specific email
-- [src/app/api/IstanbulTurkeyMail/route.js](src/app/api/IstanbulTurkeyMail/route.js) - Istanbul-specific email
+- [src/app/api/IstanbulTürkiyeMail/route.js](src/app/api/IstanbulTürkiyeMail/route.js) - Istanbul-specific email
 - Similar routes for other destinations...

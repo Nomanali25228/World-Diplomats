@@ -118,7 +118,7 @@ function Navbar() {
 
   const destinations = [
     "/Destinations",
-    "/Istanbul-Turkey",
+    "/Istanbul-Türkiye",
     "/Dubai-UAE",
     "/Kuala-Lumpur",
     "/London",
@@ -138,7 +138,7 @@ function Navbar() {
   const { selectDestination, clearDestination } = useDestination();
 
   const PATH_TO_DEST = {
-    "/Istanbul-Turkey": "Istanbul, Türkiye",
+    "/Istanbul-Türkiye": "Istanbul, Türkiye",
     "/Dubai-UAE": "Dubai, UAE",
     "/Kuala-Lumpur-Malaysia": "Kuala Lumpur, Malaysia",
     "/London-UK": "London, UK",
@@ -209,8 +209,8 @@ function Navbar() {
             {dropdownOpen2 && (
               <div className="absolute top-full mt-2 w-52 bg-white text-black rounded shadow-lg">
                 <Link
-                  href="/Istanbul-Turkey"
-                  className={dropdownLinkClass("/Istanbul-Turkey")}
+                  href="/Istanbul-Türkiye"
+                  className={dropdownLinkClass("/Istanbul-Türkiye")}
                 >
                   Istanbul, Türkiye
                 </Link>
@@ -368,7 +368,7 @@ function Navbar() {
               </button>
               {mobileDropdownOpen2 && (
                 <div className="ml-4 space-y-2">
-                  <Link href="/Istanbul-Turkey" className={mobileDropdownLinkClass("/Istanbul-Turkey")}>Istanbul, Türkiye</Link>
+                  <Link href="/Istanbul-Türkiye" className={mobileDropdownLinkClass("/Istanbul-Türkiye")}>Istanbul, Türkiye</Link>
                   <Link href="/Dubai-UAE" className={mobileDropdownLinkClass("/Dubai-UAE")}>Dubai, UAE</Link>
                   <Link href="/Kuala-Lumpur-Malaysia" className={mobileDropdownLinkClass("/Kuala-Lumpur-Malaysia")}>Kuala Lumpur, Malaysia</Link>
                   <Link href="/London-UK" className={mobileDropdownLinkClass("/London-UK")}>London, UK</Link>

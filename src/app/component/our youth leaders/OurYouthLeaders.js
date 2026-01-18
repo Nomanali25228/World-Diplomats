@@ -11,7 +11,7 @@ import speaker3 from "../../../../public/img/speaker3.png";
 const speakers = [
   {
     name: "Aras Yılmaz",
-    country: "Turkey",
+    country: "Türkiye",
     // position: "Chief of Strategy",
     img: speaker1,
   },

@@ -40,7 +40,7 @@ const DEST_DATE_MAP = {
 };
 
 const DEST_EMAIL_MAP = {
-  "Istanbul, Türkiye": "/api/IstanbulTurkeyMail",
+  "Istanbul, Türkiye": "/api/IstanbulTürkiyeMail",
   "Dubai, UAE": "/api/DubaiUAEMail",
   "Baku, Azerbaijan": "/api/BakuAzerbaijanMail",
   "Riyadh, Saudi Arabia": "/api/RiyadhSaudiArabiaMail",
@@ -356,7 +356,7 @@ const RegisterNowClient = () => {
       const clean = (obj) => Object.fromEntries(Object.entries(obj).filter(([_, v]) => v !== null && v !== ""));
       payload = clean(payload);
 
-      const res = await fetch(`https://world-diplomats-backend.onrender.com/api/${changeApi}`, {
+      const res = await fetch(`http://localhost:1337/api/${changeApi}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ data: payload }),
@@ -413,7 +413,7 @@ const RegisterNowClient = () => {
       console.log("Cronjob payload:", { id, name, email, isDelegation });
 
       const response = await axios.post(
-        "https://world-diplomats-backend.onrender.com/api/notifications",
+        "http://localhost:1337/api/notifications",
         {
           data: {
             Email: email,
