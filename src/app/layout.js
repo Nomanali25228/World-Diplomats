@@ -28,6 +28,8 @@ export const metadata = {
 
   icons: {
     icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
 
   openGraph: {
@@ -58,6 +60,18 @@ export default function RootLayout({ children }) {
         <DestinationProvider>
           {children}
         </DestinationProvider>
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "World Diplomats",
+              "url": "https://www.worlddiplomats.org",
+            }),
+          }}
+        />
 
         <Footer />
         <ScrollToTop />

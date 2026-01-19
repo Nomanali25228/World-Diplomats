@@ -459,12 +459,12 @@ export async function POST(request) {
 
                                     <!-- TIKTOK -->
                                     <td align="center" style="font-size:10px;">
-                                        <a href="https://www.tiktok.com/@worlddiplomatsmun" target="_blank"
+                                        <a href="https://www.tiktok.com/@worlddiplomats" target="_blank"
                                             style="color:#0a3b6d;text-decoration:none;">
-                                            <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png"
-                                                width="12" style="vertical-align:middle;">
-                                            &nbsp;<span style="text-decoration:underline;">@worlddiplomatsmun</span>
-                                        </a>
+                                             <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png"
+                                                 width="12" style="vertical-align:middle;">
+                                             &nbsp;<span style="text-decoration:underline;">@worlddiplomats</span>
+                                         </a>
                                     </td>
 
                                     <!-- FACEBOOK -->

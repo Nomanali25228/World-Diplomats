@@ -51,11 +51,12 @@ const ContactUS = () => {
       title: "TikTok",
       value: (
         <a
-          href="https://www.tiktok.com/@worlddiplomatsmun"
+          href="https://www.tiktok.com/@worlddiplomats"
           target="_blank"
-          className="hover:text-[#1a2a9c] transition hover:underline"
+          rel="noopener noreferrer"
+          className="text-gray-600 hover:text-[#1a2a9c] transition-colors break-words"
         >
-          tiktok/@worlddiplomatsmun
+          tiktok/@worlddiplomats
         </a>
       ),
     },

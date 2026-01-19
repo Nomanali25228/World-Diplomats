@@ -117,6 +117,7 @@ const Gallery = () => {
           {[...row1Images, ...row1Images, ...row1Images, ...row1Images].map((img, i) => (
             <img
               alt="Gallery image"
+              loading="lazy"
               key={i}
               src={img.src || img} // Handle both Next.js import object and string path
               onClick={() => setActiveIndex(i % row1Images.length)}
@@ -132,6 +133,7 @@ const Gallery = () => {
           {[...row2Images, ...row2Images, ...row2Images, ...row2Images].map((img, i) => (
             <img
               alt="Gallery image"
+              loading="lazy"
               key={i}
               src={img.src || img}
               onClick={() => setActiveIndex(half + (i % row2Images.length))} // Offset index for correct modal opening

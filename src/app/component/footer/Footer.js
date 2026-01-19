@@ -149,7 +149,7 @@ const Footer = () => {
             <a href="https://www.instagram.com/worlddiplomats_?igsh=M3ppbG5hcmp5bnJr" target="_blank">
               <FaInstagram className="hover:text-white transition" />
             </a>
-            <a href="https://www.tiktok.com/@worlddiplomatsmun" target="_blank">
+            <a href="https://www.tiktok.com/@worlddiplomats" target="_blank">
               <FaTiktok className="hover:text-white transition" />
             </a>
             <a href="https://www.threads.net/@worlddiplomats_" target="_blank">
