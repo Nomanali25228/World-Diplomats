@@ -10,12 +10,12 @@ export async function POST(request) {
         let desname = dest;
         let country = 'Malaysia';
         let CityTour = '';
-        if (dest.includes('Kuala Lumpur')) { desname = 'Kuala Lumpur, Malaysia'; country = 'Malaysia'; CityTour = 'Batu Caves'; }
-        else if (dest.includes('Dubai')) { desname = 'Dubai, UAE'; country = 'UAE'; CityTour = 'Desert Safari'; }
-        else if (dest.includes('Istanbul')) { desname = 'Istanbul, Türkiye'; country = 'Turkey'; CityTour = 'Istanbul City Tour'; }
-        else if (dest.includes('London')) { desname = 'London, UK'; country = 'UK'; CityTour = 'London city tour'; }
-        else if (dest.includes('Riyadh')) { desname = 'Riyadh, Saudi Arabia'; country = 'Saudi Arabia'; CityTour = 'Riyadh City Tour'; }
-        else if (dest.includes('Baku')) { desname = 'Baku, Azerbaijan'; country = 'Azerbaijan'; CityTour = 'Baku City Tour'; }
+        if (dest.includes('Kuala Lumpur')) { desname = 'Kuala Lumpur, Malaysia'; country = 'Kuala Lumpur, Malaysia'; CityTour = 'Batu Caves'; }
+        else if (dest.includes('Dubai')) { desname = 'Dubai, UAE'; country = 'Dubai, UAE'; CityTour = 'Desert Safari'; }
+        else if (dest.includes('Istanbul')) { desname = 'Istanbul, Türkiye'; country = 'Istanbul, Türkiye'; CityTour = 'Istanbul City Tour'; }
+        else if (dest.includes('London')) { desname = 'London, UK'; country = 'London, UK'; CityTour = 'London city tour'; }
+        else if (dest.includes('Riyadh')) { desname = 'Riyadh, Saudi Arabia'; country = 'Riyadh, Saudi Arabia'; CityTour = 'Riyadh City Tour'; }
+        else if (dest.includes('Baku')) { desname = 'Baku, Azerbaijan'; country = 'Baku, Azerbaijan'; CityTour = 'Baku City Tour'; }
 
         // Check if this is a delegation/group registration
         const isDelegation = data?.delegates && Array.isArray(data.delegates) && data.delegates.length > 0;

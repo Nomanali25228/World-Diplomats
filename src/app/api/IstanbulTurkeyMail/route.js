@@ -15,12 +15,12 @@ export async function POST(request) {
         let desname = dest;
         let country = 'Turkey';
         let CityTour = '';
-        if (dest.includes('Istanbul')) { desname = 'Istanbul, Türkiye'; country = 'Turkey'; CityTour = 'Istanbul City Tour'; }
-        else if (dest.includes('Dubai')) { desname = 'Dubai, UAE'; country = 'UAE'; CityTour = 'Desert Safari'; }
-        else if (dest.includes('Kuala Lumpur')) { desname = 'Kuala Lumpur, Malaysia'; country = 'Malaysia'; CityTour = 'Batu Caves'; }
-        else if (dest.includes('London')) { desname = 'London, UK'; country = 'UK'; CityTour = 'London city tour'; }
-        else if (dest.includes('Riyadh')) { desname = 'Riyadh, Saudi Arabia'; country = 'Saudi Arabia'; CityTour = 'Riyadh City Tour'; }
-        else if (dest.includes('Baku')) { desname = 'Baku, Azerbaijan'; country = 'Azerbaijan'; CityTour = 'Baku City Tour'; }
+        if (dest.includes('Istanbul')) { desname = 'Istanbul, Türkiye'; country = 'Istanbul, Türkiye'; CityTour = 'Istanbul City Tour'; }
+        else if (dest.includes('Dubai')) { desname = 'Dubai, UAE'; country = 'Dubai, UAE'; CityTour = 'Desert Safari'; }
+        else if (dest.includes('Kuala Lumpur')) { desname = 'Kuala Lumpur, Malaysia'; country = 'Kuala Lumpur, Malaysia'; CityTour = 'Batu Caves'; }
+        else if (dest.includes('London')) { desname = 'London, UK'; country = 'London, UK'; CityTour = 'London city tour'; }
+        else if (dest.includes('Riyadh')) { desname = 'Riyadh, Saudi Arabia'; country = 'Riyadh, Saudi Arabia'; CityTour = 'Riyadh City Tour'; }
+        else if (dest.includes('Baku')) { desname = 'Baku, Azerbaijan'; country = 'Baku, Azerbaijan'; CityTour = 'Baku City Tour'; }
 
         // Check if this is a delegation/group registration
         const isDelegation = data?.delegates && Array.isArray(data.delegates) && data.delegates.length > 0;
@@ -37,7 +37,7 @@ export async function POST(request) {
         };
         const extras = extrasMap[desname] || [];
         extras.forEach(x => zagatiyaLines.push('✓ ' + x));
-        const zagatiyaHTML = zagatiyaLines.join('<br><br>');
+        const zagatiyaHTML = zagatiyaLines.join('<br style="line-height:18px;">');
         const closingMessage = `at World Diplomats MUN and await, in <br /> anticipation, to host you at ${country}.`;
         const subject = `World Diplomats — Registration Received (${desname})`;
 
@@ -68,16 +68,24 @@ export async function POST(request) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>World Diplomats</title>
+    <style>
+        /* Prevent mobile apps from resizing text */
+        * { -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
+        table { border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; }
+        /* Ensure table layout stays consistent */
+        .packages-table { table-layout: fixed !important; }
+    </style>
 </head>
 
 <body bgcolor="#ffffff" style="margin:0; padding:0; background-color:#ffffff; font-family:Arial, Helvetica, sans-serif;">
 
-    <table width="100%" cellpadding="0" cellspacing="0"  bgcolor="#ffffff" style="background-color:#ffffff;">
+   <table width="100%" cellpadding="0" cellspacing="0"  bgcolor="#ffffff" style="background-color:#ffffff;">
         <tr>
             <td align="center">
 
                 <!-- MAIN CONTAINER -->
-                <table width="700" cellpadding="0" cellspacing="0"  bgcolor="#ffffff"  style="max-width:700px; background-color:#ffffff;">
+                <table width="850" cellpadding="0" cellspacing="0"  bgcolor="#ffffff"  style="max-width:700px; background-color:#ffffff;">
 
                     <!-- CONTENT WITH RIGHT COLOR STRIP -->
                     <tr>
@@ -97,11 +105,8 @@ export async function POST(request) {
                                             </tr>
                                         </table>
                     
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
+                          
+                        
                                         <!-- IMAGE -->
                                         <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
                                             <tr>
@@ -209,7 +214,7 @@ export async function POST(request) {
             color:#555555;
             text-align:center;
           ">
-                                                    If the above button does not work, open this link:<br>
+                                                   
 
                                                 </td>
                                             </tr>
@@ -301,130 +306,105 @@ export async function POST(request) {
                 
 
                 <!-- PACKAGES -->
-                <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+                <table width="100%" cellpadding="0" cellspacing="0" class="packages-table" style="margin-bottom:20px; table-layout: fixed;">
                     <tr>
-                        <td>
-
-                            <!-- TITLES -->
-                            <table width="100%" cellpadding="4">
-                                <tr>
-                                    <td width="33%">
-                                        <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);color:#fff;
-            padding:18px;border-radius:16px;text-align:center;font-weight:600;">
-                                            Basic
-                                        </div>
-                                    </td>
-                                    <td width="33%">
-                                        <div style="background:linear-gradient(90deg,#0b67c2,#8c1537);color:#fff;
-            padding:18px;border-radius:16px;text-align:center;font-weight:600;">
-                                            Shepandum
-                                        </div>
-                                    </td>
-                                    <td width="33%">
-                                        <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);color:#fff;
-            padding:18px;border-radius:16px;text-align:center;font-weight:600;">
-                                            Zagatiya
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-
+                        <td width="33.33%" style="padding:4px;">
+                            <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);color:#fff;
+                                padding:14px 2px;border-radius:12px;text-align:center;font-weight:600;font-size:12px;">
+                                Basic
+                            </div>
+                        </td>
+                        <td width="33.33%" style="padding:4px;">
+                            <div style="background:linear-gradient(90deg,#0b67c2,#8c1537);color:#fff;
+                                padding:14px 2px;border-radius:12px;text-align:center;font-weight:600;font-size:12px;">
+                                Shepandum
+                            </div>
+                        </td>
+                        <td width="33.33%" style="padding:4px;">
+                            <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);color:#fff;
+                                padding:14px 2px;border-radius:12px;text-align:center;font-weight:600;font-size:12px;">
+                                Zagatiya
+                            </div>
                         </td>
                     </tr>
-
                     <tr>
-                        <td>
-
-                            <!-- CARDS -->
-                            <table width="100%" cellpadding="0" cellspacing="0">
+                        <!-- BASIC -->
+                        <td width="33.33%" valign="top" style="padding:4px;">
+                            <table width="100%" height="520" cellpadding="8" cellspacing="0"
+                                style="background:#f1f1f1;border-radius:20px; table-layout: fixed;">
                                 <tr>
-
-                                    <!-- BASIC -->
-                                    <td width="33%" valign="top" style="padding:4px;">
-                                        <table width="100%" height="450" cellpadding="12" cellspacing="0"
-                                            style="background:#f1f1f1;border-radius:20px;">
-                                            <tr>
-                                                <td valign="top" style="font-size:11px;line-height:1.5;color:#333;">
-                                                    ✓ UN Simulation committee sessions<br>
-                                                    ✓ Background Study Guides<br>
-                                                    ✓ Official UNHCR endorsed Certificate<br>
-                                                    ✓ 1 committee lunch<br>
-                                                    ✓ Opening ceremony Diplomatic dinner<br>
-                                                    ✓ Closing ceremony Grand Dinner<br>
-                                                    ✓ Cultural Performance<br>
-                                                    ✓ Musical Night<br>
-                                                    ✓ Scavenger Hunt<br>
-                                                    ✓ World Diplomats merch and Kit
-                                                </td>
-                                            </tr>
- 
-                                            <!-- BUTTON -->
-                                            <tr>
-                                                <td align="center" valign="bottom">
-                                                    <a href="${buttonLink}" target="_blank" style="text-decoration:none;">
-                                                        <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);
-                  color:#fff;padding:12px 24px;border-radius:14px;font-weight:600;">
-                                                            ${isDelegation ? 'CHAT WITH US' : 'CHOOSE PLAN'}
-                                                        </div>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                    <td valign="top" style="color:#333;font-size:10px;line-height:13px;padding-top:10px;height:420px;">
+                                        <span style="color:#2bb673;font-weight:bold;">✓</span> UN Simulation committee sessions<br><br>
+                                        <span style="color:#2bb673;font-weight:bold;">✓</span> Background Study Guides<br><br>
+                                        <span style="color:#2bb673;font-weight:bold;">✓</span> Official UNHCR endorsed Certificate<br><br>
+                                        <span style="color:#2bb673;font-weight:bold;">✓</span> 1 committee lunch<br><br>
+                                        <span style="color:#2bb673;font-weight:bold;">✓</span> Opening ceremony<br><br>
+                                        <span style="color:#2bb673;font-weight:bold;">✓</span> Diplomatic dinner<br><br>
+                                        <span style="color:#2bb673;font-weight:bold;">✓</span> Closing ceremony<br><br>
+                                        <span style="color:#2bb673;font-weight:bold;">✓</span> Grand Dinner<br><br>
+                                        <span style="color:#2bb673;font-weight:bold;">✓</span> Cultural Performance<br><br>
+                                        <span style="color:#2bb673;font-weight:bold;">✓</span> Musical Night<br><br>
+                                        <span style="color:#2bb673;font-weight:bold;">✓</span> Scavenger Hunt<br><br>
+                                        <span style="color:#2bb673;font-weight:bold;">✓</span> World Diplomats merch and Kit
                                     </td>
-
-                                    <!-- SHEPANDUM -->
-                                    <td width="33%" valign="top" style="padding:4px;">
-                                        <table width="100%" height="450" cellpadding="12" cellspacing="0"
-                                            style="background:#f1f1f1;border-radius:20px;">
-                                            <tr>
-                                                <td valign="top" style="font-size:11px;line-height:1.6;color:#333;">
-                                                    ✓ Everything in Basic<br>
-                                                    ✓ 5-star premium hotel accommodation (Twin Shared)<br>
-                                                    ✓ Gourmet Morning Breakfast everyday
-                                                </td>
-                                            </tr>
-
-                                            <!-- BUTTON -->
-                                            <tr>
-                                                <td align="center" valign="bottom">
-                                                    <a href="${buttonLink}" target="_blank" style="text-decoration:none;">
-                                                        <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);
-                  color:#fff;padding:12px 24px;border-radius:14px;font-weight:600;">
-                                                            ${isDelegation ? 'CHAT WITH US' : 'CHOOSE PLAN'}
-                                                        </div>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                </tr>
+                                <tr>
+                                    <td align="center" valign="bottom" style="padding-bottom:15px;">
+                                        <a href="${buttonLink}" target="_blank" style="text-decoration:none;">
+                                            <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);
+                                                color:#fff;padding:8px 10px;border-radius:10px;font-weight:600;font-size:10px;">
+                                                ${isDelegation ? 'CHAT WITH US' : 'CHOOSE PLAN'}
+                                            </div>
+                                        </a>
                                     </td>
-
-                                    <!-- ZAGATIYA -->
-                                    <td width="33%" valign="top" style="padding:4px;">
-                                        <table width="100%" height="450" cellpadding="12" cellspacing="0"
-                                            style="background:#f1f1f1;border-radius:20px;">
-                                            <tr>
-                                                <td valign="top" style="font-size:11px;line-height:1.6;color:#333;">
-                                                    ${zagatiyaHTML}
-                                                </td>
-                                            </tr>
-
-                                            <!-- BUTTON -->
-                                            <tr>
-                                                <td align="center" valign="bottom">
-                                                    <a href="${buttonLink}" target="_blank" style="text-decoration:none;">
-                                                        <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);
-                  color:#fff;padding:12px 24px;border-radius:14px;font-weight:600;">
-                                                            ${isDelegation ? 'CHAT WITH US' : 'CHOOSE PLAN'}
-                                                        </div>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-
                                 </tr>
                             </table>
+                        </td>
 
+                        <!-- SHEPANDUM -->
+                        <td width="33.33%" valign="top" style="padding:4px;">
+                            <table width="100%" height="520" cellpadding="8" cellspacing="0"
+                                style="background:#f1f1f1;border-radius:20px; table-layout: fixed;">
+                                <tr>
+                                    <td valign="top" style="color:#333;font-size:10px;line-height:13px;padding-top:10px;height:420px;">
+                                        <span style="color:#2bb673;font-weight:bold;">✓</span> Everything in Basic package<br><br>
+                                        <span style="color:#2bb673;font-weight:bold;">✓</span> 5-star premium hotel accommodation (Twin Shared)<br><br>
+                                        <span style="color:#2bb673;font-weight:bold;">✓</span> Gourmet Morning Breakfast everyday
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" valign="bottom" style="padding-bottom:15px;">
+                                        <a href="${buttonLink}" target="_blank" style="text-decoration:none;">
+                                            <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);
+                                                color:#fff;padding:8px 10px;border-radius:10px;font-weight:600;font-size:10px;">
+                                                ${isDelegation ? 'CHAT WITH US' : 'CHOOSE PLAN'}
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+
+                        <!-- ZAGATIYA -->
+                        <td width="33.33%" valign="top" style="padding:4px;">
+                            <table width="100%" height="520" cellpadding="8" cellspacing="0"
+                                style="background:#f1f1f1;border-radius:20px; table-layout: fixed;">
+                                <tr>
+                                    <td valign="top" style="color:#333;font-size:10px;line-height:13px;padding-top:10px;height:420px;">
+                                        ${zagatiyaHTML}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" valign="bottom" style="padding-bottom:15px;">
+                                        <a href="${buttonLink}" target="_blank" style="text-decoration:none;">
+                                            <div style="background:linear-gradient(90deg,#8c1537,#0b67c2);
+                                                color:#fff;padding:8px 10px;border-radius:10px;font-weight:600;font-size:10px;">
+                                                ${isDelegation ? 'CHAT WITH US' : 'CHOOSE PLAN'}
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                 </table>
@@ -580,7 +560,7 @@ export async function POST(request) {
 #E3155A 92.3076% 100%);
               background-repeat:no-repeat;background-size:28px 100%;min-height:1200px;">
                 &nbsp;
-            </td>
+       </td>
         </tr>
     </table>
     </td>
