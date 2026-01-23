@@ -37,9 +37,18 @@ const DelegationFormContent = () => {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const dest = searchParams.get("destination");
-    if (dest) {
-      setDestination(dest);
+    // 1. Check URL first
+    const destParam = searchParams.get("destination");
+    if (destParam) {
+      setDestination(destParam);
+      localStorage.setItem("selectedDestination", destParam);
+    }
+    // 2. Otherwise check localStorage
+    else {
+      const savedDest = localStorage.getItem("selectedDestination");
+      if (savedDest) {
+        setDestination(savedDest);
+      }
     }
   }, [searchParams]);
 
@@ -327,10 +336,11 @@ const DelegationFormContent = () => {
                   <SiGmail /> info@worlddiplomats.org
                 </a>
                 <a
-                  href="https://instagram.com/WorldDiplomats"
+                  href="https://www.instagram.com/worlddiplomats_?igsh=M3ppbG5hcmp5bnJr"
+                  target="_blank"
                   className="flex items-center gap-1"
                 >
-                  <FaInstagram /> @WorldDiplomats
+                  <FaInstagram /> @worlddiplomats_
                 </a>
               </div>
             </div>
