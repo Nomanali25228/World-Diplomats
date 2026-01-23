@@ -142,7 +142,7 @@ const page = () => {
         disc="Radisson Blu Hotel, London Heathrow is unique from the outset. Perfect for weekend stays, relaxing breaks, and business travel, the hotel features 464 bedrooms and suites, two restaurants, as well as a health club with state-of-the-art Technogym equipment, perfect for morning energizing and evening downtime"
       />
 
-      <DestinationQuestions />
+      <DestinationQuestions destination="London, UK" />
 
     </div>
   )

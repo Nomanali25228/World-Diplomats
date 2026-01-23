@@ -1,6 +1,7 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Navbar from "../component/navbar/Navbar";
+import { useSearchParams } from "next/navigation";
 import { FaInstagram } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
 
@@ -11,6 +12,14 @@ const MIN_DELEGATES = 2;
 const STRAPI_URL = "https://world-diplomats-backend.onrender.com";
 
 const Page = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <DelegationFormContent />
+    </Suspense>
+  );
+};
+
+const DelegationFormContent = () => {
   const [delegationName, setDelegationName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -23,6 +32,16 @@ const Page = () => {
   const [additionalEmail, setAdditionalEmail] = useState("");
   const [institution, setInstitution] = useState("");
   const [accommodation, setAccommodation] = useState(null);
+  const [destination, setDestination] = useState("");
+
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const dest = searchParams.get("destination");
+    if (dest) {
+      setDestination(dest);
+    }
+  }, [searchParams]);
 
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -83,6 +102,11 @@ const Page = () => {
       return false;
     }
 
+    if (!destination.trim()) {
+      toast.error("Destination is required");
+      return false;
+    }
+
     return true;
   };
 
@@ -108,6 +132,7 @@ const Page = () => {
             ...(additionalEmail && { additionalEmail }),
             ...(institution && { institution }),
             accommodation,
+            Destinations: destination,
           },
         }),
       });
@@ -199,7 +224,7 @@ const Page = () => {
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                   {delegates.map((name, index) => (
-                    <div key={index} className="relative p-2 border rounded-md">
+                    <div key={index} className="relative p-2 ">
                       <label className="text-sm font-medium">
                         Delegate {index + 1}
                       </label>
@@ -244,6 +269,12 @@ const Page = () => {
                   value={institution}
                   onChange={(e) => setInstitution(e.target.value)}
                 />
+                <Field
+                  label="Destination"
+                  required
+                  value={destination}
+                  readOnly
+                />
               </Grid>
 
               <div>
@@ -269,6 +300,7 @@ const Page = () => {
                   </label>
                 </div>
               </div>
+
 
               <button
                 type="submit"
@@ -316,7 +348,7 @@ const Grid = ({ children }) => (
   </div>
 );
 
-const Field = ({ label, type = "text", value, onChange, required = false }) => (
+const Field = ({ label, type = "text", value, onChange, required = false, readOnly = false }) => (
   <div>
     <label className="block font-semibold mb-1 text-sm">
       {label} {required && <span className="text-red-600">*</span>}
@@ -325,7 +357,8 @@ const Field = ({ label, type = "text", value, onChange, required = false }) => (
       type={type}
       value={value}
       onChange={onChange}
-      className="w-full border rounded-lg px-3 py-2 text-sm"
+      readOnly={readOnly}
+      className={`w-full border rounded-lg px-3 py-2 text-sm ${readOnly ? "bg-gray-100 cursor-not-allowed opacity-80" : ""}`}
     />
   </div>
 );

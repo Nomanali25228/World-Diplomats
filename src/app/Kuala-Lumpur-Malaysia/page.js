@@ -143,7 +143,7 @@ const page = () => {
         disc="Located opposite the World Trade Centre Kuala Lumpur, the 5-star Sunway Putra Hotel offers a prime conference venue with modern meeting rooms, a grand ballroom, and easy access to public transport."
       />
 
-      <DestinationQuestions />
+      <DestinationQuestions destination="Kuala Lumpur, Malaysia" />
 
     </div>
   )

@@ -145,7 +145,7 @@ const page = () => {
       />
 
 
-      <DestinationQuestions />
+      <DestinationQuestions destination="Dubai, UAE" />
 
     </div>
   )

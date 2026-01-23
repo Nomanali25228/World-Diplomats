@@ -5,7 +5,7 @@ import Link from "next/link";
 import { FaComments, FaWhatsapp } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-const DestinationQuestions = () => {
+const DestinationQuestions = ({ destination }) => {
   // WhatsApp link example: +44 7490 344639 (replace with your number)
   const whatsappNumber = "+447490344639";
   const whatsappLink = `https://wa.me/${whatsappNumber.replace(
@@ -61,7 +61,7 @@ const DestinationQuestions = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
             >
-              <Link href="/DelegationForm">
+              <Link href={`/DelegationForm?destination=${encodeURIComponent(destination || "")}`}>
                 <button className="inline-flex cursor-pointer items-center gap-2 px-7 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 transition rounded-lg text-white text-sm sm:text-base font-medium shadow-lg">
                   <FaComments /> Register with a delegation
                 </button>

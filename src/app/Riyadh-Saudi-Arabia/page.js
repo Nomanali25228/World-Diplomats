@@ -144,7 +144,7 @@ const page = () => {
         disc="The venue is near Granada Mall and Granada Metro Station, with Riyadh’s Financial Plaza and major cultural attractions within easy reach"
       />
 
-      <DestinationQuestions />
+      <DestinationQuestions destination="Riyadh, Saudi Arabia" />
 
     </div>
   )
