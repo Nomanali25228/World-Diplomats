@@ -69,7 +69,7 @@ export default function Home() {
         <div className="mb-12">
           <h1 className="text-4xl font-black mb-4 text-white drop-shadow-md">Payment Request</h1>
           <h2 className="text-xl md:text-2xl font-medium">
-            <span className="block md:inline">ATSAS MUN</span>
+            <span className="block md:inline">World Diplomats</span>
             <span className="font-bold text-yellow-400"> ${amount}</span>
           </h2>
         </div>
