@@ -777,7 +777,7 @@ const RegisterNowClient = () => {
                             <div className="relative w-full overflow-visible">
                               <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
                               <PhoneInput
-                                country="ae"
+                                country="gb"
                                 value={form.number}
                                 placeholder="Number"
                                 onChange={(phone) => setForm(prev => ({ ...prev, number: phone }))}
