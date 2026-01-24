@@ -201,7 +201,6 @@ export async function POST(request) {
             color:#555555;
             text-align:center;
           ">
-                                                    If the above button does not work, open this link:<br>
 
                                                 </td>
                                             </tr>
