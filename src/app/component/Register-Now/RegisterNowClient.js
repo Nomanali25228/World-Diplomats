@@ -294,7 +294,7 @@ const RegisterNowClient = () => {
       const customerJson = await customerResponse.json().catch(() => ({}));
 
       if (!customerResponse.ok) {
-        const errMsg = customerJson.error || JSON.stringify(customerJson) || "Unknown error";
+        const errMsg = customerJson.message || customerJson.error || customerJson.details || JSON.stringify(customerJson) || "Unknown error";
         toast.error(`Customer creation failed: ${errMsg}`);
         setSubmitting(false);
         return;
