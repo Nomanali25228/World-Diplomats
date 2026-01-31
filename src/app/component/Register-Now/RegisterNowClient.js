@@ -83,6 +83,7 @@ const RegisterNowClient = () => {
     Array(MIN_DELEGATES).fill({ shirtSize: "", foodPreference: "", pricePackage: "" })
   );
   const [groupEmail, setGroupEmail] = useState("");
+  const [selectedCountryCode, setSelectedCountryCode] = useState("gb");
   const [isDestinationLocked, setIsDestinationLocked] = useState(false);
   const [changeApi, setChangeApi] = useState("firstnames");
 
@@ -220,8 +221,7 @@ const RegisterNowClient = () => {
           !form.number.trim() ||
           !form.gender.trim() ||
           !form.dob.trim() ||
-          !form.destination.trim() ||
-          !form.institution.trim()
+          !form.destination.trim()
         ) {
           toast.error("Please fill all required fields marked with *");
           return;
@@ -234,8 +234,7 @@ const RegisterNowClient = () => {
           !form.number.trim() ||
           !form.gender.trim() ||
           !form.dob.trim() ||
-          !form.destination.trim() ||
-          !form.institution.trim()
+          !form.destination.trim()
         ) {
           toast.error("Please fill all required fields marked with *");
           return;
@@ -254,8 +253,8 @@ const RegisterNowClient = () => {
     e.preventDefault();
 
     // Step 2 Validation
-    if (!form.reason.trim() || !form.committee.trim()) {
-      toast.error("Please provide a reason and select a committee.");
+    if (!form.committee.trim()) {
+      toast.error("Please select a committee.");
       return;
     }
 
@@ -588,7 +587,7 @@ const RegisterNowClient = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           {/* Name */}
                           <div>
-                            <label className="block text-sm font-medium text-gray-700">Name *</label>
+                            <label className="block text-sm font-medium text-gray-700">Full Name *</label>
                             <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="Name" className={inputClass} required />
                           </div>
 
@@ -605,7 +604,10 @@ const RegisterNowClient = () => {
                               options={countryOptions}
                               formatOptionLabel={formatOptionLabel}
                               placeholder="Country of Residence"
-                              onChange={(selected) => setForm(prev => ({ ...prev, countryResidence: selected.label }))}
+                              onChange={(selected) => {
+                                setForm(prev => ({ ...prev, countryResidence: selected.label }));
+                                setSelectedCountryCode(selected.code?.toLowerCase() || "gb");
+                              }}
                               styles={selectStyles}
                             />
                           </div>
@@ -626,7 +628,7 @@ const RegisterNowClient = () => {
                           <div className="relative w-full overflow-visible">
                             <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
                             <PhoneInput
-                              country="ae"
+                              country={selectedCountryCode}
                               value={form.number}
                               placeholder="Number"
                               onChange={(phone) => setForm(prev => ({ ...prev, number: phone }))}
@@ -665,7 +667,7 @@ const RegisterNowClient = () => {
 
                           {/* Destination */}
                           <div>
-                            <label className="block text-sm font-medium text-gray-700">Destination *</label>
+                            <label className="block text-sm font-medium text-gray-700">Conference Destination *</label>
                             {isDestinationLocked ? (
                               <div className="mt-1">
                                 <p className="px-4 py-3 bg-gray-100 rounded-xl text-sm text-gray-800">{selectedDestLabel}</p>
@@ -675,9 +677,9 @@ const RegisterNowClient = () => {
                                 <option value="" disabled>Select Destination</option>
                                 <option value="Istanbul, Türkiye">Istanbul, Türkiye</option>
                                 <option value="Dubai, UAE">Dubai, UAE</option>
-                                <option value="Kuala Lumpur, Malaysia">Kuala Lumpur, Malaysia</option>
-                                <option value="London, UK">London, UK</option>
-                                <option value="Riyadh, Saudi Arabia">Riyadh, Saudi Arabia</option>
+                                <option value="Kuala Lumpur, Malaysia">Kuala Lumpur, Malaysia (TBD)</option>
+                                <option value="London, UK">London, UK (TBD)</option>
+                                <option value="Riyadh, Saudi Arabia">Riyadh, Saudi Arabia (TBD)</option>
 
                               </select>
                             )}
@@ -685,14 +687,13 @@ const RegisterNowClient = () => {
 
                           {/* Institution */}
                           <div className="md:col-span-2">
-                            <label className="block text-sm font-medium text-gray-700">Institution *</label>
+                            <label className="block text-sm font-medium text-gray-700">Institution (if any)</label>
                             <input
                               name="institution"
                               value={form.institution}
                               placeholder="Institution"
                               onChange={handleChange}
                               className={`${inputClass} w-full`}
-                              required
                             />
                           </div>
 
@@ -758,7 +759,10 @@ const RegisterNowClient = () => {
                                 options={countryOptions}
                                 formatOptionLabel={formatOptionLabel}
                                 placeholder="Country of Residence"
-                                onChange={(selected) => setForm(prev => ({ ...prev, countryResidence: selected.label }))}
+                                onChange={(selected) => {
+                                  setForm(prev => ({ ...prev, countryResidence: selected.label }));
+                                  setSelectedCountryCode(selected.code?.toLowerCase() || "gb");
+                                }}
                                 styles={selectStyles}
                               />
                             </div>
@@ -777,7 +781,7 @@ const RegisterNowClient = () => {
                             <div className="relative w-full overflow-visible">
                               <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
                               <PhoneInput
-                                country="gb"
+                                country={selectedCountryCode}
                                 value={form.number}
                                 placeholder="Number"
                                 onChange={(phone) => setForm(prev => ({ ...prev, number: phone }))}
@@ -813,7 +817,7 @@ const RegisterNowClient = () => {
                             </div>
 
                             <div>
-                              <label className="block text-sm font-medium text-gray-700">Destination *</label>
+                              <label className="block text-sm font-medium text-gray-700">Conference Destination *</label>
                               {isDestinationLocked ? (
                                 <div className="mt-1">
                                   <p className="px-4 py-3 bg-gray-100 rounded-xl text-sm text-gray-800">{selectedDestLabel}</p>
@@ -824,9 +828,9 @@ const RegisterNowClient = () => {
 
                                   <option value="Istanbul, Türkiye">Istanbul, Türkiye</option>
                                   <option value="Dubai, UAE">Dubai, UAE</option>
-                                  <option value="Kuala Lumpur, Malaysia">Kuala Lumpur, Malaysia</option>
-                                  <option value="London, UK">London, UK</option>
-                                  <option value="Riyadh, Saudi Arabia">Riyadh, Saudi Arabia</option>
+                                  <option value="Kuala Lumpur, Malaysia">Kuala Lumpur, Malaysia (TBD)</option>
+                                  <option value="London, UK">London, UK (TBD)</option>
+                                  <option value="Riyadh, Saudi Arabia">Riyadh, Saudi Arabia (TBD)</option>
 
 
                                 </select>
@@ -834,8 +838,8 @@ const RegisterNowClient = () => {
                             </div>
 
                             <div>
-                              <label className="block text-sm font-medium text-gray-700">Institution *</label>
-                              <input name="institution" value={form.institution} placeholder="Institution" onChange={handleChange} className={inputClass} required />
+                              <label className="block text-sm font-medium text-gray-700">Institution (if any)</label>
+                              <input name="institution" value={form.institution} placeholder="Institution" onChange={handleChange} className={inputClass} />
                             </div>
 
                           </div>
@@ -855,8 +859,8 @@ const RegisterNowClient = () => {
                       className="space-y-4"
                     >
                       {/* Reason */}
-                      <label className="block text-sm font-medium text-gray-700">Why do you want to join? *</label>
-                      <textarea name="reason" value={form.reason} onChange={handleChange} placeholder="Why join?" className={inputClass + " min-h-[100px]"} required />
+                      <label className="block text-sm font-medium text-gray-700">Why do you want to join?</label>
+                      <textarea name="reason" value={form.reason} onChange={handleChange} placeholder="Why join?" className={inputClass + " min-h-[100px]"} />
 
                       {/* Prior Conference Experience */}
                       <label className="block text-sm font-medium text-gray-700">Prior Conference Experience (if any)</label>
@@ -904,12 +908,10 @@ const RegisterNowClient = () => {
                                   <label className="block text-sm font-medium text-gray-700">Shirt Size *</label>
                                   <select value={delegateDetails[idx]?.shirtSize || ""} onChange={(e) => updateDelegateDetail(idx, 'shirtSize', e.target.value)} className={inputClass} required>
                                     <option value="" disabled>Select Shirt Size</option>
-                                    <option>XS</option>
                                     <option>S</option>
                                     <option>M</option>
                                     <option>L</option>
                                     <option>XL</option>
-                                    <option>XXL</option>
                                   </select>
                                 </div>
                                 <div>
@@ -940,12 +942,10 @@ const RegisterNowClient = () => {
                             <label className="block text-sm font-medium text-gray-700">Shirt Size *</label>
                             <select name="shirtSize" value={form.shirtSize} onChange={handleChange} className={inputClass} required>
                               <option value="" disabled>Select Shirt Size</option>
-                              <option>XS</option>
                               <option>S</option>
                               <option>M</option>
                               <option>L</option>
                               <option>XL</option>
-                              <option>XXL</option>
                             </select>
                           </div>
                           <div className="">
