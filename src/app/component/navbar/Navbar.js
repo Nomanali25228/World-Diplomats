@@ -300,9 +300,14 @@ function Navbar() {
             About Us
           </Link>
 
-          <Link href="/Scholarships" className={linkClass("/Scholarships")}>
-            Scholarships
-          </Link>
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdliQYjIo6DGk7WhLDlFPSvUnCUGQcfhzqszKpLkpXEhLUOIA/viewform?usp=dialog"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={linkClass("/Ambassadors")}
+          >
+            Ambassadors
+          </a>
         </div>
 
         {/* Buttons Section */}
@@ -396,7 +401,7 @@ function Navbar() {
               )}
 
               <Link href="/About-US" className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors">About Us</Link>
-              <Link href="/Scholarships" className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors">Scholarships</Link>
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSdliQYjIo6DGk7WhLDlFPSvUnCUGQcfhzqszKpLkpXEhLUOIA/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" className="block py-2 px-4 rounded hover:bg-[#1e2a4d] transition-colors">Ambassadors</a>
             </nav>
           </div>
         </div>
