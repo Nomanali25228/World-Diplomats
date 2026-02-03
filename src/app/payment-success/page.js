@@ -10,11 +10,11 @@ function PaymentSuccessContent() {
   const router = useRouter();
   const amount = searchParams.get('amount');
 
-  useEffect(() => {
-    if (!amount) {
-      router.push('/');
-    }
-  }, [amount, router]);
+  // useEffect(() => {
+  //   if (!amount) {
+  //     router.push('/');
+  //   }
+  // }, [amount, router]);
 
   return (
     <header
@@ -31,10 +31,10 @@ function PaymentSuccessContent() {
       </div>
 
       <main className="relative z-10 max-w-4xl mx-auto px-6 py-16 text-center text-white">
-        
+
         {/* Card */}
         <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-10">
-          
+
           <h1 className="text-5xl md:text-6xl font-extrabold text-yellow-400 drop-shadow-lg mb-6">
             Thank You!
           </h1>
