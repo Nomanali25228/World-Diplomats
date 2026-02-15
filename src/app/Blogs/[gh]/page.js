@@ -107,7 +107,7 @@ export default function Home() {
                                                         <div className="img-container h-[200px] w-full sm:w-[260px] overflow-hidden rounded-b-[20px] mx-auto">
                                                             <div className="img-inner">
                                                                 <div className="rounded-[20px] overflow-hidden mt-[30px] bg-[#c8c2c2] h-[200px] w-full sm:w-[260px]">
-                                                                    <img
+                                                                    <Image
                                                                         src={(() => {
                                                                             const cover = post.cover;
                                                                             const url = cover?.url || cover?.data?.attributes?.url || cover?.data?.url;

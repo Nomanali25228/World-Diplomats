@@ -124,7 +124,7 @@ const BlogPostPage = () => {
           {post.cover && (
             <div className="flex justify-center">
               <div className="relative h-[40%] w-[90%] sm:w-[60%] -mt-24 sm:-mt-32 mb-6">
-                <img
+                <Image
 
                   src={(() => {
                     const cover = post.cover;

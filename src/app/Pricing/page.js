@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 import Navbar from "../component/navbar/Navbar";
 
 const pricingData = [
@@ -45,10 +46,11 @@ const Card = ({ item }) => (
   <div className="relative w-72 h-[22rem] rounded-2xl overflow-hidden shadow-2xl group">
 
     {/* Image */}
-    <img
+    <Image
       src={item.image}
       alt={item.destination}
-      className="absolute inset-0 w-full h-full object-cover"
+      fill
+      className="object-cover"
     />
 
     {/* Overlay */}
