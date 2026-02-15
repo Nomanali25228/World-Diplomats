@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 import { useRouter } from 'next/navigation';
 import { useDestination } from '@/app/context/DestinationContext';
 import istanbulImg from "../../../../public/img/cardIstanbul.jpg";
@@ -105,8 +106,8 @@ const Card = ({ dest }) => {
 
         {/* FRONT */}
         <div className="absolute w-full h-full rounded-2xl overflow-hidden shadow-xl [backface-visibility:hidden]">
-          <img
-            src={dest.cardimg.src}
+          <Image
+            src={dest.cardimg}
             alt={dest.title}
             className="w-full h-full object-cover"
           />
@@ -119,8 +120,8 @@ const Card = ({ dest }) => {
 
         {/* BACK */}
         <div className="absolute w-full h-full rounded-2xl overflow-hidden shadow-xl [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col justify-center items-center p-4">
-          <img
-            src={dest.cardimg.src}
+          <Image
+            src={dest.cardimg}
             alt={dest.title}
             className="absolute w-full h-full object-cover opacity-90 sm:blur-[1px]"
           />

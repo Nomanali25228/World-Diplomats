@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Image from "next/image";
 import { FaTimes, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 // Imports 1-63
 import img1 from "../../../../public/img/galleryimg (1).JPG";
@@ -115,15 +116,16 @@ const Gallery = () => {
         <div className="flex gap-4 animate-scroll-left whitespace-nowrap">
           {/* Quadrupled for seamless loop and wide screen coverage */}
           {[...row1Images, ...row1Images, ...row1Images, ...row1Images].map((img, i) => (
-            <img
-              alt="Gallery image"
-              loading="lazy"
-              key={i}
-              src={img.src || img} // Handle both Next.js import object and string path
-              onClick={() => setActiveIndex(i % row1Images.length)}
-              className="cursor-pointer rounded-lg shadow object-cover
-                w-28 h-20 sm:w-36 sm:h-24 md:w-44 md:h-32 lg:w-64 lg:h-40"
-            />
+            <div key={i} className="relative w-28 h-20 sm:w-36 sm:h-24 md:w-44 md:h-32 lg:w-64 lg:h-40 flex-shrink-0">
+              <Image
+                alt="Gallery image"
+                loading="lazy"
+                src={img}
+                onClick={() => setActiveIndex(i % row1Images.length)}
+                className="cursor-pointer rounded-lg shadow object-cover"
+                fill
+              />
+            </div>
           ))}
         </div>
 
@@ -131,15 +133,16 @@ const Gallery = () => {
         <div className="flex gap-4 mt-6 animate-scroll-right whitespace-nowrap">
           {/* Quadrupled for seamless loop */}
           {[...row2Images, ...row2Images, ...row2Images, ...row2Images].map((img, i) => (
-            <img
-              alt="Gallery image"
-              loading="lazy"
-              key={i}
-              src={img.src || img}
-              onClick={() => setActiveIndex(half + (i % row2Images.length))} // Offset index for correct modal opening
-              className="cursor-pointer rounded-lg shadow object-cover
-                w-28 h-20 sm:w-36 sm:h-24 md:w-44 md:h-32 lg:w-64 lg:h-40"
-            />
+            <div key={i} className="relative w-28 h-20 sm:w-36 sm:h-24 md:w-44 md:h-32 lg:w-64 lg:h-40 flex-shrink-0">
+              <Image
+                alt="Gallery image"
+                loading="lazy"
+                src={img}
+                onClick={() => setActiveIndex(half + (i % row2Images.length))}
+                className="cursor-pointer rounded-lg shadow object-cover"
+                fill
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -168,11 +171,14 @@ const Gallery = () => {
           <div className="flex flex-col items-center">
 
             {/* Image */}
-            <img
-              alt="Gallery image"
-              src={images[activeIndex]?.src || images[activeIndex]}
-              className="max-w-full max-h-[70vh] rounded-xl shadow-2xl"
-            />
+            <div className="relative w-full max-w-4xl h-[70vh]">
+              <Image
+                alt="Gallery image"
+                src={images[activeIndex]}
+                className="rounded-xl shadow-2xl object-contain"
+                fill
+              />
+            </div>
 
             {/* Mobile Buttons (Below Image) */}
             <div className="flex md:hidden items-center gap-10 mt-6 text-white text-3xl">

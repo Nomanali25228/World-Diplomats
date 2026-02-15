@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 import bg from "../../../../public/img/Ourstages.png";
 import istanbul from "../../../../public/img/Istanbul-Hero-Section.jpg";
@@ -51,10 +52,11 @@ const DestinationCard = ({ title, image, date, slug, size }) => {
       onClick={() => (window.location.href = `/${slug}`)}
     >
       {/* Image */}
-      <img
-        src={image.src}
+      <Image
+        src={image}
         alt={title}
-        className="w-full h-full object-cover"
+        className="object-cover"
+        fill
       />
 
       {/* Bottom content */}
@@ -106,10 +108,11 @@ export default function Ourstages() {
       {/* Background */}
       <section className="relative">
         <div className="absolute inset-0 -z-10">
-          <img
-            src={bg.src}
+          <Image
+            src={bg}
             alt="background"
-            className="w-full h-full object-cover brightness-50"
+            className="object-cover brightness-50"
+            fill
           />
           <div className="absolute inset-0 bg-gradient-to-br from-[#0d1b4c]/90 via-[#1a2a9c]/30 to-[#b00000]/70"></div>
         </div>

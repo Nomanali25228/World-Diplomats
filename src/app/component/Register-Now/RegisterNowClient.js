@@ -73,7 +73,7 @@ const RegisterNowClient = () => {
     committee: "",
     shirtSize: "",
     foodPreference: "",
-    destination: "",
+    destination: "Istanbul, Türkiye",
     pricePackage: "",
     priorConferenceExperience: "",
   });
@@ -94,27 +94,17 @@ const RegisterNowClient = () => {
   // Update API when destination changes
   useEffect(() => {
     const dest = (form.destination || "").trim();
+    // DEST_API_MAP is constant outside, so we don't need it in dependency array
     const newApi = DEST_API_MAP[dest] || "firstnames";
 
-    // Update state asynchronously to avoid cascading render
     if (newApi !== changeApi) {
       const update = () => setChangeApi(newApi);
-      // defer update after current render
       setTimeout(update, 0);
     }
-  }, [form.destination, changeApi, DEST_API_MAP]);
+  }, [form.destination, changeApi]);
   const dates = getDates(form.destination);
 
 
-  // Handle context destination or search param
-  // Force Destination to Istanbul
-  useEffect(() => {
-    const forced = "Istanbul, Türkiye";
-    if (form.destination !== forced) {
-      setForm((prev) => ({ ...prev, destination: forced }));
-    }
-    setIsDestinationLocked(false);
-  }, [form.destination]);
 
 
   // Keep delegateDetails in sync with delegates
