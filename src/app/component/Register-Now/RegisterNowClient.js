@@ -107,24 +107,14 @@ const RegisterNowClient = () => {
 
 
   // Handle context destination or search param
+  // Force Destination to Istanbul
   useEffect(() => {
-    if (ctxDestination && form.destination !== ctxDestination) {
-      setTimeout(() => {
-        setForm((prev) => ({ ...prev, destination: ctxDestination }));
-        setIsDestinationLocked(!!ctxLocked);
-      }, 0);
-      return;
+    const forced = "Istanbul, Türkiye";
+    if (form.destination !== forced) {
+      setForm((prev) => ({ ...prev, destination: forced }));
     }
-
-    const destParam = searchParams?.get("destination") || "";
-    if (destParam && form.destination !== destParam) {
-      selectDestination(destParam, true);
-      setTimeout(() => {
-        setForm((prev) => ({ ...prev, destination: destParam }));
-        setIsDestinationLocked(true);
-      }, 0);
-    }
-  }, [ctxDestination, ctxLocked, searchParams, selectDestination, form.destination]);
+    setIsDestinationLocked(false);
+  }, [form.destination]);
 
 
   // Keep delegateDetails in sync with delegates
@@ -676,8 +666,6 @@ const RegisterNowClient = () => {
                               <select name="destination" value={form.destination} onChange={handleChange} className={inputClass} required>
                                 <option value="" disabled>Select Destination</option>
                                 <option value="Istanbul, Türkiye">Istanbul, Türkiye</option>
-       
-
                               </select>
                             )}
                           </div>
