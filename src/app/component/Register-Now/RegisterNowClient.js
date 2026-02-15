@@ -676,10 +676,7 @@ const RegisterNowClient = () => {
                               <select name="destination" value={form.destination} onChange={handleChange} className={inputClass} required>
                                 <option value="" disabled>Select Destination</option>
                                 <option value="Istanbul, Türkiye">Istanbul, Türkiye</option>
-                                <option value="Dubai, UAE">Dubai, UAE</option>
-                                <option value="Kuala Lumpur, Malaysia">Kuala Lumpur, Malaysia (TBD)</option>
-                                <option value="London, UK">London, UK (TBD)</option>
-                                <option value="Riyadh, Saudi Arabia">Riyadh, Saudi Arabia (TBD)</option>
+       
 
                               </select>
                             )}
@@ -827,10 +824,6 @@ const RegisterNowClient = () => {
                                   <option value="" disabled>Select Destination</option>
 
                                   <option value="Istanbul, Türkiye">Istanbul, Türkiye</option>
-                                  <option value="Dubai, UAE">Dubai, UAE</option>
-                                  <option value="Kuala Lumpur, Malaysia">Kuala Lumpur, Malaysia (TBD)</option>
-                                  <option value="London, UK">London, UK (TBD)</option>
-                                  <option value="Riyadh, Saudi Arabia">Riyadh, Saudi Arabia (TBD)</option>
 
 
                                 </select>
