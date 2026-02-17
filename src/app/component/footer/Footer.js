@@ -47,7 +47,7 @@ const Footer = () => {
             The United Nations simulation organised by{" "}
             <b>World Diplomats</b> is globally recognised for its exceptional
             quality and strong commitment to preparing future diplomats for
-            real-world leadership.
+            real world leaderships
           </p>
         </div>
 
